@@ -1,0 +1,57 @@
+{
+  "motion-duration-instant": {
+    "$type": "dimension",
+    "$value": "{motion-duration-0}",
+    "$description": "lumo.semantic.motion.duration.instant"
+  },
+  "motion-duration-fast": {
+    "$type": "dimension",
+    "$value": "{motion-duration-100}",
+    "$description": "lumo.semantic.motion.duration.fast"
+  },
+  "motion-duration-base": {
+    "$type": "dimension",
+    "$value": "{motion-duration-200}",
+    "$description": "lumo.semantic.motion.duration.base"
+  },
+  "motion-duration-moderate": {
+    "$type": "dimension",
+    "$value": "{motion-duration-300}",
+    "$description": "lumo.semantic.motion.duration.moderate"
+  },
+  "motion-duration-slow": {
+    "$type": "dimension",
+    "$value": "{motion-duration-400}",
+    "$description": "lumo.semantic.motion.duration.slow"
+  },
+  "motion-duration-slower": {
+    "$type": "dimension",
+    "$value": "{motion-duration-600}",
+    "$description": "lumo.semantic.motion.duration.slower"
+  },
+  "motion-easing-standard": {
+    "$type": "string",
+    "$value": "{motion-easing-standard}",
+    "$description": "lumo.semantic.motion.easing.standard"
+  },
+  "motion-easing-decelerate": {
+    "$type": "string",
+    "$value": "{motion-easing-decelerate}",
+    "$description": "lumo.semantic.motion.easing.decelerate"
+  },
+  "motion-easing-accelerate": {
+    "$type": "string",
+    "$value": "{motion-easing-accelerate}",
+    "$description": "lumo.semantic.motion.easing.accelerate"
+  },
+  "motion-easing-emphasized": {
+    "$type": "string",
+    "$value": "{motion-easing-emphasized}",
+    "$description": "lumo.semantic.motion.easing.emphasized"
+  },
+  "motion-easing-linear": {
+    "$type": "string",
+    "$value": "{motion-easing-linear}",
+    "$description": "lumo.semantic.motion.easing.linear"
+  }
+}

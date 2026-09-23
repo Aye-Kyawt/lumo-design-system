@@ -1,0 +1,490 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-purple-100: #f3effa; /** lumo.core.color.purple.100 */
+  --color-purple-200: #e2daf6; /** lumo.core.color.purple.200 */
+  --color-purple-300: #c8b6f1; /** lumo.core.color.purple.300 */
+  --color-purple-400: #a687ed; /** lumo.core.color.purple.400 */
+  --color-purple-500: #7c4ceb; /** lumo.core.color.purple.500 */
+  --color-purple-600: #5416e3; /** lumo.core.color.purple.600 */
+  --color-purple-700: #4416b1; /** lumo.core.color.purple.700 */
+  --color-purple-800: #371782; /** lumo.core.color.purple.800 */
+  --color-purple-900: #2b165a; /** lumo.core.color.purple.900 */
+  --color-purple-1000: #1d1335; /** lumo.core.color.purple.1000 */
+  --color-blue-100: #eff3fa; /** lumo.core.color.blue.100 */
+  --color-blue-200: #dae5f6; /** lumo.core.color.blue.200 */
+  --color-blue-300: #b6cdf1; /** lumo.core.color.blue.300 */
+  --color-blue-400: #87aeed; /** lumo.core.color.blue.400 */
+  --color-blue-500: #4c89eb; /** lumo.core.color.blue.500 */
+  --color-blue-600: #1665e3; /** lumo.core.color.blue.600 */
+  --color-blue-700: #1651b1; /** lumo.core.color.blue.700 */
+  --color-blue-800: #174082; /** lumo.core.color.blue.800 */
+  --color-blue-900: #16305a; /** lumo.core.color.blue.900 */
+  --color-blue-1000: #132035; /** lumo.core.color.blue.1000 */
+  --color-aqua-100: #eff8fa; /** lumo.core.color.aqua.100 */
+  --color-aqua-200: #daf1f6; /** lumo.core.color.aqua.200 */
+  --color-aqua-300: #b6e6f1; /** lumo.core.color.aqua.300 */
+  --color-aqua-400: #87daed; /** lumo.core.color.aqua.400 */
+  --color-aqua-500: #4cceeb; /** lumo.core.color.aqua.500 */
+  --color-aqua-600: #16bee3; /** lumo.core.color.aqua.600 */
+  --color-aqua-700: #1695b1; /** lumo.core.color.aqua.700 */
+  --color-aqua-800: #176e82; /** lumo.core.color.aqua.800 */
+  --color-aqua-900: #164d5a; /** lumo.core.color.aqua.900 */
+  --color-aqua-1000: #132f35; /** lumo.core.color.aqua.1000 */
+  --color-mint-100: #effaf8; /** lumo.core.color.mint.100 */
+  --color-mint-200: #daf6f1; /** lumo.core.color.mint.200 */
+  --color-mint-300: #b6f1e5; /** lumo.core.color.mint.300 */
+  --color-mint-400: #87edd9; /** lumo.core.color.mint.400 */
+  --color-mint-500: #4cebcb; /** lumo.core.color.mint.500 */
+  --color-mint-600: #16e3ba; /** lumo.core.color.mint.600 */
+  --color-mint-700: #16b192; /** lumo.core.color.mint.700 */
+  --color-mint-800: #17826d; /** lumo.core.color.mint.800 */
+  --color-mint-900: #165a4c; /** lumo.core.color.mint.900 */
+  --color-mint-1000: #13352e; /** lumo.core.color.mint.1000 */
+  --color-green-100: #effaf3; /** lumo.core.color.green.100 */
+  --color-green-200: #daf6e4; /** lumo.core.color.green.200 */
+  --color-green-300: #b6f1cc; /** lumo.core.color.green.300 */
+  --color-green-400: #87edad; /** lumo.core.color.green.400 */
+  --color-green-500: #4ceb86; /** lumo.core.color.green.500 */
+  --color-green-600: #16e362; /** lumo.core.color.green.600 */
+  --color-green-700: #16b14f; /** lumo.core.color.green.700 */
+  --color-green-800: #17823e; /** lumo.core.color.green.800 */
+  --color-green-900: #165a2f; /** lumo.core.color.green.900 */
+  --color-green-1000: #13351f; /** lumo.core.color.green.1000 */
+  --color-yellow-100: #faf8ef; /** lumo.core.color.yellow.100 */
+  --color-yellow-200: #f6efda; /** lumo.core.color.yellow.200 */
+  --color-yellow-300: #f1e2b6; /** lumo.core.color.yellow.300 */
+  --color-yellow-400: #edd487; /** lumo.core.color.yellow.400 */
+  --color-yellow-500: #ebc34c; /** lumo.core.color.yellow.500 */
+  --color-yellow-600: #e3b016; /** lumo.core.color.yellow.600 */
+  --color-yellow-700: #b18a16; /** lumo.core.color.yellow.700 */
+  --color-yellow-800: #826717; /** lumo.core.color.yellow.800 */
+  --color-yellow-900: #5a4916; /** lumo.core.color.yellow.900 */
+  --color-yellow-1000: #352c13; /** lumo.core.color.yellow.1000 */
+  --color-orange-100: #faf4ef; /** lumo.core.color.orange.100 */
+  --color-orange-200: #f6e7da; /** lumo.core.color.orange.200 */
+  --color-orange-300: #f1d1b6; /** lumo.core.color.orange.300 */
+  --color-orange-400: #edb587; /** lumo.core.color.orange.400 */
+  --color-orange-500: #eb944c; /** lumo.core.color.orange.500 */
+  --color-orange-600: #e37316; /** lumo.core.color.orange.600 */
+  --color-orange-700: #b15c16; /** lumo.core.color.orange.700 */
+  --color-orange-800: #824717; /** lumo.core.color.orange.800 */
+  --color-orange-900: #5a3516; /** lumo.core.color.orange.900 */
+  --color-orange-1000: #352213; /** lumo.core.color.orange.1000 */
+  --color-red-100: #faeff0; /** lumo.core.color.red.100 */
+  --color-red-200: #f6dadc; /** lumo.core.color.red.200 */
+  --color-red-300: #f1b6bb; /** lumo.core.color.red.300 */
+  --color-red-400: #ed8790; /** lumo.core.color.red.400 */
+  --color-red-500: #eb4c59; /** lumo.core.color.red.500 */
+  --color-red-600: #e31628; /** lumo.core.color.red.600 */
+  --color-red-700: #b11623; /** lumo.core.color.red.700 */
+  --color-red-800: #821720; /** lumo.core.color.red.800 */
+  --color-red-900: #5a161c; /** lumo.core.color.red.900 */
+  --color-red-1000: #351315; /** lumo.core.color.red.1000 */
+  --color-pink-100: #faeff4; /** lumo.core.color.pink.100 */
+  --color-pink-200: #f6dae7; /** lumo.core.color.pink.200 */
+  --color-pink-300: #f1b6d2; /** lumo.core.color.pink.300 */
+  --color-pink-400: #ed87b7; /** lumo.core.color.pink.400 */
+  --color-pink-500: #eb4c96; /** lumo.core.color.pink.500 */
+  --color-pink-600: #e31676; /** lumo.core.color.pink.600 */
+  --color-pink-700: #b1165e; /** lumo.core.color.pink.700 */
+  --color-pink-800: #821749; /** lumo.core.color.pink.800 */
+  --color-pink-900: #5a1636; /** lumo.core.color.pink.900 */
+  --color-pink-1000: #351323; /** lumo.core.color.pink.1000 */
+  --color-neutral-0: #ffffff; /** lumo.core.color.neutral.0 */
+  --color-neutral-50: #f5f6fa; /** lumo.core.color.neutral.50 */
+  --color-neutral-100: #ebedf4; /** lumo.core.color.neutral.100 */
+  --color-neutral-200: #dadce7; /** lumo.core.color.neutral.200 */
+  --color-neutral-300: #bfc2cf; /** lumo.core.color.neutral.300 */
+  --color-neutral-400: #a0a3b1; /** lumo.core.color.neutral.400 */
+  --color-neutral-500: #808393; /** lumo.core.color.neutral.500 */
+  --color-neutral-600: #636679; /** lumo.core.color.neutral.600 */
+  --color-neutral-700: #474b62; /** lumo.core.color.neutral.700 */
+  --color-neutral-800: #30344b; /** lumo.core.color.neutral.800 */
+  --color-neutral-900: #1d2135; /** lumo.core.color.neutral.900 */
+  --color-neutral-1000: #101323; /** lumo.core.color.neutral.1000 */
+  --color-neutral-50a: rgba(16, 19, 35, 0.03999999910593033); /** lumo.core.color.neutral.50A */
+  --color-neutral-100a: rgba(16, 19, 35, 0.07999999821186066); /** lumo.core.color.neutral.100A */
+  --color-neutral-200a: rgba(16, 19, 35, 0.12999999523162842); /** lumo.core.color.neutral.200A */
+  --color-neutral-300a: rgba(16, 19, 35, 0.25); /** lumo.core.color.neutral.300A */
+  --color-neutral-400a: rgba(16, 19, 35, 0.3100000023841858); /** lumo.core.color.neutral.400A */
+  --color-neutral-500a: rgba(16, 19, 35, 0.47999998927116394); /** lumo.core.color.neutral.500A */
+  --spacing-0: 0px; /** lumo.core.spacing.0 */
+  --spacing-2: 2px; /** lumo.core.spacing.2 */
+  --spacing-4: 4px; /** lumo.core.spacing.4 */
+  --spacing-8: 8px; /** lumo.core.spacing.8 */
+  --spacing-12: 12px; /** lumo.core.spacing.12 */
+  --spacing-16: 16px; /** lumo.core.spacing.16 */
+  --spacing-20: 20px; /** lumo.core.spacing.20 */
+  --spacing-24: 24px; /** lumo.core.spacing.24 */
+  --spacing-32: 32px; /** lumo.core.spacing.32 */
+  --spacing-40: 40px; /** lumo.core.spacing.40 */
+  --spacing-48: 48px; /** lumo.core.spacing.48 */
+  --spacing-64: 64px; /** lumo.core.spacing.64 */
+  --spacing-80: 80px; /** lumo.core.spacing.80 */
+  --spacing-96: 96px; /** lumo.core.spacing.96 */
+  --border-radius-none: 0px; /** lumo.core.border.radius.none */
+  --border-radius-xs: 2px; /** lumo.core.border.radius.xs */
+  --border-radius-sm: 4px; /** lumo.core.border.radius.sm */
+  --border-radius-md: 8px; /** lumo.core.border.radius.md */
+  --border-radius-lg: 12px; /** lumo.core.border.radius.lg */
+  --border-radius-xl: 16px; /** lumo.core.border.radius.xl */
+  --border-radius-2xl: 24px; /** lumo.core.border.radius.2xl */
+  --border-radius-full: 999px; /** lumo.core.border.radius.full */
+  --border-width-0: 0px; /** lumo.core.border.width.0 */
+  --border-width-1: 1px; /** lumo.core.border.width.1 */
+  --border-width-2: 2px; /** lumo.core.border.width.2 */
+  --border-width-4: 4px; /** lumo.core.border.width.4 */
+  --border-dash-dashed-segment: 4px; /** lumo.core.border.dash.dashed.segment */
+  --border-dash-dashed-gap: 4px; /** lumo.core.border.dash.dashed.gap */
+  --border-dash-dotted-segment: 1px; /** lumo.core.border.dash.dotted.segment */
+  --border-dash-dotted-gap: 2px; /** lumo.core.border.dash.dotted.gap */
+  --opacity-0: 0; /** lumo.core.opacity.0 */
+  --opacity-4: 0.04; /** lumo.core.opacity.4 */
+  --opacity-8: 0.08; /** lumo.core.opacity.8 */
+  --opacity-12: 0.12; /** lumo.core.opacity.12 */
+  --opacity-16: 0.16; /** lumo.core.opacity.16 */
+  --opacity-24: 0.24; /** lumo.core.opacity.24 */
+  --opacity-40: 0.4; /** lumo.core.opacity.40 */
+  --opacity-48: 0.48; /** lumo.core.opacity.48 */
+  --opacity-64: 0.64; /** lumo.core.opacity.64 */
+  --opacity-80: 0.8; /** lumo.core.opacity.80 */
+  --opacity-100: 1; /** lumo.core.opacity.100 */
+  --motion-duration-0: 0ms; /** lumo.core.motion.duration.0 */
+  --motion-duration-100: 100ms; /** lumo.core.motion.duration.100 */
+  --motion-duration-200: 200ms; /** lumo.core.motion.duration.200 */
+  --motion-duration-300: 300ms; /** lumo.core.motion.duration.300 */
+  --motion-duration-400: 400ms; /** lumo.core.motion.duration.400 */
+  --motion-duration-600: 600ms; /** lumo.core.motion.duration.600 */
+  --typography-fontfamily-inter: Inter; /** lumo.core.typography.fontFamily.inter */
+  --typography-fontweight-thin: thin; /** lumo.core.typography.fontWeight.thin */
+  --typography-fontweight-extralight: extra-light; /** lumo.core.typography.fontWeight.extralight */
+  --typography-fontweight-light: light; /** lumo.core.typography.fontWeight.light */
+  --typography-fontweight-regular: regular; /** lumo.core.typography.fontWeight.regular */
+  --typography-fontweight-medium: medium; /** lumo.core.typography.fontWeight.medium */
+  --typography-fontweight-semibold: semi-bold; /** lumo.core.typography.fontWeight.semibold */
+  --typography-fontweight-bold: bold; /** lumo.core.typography.fontWeight.bold */
+  --typography-fontweight-extrabold: extra-bold; /** lumo.core.typography.fontWeight.extrabold */
+  --typography-fontweight-black: black; /** lumo.core.typography.fontWeight.black */
+  --typography-fontsize-10: 10px; /** lumo.core.typography.fontSize.10 */
+  --typography-fontsize-11: 11px; /** lumo.core.typography.fontSize.11 */
+  --typography-fontsize-12: 12px; /** lumo.core.typography.fontSize.12 */
+  --typography-fontsize-13: 13px; /** lumo.core.typography.fontSize.13 */
+  --typography-fontsize-14: 14px; /** lumo.core.typography.fontSize.14 */
+  --typography-fontsize-15: 15px; /** lumo.core.typography.fontSize.15 */
+  --typography-fontsize-16: 16px; /** lumo.core.typography.fontSize.16 */
+  --typography-fontsize-17: 17px; /** lumo.core.typography.fontSize.17 */
+  --typography-fontsize-18: 18px; /** lumo.core.typography.fontSize.18 */
+  --typography-fontsize-20: 20px; /** lumo.core.typography.fontSize.20 */
+  --typography-fontsize-24: 24px; /** lumo.core.typography.fontSize.24 */
+  --typography-fontsize-26: 26px; /** lumo.core.typography.fontSize.26 */
+  --typography-fontsize-28: 28px; /** lumo.core.typography.fontSize.28 */
+  --typography-fontsize-30: 30px; /** lumo.core.typography.fontSize.30 */
+  --typography-fontsize-32: 32px; /** lumo.core.typography.fontSize.32 */
+  --typography-fontsize-34: 34px; /** lumo.core.typography.fontSize.34 */
+  --typography-fontsize-36: 36px; /** lumo.core.typography.fontSize.36 */
+  --typography-fontsize-40: 40px; /** lumo.core.typography.fontSize.40 */
+  --typography-fontsize-48: 48px; /** lumo.core.typography.fontSize.48 */
+  --typography-fontsize-56: 56px; /** lumo.core.typography.fontSize.56 */
+  --typography-fontsize-64: 64px; /** lumo.core.typography.fontSize.64 */
+  --typography-lineheight-12: 12px; /** lumo.core.typography.lineHeight.12 */
+  --typography-lineheight-14: 14px; /** lumo.core.typography.lineHeight.14 */
+  --typography-lineheight-16: 16px; /** lumo.core.typography.lineHeight.16 */
+  --typography-lineheight-18: 18px; /** lumo.core.typography.lineHeight.18 */
+  --typography-lineheight-20: 20px; /** lumo.core.typography.lineHeight.20 */
+  --typography-lineheight-22: 22px; /** lumo.core.typography.lineHeight.22 */
+  --typography-lineheight-24: 24px; /** lumo.core.typography.lineHeight.24 */
+  --typography-lineheight-28: 28px; /** lumo.core.typography.lineHeight.28 */
+  --typography-lineheight-32: 32px; /** lumo.core.typography.lineHeight.32 */
+  --typography-lineheight-36: 36px; /** lumo.core.typography.lineHeight.36 */
+  --typography-lineheight-40: 40px; /** lumo.core.typography.lineHeight.40 */
+  --typography-lineheight-44: 44px; /** lumo.core.typography.lineHeight.44 */
+  --typography-lineheight-48: 48px; /** lumo.core.typography.lineHeight.48 */
+  --typography-lineheight-56: 56px; /** lumo.core.typography.lineHeight.56 */
+  --typography-lineheight-64: 64px; /** lumo.core.typography.lineHeight.64 */
+  --typography-lineheight-80: 80px; /** lumo.core.typography.lineHeight.80 */
+  --size-12: 12px; /** lumo.core.size.12 */
+  --size-16: 16px; /** lumo.core.size.16 */
+  --size-20: 20px; /** lumo.core.size.20 */
+  --size-24: 24px; /** lumo.core.size.24 */
+  --size-28: 28px; /** lumo.core.size.28 */
+  --size-32: 32px; /** lumo.core.size.32 */
+  --size-36: 36px; /** lumo.core.size.36 */
+  --size-40: 40px; /** lumo.core.size.40 */
+  --size-44: 44px; /** lumo.core.size.44 */
+  --size-48: 48px; /** lumo.core.size.48 */
+  --size-52: 52px; /** lumo.core.size.52 */
+  --size-56: 56px; /** lumo.core.size.56 */
+  --size-64: 64px; /** lumo.core.size.64 */
+  --size-72: 72px; /** lumo.core.size.72 */
+  --size-240: 240px; /** lumo.core.size.240 */
+  --size-256: 256px; /** lumo.core.size.256 */
+  --size-400: 400px; /** lumo.core.size.400 */
+  --size-480: 480px; /** lumo.core.size.480 */
+  --size-560: 560px; /** lumo.core.size.560 */
+  --size-800: 800px; /** lumo.core.size.800 */
+  --z-index-base: 0; /** lumo.semantic.z-index.base */
+  --z-index-raised: 1; /** lumo.semantic.z-index.raised */
+  --z-index-dropdown: 1000; /** lumo.semantic.z-index.dropdown */
+  --z-index-sticky: 1100; /** lumo.semantic.z-index.sticky */
+  --z-index-drawer: 1200; /** lumo.semantic.z-index.drawer */
+  --z-index-overlay: 1300; /** lumo.semantic.z-index.overlay */
+  --z-index-modal: 1400; /** lumo.semantic.z-index.modal */
+  --z-index-popover: 1500; /** lumo.semantic.z-index.popover */
+  --z-index-toast: 1600; /** lumo.semantic.z-index.toast */
+  --z-index-tooltip: 1700; /** lumo.semantic.z-index.tooltip */
+  --elevation-level1: 0px 1px 2px 0px rgb(6.2745% 7.451% 13.725% / 0.05), 0px 1px 3px 0px rgb(6.2745% 7.451% 13.725% / 0.08); /** Cards, tiles, list rows that sit slightly above the canvas */
+  --elevation-level2: 0px 2px 4px -1px rgb(6.2745% 7.451% 13.725% / 0.06), 0px 4px 8px -2px rgb(6.2745% 7.451% 13.725% / 0.1); /** Dropdowns, menus, popovers, tooltips */
+  --elevation-level3: 0px 4px 6px -2px rgb(6.2745% 7.451% 13.725% / 0.05), 0px 12px 16px -4px rgb(6.2745% 7.451% 13.725% / 0.12); /** Sticky headers, drawers, side sheets */
+  --elevation-level4: 0px 8px 8px -4px rgb(6.2745% 7.451% 13.725% / 0.04), 0px 20px 24px -4px rgb(6.2745% 7.451% 13.725% / 0.14); /** Modals, dialogs, toasts — highest emphasis */
+  --elevation-focused: 0px 0px 0px 3px rgb(8.6275% 74.51% 89.02% / 0.4); /** Keyboard focus indicator (Aqua-600 at 40%, 3px spread) */
+  --border-radius-tag: var(--border-radius-sm); /** lumo.semantic.border.radius.tag */
+  --border-radius-checkbox: var(--border-radius-xs); /** lumo.semantic.border.radius.checkbox */
+  --border-radius-button: var(--border-radius-md); /** lumo.semantic.border.radius.button */
+  --border-radius-input: var(--border-radius-md); /** lumo.semantic.border.radius.input */
+  --border-radius-card: var(--border-radius-lg); /** lumo.semantic.border.radius.card */
+  --border-radius-dropdown: var(--border-radius-md); /** lumo.semantic.border.radius.dropdown */
+  --border-radius-modal: var(--border-radius-xl); /** lumo.semantic.border.radius.modal */
+  --border-radius-chip: var(--border-radius-full); /** lumo.semantic.border.radius.chip */
+  --border-radius-avatar: var(--border-radius-full); /** lumo.semantic.border.radius.avatar */
+  --border-width-default: var(--border-width-1); /** lumo.semantic.border.width.default */
+  --border-width-focused: var(--border-width-2); /** lumo.semantic.border.width.focused */
+  --opacity-disabled: var(--opacity-40); /** lumo.semantic.opacity.disabled */
+  --opacity-overlay-hovered: var(--opacity-8); /** lumo.semantic.opacity.overlay.hovered */
+  --opacity-overlay-pressed: var(--opacity-12); /** lumo.semantic.opacity.overlay.pressed */
+  --opacity-overlay-selected: var(--opacity-16); /** lumo.semantic.opacity.overlay.selected */
+  --opacity-overlay-scrim: var(--opacity-48); /** lumo.semantic.opacity.overlay.scrim */
+  --opacity-skeleton: var(--opacity-64); /** lumo.semantic.opacity.skeleton */
+  --motion-duration-instant: var(--motion-duration-0); /** lumo.semantic.motion.duration.instant */
+  --motion-duration-fast: var(--motion-duration-100); /** lumo.semantic.motion.duration.fast */
+  --motion-duration-base: var(--motion-duration-200); /** lumo.semantic.motion.duration.base */
+  --motion-duration-moderate: var(--motion-duration-300); /** lumo.semantic.motion.duration.moderate */
+  --motion-duration-slow: var(--motion-duration-400); /** lumo.semantic.motion.duration.slow */
+  --motion-duration-slower: var(--motion-duration-600); /** lumo.semantic.motion.duration.slower */
+  --color-text-primary: var(--color-neutral-800); /** lumo.semantic.color.text.primary — Text Colors · primary */
+  --color-text-secondary: var(--color-neutral-600); /** lumo.semantic.color.text.secondary — Text Colors · secondary */
+  --color-text-placeholder: var(--color-neutral-300); /** lumo.semantic.color.text.secondary — Text Colors · secondary */
+  --color-text-disabled: var(--color-neutral-400); /** lumo.semantic.color.text.disabled — Text Colors · disabled */
+  --color-text-bold: var(--color-neutral-1000); /** lumo.semantic.color.text.bold — Text Colors · bold */
+  --color-text-inverse: var(--color-neutral-0); /** lumo.semantic.color.text.inverse — Text Colors · inverse */
+  --color-bg-base: var(--color-neutral-0); /** lumo.semantic.color.bg.base — Neutral Backgrounds · base */
+  --color-bg-surfaceprimary: var(--color-neutral-50); /** lumo.semantic.color.bg.surfacePrimary — Neutral Backgrounds · surface primary */
+  --color-bg-surfacesecondary: var(--color-neutral-100); /** lumo.semantic.color.bg.surfaceSecondary — Neutral Backgrounds · surface secondary */
+  --color-bg-inverse: var(--color-neutral-1000); /** lumo.semantic.color.bg.inverse — Neutral Backgrounds · invert */
+  --color-bg-overlay-subtle: var(--color-neutral-200a); /** lumo.semantic.color.bg.overlay.subtle — Neutral Backgrounds · overlay */
+  --color-bg-overlay-scrim: var(--color-neutral-500a); /** lumo.semantic.color.bg.overlay.scrim — Neutral Backgrounds · scrim */
+  --color-bg-primary-idle: var(--color-aqua-700); /** lumo.semantic.color.bg.primary.idle — Interactive Backgrounds · primary idle */
+  --color-bg-primary-hovered: var(--color-aqua-800); /** lumo.semantic.color.bg.primary.hovered — Interactive Backgrounds · primary hovered */
+  --color-bg-primary-pressed: var(--color-aqua-1000); /** lumo.semantic.color.bg.primary.pressed — Interactive Backgrounds · primary pressed */
+  --color-bg-primary-tonal-idle: var(--color-aqua-100); /** lumo.semantic.color.bg.primary.tonal.idle — Interactive Backgrounds · primary tonal idle */
+  --color-bg-primary-tonal-hovered: var(--color-aqua-300); /** lumo.semantic.color.bg.primary.tonal.hovered — Interactive Backgrounds · primary tonal hovered */
+  --color-bg-negative-idle: var(--color-red-600); /** lumo.semantic.color.bg.negative.idle — Interactive Backgrounds · negative idle */
+  --color-bg-negative-hovered: var(--color-red-700); /** lumo.semantic.color.bg.negative.hovered — Interactive Backgrounds · negative hovered */
+  --color-bg-negative-pressed: var(--color-red-800); /** lumo.semantic.color.bg.negative.pressed — Interactive Backgrounds · negative pressed */
+  --color-bg-negative-tonal-idle: var(--color-red-100); /** lumo.semantic.color.bg.negative.tonal.idle — Interactive Backgrounds · negative tonal idle */
+  --color-bg-negative-tonal-hovered: var(--color-red-300); /** lumo.semantic.color.bg.negative.tonal.hovered — Interactive Backgrounds · negative tonal hovered */
+  --color-bg-positive-idle: var(--color-green-800); /** lumo.semantic.color.bg.positive.idle — Interactive Backgrounds · positive idle */
+  --color-bg-positive-hovered: var(--color-green-900); /** lumo.semantic.color.bg.positive.hovered — Interactive Backgrounds · positive hovered */
+  --color-bg-positive-pressed: var(--color-green-1000); /** lumo.semantic.color.bg.positive.pressed — Interactive Backgrounds · positive pressed */
+  --color-bg-positive-tonal-idle: var(--color-green-100); /** lumo.semantic.color.bg.positive.tonal.idle — Interactive Backgrounds · positive tonal idle */
+  --color-bg-positive-tonal-hovered: var(--color-green-300); /** lumo.semantic.color.bg.positive.tonal.hovered — Interactive Backgrounds · positive tonal hovered */
+  --color-bg-warning-idle: var(--color-orange-700); /** lumo.semantic.color.bg.warning.idle — Interactive Backgrounds · warning idle */
+  --color-bg-warning-hovered: var(--color-orange-800); /** lumo.semantic.color.bg.warning.hovered — Interactive Backgrounds · warning hovered */
+  --color-bg-warning-pressed: var(--color-orange-900); /** lumo.semantic.color.bg.warning.pressed — Interactive Backgrounds · warning pressed */
+  --color-bg-warning-tonal-idle: var(--color-orange-100); /** lumo.semantic.color.bg.warning.tonal.idle — Interactive Backgrounds · warning tonal idle */
+  --color-bg-warning-tonal-hovered: var(--color-orange-300); /** lumo.semantic.color.bg.warning.tonal.hovered — Interactive Backgrounds · warning tonal hovered */
+  --color-bg-info-idle: var(--color-blue-600); /** lumo.semantic.color.bg.info.idle — Interactive Backgrounds · info idle */
+  --color-bg-info-hovered: var(--color-blue-700); /** lumo.semantic.color.bg.info.hovered — Interactive Backgrounds · info hovered */
+  --color-bg-info-pressed: var(--color-blue-800); /** lumo.semantic.color.bg.info.pressed — Interactive Backgrounds · info pressed */
+  --color-bg-info-tonal-idle: var(--color-blue-100); /** lumo.semantic.color.bg.info.tonal.idle — Interactive Backgrounds · info tonal idle */
+  --color-bg-info-tonal-hovered: var(--color-blue-300); /** lumo.semantic.color.bg.info.tonal.hovered — Interactive Backgrounds · info tonal hovered */
+  --color-bg-update-idle: var(--color-purple-500); /** lumo.semantic.color.bg.update.idle — Interactive Backgrounds · update idle */
+  --color-bg-update-hovered: var(--color-purple-600); /** lumo.semantic.color.bg.update.hovered — Interactive Backgrounds · update hovered */
+  --color-bg-update-pressed: var(--color-purple-700); /** lumo.semantic.color.bg.update.pressed — Interactive Backgrounds · update pressed */
+  --color-bg-update-tonal-idle: var(--color-purple-100); /** lumo.semantic.color.bg.update.tonal.idle — Interactive Backgrounds · update tonal idle */
+  --color-bg-update-tonal-hovered: var(--color-purple-300); /** lumo.semantic.color.bg.update.tonal.hovered — Interactive Backgrounds · update tonal hovered */
+  --color-bg-disabled: var(--color-neutral-200); /** lumo.semantic.color.bg.disabled — Interactive Backgrounds · disabled */
+  --color-text-oninteractive: var(--color-neutral-0); /** lumo.semantic.color.text.onInteractive — Interactive Backgrounds · foreground on solid */
+  --color-text-ontonal: var(--color-neutral-1000); /** lumo.semantic.color.text.onTonal — Interactive Backgrounds · foreground on tonal */
+  --color-bg-brand-subtle: var(--color-aqua-100); /** lumo.semantic.color.bg.brand.subtle — Color Semantics · brand light */
+  --color-icon-brand: var(--color-aqua-600); /** lumo.semantic.color.icon.brand — Color Semantics · brand default */
+  --color-text-brand: var(--color-aqua-800); /** lumo.semantic.color.text.brand — Color Semantics · brand foreground */
+  --color-bg-negative-subtle: var(--color-red-100); /** lumo.semantic.color.bg.negative.subtle — Color Semantics · negative light */
+  --color-icon-negative: var(--color-red-600); /** lumo.semantic.color.icon.negative — Color Semantics · negative default */
+  --color-text-negative: var(--color-red-800); /** lumo.semantic.color.text.negative — Color Semantics · negative foreground */
+  --color-bg-positive-subtle: var(--color-green-100); /** lumo.semantic.color.bg.positive.subtle — Color Semantics · positive light */
+  --color-icon-positive: var(--color-green-600); /** lumo.semantic.color.icon.positive — Color Semantics · positive default */
+  --color-text-positive: var(--color-green-800); /** lumo.semantic.color.text.positive — Color Semantics · positive foreground */
+  --color-bg-warning-subtle: var(--color-orange-100); /** lumo.semantic.color.bg.warning.subtle — Color Semantics · warning light */
+  --color-icon-warning: var(--color-orange-600); /** lumo.semantic.color.icon.warning — Color Semantics · warning default */
+  --color-text-warning: var(--color-orange-700); /** lumo.semantic.color.text.warning — Color Semantics · warning foreground */
+  --color-bg-info-subtle: var(--color-blue-100); /** lumo.semantic.color.bg.info.subtle — Color Semantics · info light */
+  --color-icon-info: var(--color-blue-600); /** lumo.semantic.color.icon.info — Color Semantics · info default */
+  --color-text-info: var(--color-blue-800); /** lumo.semantic.color.text.info — Color Semantics · info foreground */
+  --color-bg-update-subtle: var(--color-purple-100); /** lumo.semantic.color.bg.update.subtle — Color Semantics · update light */
+  --color-icon-update: var(--color-purple-600); /** lumo.semantic.color.icon.update — Color Semantics · update default */
+  --color-text-update: var(--color-purple-700); /** lumo.semantic.color.text.update — Color Semantics · update foreground */
+  --color-bg-accent-aqua-subtle: var(--color-aqua-100); /** lumo.semantic.color.bg.accent.aqua.subtle — Accent Colors · aqua light */
+  --color-bg-accent-aqua-default: var(--color-aqua-600); /** lumo.semantic.color.bg.accent.aqua.default — Accent Colors · aqua default */
+  --color-text-accent-aqua: var(--color-aqua-800); /** lumo.semantic.color.text.accent.aqua — Accent Colors · aqua foreground */
+  --color-bg-accent-purple-subtle: var(--color-purple-100); /** lumo.semantic.color.bg.accent.purple.subtle — Accent Colors · purple light */
+  --color-bg-accent-purple-default: var(--color-purple-600); /** lumo.semantic.color.bg.accent.purple.default — Accent Colors · purple default */
+  --color-text-accent-purple: var(--color-purple-800); /** lumo.semantic.color.text.accent.purple — Accent Colors · purple foreground */
+  --color-bg-accent-red-subtle: var(--color-red-100); /** lumo.semantic.color.bg.accent.red.subtle — Accent Colors · red light */
+  --color-bg-accent-red-default: var(--color-red-600); /** lumo.semantic.color.bg.accent.red.default — Accent Colors · red default */
+  --color-text-accent-red: var(--color-red-800); /** lumo.semantic.color.text.accent.red — Accent Colors · red foreground */
+  --color-bg-accent-green-subtle: var(--color-green-100); /** lumo.semantic.color.bg.accent.green.subtle — Accent Colors · green light */
+  --color-bg-accent-green-default: var(--color-green-600); /** lumo.semantic.color.bg.accent.green.default — Accent Colors · green default */
+  --color-text-accent-green: var(--color-green-800); /** lumo.semantic.color.text.accent.green — Accent Colors · green foreground */
+  --color-bg-accent-orange-subtle: var(--color-orange-100); /** lumo.semantic.color.bg.accent.orange.subtle — Accent Colors · orange light */
+  --color-bg-accent-orange-default: var(--color-orange-600); /** lumo.semantic.color.bg.accent.orange.default — Accent Colors · orange default */
+  --color-text-accent-orange: var(--color-orange-700); /** lumo.semantic.color.text.accent.orange — Accent Colors · orange foreground */
+  --color-bg-accent-blue-subtle: var(--color-blue-100); /** lumo.semantic.color.bg.accent.blue.subtle — Accent Colors · blue light */
+  --color-bg-accent-blue-default: var(--color-blue-600); /** lumo.semantic.color.bg.accent.blue.default — Accent Colors · blue default */
+  --color-text-accent-blue: var(--color-blue-800); /** lumo.semantic.color.text.accent.blue — Accent Colors · blue foreground */
+  --color-bg-accent-yellow-subtle: var(--color-yellow-100); /** lumo.semantic.color.bg.accent.yellow.subtle — Accent Colors · yellow light */
+  --color-bg-accent-yellow-default: var(--color-yellow-600); /** lumo.semantic.color.bg.accent.yellow.default — Accent Colors · yellow default */
+  --color-text-accent-yellow: var(--color-yellow-700); /** lumo.semantic.color.text.accent.yellow — Accent Colors · yellow foreground */
+  --color-bg-accent-pink-subtle: var(--color-pink-100); /** lumo.semantic.color.bg.accent.pink.subtle — Accent Colors · pink light */
+  --color-bg-accent-pink-default: var(--color-pink-600); /** lumo.semantic.color.bg.accent.pink.default — Accent Colors · pink default */
+  --color-text-accent-pink: var(--color-pink-800); /** lumo.semantic.color.text.accent.pink — Accent Colors · pink foreground */
+  --color-bg-accent-mint-subtle: var(--color-mint-100); /** lumo.semantic.color.bg.accent.mint.subtle — Accent Colors · mint light */
+  --color-bg-accent-mint-default: var(--color-mint-600); /** lumo.semantic.color.bg.accent.mint.default — Accent Colors · mint default */
+  --color-text-accent-mint: var(--color-mint-800); /** lumo.semantic.color.text.accent.mint — Accent Colors · mint foreground */
+  --color-bg-aqua-twotone: var(--color-aqua-100); /** lumo.semantic.color.bg.aqua.twoTone — Two-Tone · aqua */
+  --color-text-aqua-twotone: var(--color-aqua-900); /** lumo.semantic.color.text.aqua.twoTone — Two-Tone · aqua */
+  --color-bg-purple-twotone: var(--color-purple-100); /** lumo.semantic.color.bg.purple.twoTone — Two-Tone · purple */
+  --color-text-purple-twotone: var(--color-purple-800); /** lumo.semantic.color.text.purple.twoTone — Two-Tone · purple */
+  --color-bg-blue-twotone: var(--color-blue-100); /** lumo.semantic.color.bg.blue.twoTone — Two-Tone · blue */
+  --color-text-blue-twotone: var(--color-blue-800); /** lumo.semantic.color.text.blue.twoTone — Two-Tone · blue */
+  --color-bg-mint-twotone: var(--color-mint-100); /** lumo.semantic.color.bg.mint.twoTone — Two-Tone · mint */
+  --color-text-mint-twotone: var(--color-mint-900); /** lumo.semantic.color.text.mint.twoTone — Two-Tone · mint */
+  --color-bg-green-twotone: var(--color-green-100); /** lumo.semantic.color.bg.green.twoTone — Two-Tone · green */
+  --color-text-green-twotone: var(--color-green-800); /** lumo.semantic.color.text.green.twoTone — Two-Tone · green */
+  --color-bg-yellow-twotone: var(--color-yellow-100); /** lumo.semantic.color.bg.yellow.twoTone — Two-Tone · yellow */
+  --color-text-yellow-twotone: var(--color-yellow-800); /** lumo.semantic.color.text.yellow.twoTone — Two-Tone · yellow */
+  --color-bg-orange-twotone: var(--color-orange-100); /** lumo.semantic.color.bg.orange.twoTone — Two-Tone · orange */
+  --color-text-orange-twotone: var(--color-orange-800); /** lumo.semantic.color.text.orange.twoTone — Two-Tone · orange */
+  --color-bg-red-twotone: var(--color-red-100); /** lumo.semantic.color.bg.red.twoTone — Two-Tone · red */
+  --color-text-red-twotone: var(--color-red-800); /** lumo.semantic.color.text.red.twoTone — Two-Tone · red */
+  --color-bg-pink-twotone: var(--color-pink-100); /** lumo.semantic.color.bg.pink.twoTone — Two-Tone · pink */
+  --color-text-pink-twotone: var(--color-pink-800); /** lumo.semantic.color.text.pink.twoTone — Two-Tone · pink */
+  --color-border-primary-default: var(--color-neutral-300); /** lumo.semantic.color.border.primary.default — Border Colors · primary default */
+  --color-border-primary-hovered: var(--color-neutral-400); /** lumo.semantic.color.border.primary.hovered — Border Colors · primary hovered */
+  --color-border-primary-focused: var(--color-neutral-1000); /** lumo.semantic.color.border.primary.focused — Border Colors · primary focused */
+  --color-border-brand-default: var(--color-aqua-300); /** lumo.semantic.color.border.brand.default — Border Colors · brand default */
+  --color-border-brand-hovered: var(--color-aqua-400); /** lumo.semantic.color.border.brand.hovered — Border Colors · brand hovered */
+  --color-border-brand-focused: var(--color-aqua-500); /** lumo.semantic.color.border.brand.focused — Border Colors · brand focused */
+  --color-border-negative-default: var(--color-red-300); /** lumo.semantic.color.border.negative.default — Border Colors · negative default */
+  --color-border-negative-hovered: var(--color-red-400); /** lumo.semantic.color.border.negative.hovered — Border Colors · negative hovered */
+  --color-border-negative-focused: var(--color-red-500); /** lumo.semantic.color.border.negative.focused — Border Colors · negative focused */
+  --color-border-positive-default: var(--color-green-300); /** lumo.semantic.color.border.positive.default — Border Colors · positive default */
+  --color-border-positive-hovered: var(--color-green-400); /** lumo.semantic.color.border.positive.hovered — Border Colors · positive hovered */
+  --color-border-positive-focused: var(--color-green-500); /** lumo.semantic.color.border.positive.focused — Border Colors · positive focused */
+  --color-border-warning-default: var(--color-orange-300); /** lumo.semantic.color.border.warning.default — Border Colors · warning default */
+  --color-border-warning-hovered: var(--color-orange-400); /** lumo.semantic.color.border.warning.hovered — Border Colors · warning hovered */
+  --color-border-warning-focused: var(--color-orange-500); /** lumo.semantic.color.border.warning.focused — Border Colors · warning focused */
+  --color-border-info-default: var(--color-blue-300); /** lumo.semantic.color.border.info.default — Border Colors · info default */
+  --color-border-info-hovered: var(--color-blue-400); /** lumo.semantic.color.border.info.hovered — Border Colors · info hovered */
+  --color-border-info-focused: var(--color-blue-500); /** lumo.semantic.color.border.info.focused — Border Colors · info focused */
+  --color-border-update-default: var(--color-purple-300); /** lumo.semantic.color.border.update.default — Border Colors · update default */
+  --color-border-update-hovered: var(--color-purple-400); /** lumo.semantic.color.border.update.hovered — Border Colors · update hovered */
+  --color-border-update-focused: var(--color-purple-500); /** lumo.semantic.color.border.update.focused — Border Colors · update focused */
+  --color-border-accent-yellow-default: var(--color-yellow-300); /** lumo.semantic.color.border.accent.yellow.default — Border Colors · accent/yellow default */
+  --color-border-accent-yellow-hovered: var(--color-yellow-400); /** lumo.semantic.color.border.accent.yellow.hovered — Border Colors · accent/yellow hovered */
+  --color-border-accent-yellow-focused: var(--color-yellow-500); /** lumo.semantic.color.border.accent.yellow.focused — Border Colors · accent/yellow focused */
+  --color-border-accent-mint-default: var(--color-mint-300); /** lumo.semantic.color.border.accent.mint.default — Border Colors · accent/mint default */
+  --color-border-accent-mint-hovered: var(--color-mint-400); /** lumo.semantic.color.border.accent.mint.hovered — Border Colors · accent/mint hovered */
+  --color-border-accent-mint-focused: var(--color-mint-500); /** lumo.semantic.color.border.accent.mint.focused — Border Colors · accent/mint focused */
+  --color-border-accent-pink-default: var(--color-pink-300); /** lumo.semantic.color.border.accent.pink.default — Border Colors · accent/pink default */
+  --color-border-accent-pink-hovered: var(--color-pink-400); /** lumo.semantic.color.border.accent.pink.hovered — Border Colors · accent/pink hovered */
+  --color-border-accent-pink-focused: var(--color-pink-500); /** lumo.semantic.color.border.accent.pink.focused — Border Colors · accent/pink focused */
+  --typography-fontfamily-title: var(--typography-fontfamily-inter); /** lumo.semantic.typography.fontFamily.title */
+  --typography-fontfamily-body: var(--typography-fontfamily-inter); /** lumo.semantic.typography.fontFamily.body */
+  --typography-fontfamily-caption: var(--typography-fontfamily-inter); /** lumo.semantic.typography.fontFamily.caption */
+  --typography-fontfamily-label: var(--typography-fontfamily-inter); /** lumo.semantic.typography.fontFamily.label */
+  --typography-fontsize-2xs: var(--typography-fontsize-10); /** lumo.semantic.typography.fontSize.2xs */
+  --typography-lineheight-2xs: var(--typography-lineheight-12); /** lumo.semantic.typography.lineHeight.2xs */
+  --typography-fontsize-xs: var(--typography-fontsize-11); /** lumo.semantic.typography.fontSize.xs */
+  --typography-lineheight-xs: var(--typography-lineheight-16); /** lumo.semantic.typography.lineHeight.xs */
+  --typography-fontsize-sm: var(--typography-fontsize-12); /** lumo.semantic.typography.fontSize.sm */
+  --typography-lineheight-sm: var(--typography-lineheight-16); /** lumo.semantic.typography.lineHeight.sm */
+  --typography-fontsize-md: var(--typography-fontsize-14); /** lumo.semantic.typography.fontSize.md */
+  --typography-lineheight-md: var(--typography-lineheight-20); /** lumo.semantic.typography.lineHeight.md */
+  --typography-fontsize-lg: var(--typography-fontsize-16); /** lumo.semantic.typography.fontSize.lg */
+  --typography-lineheight-lg: var(--typography-lineheight-24); /** lumo.semantic.typography.lineHeight.lg */
+  --typography-fontsize-xl: var(--typography-fontsize-20); /** lumo.semantic.typography.fontSize.xl */
+  --typography-lineheight-xl: var(--typography-lineheight-24); /** lumo.semantic.typography.lineHeight.xl */
+  --typography-fontsize-2xl: var(--typography-fontsize-24); /** lumo.semantic.typography.fontSize.2xl */
+  --typography-lineheight-2xl: var(--typography-lineheight-32); /** lumo.semantic.typography.lineHeight.2xl */
+  --typography-fontsize-3xl: var(--typography-fontsize-32); /** lumo.semantic.typography.fontSize.3xl */
+  --typography-lineheight-3xl: var(--typography-lineheight-40); /** lumo.semantic.typography.lineHeight.3xl */
+  --typography-fontsize-4xl: var(--typography-fontsize-64); /** lumo.semantic.typography.fontSize.4xl */
+  --typography-lineheight-4xl: var(--typography-lineheight-80); /** lumo.semantic.typography.lineHeight.4xl */
+  --spacing-padding-xs: var(--spacing-4); /** lumo.semantic.spacing.padding.xs */
+  --spacing-padding-sm: var(--spacing-8); /** lumo.semantic.spacing.padding.sm */
+  --spacing-padding-md: var(--spacing-16); /** lumo.semantic.spacing.padding.md */
+  --spacing-padding-lg: var(--spacing-24); /** lumo.semantic.spacing.padding.lg */
+  --spacing-padding-xl: var(--spacing-32); /** lumo.semantic.spacing.padding.xl */
+  --spacing-gap-xs: var(--spacing-4); /** lumo.semantic.spacing.gap.xs */
+  --spacing-gap-sm: var(--spacing-8); /** lumo.semantic.spacing.gap.sm */
+  --spacing-gap-md: var(--spacing-16); /** lumo.semantic.spacing.gap.md */
+  --spacing-gap-lg: var(--spacing-24); /** lumo.semantic.spacing.gap.lg */
+  --spacing-gap-xl: var(--spacing-40); /** lumo.semantic.spacing.gap.xl */
+  --spacing-gap-horizontal-xs: var(--spacing-4); /** lumo.semantic.spacing.gap.horizontal.xs */
+  --spacing-gap-horizontal-sm: var(--spacing-8); /** lumo.semantic.spacing.gap.horizontal.sm */
+  --spacing-gap-horizontal-md: var(--spacing-12); /** lumo.semantic.spacing.gap.horizontal.md */
+  --spacing-gap-horizontal-lg: var(--spacing-16); /** lumo.semantic.spacing.gap.horizontal.lg */
+  --spacing-gap-horizontal-xl: var(--spacing-24); /** lumo.semantic.spacing.gap.horizontal.xl */
+  --spacing-margin-sm: var(--spacing-32); /** lumo.semantic.spacing.margin.sm */
+  --spacing-margin-md: var(--spacing-48); /** lumo.semantic.spacing.margin.md */
+  --spacing-margin-lg: var(--spacing-64); /** lumo.semantic.spacing.margin.lg */
+  --spacing-margin-xl: var(--spacing-96); /** lumo.semantic.spacing.margin.xl */
+  --size-icon-xs: var(--size-12); /** lumo.semantic.size.icon.xs */
+  --size-icon-sm: var(--size-16); /** lumo.semantic.size.icon.sm */
+  --size-icon-md: var(--size-20); /** lumo.semantic.size.icon.md */
+  --size-icon-lg: var(--size-24); /** lumo.semantic.size.icon.lg */
+  --size-icon-xl: var(--size-32); /** lumo.semantic.size.icon.xl */
+  --size-control-sm: var(--size-32); /** lumo.semantic.size.control.sm */
+  --size-control-md: var(--size-40); /** lumo.semantic.size.control.md */
+  --size-control-lg: var(--size-48); /** lumo.semantic.size.control.lg */
+  --size-avatar-xs: var(--size-24); /** lumo.semantic.size.avatar.xs */
+  --size-avatar-sm: var(--size-32); /** lumo.semantic.size.avatar.sm */
+  --size-avatar-md: var(--size-40); /** lumo.semantic.size.avatar.md */
+  --size-avatar-lg: var(--size-48); /** lumo.semantic.size.avatar.lg */
+  --size-avatar-xl: var(--size-64); /** lumo.semantic.size.avatar.xl */
+  --size-touchtarget-min: var(--size-44); /** lumo.semantic.size.touchTarget.min */
+  --size-layout-sidebar: var(--size-256); /** lumo.semantic.size.layout.sidebar */
+  --size-layout-sidebarcollapsed: var(--size-72); /** lumo.semantic.size.layout.sidebarCollapsed */
+  --size-layout-topbar: var(--size-64); /** lumo.semantic.size.layout.topbar */
+  --size-layout-modal-sm: var(--size-400); /** lumo.semantic.size.layout.modal.sm */
+  --size-layout-modal-md: var(--size-560); /** lumo.semantic.size.layout.modal.md */
+  --size-layout-modal-lg: var(--size-800); /** lumo.semantic.size.layout.modal.lg */
+  --size-layout-drawer: var(--size-480); /** lumo.semantic.size.layout.drawer */
+  --heading-h1: Medium var(--typography-fontsize-4xl)/var(--typography-lineheight-4xl) var(--typography-fontfamily-title); /** Use for the most prominent headings to make catchy titles, such as main titles on landing page */
+  --heading-h2: Semi Bold var(--typography-fontsize-3xl)/var(--typography-lineheight-3xl) var(--typography-fontfamily-title); /** Use for the secondary headings that are slightly less prominent than the main title such as secondary titles on landing page */
+  --heading-h3: Semi Bold var(--typography-fontsize-2xl)/var(--typography-lineheight-2xl) var(--typography-fontfamily-title); /** Use for the headings that require the highest level of emphasis within products, such as page titles or important headers within sections */
+  --heading-h4: Semi Bold var(--typography-fontsize-xl)/var(--typography-lineheight-xl) var(--typography-fontfamily-title); /** Use for the headings that require a significant level of emphasis within products, such as page titles or headers within sections */
+  --heading-h5: Medium var(--typography-fontsize-lg)/var(--typography-lineheight-lg) var(--typography-fontfamily-title); /** Use for the headings that require a lower level of emphasis within products, such as feature titles or tab titles */
+  --heading-h6: Medium var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-title); /** Use for the least prominent headings, suitable for the smallest sections or specific points within detailed content such as headings of tabs */
+  --caption-caption1: Semi Bold var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-caption); /** Use for text elements in all capital letters, providing primary captions with clear and subtle emphasis such as tabs */
+  --caption-caption2: Semi Bold var(--typography-fontsize-2xs)/var(--typography-lineheight-2xs) var(--typography-fontfamily-caption); /** Use for text elements in all capital letters, providing secondary captions with a more subtle level of emphasis such as tags */
+  --body-body1: Regular var(--typography-fontsize-lg)/var(--typography-lineheight-lg) var(--typography-fontfamily-body); /** Use for the biggest body text that requires more emphasis than the default body text such as highlighted text, key information within a paragraph */
+  --body-body2: Regular var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body); /** Use for the primary body text, ensuring clear readability and consistency such as main paragraphs, descriptive text and long-form content */
+  --body-body2-intense: Semi Bold var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body); /** Use for primary body text that needs emphasis within a paragraph, such as inline key terms or values */
+  --body-body2-underlined: Regular var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body); /** Use for the interaction states such as hovered, pressed, enabled of the primary body text or links */
+  --body-body3: Regular var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body); /** Use for the secondary body text, which needs to be less prominent than default body text such as metadata descriptions, breadcrumbs */
+  --body-body3-intense: Semi Bold var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body); /** Use for secondary body text that needs emphasis, such as highlighted metadata or table values */
+  --body-body3-underlined: Regular var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body); /** Use for the interaction states such as hovered, pressed, enabled of the secondary body text or links */
+  --body-body4: Regular var(--typography-fontsize-xs)/var(--typography-lineheight-xs) var(--typography-fontfamily-body); /** Use for text elements that need subtle emphasis, supporting other body text elements such as description text under secondary body text */
+  --body-body5: Regular var(--typography-fontsize-2xs)/var(--typography-lineheight-2xs) var(--typography-fontfamily-body); /** Use for the least prominent body text in data-heavy layouts and small components, such as chips */
+  --body-body6-medium: Medium var(--typography-fontsize-md)/var(--typography-lineheight-sm) var(--typography-fontfamily-label); /** Use for text elements that serve as labels, providing clear and concise information such as form labels, input field labels */
+  --body-body6-intense: Semi Bold var(--typography-fontsize-lg)/var(--typography-lineheight-md) var(--typography-fontfamily-body);
+  --button-button1: Semi Bold var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body); /** Use for the text elements of the medium size button component */
+  --button-button2: Semi Bold var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body); /** Use for the text elements of the small size button component */
+  --label-label1: Medium var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-label);
+  --label-label2: Medium var(--typography-fontsize-2xs)/var(--typography-lineheight-2xs) var(--typography-fontfamily-label);
+  --label-label3: Medium var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-label);
+}

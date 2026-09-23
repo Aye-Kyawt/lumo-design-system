@@ -1,0 +1,42 @@
+{
+  "grid-breakpoint-min": {
+    "$type": "dimension",
+    "$value": {
+      "value": 0,
+      "unit": "px"
+    },
+    "$description": "lumo.semantic.grid.breakpoint.min"
+  },
+  "grid-columns": {
+    "$type": "dimension",
+    "$value": {
+      "value": 4,
+      "unit": "px"
+    },
+    "$description": "lumo.semantic.grid.columns"
+  },
+  "grid-gutter": {
+    "$type": "dimension",
+    "$value": {
+      "value": 16,
+      "unit": "px"
+    },
+    "$description": "lumo.semantic.grid.gutter"
+  },
+  "grid-margin": {
+    "$type": "dimension",
+    "$value": {
+      "value": 16,
+      "unit": "px"
+    },
+    "$description": "lumo.semantic.grid.margin"
+  },
+  "grid-container-maxwidth": {
+    "$type": "dimension",
+    "$value": {
+      "value": 599,
+      "unit": "px"
+    },
+    "$description": "lumo.semantic.grid.container.maxWidth"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "opacity-disabled": {
+    "$type": "number",
+    "$value": "{opacity-40}",
+    "$description": "lumo.semantic.opacity.disabled"
+  },
+  "opacity-overlay-hovered": {
+    "$type": "number",
+    "$value": "{opacity-8}",
+    "$description": "lumo.semantic.opacity.overlay.hovered"
+  },
+  "opacity-overlay-pressed": {
+    "$type": "number",
+    "$value": "{opacity-12}",
+    "$description": "lumo.semantic.opacity.overlay.pressed"
+  },
+  "opacity-overlay-selected": {
+    "$type": "number",
+    "$value": "{opacity-16}",
+    "$description": "lumo.semantic.opacity.overlay.selected"
+  },
+  "opacity-overlay-scrim": {
+    "$type": "number",
+    "$value": "{opacity-48}",
+    "$description": "lumo.semantic.opacity.overlay.scrim"
+  },
+  "opacity-skeleton": {
+    "$type": "number",
+    "$value": "{opacity-64}",
+    "$description": "lumo.semantic.opacity.skeleton"
+  }
+}

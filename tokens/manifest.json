@@ -1,0 +1,113 @@
+{
+  "name": "Design Tokens",
+  "collections": {
+    "lumo.core": {
+      "modes": {
+        "value": [
+          "lumo.core.value.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.typography": {
+      "modes": {
+        "web": [
+          "lumo.semantic.typography.web.tokens.json"
+        ],
+        "mobile": [
+          "lumo.semantic.typography.mobile.tokens.json"
+        ],
+        "admin": [
+          "lumo.semantic.typography.admin.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.layout": {
+      "modes": {
+        "mobile": [
+          "lumo.semantic.layout.mobile.tokens.json"
+        ],
+        "tablet": [
+          "lumo.semantic.layout.tablet.tokens.json"
+        ],
+        "desktop": [
+          "lumo.semantic.layout.desktop.tokens.json"
+        ],
+        "wide": [
+          "lumo.semantic.layout.wide.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.spacing": {
+      "modes": {
+        "web": [
+          "lumo.semantic.spacing.web.tokens.json"
+        ],
+        "mobile": [
+          "lumo.semantic.spacing.mobile.tokens.json"
+        ],
+        "admin": [
+          "lumo.semantic.spacing.admin.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.size": {
+      "modes": {
+        "web": [
+          "lumo.semantic.size.web.tokens.json"
+        ],
+        "mobile": [
+          "lumo.semantic.size.mobile.tokens.json"
+        ],
+        "admin": [
+          "lumo.semantic.size.admin.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.border": {
+      "modes": {
+        "value": [
+          "lumo.semantic.border.value.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.opacity": {
+      "modes": {
+        "value": [
+          "lumo.semantic.opacity.value.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.z-index": {
+      "modes": {
+        "value": [
+          "lumo.semantic.z-index.value.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.color": {
+      "modes": {
+        "on-light": [
+          "lumo.semantic.color.on-light.tokens.json"
+        ],
+        "on-dark": [
+          "lumo.semantic.color.on-dark.tokens.json"
+        ]
+      }
+    },
+    "lumo.semantic.motion": {
+      "modes": {
+        "value": [
+          "lumo.semantic.motion.value.tokens.json"
+        ]
+      }
+    }
+  },
+  "styles": {
+    "typography": [
+      "typography.styles.tokens.json"
+    ],
+    "effects": [
+      "effects.styles.tokens.json"
+    ]
+  }
+}

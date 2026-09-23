@@ -1,0 +1,11 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --grid-breakpoint-min: 1440px; /** lumo.semantic.grid.breakpoint.min */
+  --grid-columns: 12px; /** lumo.semantic.grid.columns */
+  --grid-gutter: 32px; /** lumo.semantic.grid.gutter */
+  --grid-margin: 80px; /** lumo.semantic.grid.margin */
+  --grid-container-maxwidth: 1440px; /** lumo.semantic.grid.container.maxWidth */
+}

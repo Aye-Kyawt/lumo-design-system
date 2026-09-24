@@ -1,0 +1,112 @@
+{
+  "typography-fontfamily-title": {
+    "$type": "fontFamily",
+    "$value": "{typography-fontfamily-inter}",
+    "$description": "lumo.semantic.typography.fontFamily.title"
+  },
+  "typography-fontfamily-body": {
+    "$type": "fontFamily",
+    "$value": "{typography-fontfamily-inter}",
+    "$description": "lumo.semantic.typography.fontFamily.body"
+  },
+  "typography-fontfamily-caption": {
+    "$type": "fontFamily",
+    "$value": "{typography-fontfamily-inter}",
+    "$description": "lumo.semantic.typography.fontFamily.caption"
+  },
+  "typography-fontfamily-label": {
+    "$type": "fontFamily",
+    "$value": "{typography-fontfamily-inter}",
+    "$description": "lumo.semantic.typography.fontFamily.label"
+  },
+  "typography-fontsize-2xs": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-10}",
+    "$description": "lumo.semantic.typography.fontSize.2xs"
+  },
+  "typography-lineheight-2xs": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-12}",
+    "$description": "lumo.semantic.typography.lineHeight.2xs"
+  },
+  "typography-fontsize-xs": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-11}",
+    "$description": "lumo.semantic.typography.fontSize.xs"
+  },
+  "typography-lineheight-xs": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-14}",
+    "$description": "lumo.semantic.typography.lineHeight.xs"
+  },
+  "typography-fontsize-sm": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-12}",
+    "$description": "lumo.semantic.typography.fontSize.sm"
+  },
+  "typography-lineheight-sm": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-16}",
+    "$description": "lumo.semantic.typography.lineHeight.sm"
+  },
+  "typography-fontsize-md": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-13}",
+    "$description": "lumo.semantic.typography.fontSize.md"
+  },
+  "typography-lineheight-md": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-18}",
+    "$description": "lumo.semantic.typography.lineHeight.md"
+  },
+  "typography-fontsize-lg": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-14}",
+    "$description": "lumo.semantic.typography.fontSize.lg"
+  },
+  "typography-lineheight-lg": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-20}",
+    "$description": "lumo.semantic.typography.lineHeight.lg"
+  },
+  "typography-fontsize-xl": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-18}",
+    "$description": "lumo.semantic.typography.fontSize.xl"
+  },
+  "typography-lineheight-xl": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-24}",
+    "$description": "lumo.semantic.typography.lineHeight.xl"
+  },
+  "typography-fontsize-2xl": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-20}",
+    "$description": "lumo.semantic.typography.fontSize.2xl"
+  },
+  "typography-lineheight-2xl": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-28}",
+    "$description": "lumo.semantic.typography.lineHeight.2xl"
+  },
+  "typography-fontsize-3xl": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-24}",
+    "$description": "lumo.semantic.typography.fontSize.3xl"
+  },
+  "typography-lineheight-3xl": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-32}",
+    "$description": "lumo.semantic.typography.lineHeight.3xl"
+  },
+  "typography-fontsize-4xl": {
+    "$type": "dimension",
+    "$value": "{typography-fontsize-32}",
+    "$description": "lumo.semantic.typography.fontSize.4xl"
+  },
+  "typography-lineheight-4xl": {
+    "$type": "dimension",
+    "$value": "{typography-lineheight-40}",
+    "$description": "lumo.semantic.typography.lineHeight.4xl"
+  }
+}

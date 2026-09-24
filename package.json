@@ -10,8 +10,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "style-dictionary": "^5.5.5"
-  }
+  },
+  "type": "module"
 }

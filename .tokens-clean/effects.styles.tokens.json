@@ -1,0 +1,275 @@
+{
+  "elevation-level1": {
+    "$type": "shadow",
+    "$description": "Cards, tiles, list rows that sit slightly above the canvas",
+    "$value": [
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.05000000074505806
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 1,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 2,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.07999999821186066
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 1,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 3,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
+    ]
+  },
+  "elevation-level2": {
+    "$type": "shadow",
+    "$description": "Dropdowns, menus, popovers, tooltips",
+    "$value": [
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.05999999865889549
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 2,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 4,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -1,
+          "unit": "px"
+        }
+      },
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.10000000149011612
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 4,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 8,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -2,
+          "unit": "px"
+        }
+      }
+    ]
+  },
+  "elevation-level3": {
+    "$type": "shadow",
+    "$description": "Sticky headers, drawers, side sheets",
+    "$value": [
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.05000000074505806
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 4,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 6,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -2,
+          "unit": "px"
+        }
+      },
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.11999999731779099
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 12,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 16,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -4,
+          "unit": "px"
+        }
+      }
+    ]
+  },
+  "elevation-level4": {
+    "$type": "shadow",
+    "$description": "Modals, dialogs, toasts — highest emphasis",
+    "$value": [
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.03999999910593033
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 8,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 8,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -4,
+          "unit": "px"
+        }
+      },
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.062745101749897,
+            0.07450980693101883,
+            0.13725490868091583
+          ],
+          "alpha": 0.14000000059604645
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 20,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 24,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -4,
+          "unit": "px"
+        }
+      }
+    ]
+  },
+  "elevation-focused": {
+    "$type": "shadow",
+    "$description": "Keyboard focus indicator (Aqua-600 at 40%, 3px spread)",
+    "$value": [
+      {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.08627451211214066,
+            0.7450980544090271,
+            0.8901960849761963
+          ],
+          "alpha": 0.4000000059604645
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 0,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 3,
+          "unit": "px"
+        }
+      }
+    ]
+  }
+}

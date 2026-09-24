@@ -1,204 +1,247 @@
-const fs = require('fs');
-const path = require('path');
-const StyleDictionary = require('style-dictionary').default;
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import StyleDictionary from 'style-dictionary';
 
-const TOKENS_DIR = path.join(__dirname, 'tokens');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SRC_DIR = path.join(__dirname, 'tokens');
 const CLEAN_DIR = path.join(__dirname, '.tokens-clean');
 
 const PLATFORMS = ['web', 'mobile', 'admin'];
-const COLOR_MODES = ['on-light', 'on-dark'];
-const LAYOUT_MODES = ['mobile', 'tablet', 'desktop', 'wide'];
+const LAYOUTS = ['mobile', 'tablet', 'desktop', 'wide'];
 
-const SHARED_FILES = [
+// Files that are the same regardless of platform / colour mode.
+const SHARED = [
   'lumo.core.value.tokens.json',
   'lumo.semantic.border.value.tokens.json',
   'lumo.semantic.opacity.value.tokens.json',
   'lumo.semantic.z-index.value.tokens.json',
   'lumo.semantic.motion.value.tokens.json',
-  'typography.styles.tokens.json',
-  'effects.styles.tokens.json',
+];
+const STYLES = ['typography.styles.tokens.json', 'effects.styles.tokens.json'];
+
+const perPlatform = (p) => [
+  `lumo.semantic.typography.${p}.tokens.json`,
+  `lumo.semantic.spacing.${p}.tokens.json`,
+  `lumo.semantic.size.${p}.tokens.json`,
 ];
 
+const LIGHT = 'lumo.semantic.color.on-light.tokens.json';
+const DARK = 'lumo.semantic.color.on-dark.tokens.json';
+
 // ---------------------------------------------------------------------------
-// Unit step: Figma variables of type FLOAT carry no unit, and the exporter
-// stamps every one of them as a px dimension. That is correct for spacing,
-// sizing and radii, but opacity, z-index and durations are not lengths —
-// left as px they emit invalid CSS (`z-index: 1400px`) that browsers drop
-// silently, so the tokens appear to work while doing nothing.
+// 1. Clean pass
+//
+// The Figma export emits some tokens that alias their own name, e.g.
+//   "border-style-solid": { "$value": "{border-style-solid}" }
+// Style Dictionary can't resolve those (circular). For each one we either
+// fall back to a real literal defined elsewhere under the same name, or --
+// if no real value exists anywhere in the export -- drop it and report it.
 // ---------------------------------------------------------------------------
-function numericValue(value) {
-  if (typeof value === 'number') return value;
-  if (typeof value === 'string') {
-    const match = /^(-?\d*\.?\d+)(?:px|rem|ms|s)?$/.exec(value.trim());
-    return match ? parseFloat(match[1]) : null;
+const isSelfRef = (key, value) => typeof value === 'string' && value === `{${key}}`;
+const isAlias = (value) => typeof value === 'string' && /^\{.+\}$/.test(value);
+
+function cleanTokens() {
+  const files = fs.readdirSync(SRC_DIR).filter((f) => f.endsWith('.tokens.json'));
+  const parsed = Object.fromEntries(
+    files.map((f) => [f, JSON.parse(fs.readFileSync(path.join(SRC_DIR, f), 'utf8'))]),
+  );
+
+  // Every token name that has a real (non-alias) value somewhere.
+  const literals = new Set();
+  for (const data of Object.values(parsed)) {
+    for (const [key, def] of Object.entries(data)) {
+      if (def && typeof def === 'object' && '$value' in def && !isAlias(def.$value)) {
+        literals.add(key);
+      }
+    }
   }
-  if (value && typeof value === 'object' && typeof value.value === 'number') return value.value;
-  return null;
+
+  const deduped = [];
+  const dropped = [];
+
+  fs.rmSync(CLEAN_DIR, { recursive: true, force: true });
+  fs.mkdirSync(CLEAN_DIR, { recursive: true });
+
+  for (const [file, data] of Object.entries(parsed)) {
+    const out = {};
+    for (const [key, def] of Object.entries(data)) {
+      if (def && typeof def === 'object' && isSelfRef(key, def.$value)) {
+        (literals.has(key) ? deduped : dropped).push(`${file}  ->  ${key}`);
+        continue;
+      }
+      out[key] = def;
+    }
+    fs.writeFileSync(path.join(CLEAN_DIR, file), JSON.stringify(out, null, 2));
+  }
+
+  return { deduped, dropped };
 }
 
-// Runs after the built-in css transforms, so it overrides their px output
-// regardless of whether the value still an object or is already a string.
-function registerUnitTransform(name, prefix, render) {
-  StyleDictionary.registerTransform({
-    name,
-    type: 'value',
-    transitive: true,
-    filter: (token) =>
-      String(token.path[0] || '').startsWith(prefix) && numericValue(token.$value) !== null,
-    transform: (token) => render(numericValue(token.$value)),
-  });
-}
+// ---------------------------------------------------------------------------
+// 2. Font weight normalisation
+//
+// Figma writes weights as human names -- "Semi Bold" inside typography
+// styles, "semi-bold" on the core tokens. CSS, iOS and Android all want
+// numbers. Normalise both spellings to the numeric scale.
+// ---------------------------------------------------------------------------
+const WEIGHTS = {
+  thin: 100,
+  hairline: 100,
+  extralight: 200,
+  ultralight: 200,
+  light: 300,
+  regular: 400,
+  normal: 400,
+  book: 400,
+  medium: 500,
+  semibold: 600,
+  demibold: 600,
+  bold: 700,
+  extrabold: 800,
+  ultrabold: 800,
+  black: 900,
+  heavy: 900,
+};
 
-registerUnitTransform('lumo/opacity-ratio', 'opacity-', (n) => String(n / 100));
-registerUnitTransform('lumo/z-index-unitless', 'z-index-', (n) => String(n));
-registerUnitTransform('lumo/duration-ms', 'motion-duration-', (n) => `${n}ms`);
+const toWeight = (v) => {
+  if (typeof v !== 'string') return v;
+  const key = v.toLowerCase().replace(/[^a-z]/g, '');
+  return WEIGHTS[key] ?? v;
+};
 
-StyleDictionary.registerTransformGroup({
-  name: 'lumo/css',
-  transforms: [
-    ...StyleDictionary.hooks.transformGroups.css,
-    'lumo/opacity-ratio',
-    'lumo/z-index-unitless',
-    'lumo/duration-ms',
-  ],
+StyleDictionary.registerPreprocessor({
+  name: 'lumo/normalise',
+  preprocessor: (dict) => {
+    const walk = (node) => {
+      for (const key of Object.keys(node)) {
+        const token = node[key];
+        if (!token || typeof token !== 'object') continue;
+
+        if (token.$type === 'fontWeight' && !isAlias(token.$value)) {
+          token.$value = toWeight(token.$value);
+        } else if (token.$type === 'typography' && token.$value) {
+          token.$value = { ...token.$value, fontWeight: toWeight(token.$value.fontWeight) };
+        } else if (!('$value' in token)) {
+          walk(token);
+        }
+      }
+      return node;
+    };
+    return walk(dict);
+  },
 });
 
 // ---------------------------------------------------------------------------
-// Clean step: some tokens exported from Figma alias to their own name
-// (e.g. "border-style-solid": "{border-style-solid}"), which Style
-// Dictionary can't resolve. We build a lookup of every literal (non-alias)
-// value across all source files, then for each self-referencing token:
-//   - if a literal value exists elsewhere under the same name, drop the
-//     duplicate so that literal wins (no data lost, no collision)
-//   - otherwise there is no real value anywhere in the export, so we drop
-//     the token and report it — it needs a real value added at the source
-//     (Figma) and re-exporting.
+// 3. Builds
 // ---------------------------------------------------------------------------
-function loadAllTokenFiles() {
-  const files = fs.readdirSync(TOKENS_DIR).filter((f) => f.endsWith('.tokens.json'));
-  const byFile = {};
-  for (const f of files) {
-    byFile[f] = JSON.parse(fs.readFileSync(path.join(TOKENS_DIR, f), 'utf8'));
-  }
-  return byFile;
-}
+const src = (files) => files.map((f) => path.join(CLEAN_DIR, f));
 
-function isSelfReference(key, value) {
-  return typeof value === 'string' && value === `{${key}}`;
-}
-
-function cleanTokens() {
-  const byFile = loadAllTokenFiles();
-
-  // literal (non-alias) values, keyed by token name, across every file
-  const literalsByKey = {};
-  for (const data of Object.values(byFile)) {
-    for (const [key, def] of Object.entries(data)) {
-      if (def && typeof def === 'object' && '$value' in def && !isSelfReference(key, def.$value)) {
-        if (typeof def.$value !== 'object' && typeof def.$value !== 'string') continue;
-        if (typeof def.$value === 'string' && /^\{.*\}$/.test(def.$value)) continue; // still an alias, just to something else
-        literalsByKey[key] = def.$value;
-      }
-    }
-  }
-
-  const dropped = []; // tokens with no real value anywhere
-  const deduped = []; // tokens dropped because a literal already exists elsewhere
-
-  fs.mkdirSync(CLEAN_DIR, { recursive: true });
-
-  for (const [file, data] of Object.entries(byFile)) {
-    const cleaned = {};
-    for (const [key, def] of Object.entries(data)) {
-      if (def && typeof def === 'object' && isSelfReference(key, def.$value)) {
-        if (key in literalsByKey) {
-          deduped.push(`${file}: ${key}`);
-          continue; // drop duplicate; the literal elsewhere will resolve it
-        }
-        dropped.push(`${file}: ${key}`);
-        continue; // no real value anywhere; drop and report
-      }
-      cleaned[key] = def;
-    }
-    fs.writeFileSync(path.join(CLEAN_DIR, file), JSON.stringify(cleaned, null, 2));
-  }
-
-  return { dropped, deduped };
-}
-
-function cleanSrc(file) {
-  return path.join(CLEAN_DIR, file);
-}
-
-async function buildThemePlatform(platform, colorMode) {
-  const sd = new StyleDictionary({
+const cssDict = (sources, buildPath, files) =>
+  new StyleDictionary({
     usesDtcg: true,
-    source: [
-      ...SHARED_FILES,
-      `lumo.semantic.color.${colorMode}.tokens.json`,
-      `lumo.semantic.typography.${platform}.tokens.json`,
-      `lumo.semantic.spacing.${platform}.tokens.json`,
-      `lumo.semantic.size.${platform}.tokens.json`,
-    ].map(cleanSrc),
+    log: { warnings: 'disabled' },
+    source: src(sources),
+    preprocessors: ['lumo/normalise'],
+    platforms: { css: { transformGroup: 'css', buildPath, files } },
+  });
+
+async function buildPlatform(platform) {
+  // :root -- core + light colours + this platform's type/space/size + styles
+  await cssDict(
+    [...SHARED, LIGHT, ...perPlatform(platform), ...STYLES],
+    `build/css/${platform}/`,
+    [
+      {
+        destination: 'tokens.css',
+        format: 'css/variables',
+        options: { selector: ':root', outputReferences: true },
+      },
+    ],
+  ).buildAllPlatforms();
+
+  // dark -- only the colours that actually change
+  await cssDict([...SHARED, DARK], `build/css/${platform}/`, [
+    {
+      destination: 'tokens-dark.css',
+      format: 'css/variables',
+      options: { selector: '[data-theme="dark"]' },
+      filter: (t) => t.filePath.includes('color.on-dark'),
+    },
+  ]).buildAllPlatforms();
+}
+
+async function buildLayout(mode) {
+  await cssDict([`lumo.semantic.layout.${mode}.tokens.json`], 'build/css/layout/', [
+    {
+      destination: `tokens.${mode}.css`,
+      format: 'css/variables',
+      options: { selector: `[data-breakpoint="${mode}"]` },
+    },
+  ]).buildAllPlatforms();
+}
+
+async function buildNative() {
+  const sources = src([...SHARED, LIGHT, ...perPlatform('mobile'), ...STYLES]);
+  await new StyleDictionary({
+    usesDtcg: true,
+    log: { warnings: 'disabled' },
+    source: sources,
+    preprocessors: ['lumo/normalise'],
     platforms: {
-      css: {
-        transformGroup: 'lumo/css',
-        buildPath: `build/css/${platform}/`,
+      ios: {
+        transformGroup: 'ios-swift',
+        buildPath: 'build/ios/',
         files: [
           {
-            destination: `tokens.${colorMode}.css`,
-            format: 'css/variables',
-            options: { outputReferences: true },
+            destination: 'Tokens.swift',
+            format: 'ios-swift/class.swift',
+            options: { className: 'Tokens' },
+          },
+        ],
+      },
+      android: {
+        transformGroup: 'android',
+        buildPath: 'build/android/',
+        files: [
+          {
+            destination: 'colors.xml',
+            format: 'android/resources',
+            resourceType: 'color',
+            filter: (t) => (t.$type ?? t.type) === 'color',
           },
         ],
       },
     },
-  });
-  await sd.hasInitialized;
-  await sd.buildAllPlatforms();
+  }).buildAllPlatforms();
 }
 
-async function buildLayout(mode) {
-  const sd = new StyleDictionary({
-    usesDtcg: true,
-    source: [cleanSrc(`lumo.semantic.layout.${mode}.tokens.json`)],
-    platforms: {
-      css: {
-        transformGroup: 'lumo/css',
-        buildPath: 'build/css/layout/',
-        files: [{ destination: `tokens.${mode}.css`, format: 'css/variables' }],
-      },
-    },
-  });
-  await sd.hasInitialized;
-  await sd.buildAllPlatforms();
+// ---------------------------------------------------------------------------
+const { deduped, dropped } = cleanTokens();
+
+for (const platform of PLATFORMS) {
+  console.log(`css    ${platform}`);
+  await buildPlatform(platform);
 }
+for (const mode of LAYOUTS) {
+  console.log(`css    layout/${mode}`);
+  await buildLayout(mode);
+}
+console.log('native ios + android');
+await buildNative();
 
-(async () => {
-  const { dropped, deduped } = cleanTokens();
+console.log('\nBuild complete.');
 
-  for (const platform of PLATFORMS) {
-    for (const colorMode of COLOR_MODES) {
-      console.log(`Building ${platform} / ${colorMode}...`);
-      await buildThemePlatform(platform, colorMode);
-    }
-  }
-  for (const mode of LAYOUT_MODES) {
-    console.log(`Building layout / ${mode}...`);
-    await buildLayout(mode);
-  }
-
-  console.log('\nDone.');
-
-  if (deduped.length) {
-    console.log(`\nNote: ${deduped.length} duplicate self-referencing tokens were skipped (a real value from the core tier was used instead):`);
-    deduped.forEach((d) => console.log('  - ' + d));
-  }
-  if (dropped.length) {
-    console.log(`\nWARNING: ${dropped.length} tokens had NO real value anywhere in the export and were skipped entirely. Fix these in Figma and re-export:`);
-    dropped.forEach((d) => console.log('  - ' + d));
-  }
-})().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (deduped.length) {
+  console.log(
+    `\n${deduped.length} self-referencing tokens resolved from the core tier instead:`,
+  );
+  for (const d of deduped) console.log(`  ${d}`);
+}
+if (dropped.length) {
+  console.log(
+    `\nWARNING -- ${dropped.length} tokens have no real value anywhere in the export and were skipped.`,
+  );
+  console.log('Give these a value in Figma and re-export:');
+  for (const d of dropped) console.log(`  ${d}`);
+}

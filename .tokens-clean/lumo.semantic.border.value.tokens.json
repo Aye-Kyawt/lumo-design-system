@@ -1,0 +1,57 @@
+{
+  "border-radius-tag": {
+    "$type": "dimension",
+    "$value": "{border-radius-sm}",
+    "$description": "lumo.semantic.border.radius.tag"
+  },
+  "border-radius-checkbox": {
+    "$type": "dimension",
+    "$value": "{border-radius-xs}",
+    "$description": "lumo.semantic.border.radius.checkbox"
+  },
+  "border-radius-button": {
+    "$type": "dimension",
+    "$value": "{border-radius-md}",
+    "$description": "lumo.semantic.border.radius.button"
+  },
+  "border-radius-input": {
+    "$type": "dimension",
+    "$value": "{border-radius-md}",
+    "$description": "lumo.semantic.border.radius.input"
+  },
+  "border-radius-card": {
+    "$type": "dimension",
+    "$value": "{border-radius-lg}",
+    "$description": "lumo.semantic.border.radius.card"
+  },
+  "border-radius-dropdown": {
+    "$type": "dimension",
+    "$value": "{border-radius-md}",
+    "$description": "lumo.semantic.border.radius.dropdown"
+  },
+  "border-radius-modal": {
+    "$type": "dimension",
+    "$value": "{border-radius-xl}",
+    "$description": "lumo.semantic.border.radius.modal"
+  },
+  "border-radius-chip": {
+    "$type": "dimension",
+    "$value": "{border-radius-full}",
+    "$description": "lumo.semantic.border.radius.chip"
+  },
+  "border-radius-avatar": {
+    "$type": "dimension",
+    "$value": "{border-radius-full}",
+    "$description": "lumo.semantic.border.radius.avatar"
+  },
+  "border-width-default": {
+    "$type": "dimension",
+    "$value": "{border-width-1}",
+    "$description": "lumo.semantic.border.width.default"
+  },
+  "border-width-focused": {
+    "$type": "dimension",
+    "$value": "{border-width-2}",
+    "$description": "lumo.semantic.border.width.focused"
+  }
+}

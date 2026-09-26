@@ -1,3 +1,7 @@
 node_modules/
-build/
 .DS_Store
+
+# Generated on every build — see build-tokens.js
+.tokens-clean/
+build/
+storybook-static/

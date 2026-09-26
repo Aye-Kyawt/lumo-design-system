@@ -4,14 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:tokens": "node build-tokens.js"
+    "build:tokens": "node build-tokens.js",
+    "storybook": "npm run build:tokens && storybook dev -p 6006",
+    "build:storybook": "npm run build:tokens && storybook build -o storybook-static"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "style-dictionary": "^5.5.5"
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/react-vite": "^10.6.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "storybook": "^10.6.0",
+    "style-dictionary": "^5.5.5",
+    "vite": "^7.3.6"
   },
   "type": "module"
 }

@@ -1,0 +1,85 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Lumo design tokens
+
+Every value in this Storybook is read from the **built** token files — the same
+`build/css` and `build/json` artefacts a product consumes. Nothing here is
+re-typed by hand, so a swatch that looks wrong means the pipeline is wrong.
+
+## The pipeline
+
+```
+Figma  ──export──▶  tokens/*.tokens.json  ──style-dictionary──▶  build/
+```
+
+- **`tokens/`** — the DTCG export from the Figma file `Lumo.Token.V1.0.Complete`.
+  Treat it as generated: edit values in Figma, not here.
+- **`build-tokens.js`** — cleans the export (self-referencing tokens, font-weight
+  names like `Semi Bold` → `600`) and runs Style Dictionary.
+- **`build/`** — what ships: CSS per platform, a dark-mode sheet, four layout
+  sheets, Swift and Android resources, plus the JSON these docs read.
+
+Rebuild everything with:
+
+```bash
+npm run build:tokens
+```
+
+## Three tiers
+
+1. **Core** (`lumo.core`) — the only tokens holding literal values: colour ramps,
+   the spacing scale, raw sizes. Products should never reference these directly.
+2. **Semantic** — named by role (`--color-text-primary`, `--spacing-padding-lg`),
+   each one aliasing a core token. This is the layer to build with.
+3. **Styles** — composite typography and shadow tokens that bundle several
+   values into one declaration (`font: var(--body-body2)`).
+
+The alias column in these tables shows the link: `→ --color-neutral-800` means
+the semantic token points there and will follow it if the ramp is retuned.
+
+## The three toolbar controls
+
+- **Platform** — swaps which stylesheet is loaded. Typography, spacing and sizing
+  are authored separately for `web`, `mobile` and `admin`; everything else is
+  shared. See *Reference → Platform comparison* for exactly what moves.
+- **Theme** — sets `data-theme` on the preview. Dark mode is a separate sheet of
+  colour overrides; token names are identical in both.
+- **Breakpoint** — sets `data-breakpoint`, which picks one of the four grid
+  sheets. Only the *Layout & grid* page responds to it.
+
+## Consuming the tokens
+
+```css
+@import url('build/css/web/tokens.css');
+@import url('build/css/web/tokens-dark.css');
+@import url('build/css/layout/tokens.desktop.css');
+```
+
+```css
+.card {
+  padding: var(--spacing-padding-lg);
+  border-radius: var(--border-radius-card);
+  background: var(--color-bg-surfaceprimary);
+  color: var(--color-text-primary);
+  box-shadow: var(--elevation-level1);
+  font: var(--body-body2);
+}
+```
+
+Click any token name in these pages to copy it as `var(--name)`.
+
+## Known gaps in the export
+
+One problem still comes from the Figma export rather than from anything in this
+repo, and it is called out on the page where it bites:
+
+- **Eight tokens with no value.** `border-style-solid|dashed|dotted` and the five
+  `motion-easing-*` tokens are exported as self-references, so the build drops
+  them and they are absent from every platform. `npm run build:tokens` lists them
+  at the end of each run.
+
+A second one — Figma typing every plain `FLOAT` as a `dimension`, so opacity,
+durations, z-index and `--grid-columns` all shipped as `px` — is now corrected
+in the build, which rewrites those four families to the units CSS expects.

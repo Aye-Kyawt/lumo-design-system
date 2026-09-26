@@ -133,22 +133,113 @@ StyleDictionary.registerPreprocessor({
 });
 
 // ---------------------------------------------------------------------------
-// 3. Builds
+// 3. A flat JSON mirror of every stylesheet
+//
+// Storybook needs more than CSS can carry: each token's $type, whether it
+// aliases another token or holds a literal, and the Figma path behind it.
+// Rather than re-parse the stylesheets, every CSS build emits the same
+// tokens as JSON -- same names, same transformed values, plus that metadata.
+// ---------------------------------------------------------------------------
+const valueOf = (t) => t.$value ?? t.value;
+
+StyleDictionary.registerFormat({
+  name: 'lumo/json-flat',
+  format: ({ dictionary }) =>
+    `${JSON.stringify(
+      dictionary.allTokens.map((t) => ({
+        name: `--${t.name}`,
+        value: valueOf(t),
+        type: t.$type ?? t.type,
+        // The unresolved right-hand side: "{color-neutral-800}" for an alias,
+        // the literal itself for a core token. Lets the docs show the chain.
+        original: valueOf(t.original),
+        isAlias: isAlias(valueOf(t.original)),
+        description: t.$description ?? t.comment ?? '',
+        path: t.path.join('.'),
+        file: path.basename(t.filePath),
+      })),
+      null,
+      2,
+    )}\n`,
+});
+
+// ---------------------------------------------------------------------------
+// 4. Unitless families
+//
+// Figma variables of type FLOAT carry no unit, so the export stamps every one
+// of them as a px dimension. Right for spacing, sizing and radii; wrong for
+// opacity, z-index and durations, which are not lengths. Left as px they emit
+// invalid CSS (`z-index: 1400px`) that browsers drop, so the token looks
+// applied while doing nothing.
+// ---------------------------------------------------------------------------
+function numeric(value) {
+  if (typeof value === 'number') return value;
+  if (typeof value === 'string') {
+    const match = /^(-?\d*\.?\d+)(?:px|rem|ms|s)?$/.exec(value.trim());
+    return match ? parseFloat(match[1]) : null;
+  }
+  if (value && typeof value === 'object' && typeof value.value === 'number') return value.value;
+  return null;
+}
+
+// Appended after the built-in css transforms so these win, whether the value
+// still an object at that point or has already been stringified to px.
+//
+// Deliberately NOT transitive: an alias like `opacity-disabled -> opacity-40`
+// resolves to the value the core token was already given, so re-running the
+// transform down the chain would divide a second time and yield 0.004.
+const unitFix = (name, prefix, render) => {
+  StyleDictionary.registerTransform({
+    name,
+    type: 'value',
+    filter: (t) => String(t.path[0] ?? '').startsWith(prefix) && numeric(valueOf(t)) !== null,
+    transform: (t) => render(numeric(valueOf(t))),
+  });
+  return name;
+};
+
+const UNIT_FIXES = [
+  unitFix('lumo/opacity-ratio', 'opacity-', (n) => String(n / 100)),
+  unitFix('lumo/z-index-unitless', 'z-index-', (n) => String(n)),
+  unitFix('lumo/duration-ms', 'motion-duration-', (n) => `${n}ms`),
+  // A column count. The other grid tokens really are lengths, so this is the
+  // one name rather than the whole `grid-` family.
+  unitFix('lumo/grid-columns-unitless', 'grid-columns', (n) => String(n)),
+];
+
+StyleDictionary.registerTransformGroup({
+  name: 'lumo/css',
+  transforms: [...StyleDictionary.hooks.transformGroups.css, ...UNIT_FIXES],
+});
+
+// ---------------------------------------------------------------------------
+// 5. Builds
 // ---------------------------------------------------------------------------
 const src = (files) => files.map((f) => path.join(CLEAN_DIR, f));
 
-const cssDict = (sources, buildPath, files) =>
+const dict = (sources, buildPath, files, json) =>
   new StyleDictionary({
     usesDtcg: true,
     log: { warnings: 'disabled' },
     source: src(sources),
     preprocessors: ['lumo/normalise'],
-    platforms: { css: { transformGroup: 'css', buildPath, files } },
+    platforms: {
+      css: { transformGroup: 'lumo/css', buildPath, files },
+      json: {
+        transformGroup: 'lumo/css',
+        buildPath: 'build/json/',
+        files: [
+          { destination: json.destination, format: 'lumo/json-flat', filter: json.filter },
+        ],
+      },
+    },
   });
+
+const isDarkColour = (t) => t.filePath.includes('color.on-dark');
 
 async function buildPlatform(platform) {
   // :root -- core + light colours + this platform's type/space/size + styles
-  await cssDict(
+  await dict(
     [...SHARED, LIGHT, ...perPlatform(platform), ...STYLES],
     `build/css/${platform}/`,
     [
@@ -158,27 +249,38 @@ async function buildPlatform(platform) {
         options: { selector: ':root', outputReferences: true },
       },
     ],
+    { destination: `${platform}.json` },
   ).buildAllPlatforms();
 
   // dark -- only the colours that actually change
-  await cssDict([...SHARED, DARK], `build/css/${platform}/`, [
-    {
-      destination: 'tokens-dark.css',
-      format: 'css/variables',
-      options: { selector: '[data-theme="dark"]' },
-      filter: (t) => t.filePath.includes('color.on-dark'),
-    },
-  ]).buildAllPlatforms();
+  await dict(
+    [...SHARED, DARK],
+    `build/css/${platform}/`,
+    [
+      {
+        destination: 'tokens-dark.css',
+        format: 'css/variables',
+        options: { selector: '[data-theme="dark"]' },
+        filter: isDarkColour,
+      },
+    ],
+    { destination: `${platform}.dark.json`, filter: isDarkColour },
+  ).buildAllPlatforms();
 }
 
 async function buildLayout(mode) {
-  await cssDict([`lumo.semantic.layout.${mode}.tokens.json`], 'build/css/layout/', [
-    {
-      destination: `tokens.${mode}.css`,
-      format: 'css/variables',
-      options: { selector: `[data-breakpoint="${mode}"]` },
-    },
-  ]).buildAllPlatforms();
+  await dict(
+    [`lumo.semantic.layout.${mode}.tokens.json`],
+    'build/css/layout/',
+    [
+      {
+        destination: `tokens.${mode}.css`,
+        format: 'css/variables',
+        options: { selector: `[data-breakpoint="${mode}"]` },
+      },
+    ],
+    { destination: `layout.${mode}.json` },
+  ).buildAllPlatforms();
 }
 
 async function buildNative() {
@@ -218,6 +320,9 @@ async function buildNative() {
 
 // ---------------------------------------------------------------------------
 const { deduped, dropped } = cleanTokens();
+
+// Start from an empty build/ so a renamed or removed output can't linger.
+fs.rmSync(path.join(__dirname, 'build'), { recursive: true, force: true });
 
 for (const platform of PLATFORMS) {
   console.log(`css    ${platform}`);

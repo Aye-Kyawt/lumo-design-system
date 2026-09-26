@@ -1,0 +1,334 @@
+/*
+ * Chrome for the token gallery itself.
+ *
+ * It deliberately styles itself with the tokens it documents -- so if the
+ * build breaks, the docs break visibly -- but every custom property carries a
+ * fallback, so a missing token degrades to something readable instead of
+ * rendering the page invisible.
+ */
+
+.lumo-docs {
+  font-family: var(--typography-fontfamily-body, Inter), system-ui, sans-serif;
+  background: var(--color-bg-base, #ffffff);
+  color: var(--color-text-primary, #30344b);
+  min-height: 100vh;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.lumo-docs *,
+.lumo-docs *::before,
+.lumo-docs *::after {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------- page ---- */
+
+.lumo-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.lumo-page__head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border-primary-default, #e2e4ed);
+}
+
+.lumo-page__title {
+  margin: 0;
+  font: var(--heading-h3, 600 28px/36px Inter);
+  color: var(--color-text-bold, #1b1d2a);
+}
+
+.lumo-page__intro {
+  margin: 0;
+  max-width: 68ch;
+  font: var(--body-body2, 400 16px/24px Inter);
+  color: var(--color-text-secondary, #5b6076);
+}
+
+/* ------------------------------------------------------------- section ---- */
+
+.lumo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lumo-section__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lumo-section__title {
+  margin: 0;
+  font: var(--heading-h5, 500 18px/26px Inter);
+  color: var(--color-text-bold, #1b1d2a);
+}
+
+.lumo-section__note {
+  margin: 0;
+  max-width: 68ch;
+  font: var(--body-body3, 400 14px/20px Inter);
+  color: var(--color-text-secondary, #5b6076);
+}
+
+/* ---------------------------------------------------------------- note ---- */
+
+.lumo-note {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--border-radius-md, 8px);
+  border: 1px solid var(--color-border-warning-default, #e8c37a);
+  background: var(--color-bg-warning-subtle, #fdf6e8);
+  color: var(--color-text-primary, #30344b);
+  font: var(--body-body3, 400 14px/20px Inter);
+}
+
+.lumo-note--info {
+  border-color: var(--color-border-info-default, #9dbdf2);
+  background: var(--color-bg-info-subtle, #eef4fd);
+}
+
+.lumo-note__label {
+  flex: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  line-height: 20px;
+}
+
+.lumo-note p {
+  margin: 0 0 8px;
+}
+
+.lumo-note p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------- grid ---- */
+
+.lumo-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--lumo-grid-min, 200px), 1fr));
+}
+
+/* -------------------------------------------------------------- swatch ---- */
+
+.lumo-swatch {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius-md, 8px);
+  border: 1px solid var(--color-border-primary-default, #e2e4ed);
+  background: var(--color-bg-surfaceprimary, #ffffff);
+  overflow: hidden;
+}
+
+.lumo-swatch__chip {
+  height: 64px;
+  /* A checkerboard behind the colour so alpha tokens read as translucent. */
+  background-image: linear-gradient(45deg, #d8d8dd 25%, transparent 25%),
+    linear-gradient(-45deg, #d8d8dd 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d8d8dd 75%),
+    linear-gradient(-45deg, transparent 75%, #d8d8dd 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+  position: relative;
+}
+
+.lumo-swatch__chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--lumo-swatch-colour);
+}
+
+.lumo-swatch__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px 12px;
+}
+
+/* ---------------------------------------------------------- name / code --- */
+
+.lumo-name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-text-primary, #30344b);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: copy;
+  overflow-wrap: break-word;
+}
+
+.lumo-name:hover {
+  color: var(--color-text-action, #4416b1);
+  text-decoration: underline;
+}
+
+.lumo-name--copied,
+.lumo-name--copied:hover {
+  color: var(--color-text-positive, #1f7a44);
+  text-decoration: none;
+}
+
+.lumo-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-text-secondary, #5b6076);
+  overflow-wrap: break-word;
+}
+
+.lumo-alias {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 18px;
+  color: var(--color-text-placeholder, #9aa0b4);
+  overflow-wrap: break-word;
+}
+
+.lumo-desc {
+  font: var(--body-body4, 400 12px/18px Inter);
+  color: var(--color-text-secondary, #5b6076);
+}
+
+/* --------------------------------------------------------------- table ---- */
+
+.lumo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--body-body3, 400 14px/20px Inter);
+}
+
+.lumo-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font: var(--label-label1, 500 14px/20px Inter);
+  color: var(--color-text-secondary, #5b6076);
+  border-bottom: 1px solid var(--color-border-primary-default, #e2e4ed);
+  white-space: nowrap;
+}
+
+.lumo-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border-primary-default, #e2e4ed);
+  vertical-align: middle;
+}
+
+.lumo-table tr:last-child td {
+  border-bottom: none;
+}
+
+.lumo-table__wrap {
+  border: 1px solid var(--color-border-primary-default, #e2e4ed);
+  border-radius: var(--border-radius-md, 8px);
+  background: var(--color-bg-surfaceprimary, #ffffff);
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------- input ---- */
+
+.lumo-search {
+  width: 100%;
+  max-width: 360px;
+  padding: 8px 12px;
+  font: var(--body-body3, 400 14px/20px Inter);
+  color: var(--color-text-primary, #30344b);
+  background: var(--color-bg-surfaceprimary, #ffffff);
+  border: 1px solid var(--color-border-primary-default, #e2e4ed);
+  border-radius: var(--border-radius-sm, 4px);
+}
+
+.lumo-search:focus {
+  outline: none;
+  border-color: var(--color-border-primary-focused, #7c4ceb);
+  box-shadow: var(--elevation-focused, 0 0 0 3px rgb(124 76 235 / 0.3));
+}
+
+.lumo-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.lumo-count {
+  font: var(--body-body4, 400 12px/18px Inter);
+  color: var(--color-text-secondary, #5b6076);
+}
+
+/* -------------------------------------------------------------- ruler ----- */
+
+.lumo-ruler {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lumo-ruler__bar {
+  height: 16px;
+  border-radius: var(--border-radius-xs, 2px);
+  background: var(--color-bg-primary-idle, #5416e3);
+  flex: none;
+  min-width: 1px;
+}
+
+.lumo-ruler__box {
+  flex: none;
+  background: var(--color-bg-primary-tonal-idle, #efe9fd);
+  border: 1px solid var(--color-border-brand-default, #a687ed);
+}
+
+.lumo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lumo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lumo-specimen {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border-primary-default, #e2e4ed);
+}
+
+.lumo-specimen:last-child {
+  border-bottom: none;
+}
+
+.lumo-specimen__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.lumo-card {
+  padding: 20px;
+  border-radius: var(--border-radius-lg, 12px);
+  background: var(--color-bg-surfaceprimary, #ffffff);
+  border: 1px solid var(--color-border-primary-default, #e2e4ed);
+}

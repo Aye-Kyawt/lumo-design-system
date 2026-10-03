@@ -124,12 +124,15 @@ recorded in [`naming-conflicts.md`](naming-conflicts.md) with the reasoning:
 
 ## Design gaps — reported, not filled in
 
-1. **`transparent/focused` has no focus indicator.** Node `29:1800` binds
-   `border/width/focused` but no border colour, and renders no edge at all — the
-   variant is distinguished only by darkening the label. A focusable control
-   with no visible focus indicator fails WCAG 2.4.7. The `state="focused"` prop
-   reproduces the node exactly so QA can compare, but **real keyboard focus gets
-   the ring that fill and outline already use** (`border-primary-focused` at
+1. **`transparent/focused` has no focus indicator.** Node `29:1800` renders no
+   border and no ring at all — the variant is distinguished only by a darker
+   label. (`get_variable_defs` does list `border/width/focused` against the
+   node, but `get_design_context` returns no border properties, so there is no
+   edge to resolve a colour for. Don't go looking for a half-finished binding;
+   there is nothing there to complete.) A focusable control with no visible
+   focus indicator fails WCAG 2.4.7. The `state="focused"` prop reproduces the
+   node exactly so QA can compare, but **real keyboard focus gets the ring that
+   fill and outline already use** (`border-primary-focused` at
    `border-width-focused`) rather than an invented value. A designer should
    decide what transparent focus looks like.
 

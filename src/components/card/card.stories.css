@@ -1,0 +1,63 @@
+/*
+ * Story scaffolding only -- not part of the component.
+ *
+ * Figma draws _Slot/Content (node 41:21) as a dashed placeholder so a designer
+ * can see where a real component goes. It is a design-time artifact: the card
+ * ships with `children`, not with this box. It lives here so the stories line
+ * up with the Figma node during review, and nowhere near card.css.
+ */
+
+.lumo-card-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  inline-size: 100%;
+  /* Placeholder geometry, straight off the Figma slot -- no token covers it. */
+  block-size: 80px;
+  padding-inline: var(--spacing-padding-md);
+  background: var(--color-bg-surfaceprimary);
+  border: var(--border-width-default) dashed var(--color-border-primary-default);
+  border-radius: var(--border-radius-card);
+  font: var(--body-body3);
+  color: var(--color-text-secondary);
+  text-align: center;
+  /* Figma's placeholder text is hug-width and never wraps -- at padding lg
+     and xl it overflows the dashed box rather than reflowing. Match it so
+     the stories line up with the node under review. */
+  white-space: nowrap;
+}
+
+.lumo-card-slot--action {
+  inline-size: 88px;
+  block-size: 32px;
+  padding-inline: var(--spacing-padding-sm);
+  white-space: nowrap;
+}
+
+.lumo-card-slot--footer {
+  inline-size: 140px;
+  block-size: 36px;
+  white-space: nowrap;
+}
+
+/* The Figma frame draws every variant at 320px; product cards are fluid, so
+   the stories pin the width here rather than in the component. */
+.lumo-card-stage {
+  inline-size: 320px;
+}
+
+.lumo-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 320px);
+  gap: var(--spacing-gap-lg);
+  align-items: start;
+}
+
+.lumo-card-grid__label {
+  grid-column: 1 / -1;
+  margin: 0;
+  font: var(--body-body3-intense);
+  color: var(--color-text-secondary);
+}

@@ -66,3 +66,54 @@ property and otherwise leave the name alone; map a `↳Slot` to `children` where
 component has one slot, and to a named prop where it has several. Keep every
 variant *value* exactly as Figma spells it, since those are what QA reads off the
 node.
+
+---
+
+## `type` collides with the DOM button type
+
+**Found while building:** Button (`component/button`)
+
+The Figma component set names its variant property `Type`
+(`fill | outline | transparent`). `<button>` already has a `type` attribute, and
+it decides whether the element submits a form.
+
+This one is not just awkward, it is a live hazard. A `<button>` with no `type`
+inside a `<form>` defaults to `submit`, so a Button that quietly forwarded an
+unset `type` to the DOM would post the form on every click.
+
+**Chosen names:** `type` stays the Figma variant, per the rule that Figma names
+win. The DOM attribute is exposed separately as `htmlType`
+(`button | submit | reset`), defaulting to `"button"`.
+
+Defaulting it to `"button"` rather than leaving it unset is the important half:
+the safe behaviour is the one you get by not thinking about it, and a caller who
+actually wants a submit button has to say so.
+
+**The general rule this suggests:** when a Figma property name collides with a
+real attribute of the element the component renders, the Figma name keeps the
+prop and the DOM attribute gets a prefixed one — not the other way round. Give
+the DOM escape hatch a default that is safe when nobody sets it.
+
+---
+
+## Figma's icon swap slots became glyph names
+
+**Found while building:** Button (`component/button`)
+
+Figma gives Button two instance-swap slots, `↳iconLeft` and `↳iconRight`, for
+dropping an icon component into each end.
+
+Per `CLAUDE.md` the icon set is Material Symbols, loaded as a font from the
+Google Fonts CDN. With an icon font there is no instance to swap — the glyph
+*is* its name — so a slot taking a React node would be a worse API than a
+string.
+
+**Chosen names:** `iconLeftName` and `iconRightName`, each taking a Material
+Symbols glyph name and defaulting to `add` (what the Figma node uses).
+`iconLeft` and `iconRight` remain the booleans Figma defines, controlling
+whether each icon shows at all.
+
+**The general rule this suggests:** a Figma instance-swap slot does not have to
+become a node prop. Where the design system has settled on one icon font, the
+slot is better expressed as the name of the thing to draw, and the boolean that
+Figma already provides stays as the on/off switch.

@@ -58,3 +58,22 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
 - Production URL : https://horizon-stays-docs.vercel.app
 - Build config : `docs-site/vercel.json` on `astro` (framework, `npm install`, `npm run build`, output `dist`). Install is `npm install`, not `npm ci`: a lockfile written on macOS can omit packages Linux needs, and `npm ci` refuses it
 - Every other branch : `docs-site/vercel.json` holds only `{"git": {"deploymentEnabled": false}}`, so pushes there do not build the docs project and leave no failing check. Keep `astro`'s own `docs-site/vercel.json` when merging `main` into it
+
+## Repo root deployment
+- The repo root is **not** a deployable site. It is the component library: there is no `build`
+  script and nothing at the root that a host should serve
+- `vercel.json` at the root holds only `{"git": {"deploymentEnabled": false}}` — the same
+  mechanism the docs site uses on its non-`astro` branches. Two Vercel projects
+  (`lumo-design-system` and `lumo-design-system-l2n7`, team `aye-kyawts-projects`) are connected
+  to this repo with the root as their root directory, and both failed on every pull request
+  because Vercel's default `npm run build` has nothing to call. `-l2n7` is Vercel's collision
+  suffix, so the second one is the same repo connected twice
+- This does not touch `horizon-stays-docs`. Its root directory is `docs-site`, so it reads
+  `docs-site/vercel.json` and never the root file
+- A `vercel.json` only applies to commits on branches that contain it, so the failing checks
+  clear per branch as this reaches them
+- **Storybook is not deployed by either of those projects, or by anything else yet.** The
+  registry's `Staging Storybook` and `Production Storybook` columns are empty for all 12
+  components, and the Engineer and DevOps agents are both required to write a URL they have
+  opened and seen render. Choosing where Storybook is hosted is a human decision and belongs in
+  this file before an agent writes one of those cells

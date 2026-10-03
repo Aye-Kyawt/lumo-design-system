@@ -112,22 +112,15 @@ accessible name.
 
 ## Naming
 
-> These belong in `docs/naming-conflicts.md`. They are here for now because that
-> file is created by the Card branch, which is still in review — fold them in
-> once it lands.
+Two of Button's prop names could not be taken straight from Figma. Both are
+recorded in [`naming-conflicts.md`](naming-conflicts.md) with the reasoning:
 
-**`type` collides with the DOM button type.** Figma names the variant property
-`Type`, and `<button>` already has a `type` attribute that decides
-submit/button/reset. The Figma name wins for the variant, per `CLAUDE.md`, so
-`type` is `fill | outline | transparent` and the DOM attribute is exposed
-separately as `htmlType`, defaulting to `"button"`. Defaulting matters: an
-unqualified `<button>` inside a form defaults to `submit` and would post the
-form on every click.
-
-**The icon swap slots became names.** Figma's `↳iconLeft` / `↳iconRight`
-instance-swap slots are `iconLeftName` / `iconRightName`, taking a Material
-Symbols glyph name. With an icon font there is no instance to swap — the glyph
-is the name. `iconLeft` and `iconRight` stay as the booleans Figma defines.
+- **`type` collides with the DOM button type.** The Figma variant keeps `type`;
+  the DOM attribute is `htmlType`, defaulting to `"button"` so a Button inside a
+  form cannot submit it by accident.
+- **The icon swap slots became glyph names.** `↳iconLeft` / `↳iconRight` are
+  `iconLeftName` / `iconRightName`, taking a Material Symbols name. `iconLeft`
+  and `iconRight` stay as the booleans Figma defines.
 
 ## Design gaps — reported, not filled in
 

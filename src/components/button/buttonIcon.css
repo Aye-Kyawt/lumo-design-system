@@ -1,0 +1,37 @@
+/*
+ * Material Symbols Outlined glyph, sized to size/icon/md.
+ *
+ * The colour comes from --lumo-button-icon rather than `currentColor`: in
+ * several variants the design binds the icon to a different token than the
+ * label (outline/default is text/accent/aqua on the label but icon/brand on the
+ * icon), so the two cannot share one colour.
+ */
+
+.lumo-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  inline-size: var(--size-icon-md);
+  block-size: var(--size-icon-md);
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--size-icon-md);
+  font-weight: var(--typography-fontweight-regular);
+  font-style: normal;
+  line-height: 1;
+  color: var(--lumo-button-icon);
+
+  /* Font axes, not design values -- `opsz` tracks the 20px glyph box that
+     size/icon/md sets, and there is no token layer for a variable font axis. */
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+
+  direction: ltr;
+  white-space: nowrap;
+  word-wrap: normal;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}

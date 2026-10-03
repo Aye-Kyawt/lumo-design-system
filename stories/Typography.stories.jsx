@@ -72,7 +72,7 @@ function Styles({ platform, theme }) {
 
         return (
           <Section key={prefix} title={title}>
-            <div className="lumo-card">
+            <div className="lumo-panel">
               {group.map((token) => (
                 <Specimen key={token.name} token={token} sample={sample} transform={transform} />
               ))}

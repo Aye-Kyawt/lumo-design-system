@@ -8,7 +8,13 @@ import react from '@vitejs/plugin-react';
  * @type {import('@storybook/react-vite').StorybookConfig}
  */
 const config = {
-  stories: ['../stories/**/*.mdx', '../stories/**/*.stories.jsx'],
+  stories: [
+    '../stories/**/*.mdx',
+    '../stories/**/*.stories.jsx',
+    // Components live in src/components/<name>/ per tools.md; without this
+    // glob Storybook only ever shows the token galleries.
+    '../src/components/**/*.stories.jsx',
+  ],
   addons: ['@storybook/addon-docs'],
   framework: { name: '@storybook/react-vite', options: {} },
 

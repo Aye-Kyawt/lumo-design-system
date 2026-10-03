@@ -1,0 +1,12 @@
+{
+  "$comment": "Template. Copy to .claude/registry.local.json and fill in the IDs for your own registry base. The real file is gitignored so that the base an agent writes to is a local decision, not a committed one.",
+  "baseId": "appXXXXXXXXXXXXXX",
+  "baseUrl": "https://airtable.com/appXXXXXXXXXXXXXX",
+  "tables": {
+    "components": "tblXXXXXXXXXXXXXX",
+    "stagingTesting": "tblXXXXXXXXXXXXXX",
+    "dsFeedback": "tblXXXXXXXXXXXXXX",
+    "githubCommits": "tblXXXXXXXXXXXXXX",
+    "oneOffComponents": "tblXXXXXXXXXXXXXX"
+  }
+}

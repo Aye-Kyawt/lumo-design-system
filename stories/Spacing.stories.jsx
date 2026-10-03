@@ -76,7 +76,7 @@ function Spacing({ platform, theme }) {
 
       <Section title="In context" note="The same three roles applied to a card.">
         <div
-          className="lumo-card"
+          className="lumo-panel"
           style={{ padding: 'var(--spacing-padding-lg)', display: 'grid', gap: 'var(--spacing-gap-md)' }}
         >
           <strong style={{ font: 'var(--heading-h6)' }}>padding-lg · gap-md</strong>

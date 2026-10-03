@@ -5,3 +5,7 @@ node_modules/
 .tokens-clean/
 build/
 storybook-static/
+
+# QA run artifacts. Regenerated every test pass, so a committed set goes stale
+# the moment the component is fixed -- as happened on PR #7.
+reports/

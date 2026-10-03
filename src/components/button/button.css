@@ -88,44 +88,59 @@
 
 /* ------------------------------------------- State — real interaction ---- */
 
-.lumo-button--fill:hover:not(:disabled) {
+/*
+ * Guarded by :not([data-forced-state]).
+ *
+ * Source order is NOT enough here. `.lumo-button--fill:hover:not(:disabled)` is
+ * specificity (0,3,0) -- the class, :hover, and :not(:disabled) each count --
+ * while `.lumo-button--fill.lumo-button--error` is only (0,2,0). Specificity
+ * beats order, so without this guard the live hover rule wins and an error
+ * button turns brand-teal the moment a user points at it. The attribute makes
+ * the two sets mutually exclusive instead of letting them compete.
+ */
+
+.lumo-button--fill:not([data-forced-state]):hover:not(:disabled) {
   --lumo-button-bg: var(--color-bg-primary-hovered);
   --lumo-button-fg: var(--color-text-onhovered);
   --lumo-button-icon: var(--color-icon-onhovered);
 }
 
-.lumo-button--outline:hover:not(:disabled) {
+.lumo-button--outline:not([data-forced-state]):hover:not(:disabled) {
   --lumo-button-bg: var(--color-bg-primary-tonal-idle);
   --lumo-button-ring-color: var(--color-border-brand-hovered);
 }
 
-.lumo-button--transparent:hover:not(:disabled) {
+.lumo-button--transparent:not([data-forced-state]):hover:not(:disabled) {
   --lumo-button-bg: var(--color-bg-primary-tonal-idle);
   --lumo-button-fg: var(--color-text-brand);
   --lumo-button-icon: var(--color-text-brand);
 }
 
-.lumo-button--fill:disabled {
+.lumo-button--fill:disabled,
+.lumo-button--fill.lumo-button--disabled {
   --lumo-button-bg: var(--color-bg-disabled);
   --lumo-button-fg: var(--color-text-disabled);
   --lumo-button-icon: var(--color-icon-disabled);
 }
 
-.lumo-button--outline:disabled {
+.lumo-button--outline:disabled,
+.lumo-button--outline.lumo-button--disabled {
   --lumo-button-bg: var(--color-bg-base);
   --lumo-button-fg: var(--color-text-disabled);
   --lumo-button-icon: var(--color-icon-disabled);
   --lumo-button-ring-color: var(--color-border-primary-disabled);
 }
 
-.lumo-button--transparent:disabled {
+.lumo-button--transparent:disabled,
+.lumo-button--transparent.lumo-button--disabled {
   --lumo-button-fg: var(--color-text-disabled);
   --lumo-button-icon: var(--color-icon-disabled);
 }
 
 /* ----------------------------------------------- State — forced by prop ---- */
 
-/* These come after the live rules so `state` always wins over the pointer. */
+/* The live rules above opt out via [data-forced-state], so these are the only
+   ones that can match once `state` is set to anything but `default`. */
 
 .lumo-button--fill.lumo-button--hovered {
   --lumo-button-bg: var(--color-bg-primary-hovered);

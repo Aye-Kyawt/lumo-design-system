@@ -61,12 +61,19 @@ export function Button({
 
   return (
     <button
+      // `rest` is spread FIRST so a caller cannot reach past the component and
+      // cancel what `state` promises -- passing `disabled` or `onClick` through
+      // it used to silently defeat state="disabled".
+      {...rest}
       type={htmlType}
       className={classes}
+      // Tells the CSS a state is pinned, so the live :hover rules stand down.
+      // Without it they out-specify the forced ones and an error button turns
+      // brand-teal under the pointer.
+      data-forced-state={state !== 'default' ? state : undefined}
       disabled={disabled}
       aria-label={iconOnly ? label : undefined}
       onClick={disabled ? undefined : onClick}
-      {...rest}
     >
       {iconLeft && <ButtonIcon name={iconLeftName} />}
       {text && <span className="lumo-button__label">{label}</span>}

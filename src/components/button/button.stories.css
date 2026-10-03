@@ -1,0 +1,35 @@
+/*
+ * Story scaffolding only -- not part of the component.
+ * Lays the fifteen variants out the way the Figma component set is arranged.
+ */
+
+.lumo-button-grid {
+  display: grid;
+  grid-template-columns: max-content repeat(5, max-content);
+  gap: var(--spacing-gap-lg);
+  align-items: center;
+  justify-items: start;
+}
+
+.lumo-button-grid__head,
+.lumo-button-grid__row {
+  font: var(--body-body3-intense);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Transparent buttons have no surface of their own, so on the gallery's white
+   page the hovered and focused states are hard to judge. This is a story-only
+   backdrop, not part of the component. */
+.lumo-button-stage--inverse {
+  padding: var(--spacing-padding-md);
+  background: var(--color-bg-surfacesecondary);
+  border-radius: var(--border-radius-card);
+}
+
+.lumo-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-gap-horizontal-md);
+}

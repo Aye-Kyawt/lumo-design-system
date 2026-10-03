@@ -1,0 +1,16 @@
+/*
+ * card/layout/vertical — Figma node 63:98.
+ *
+ * The layout carries padding/sm of its own, on top of whatever padding the
+ * card sets. That is why Padding=none still leaves 8px of breathing room
+ * inside the card surface -- the 8px belongs to the layout, not the card.
+ */
+
+.lumo-card-layout-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-md);
+  inline-size: 100%;
+  padding: var(--spacing-padding-sm);
+}

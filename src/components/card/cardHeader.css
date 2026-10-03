@@ -1,0 +1,46 @@
+/*
+ * card/header — Figma node 62:109.
+ * Auto-layout horizontal, centre-aligned, gap gap/horizontal/md. The text
+ * block takes the remaining width; the Action slot keeps its own size.
+ */
+
+.lumo-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-gap-horizontal-md);
+  inline-size: 100%;
+}
+
+/* min-inline-size:0 lets a long title ellipsise instead of pushing the
+   Action slot out of the card -- a flex item defaults to min-width:auto. */
+.lumo-card-header__text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-xs);
+  min-inline-size: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.lumo-card-header__title {
+  margin: 0;
+  inline-size: 100%;
+  font: var(--heading-h5);
+  color: var(--color-text-primary);
+}
+
+.lumo-card-header__subtitle {
+  margin: 0;
+  inline-size: 100%;
+  font: var(--body-body3);
+  color: var(--color-text-secondary);
+}
+
+.lumo-card-header__action {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}

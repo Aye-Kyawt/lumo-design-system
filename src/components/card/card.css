@@ -1,0 +1,110 @@
+/*
+ * card — Figma component set 65:230.
+ *
+ * State x Padding, 4 x 4. State paints the edge and the surface; Padding sets
+ * the inset around the ↳Layout slot. The card does not set its own width: in
+ * Figma every variant is drawn at 320px, but a card in a product fills the
+ * column it sits in, so width belongs to the caller.
+ */
+
+.lumo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-md);
+  box-sizing: border-box;
+  inline-size: 100%;
+  overflow: hidden;
+  background: var(--color-bg-base);
+  border-radius: var(--border-radius-card);
+
+  /*
+   * Figma draws the card edge as an *inside* stroke: it sits within the card's
+   * box and never changes its size -- which is why the focused variant, at 2px,
+   * is exactly as tall as the default one at 1px. A CSS border cannot do that
+   * on an auto-height box; it would add 2px to every card and make focus reflow
+   * the content. An inset shadow is the honest translation of an inside stroke.
+   */
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-primary-default);
+
+  transition:
+    box-shadow var(--motion-duration-fast),
+    background-color var(--motion-duration-fast);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-card {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------- Padding ---- */
+
+.lumo-card--padding-none {
+  padding: 0;
+}
+
+.lumo-card--padding-md {
+  padding: var(--spacing-padding-md);
+}
+
+.lumo-card--padding-lg {
+  padding: var(--spacing-padding-lg);
+}
+
+.lumo-card--padding-xl {
+  padding: var(--spacing-padding-xl);
+}
+
+/* --------------------------------------------------------------- State ---- */
+
+/*
+ * Real interaction first, forced state after, so the `state` prop always wins
+ * over whatever the pointer is doing. An interactive card is a role="button",
+ * so it also gets the cursor that promises a click.
+ */
+
+.lumo-card--interactive {
+  cursor: pointer;
+}
+
+.lumo-card--interactive:hover {
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-primary-hovered);
+}
+
+.lumo-card--interactive:focus-visible {
+  box-shadow: inset 0 0 0 var(--border-width-focused) var(--color-border-primary-focused);
+  outline: none;
+}
+
+.lumo-card--hovered {
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-primary-hovered);
+}
+
+.lumo-card--focused {
+  box-shadow: inset 0 0 0 var(--border-width-focused) var(--color-border-primary-focused);
+  outline: none;
+}
+
+.lumo-card--disabled {
+  background: var(--color-bg-disabled);
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-primary-disabled);
+  cursor: not-allowed;
+}
+
+/*
+ * Windows High Contrast throws box-shadow away, so the card would lose its edge
+ * and its focus ring entirely. Put both back with system colours, where being
+ * visible matters more than matching the node to the pixel.
+ */
+@media (forced-colors: active) {
+  .lumo-card {
+    border: var(--border-width-default) solid CanvasText;
+  }
+
+  .lumo-card--interactive:focus-visible,
+  .lumo-card--focused {
+    outline: var(--border-width-focused) solid Highlight;
+    outline-offset: calc(-1 * var(--border-width-focused));
+  }
+}

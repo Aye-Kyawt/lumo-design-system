@@ -326,7 +326,9 @@
   align-items: baseline;
 }
 
-.lumo-card {
+/* Renamed from .lumo-card: that name now belongs to the Card component in
+   src/components/card/. This is gallery chrome, not a design system card. */
+.lumo-panel {
   padding: 20px;
   border-radius: var(--border-radius-lg, 12px);
   background: var(--color-bg-surfaceprimary, #ffffff);

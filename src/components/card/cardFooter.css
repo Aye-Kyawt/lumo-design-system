@@ -1,0 +1,32 @@
+/*
+ * card/footer — Figma node 62:115.
+ * Divider, then a row of actions pushed to the trailing edge.
+ */
+
+.lumo-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-sm);
+  inline-size: 100%;
+}
+
+/* The divider is a filled 1px box in Figma, not a stroke -- block-size carries
+   border/width/default so it tracks the same token a border would. */
+.lumo-card-footer__divider {
+  flex: 0 0 auto;
+  inline-size: 100%;
+  block-size: var(--border-width-default);
+  background: var(--color-border-primary-default);
+}
+
+.lumo-card-footer__row {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-gap-horizontal-sm);
+  inline-size: 100%;
+  overflow: hidden;
+}

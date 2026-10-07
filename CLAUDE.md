@@ -1,15 +1,15 @@
 # CLAUDE.md - how we work in this repo
 
-This project is to build a design. This project is to build a design system that syncs both design and development. The design system name is Horizon Stays Design System.
+This project is to build a design. This project is to build a design system that syncs both design and development. The design system name is Lumo Design System.
 
-**Before changing tooling, dependencies,tests, package scripts or deployment configuration, read** `./tool.md` **and follow it as the source of truth.**
+**Before changing tooling, dependencies,tests, package scripts or deployment configuration, read** `./tools.md` **and follow it as the source of truth.**
 
 ## The system
 
 - Tokens are the only source of visual values.Every color, space, radius and font value in a component references a token.
 - Semantic tokens point at primitives.Components use semantic tokens only.
 - A component referencing a raw hex is wrong; it should reference `--color-action-primary`.
-- Never edit anything in `build/tokens/` by hand. It is generated based on `tokens/`
+- Never edit anything in `build/` by hand. It is generated from `tokens/` by `build-tokens.js`
 - Modes come from figma. A token that exists in one mode and not another is a design gap; report it rather than filling it in.
 
 

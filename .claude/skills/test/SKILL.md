@@ -77,7 +77,7 @@ Screenshot each state, including hover, disabled, and loading. Save them to
 
 ### 6 · Check the tokens
 Confirm no raw hex, px, or font value appears in the component or its CSS. The
-token names live in `build/tokens/css/tokens.css` — that file is generated, so
+token names live in `build/css/<platform>/tokens.css` — that file is generated, so
 read it, never edit it.
 
 A value the design left unbound is a design gap, not an engineering defect.
@@ -102,7 +102,7 @@ Do not burn a finding on these:
 
 ## References
 - The component under test: `src/components/<Name>/`
-- The generated tokens: `build/tokens/css/tokens.css` (read-only, never hand-edited)
+- The generated tokens: `build/css/<platform>/tokens.css` (read-only, never hand-edited)
 - Commands and stack: `tools.md`
 - What a component must satisfy: `CLAUDE.md`
 

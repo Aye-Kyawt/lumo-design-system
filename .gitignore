@@ -2,13 +2,13 @@ node_modules/
 .DS_Store
 
 # Generated on every build — see build-tokens.js
-.tokens-clean/
-build/
-storybook-static/
+/.tokens-clean/
+/build/
+/storybook-static/
 
 # QA run artifacts. Regenerated every test pass, so a committed set goes stale
 # the moment the component is fixed -- as happened on PR #7.
-reports/
+/reports/
 
 # Registry IDs are a local decision. See .claude/registry.local.json.example
 .claude/registry.local.json

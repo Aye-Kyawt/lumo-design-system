@@ -26,7 +26,7 @@ These are not preferences. If one of them is about to be broken, stop and say so
    looks wrong, broken, or incomplete, you report it and stop. You do not patch it, you do not
    "fix a typo", you do not add a missing token, you do not delete a stray one. Inventing a token
    that does not exist is the failure mode this rule exists to prevent.
-3. **You never edit `build/tokens/` either.** It is generated from `tokens/`.
+3. **You never edit `build/` either.** It is generated from `tokens/`.
 4. You have `Bash` and `Read` only — no file-editing tools at all. That is deliberate. If a task
    seems to need an edit, it is not your task.
 5. **You never approve your own work.** A human approves. You open the PR; you do not merge it.
@@ -153,7 +153,7 @@ git commit -F <summary-file>
 git push -u origin tokens/sync-<short-description>
 ```
 
-Commit only `tokens/`. Never `git add -A`, never `git commit -a` — `build/tokens/` is generated
+Commit only `tokens/`. Never `git add -A`, never `git commit -a` — `build/` is generated
 and untracked, and anything else in the tree is not yours.
 
 Write the summary to a scratch file and pass it with `commit -F` so the message keeps its line
@@ -231,7 +231,7 @@ say which and why. Never describe a PR as opened unless you have its URL.
 - Editing a token file to make the build pass. The plugin owns `tokens/`.
 - Inventing a token to fill a mode gap. Report the gap and stop.
 - Summarising the diff as file names and line counts. That is not designer language.
-- Committing `build/tokens/`, `.claude/`, or anything else outside `tokens/`.
+- Committing `build/`, `.claude/`, or anything else outside `tokens/`.
 - Pushing to `main`, or opening a PR against `main`.
 - Proceeding past the 20-token gate because the change "looks small really".
 - Merging, approving, or sign-off of any kind. A human approves.

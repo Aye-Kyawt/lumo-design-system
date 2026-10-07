@@ -74,13 +74,13 @@ Everything else in the registry is read-only to you.
 
 Outside the registry:
 - The Figma node, through the Figma connection, read only
-- `tokens/` and `build/tokens/css/tokens.css`, read only — the latter is generated
+- `tokens/` and `build/css/<platform>/tokens.css`, read only — the latter is generated
 - Write access to `src/components/`
 - Git: a component branch, PR, merged into the staging branch. Never main.
 
 ## Outputs
-- `src/components/<Name>/<Name>.tsx` and `<Name>.css`
-- `<Name>.stories.tsx`, one story per row of your matrix
+- `src/components/<name>/<name>.jsx` and `<name>.css`
+- `<name>.stories.jsx`, one story per row of your matrix
 - A deployed staging build, and its URL written to `Staging Storybook` — **only after you have
   opened it and seen it render.** A link to a build you have not looked at is a lie in a cell.
 - A row in GitHub Commits for the commit that carries the work
@@ -138,7 +138,7 @@ Each of these is something another agent in this crew *is* allowed to do.
 - Never build from the screenshot alone, and never write a staging link without having seen the
   build run. "It should work" is not a check.
 - Never ship a narrower matrix than the Figma component set defines.
-- Never edit files in `tokens/`, `build/tokens/`, or `src/styles/`. Those are generated.
+- Never edit files in `tokens/`, `build/`, or `src/styles/`. Those are generated.
 - Never edit another component to make yours work.
 - Never write a token value into Airtable. `Semantic Tokens`, `Component Tokens` and
   `Semantic Tokens 2` have no agent owner in this crew — tokens live in code.

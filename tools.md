@@ -5,75 +5,68 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
 ## Stack
 
 - Framework : React 19 with Vite
-- Language : Typescript, strict
-- Package manager : npm, pinned to 11.19.1 by `packageManager` in `package.json`
+- Language : JavaScript with JSX. `typescript` is not installed and there is no `tsconfig.json`.
+  A component is `src/components/<name>/<name>.jsx` with `<name>.css`, `<name>.stories.jsx` and an
+  `index.js`; subcomponents sit beside it in the same folder, camelCase (`buttonIcon.jsx`)
+- Package manager : npm
 - Styling : CSS custom properties, generated from tokens
-- Tokens : Style Dictionary v5, reading the Figma "Design Tokens" plugin export
+- Tokens : Style Dictionary v5, driven by `build-tokens.js`, reading the Figma "Design Tokens" plugin export
 - Component workshop : Storybook 10 (react-vite)
-- Tests : Vitest
-- Accessibility : Storybook a11y addon
-- Reference site : Astro Starlight, in `docs-site/` (its own npm package), deployed on Vercel
 
 ## Commands
 | Job | Command |
 |---|---|
 |Install | `npm install` |
-|Resolve registry IDs | `AIRTABLE_PAT=pat... npm run registry:init` |
 |Build tokens | `npm run build:tokens` |
 |Run Storybook | `npm run storybook` |
-|Build Storybook | `npm run build-storybook` |
-|Test | `npm test` |
-|Type check | `npm run Lint` |
-|Install reference site | `npm install --prefix docs-site` |
-|Run reference site | `npm --prefix docs-site run dev` |
-|Build reference site | `npm --prefix docs-site run build` |
+|Build Storybook | `npm run build:storybook` (outputs `storybook-static/`) |
 
 ## Paths
-- Tokens souce : `tokens/token.json` (exported from Figma, commited)
-- Token config : `style-dictionary.config.js`
-- Generated output : `build/tokens/` (never edit by hand , gitignoreed)
+- Token source : `tokens/*.tokens.json` — 23 files plus `manifest.json`, exported from Figma, committed
+- Token config : `build-tokens.js` at the repo root. There is no `style-dictionary.config.js`
+- Generated output : `build/` — CSS at `build/css/<platform>/tokens.css` and `tokens-dark.css` for
+  `web`, `admin` and `mobile`, breakpoints at `build/css/layout/tokens.<breakpoint>.css`, plus
+  `build/json/`, `build/ios/` and `build/android/`. Never edit by hand; gitignored. There is no
+  `build/tokens/` directory
 - Components : `src/components/<Name>/`
 - Agents : `.claude/agents/`
 - Skills : `.claude/skills/`
-- Reference site : `docs-site/` — component pages are generated into `docs-site/src/content/docs/components/` from `src/components/` (never edit by hand, gitignored)
+
+## Not set up yet
+These were listed as stack facts before anything implemented them. They are kept here as
+intent so nobody re-adds them as commands that fail, and nobody assumes the guarantee exists.
+
+- **Tests.** No `test` script and `vitest` is not installed. There is no test command to run
+- **Type checking.** No `Lint` or `typecheck` script, and no `typescript` dependency. "Typescript,
+  strict" was never true of this repo, so nothing enforces it. TypeScript has since been dropped
+  from the build skill and `engineer.md` too, which used to specify `.tsx`; adopting it later
+  means revisiting those two files and this section together
+- **Accessibility.** `@storybook/addon-a11y` is not installed, so the a11y checks CLAUDE.md
+  implies for every interaction state are manual
+
+## Repo root deployment
+- The repo root is **not** a deployable site. It is the component library, and the only thing it
+  builds is Storybook
+- `vercel.json` at the root holds only `{"git": {"deploymentEnabled": false}}`. Two Vercel
+  projects (`lumo-design-system` and `lumo-design-system-l2n7`, team `aye-kyawts-projects`) are
+  connected to this repo with the root as their root directory, and both failed on every pull
+  request. The error was `Command "vite build" exited with 1`: Vercel detects `vite` in
+  devDependencies, applies its Vite preset, and runs `vite build`, which looks for an
+  `index.html` entry at the root. A component library has none, so Rollup resolves zero entry
+  modules and exits 1. Reproduce it with `npx vite build`
+- `-l2n7` is Vercel's collision suffix, so the second project is this repo connected twice
+- A `vercel.json` only applies to commits on branches that contain it, so the failing checks
+  clear per branch as it reaches them
+- **Storybook is not deployed anywhere yet.** The registry's `Staging Storybook` and
+  `Production Storybook` columns are empty for all 12 components, and the Engineer and DevOps
+  agents may only write a URL they have opened and seen render. If Storybook is to be hosted on
+  Vercel, it needs build command `npm run build:storybook` and output directory
+  `storybook-static` on a project of its own — a human decision, recorded here before an agent
+  writes either cell
 
 ## Dependency rules
 - Match the package manager in this file. This project uses npm. not yarn or pnpm.
-- Use the pinned npm. `package.json` sets `"packageManager": "npm@11.19.1"`; Corepack and Vercel
-  read it, and `corepack enable` makes `npm` resolve to it locally. An older npm silently rewrites
-  `package-lock.json` on install — npm 10 drops the `libc` fields npm 11 writes, which is 90 lines
-  of deletions that look like a dependency change and are not. If you see that diff after an
-  install, you are on the wrong npm: restore the lockfile rather than committing it.
-- npm 11, not 12. npm 12 needs Node `^22.22.2 || ^24.15.0 || >=26.0.0`; 11.19.1 needs
-  `^20.17.0 || >=22.9.0`, which covers every Node this project is built on.
 - Use the existing package scripts before inventing commands.
 - Do not add a dependency without explaining why in your report.
 - Do not add a UI or component library. This repo is the component library.
-- If ths file disagrees with `package.json`, inspect the repo and say so.
-
-## Docs site deployment
-- Folder : `docs-site/` — its own npm package (Astro + Starlight), with its own `package.json` and `package-lock.json`
-- Vercel project : `horizon-stays-docs` (`prj_ar797IkOlHmF0Nk7RR2vSoplKsBn`, team `aye-kyawts-projects`), root directory `docs-site`
-- Production branch : `astro` — every push to it deploys production
-- Production URL : https://horizon-stays-docs.vercel.app
-- Build config : `docs-site/vercel.json` on `astro` (framework, `npm install`, `npm run build`, output `dist`). Install is `npm install`, not `npm ci`: a lockfile written on macOS can omit packages Linux needs, and `npm ci` refuses it
-- Every other branch : `docs-site/vercel.json` holds only `{"git": {"deploymentEnabled": false}}`, so pushes there do not build the docs project and leave no failing check. Keep `astro`'s own `docs-site/vercel.json` when merging `main` into it
-
-## Repo root deployment
-- The repo root is **not** a deployable site. It is the component library: there is no `build`
-  script and nothing at the root that a host should serve
-- `vercel.json` at the root holds only `{"git": {"deploymentEnabled": false}}` — the same
-  mechanism the docs site uses on its non-`astro` branches. Two Vercel projects
-  (`lumo-design-system` and `lumo-design-system-l2n7`, team `aye-kyawts-projects`) are connected
-  to this repo with the root as their root directory, and both failed on every pull request
-  because Vercel's default `npm run build` has nothing to call. `-l2n7` is Vercel's collision
-  suffix, so the second one is the same repo connected twice
-- This does not touch `horizon-stays-docs`. Its root directory is `docs-site`, so it reads
-  `docs-site/vercel.json` and never the root file
-- A `vercel.json` only applies to commits on branches that contain it, so the failing checks
-  clear per branch as this reaches them
-- **Storybook is not deployed by either of those projects, or by anything else yet.** The
-  registry's `Staging Storybook` and `Production Storybook` columns are empty for all 12
-  components, and the Engineer and DevOps agents are both required to write a URL they have
-  opened and seen render. Choosing where Storybook is hosted is a human decision and belongs in
-  this file before an agent writes one of those cells
+- If this file disagrees with `package.json`, inspect the repo and say so.

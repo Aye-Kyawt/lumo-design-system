@@ -44,25 +44,31 @@ intent so nobody re-adds them as commands that fail, and nobody assumes the guar
 - **Accessibility.** `@storybook/addon-a11y` is not installed, so the a11y checks CLAUDE.md
   implies for every interaction state are manual
 
-## Repo root deployment
-- The repo root is **not** a deployable site. It is the component library, and the only thing it
-  builds is Storybook
-- `vercel.json` at the root holds only `{"git": {"deploymentEnabled": false}}`. Two Vercel
-  projects (`lumo-design-system` and `lumo-design-system-l2n7`, team `aye-kyawts-projects`) are
-  connected to this repo with the root as their root directory, and both failed on every pull
-  request. The error was `Command "vite build" exited with 1`: Vercel detects `vite` in
-  devDependencies, applies its Vite preset, and runs `vite build`, which looks for an
-  `index.html` entry at the root. A component library has none, so Rollup resolves zero entry
-  modules and exits 1. Reproduce it with `npx vite build`
-- `-l2n7` is Vercel's collision suffix, so the second project is this repo connected twice
-- A `vercel.json` only applies to commits on branches that contain it, so the failing checks
-  clear per branch as it reaches them
-- **Storybook is not deployed anywhere yet.** The registry's `Staging Storybook` and
-  `Production Storybook` columns are empty for all 12 components, and the Engineer and DevOps
-  agents may only write a URL they have opened and seen render. If Storybook is to be hosted on
-  Vercel, it needs build command `npm run build:storybook` and output directory
-  `storybook-static` on a project of its own — a human decision, recorded here before an agent
-  writes either cell
+## Repo root deployment — Storybook
+- Vercel project : imported from this repo with the repo root as its root directory. It publishes
+  **Storybook**, which is the only thing this repo builds
+- Build config : `vercel.json` at the root — `framework: null`, `npm install`,
+  `npm run build:storybook`, output `storybook-static`
+- `framework: null` is the part that matters. Left to detect, Vercel sees `vite` in
+  devDependencies, applies its Vite preset and runs `vite build`, which looks for an `index.html`
+  entry at the root. A component library has none, so Rollup resolves zero entry modules and the
+  build fails with `Command "vite build" exited with 1`. Setting the framework to Other stops
+  that. Reproduce the failure with `npx vite build`
+- Install is `npm install`, not `npm ci`: a lockfile written on macOS can omit packages Linux
+  needs, and `npm ci` refuses it
+- `npm run build:storybook` runs `build:tokens` first, so the generated token CSS that
+  `.storybook/preview.jsx` imports from `build/css/` is produced during the build. Nothing
+  generated needs to be committed for the deploy to work — verified from a clean tree with
+  `build/`, `.tokens-clean/` and `storybook-static/` all absent
+- Previews and production : every branch gets a preview URL, `main` gets production. These are
+  the URLs the registry's `Staging Storybook` and `Production Storybook` columns are for — a
+  preview build for the Engineer, the production build for DevOps. Both agents must still open
+  the URL and see it render before writing the cell; a link to a build nobody looked at is a lie
+  in a cell
+- History : the root carried `{"git": {"deploymentEnabled": false}}` while no project was meant
+  to build it. Note for anyone re-reading that period — the flag only suppresses deployments
+  triggered by a **git push**. Importing a project, or deploying from the dashboard or the CLI,
+  is not a push and builds regardless
 
 ## Dependency rules
 - Match the package manager in this file. This project uses npm. not yarn or pnpm.

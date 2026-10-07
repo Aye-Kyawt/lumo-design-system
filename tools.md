@@ -5,7 +5,9 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
 ## Stack
 
 - Framework : React 19 with Vite
-- Language : JavaScript with JSX. `typescript` is not installed and there is no `tsconfig.json`; every file under `src/` and `stories/` is `.jsx` or `.js`
+- Language : JavaScript with JSX. `typescript` is not installed and there is no `tsconfig.json`.
+  A component is `src/components/<name>/<name>.jsx` with `<name>.css`, `<name>.stories.jsx` and an
+  `index.js`; subcomponents sit beside it in the same folder, camelCase (`buttonIcon.jsx`)
 - Package manager : npm
 - Styling : CSS custom properties, generated from tokens
 - Tokens : Style Dictionary v5, driven by `build-tokens.js`, reading the Figma "Design Tokens" plugin export
@@ -36,13 +38,11 @@ intent so nobody re-adds them as commands that fail, and nobody assumes the guar
 
 - **Tests.** No `test` script and `vitest` is not installed. There is no test command to run
 - **Type checking.** No `Lint` or `typecheck` script, and no `typescript` dependency. "Typescript,
-  strict" was never true of this repo, so nothing enforces it
+  strict" was never true of this repo, so nothing enforces it. TypeScript has since been dropped
+  from the build skill and `engineer.md` too, which used to specify `.tsx`; adopting it later
+  means revisiting those two files and this section together
 - **Accessibility.** `@storybook/addon-a11y` is not installed, so the a11y checks CLAUDE.md
   implies for every interaction state are manual
-- **Note for the component agents.** `.claude/skills/build/SKILL.md` and
-  `.claude/agents/engineer.md` tell the Engineer to create `<Name>.tsx`, while all 21 existing
-  components are `.jsx`. Whether this project moves to TypeScript or the instructions drop it is
-  a human decision, and it belongs in this file once made
 
 ## Repo root deployment
 - The repo root is **not** a deployable site. It is the component library, and the only thing it

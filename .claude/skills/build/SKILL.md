@@ -34,7 +34,7 @@ A property the design leaves unbound is a design gap. Report it and build the re
 rather than invented.
 
 ### 3 · Implement — structure and behaviour
-Create `src/components/<Name>/<Name>.tsx` and `<Name>.css`. Prop names match the
+Create `src/components/<name>/<name>.jsx` and `<name>.css`. Prop names match the
 Figma property names exactly. Every CSS value uses `var(--token-name)`.
 
 Layout is translated, not eyeballed: auto-layout becomes flex or grid carrying its
@@ -46,7 +46,7 @@ class that changes colour.
 **Check:** `npm run lint` passes.
 
 ### 4 · Check — render it and compare
-Write `<Name>.stories.tsx`, one story per row of your matrix. **Record the Figma
+Write `<name>.stories.jsx`, one story per row of your matrix. **Record the Figma
 node URL at the top of that file** — QA tests against the node, not against your
 story file, and cannot start without it.
 

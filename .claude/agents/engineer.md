@@ -79,8 +79,8 @@ Outside the registry:
 - Git: a component branch, PR, merged into the staging branch. Never main.
 
 ## Outputs
-- `src/components/<Name>/<Name>.tsx` and `<Name>.css`
-- `<Name>.stories.tsx`, one story per row of your matrix
+- `src/components/<name>/<name>.jsx` and `<name>.css`
+- `<name>.stories.jsx`, one story per row of your matrix
 - A deployed staging build, and its URL written to `Staging Storybook` — **only after you have
   opened it and seen it render.** A link to a build you have not looked at is a lie in a cell.
 - A row in GitHub Commits for the commit that carries the work

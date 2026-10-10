@@ -1,0 +1,57 @@
+/*
+ * Story scaffolding only -- not part of the component.
+ * Lays the two variants out the way the Figma component set is arranged, and
+ * gives the behaviour stories a settings row to sit in.
+ */
+
+.lumo-switch-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-md);
+}
+
+.lumo-switch-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gap-horizontal-lg);
+}
+
+.lumo-switch-row__head {
+  font: var(--body-body3-intense);
+  color: var(--color-text-secondary);
+  margin: 0;
+  min-inline-size: var(--size-240);
+}
+
+.lumo-switch-note {
+  font: var(--body-body3);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* The setting list the "In context" story shows the switch inside. */
+.lumo-switch-settings {
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--size-400);
+  max-inline-size: 100%;
+}
+
+.lumo-switch-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gap-horizontal-lg);
+  padding-block: var(--spacing-padding-sm);
+  border-block-end: var(--border-width-default) solid var(--color-border-primary-default);
+}
+
+.lumo-switch-setting:last-child {
+  border-block-end: none;
+}
+
+.lumo-switch-setting__label {
+  font: var(--body-body3);
+  color: var(--color-text-primary);
+}

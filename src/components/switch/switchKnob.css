@@ -1,0 +1,57 @@
+/*
+ * switchKnob — Figma node 17:1203 ("Knob").
+ *
+ * Every measurement here reads a custom property declared on `.lumo-switch`
+ * in switch.css, so the knob and the track can never disagree about the
+ * geometry. Nothing in this file is a raw value.
+ */
+
+.lumo-switch__knob {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  inline-size: var(--lumo-switch-knob-size);
+  block-size: var(--lumo-switch-knob-size);
+
+  /*
+   * DESIGN GAP, reported not filled — docs/switch.md, gap 2.
+   * The node draws the knob as a circle but binds no radius variable, and the
+   * semantic radius scale has no toggle/switch entry. `radius/avatar` is the
+   * semantic name for "a round thing"; it resolves to radius/full in every
+   * platform mode, so the shape is exact and only the name is borrowed.
+   */
+  border-radius: var(--border-radius-avatar);
+
+  /* The only variable the Knob layer actually binds in Figma. */
+  background: var(--color-bg-base);
+
+  /*
+   * DESIGN GAP, reported not filled — docs/switch.md, gap 4.
+   * Duration is a token. Easing is not: every `motion.easing.*` token in the
+   * export has no value and build-tokens.js skips all five, so there is no
+   * easing token to reference and none is invented here. The browser default
+   * applies until a designer gives those tokens a value in Figma.
+   */
+  transition: transform var(--motion-duration-fast);
+  transform: translateX(0);
+}
+
+.lumo-switch--on .lumo-switch__knob {
+  transform: translateX(var(--lumo-switch-knob-travel));
+}
+
+/* The knob is the whole state indicator, so it must survive a forced palette. */
+@media (forced-colors: active) {
+  .lumo-switch__knob {
+    background: ButtonText;
+  }
+
+  .lumo-switch[aria-disabled='true'] .lumo-switch__knob {
+    background: GrayText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-switch__knob {
+    transition-duration: var(--motion-duration-instant);
+  }
+}

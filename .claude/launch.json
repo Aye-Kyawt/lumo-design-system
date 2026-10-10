@@ -6,6 +6,13 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "storybook", "--", "--no-open", "--quiet"],
       "port": 6006
+    },
+    {
+      "name": "storybook-alt",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["storybook", "dev", "-p", "6007", "--no-open", "--quiet"],
+      "port": 6007,
+      "autoPort": false
     }
   ]
 }

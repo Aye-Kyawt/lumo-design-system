@@ -140,6 +140,30 @@ export const HeaderWithoutSubtitle = {
   ),
 };
 
+/**
+ * card/header with `subtitle` off and `↳Action` filled — the fourth combination
+ * of the node's two booleans. The only one where the 32px action slot is taller
+ * than the 24px title, so the header's height stops being set by the text.
+ */
+export const HeaderWithActionWithoutSubtitle = {
+  name: 'Header — action, no subtitle',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Stage>
+      <Card padding="md">
+        <CardLayoutVertical
+          headerProps={{
+            subtitle: false,
+            action: true,
+            children: <Slot variant="lumo-card-slot--action">Action</Slot>,
+          }}
+          body={<Slot />}
+        />
+      </Card>
+    </Stage>
+  ),
+};
+
 /** card/layout/vertical with `footer` on — divider plus a trailing action row. */
 export const WithFooter = {
   name: 'Layout — with footer',
@@ -165,6 +189,28 @@ export const WithoutHeader = {
     <Stage>
       <Card padding="md">
         <CardLayoutVertical header={false} body={<Slot />} />
+      </Card>
+    </Stage>
+  ),
+};
+
+/**
+ * card/layout/vertical with `header` off and `footer` on — the fourth
+ * combination of the node's two booleans. Body and footer only, so the
+ * footer's divider is the card's first rule rather than its last.
+ */
+export const WithFooterWithoutHeader = {
+  name: 'Layout — footer, no header',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Stage>
+      <Card padding="md">
+        <CardLayoutVertical
+          header={false}
+          body={<Slot />}
+          footer
+          footerContent={<Slot variant="lumo-card-slot--footer">Footer slot</Slot>}
+        />
       </Card>
     </Stage>
   ),

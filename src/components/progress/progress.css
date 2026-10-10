@@ -1,0 +1,162 @@
+/*
+ * progress — Figma component set 69:1151.
+ *
+ * Eight variants: Status (brand | positive | warning | negative) x Size
+ * (sm | md). Status changes exactly one thing, the indicator colour; Size
+ * changes exactly one thing, the track height. Both ride on a custom property
+ * so each variant rule is a single line.
+ *
+ *   --lumo-progress-indicator      the filled colour         (Status)
+ *   --lumo-progress-track-height   the height of the bar     (Size)
+ *   --lumo-progress-fill           how far the fill runs     (set per instance)
+ *
+ * The node is drawn 280px wide, but that is the frame on the canvas, not a
+ * constraint: inside it the label is full-width, the row is full-width and the
+ * track is a flex child that takes the remaining space. So the component is
+ * fluid here and the stories constrain it to 280px to match the node.
+ *
+ * There is no transition on the fill. See DESIGN GAP 3 below.
+ */
+
+.lumo-progress {
+  /*
+   * DESIGN GAP 1 — docs/progress.md, gap 1. Size is the whole reason this
+   * property exists, and neither of its two values is bound to a variable in
+   * Figma: the node draws the track 6px tall at sm and 8px at md as raw
+   * numbers. There is no size token anywhere near those values either — the
+   * core size scale starts at 12 and the semantic size families are icon,
+   * control, avatar, touchTarget and layout, none of which means "the height
+   * of a progress track".
+   *
+   * So the two heights are composed from core spacing primitives, which is a
+   * layer this component should not be touching. They are exact (6 and 8, in
+   * every platform mode, because core spacing is mode-independent) and they
+   * are isolated here, so closing the gap is a one-line change per size once a
+   * designer authors something like size/progress/sm and size/progress/md and
+   * binds the node to it.
+   */
+  --lumo-progress-track-height: calc(var(--spacing-4) + var(--spacing-2)); /* 6 */
+
+  --lumo-progress-indicator: var(--color-bg-primary-idle);
+
+  /*
+   * DESIGN GAP 2 — docs/progress.md, gap 2. The node binds the track and the
+   * indicator to core/border/radius/full, reaching past the semantic layer
+   * itself. The semantic radii that resolve to the same 999 are `chip` and
+   * `avatar`, and a progress track is neither, so borrowing one of those names
+   * would be a lie about meaning rather than a fix. Reproduced as the node
+   * binds it, raised rather than papered over.
+   */
+  --lumo-progress-radius: var(--border-radius-full);
+
+  /* Set per instance by the component; 0 is the honest default if it is not. */
+  --lumo-progress-fill: 0%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  inline-size: 100%;
+  gap: var(--spacing-gap-xs);
+}
+
+/* --------------------------------------------------------------- text ---- */
+
+.lumo-progress__label {
+  inline-size: 100%;
+  margin: 0;
+  font: var(--label-label1);
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+.lumo-progress__value {
+  flex: 0 0 auto;
+  margin: 0;
+  font: var(--body-body3);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------- the bar ---- */
+
+.lumo-progress__row {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  gap: var(--spacing-gap-horizontal-sm);
+}
+
+.lumo-progress__track {
+  display: flex;
+  flex: 1 0 0;
+  align-items: stretch;
+  min-inline-size: 0;
+  block-size: var(--lumo-progress-track-height);
+  overflow: clip;
+  border-radius: var(--lumo-progress-radius);
+  background: var(--color-bg-surfacesecondary);
+}
+
+.lumo-progress__indicator {
+  flex: 0 0 auto;
+  inline-size: var(--lumo-progress-fill);
+  block-size: 100%;
+  border-radius: var(--lumo-progress-radius);
+  background: var(--lumo-progress-indicator);
+
+  /*
+   * DESIGN GAP 3 — docs/progress.md, gap 3. A bar whose fill moves wants a
+   * transition, and a transition needs a duration and an easing. The duration
+   * tokens exist; all five motion/easing tokens are declared in the Figma
+   * export with no value in any mode, so the token build skips them and no
+   * --motion-easing-* custom property is emitted. Rather than substitute a
+   * cubic-bezier nobody designed, or dress up a CSS keyword as the bound
+   * value, the fill simply does not animate. One declaration closes this once
+   * the easings have values.
+   */
+}
+
+/* ------------------------------------------------- Status — the colour ---- */
+
+.lumo-progress--brand {
+  --lumo-progress-indicator: var(--color-bg-primary-idle);
+}
+
+.lumo-progress--positive {
+  --lumo-progress-indicator: var(--color-bg-positive-idle);
+}
+
+.lumo-progress--warning {
+  --lumo-progress-indicator: var(--color-bg-warning-idle);
+}
+
+.lumo-progress--negative {
+  --lumo-progress-indicator: var(--color-bg-negative-idle);
+}
+
+/* --------------------------------------------------- Size — the height ---- */
+
+.lumo-progress--sm {
+  --lumo-progress-track-height: calc(var(--spacing-4) + var(--spacing-2)); /* 6 */
+}
+
+.lumo-progress--md {
+  --lumo-progress-track-height: var(--spacing-8); /* 8 */
+}
+
+/*
+ * Forced colours drops every background, which for this component drops the
+ * whole message — unlike Badge, the meaning here is carried by the fill, not
+ * by words. So the track is outlined to keep its shape and the indicator is
+ * painted in a system colour that forced-colors mode does honour.
+ */
+@media (forced-colors: active) {
+  .lumo-progress__track {
+    border: var(--border-width-default) solid CanvasText;
+  }
+
+  .lumo-progress__indicator {
+    background: Highlight;
+  }
+}

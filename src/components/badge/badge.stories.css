@@ -1,0 +1,34 @@
+/*
+ * Story scaffolding only -- not part of the component.
+ * Lays the five tones out the way the Figma component set is arranged.
+ */
+
+.lumo-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-gap-horizontal-xl);
+}
+
+.lumo-badge-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-sm);
+}
+
+.lumo-badge-stack__head {
+  font: var(--body-body3-intense);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* A badge is usually read inside running text or beside a title, so one story
+   shows it in that setting rather than alone on a blank canvas. */
+.lumo-badge-incontext {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gap-horizontal-sm);
+  font: var(--body-body3);
+  color: var(--color-text-primary);
+}

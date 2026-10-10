@@ -1,0 +1,95 @@
+/*
+ * badge — Figma component set 17:1139.
+ *
+ * One variant property, `Tone`, with five values. Every variant is the same
+ * box; only two things change, so the skin rides on two custom properties:
+ *
+ *   --lumo-badge-bg   the tonal surface
+ *   --lumo-badge-fg   the label colour
+ *
+ * The badge is not interactive. The Figma component set defines no hovered,
+ * pressed, focused or disabled variant, and the component's own description in
+ * Figma says a badge labels "a status or category the user reads, not clicks".
+ * So there are deliberately no interaction rules here -- see docs/badge.md.
+ */
+
+.lumo-badge {
+  --lumo-badge-bg: var(--color-bg-primary-tonal-idle);
+  --lumo-badge-fg: var(--color-text-brand);
+
+  /*
+   * DESIGN GAP, reported not filled -- docs/badge.md, gap 1.
+   *
+   * The node's auto-layout is 4px vertical / 10px horizontal, but only the
+   * vertical side is bound to a variable (spacing/padding/xs). The horizontal
+   * 10px is a raw number with no variable behind it, and the semantic padding
+   * scale has no 10 step: xs=4, sm=8, md=16, lg=24, xl=32. Rather than author a
+   * token that does not exist in Figma, this binds the nearest step in the
+   * correct family, spacing/padding/sm. The badge therefore renders 61x24
+   * where the node is 65x24 -- 2px narrower per side. Declared here as one
+   * custom property so that closing the gap is a one-line change once a
+   * designer either binds the node to padding/sm or authors a 10px step.
+   */
+  --lumo-badge-padding-inline: var(--spacing-padding-sm);
+
+  display: inline-flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  margin: 0;
+  padding-block: var(--spacing-padding-xs);
+  padding-inline: var(--lumo-badge-padding-inline);
+  border-radius: var(--border-radius-chip);
+  background: var(--lumo-badge-bg);
+  color: var(--lumo-badge-fg);
+  font: var(--label-label1);
+  white-space: nowrap;
+}
+
+.lumo-badge__label {
+  flex: 0 0 auto;
+  word-break: break-word;
+}
+
+/* ------------------------------------------------------ Tone — the skin ---- */
+
+.lumo-badge--primary {
+  --lumo-badge-bg: var(--color-bg-primary-tonal-idle);
+  --lumo-badge-fg: var(--color-text-brand);
+}
+
+/*
+ * Success and Warning bind an ICON token to a text layer, while Primary,
+ * Danger and Neutral all bind a text token. Reproduced as drawn; raised as
+ * gap 2 in docs/badge.md, because color/text/positive and color/text/warning
+ * both exist and are darker.
+ */
+.lumo-badge--success {
+  --lumo-badge-bg: var(--color-bg-positive-tonal-idle);
+  --lumo-badge-fg: var(--color-icon-positive);
+}
+
+.lumo-badge--warning {
+  --lumo-badge-bg: var(--color-bg-warning-tonal-idle);
+  --lumo-badge-fg: var(--color-icon-warning);
+}
+
+.lumo-badge--danger {
+  --lumo-badge-bg: var(--color-bg-negative-tonal-idle);
+  --lumo-badge-fg: var(--color-text-negative);
+}
+
+.lumo-badge--neutral {
+  --lumo-badge-bg: var(--color-bg-surfacesecondary);
+  --lumo-badge-fg: var(--color-text-secondary);
+}
+
+/*
+ * The tint is the only thing forced-colors mode drops, and the badge's meaning
+ * is carried by its words, not its colour -- so nothing is lost. The edge is
+ * restored only so the pill stays a pill against the forced background.
+ */
+@media (forced-colors: active) {
+  .lumo-badge {
+    border: var(--border-width-default) solid CanvasText;
+  }
+}

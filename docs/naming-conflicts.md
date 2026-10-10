@@ -117,3 +117,40 @@ whether each icon shows at all.
 become a node prop. Where the design system has settled on one icon font, the
 slot is better expressed as the name of the thing to draw, and the boolean that
 Figma already provides stays as the on/off switch.
+
+---
+
+## Figma's `Value` is a boolean, so the number needed another name
+
+**Found while building:** Progress (`component/progress`)
+
+The Figma component set gives Progress a `Value` property, and it is a **boolean** —
+it shows or hides the little percentage text beside the bar. The string in that text
+is a separate property, `Value text`.
+
+What Figma has no property for at all is the thing the bar is actually about: how far
+along it is. The node draws the fill at a fixed 158px in every variant, which is what
+a static frame can do, so the number only exists once the component is code.
+
+Calling that number `value` would be the natural name — it is what `<progress value>`
+and `aria-valuenow` both call it — but `Value` is already taken by the Figma boolean,
+and per the Button precedent the Figma name wins.
+
+**Chosen names:** `value` stays the Figma boolean. The number is `percent`, taking
+0–100 and clamped to it. `valueText` defaults to `` `${percent}%` ``, so the text and
+the fill agree by default instead of by coincidence — which is the one thing the node
+itself gets wrong (its fill is ~64% of the track while its text reads 72%; see
+`docs/progress.md`, gap 4).
+
+`percent` rather than `now` or `amount` because it says its own units, and the default
+`valueText` makes the percentage reading explicit anyway.
+
+**The general rule this suggests:** a Figma boolean that toggles the *display* of a
+value will often sit on the name the value itself wants. Leave the boolean where Figma
+put it and give the value a name that states its units — the boolean is about
+visibility, so it is the one that can afford the vaguer name.
+
+**Suggestion back to design:** renaming the Figma pair to `Show value` and
+`Value label` would free `Value` for the number and make the set read the way the code
+does. That is a design decision, not an engineering one, so nothing has been changed
+in Figma.

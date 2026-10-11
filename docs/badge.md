@@ -57,41 +57,95 @@ Nothing is a raw hex, px or font name.
 | Tone | surface | label |
 |---|---|---|
 | Primary | `--color-bg-primary-tonal-idle` | `--color-text-brand` |
-| Success | `--color-bg-positive-tonal-idle` | `--color-icon-positive` |
-| Warning | `--color-bg-warning-tonal-idle` | `--color-icon-warning` |
+| Success | `--color-bg-positive-tonal-idle` | `--color-text-positive` |
+| Warning | `--color-bg-warning-tonal-idle` | `--color-text-warning` |
 | Danger  | `--color-bg-negative-tonal-idle` | `--color-text-negative` |
 | Neutral | `--color-bg-surfacesecondary` | `--color-text-secondary` |
 
 Measured in Storybook, every one of the ten colours resolves to exactly the hex
 the Figma variable carries.
 
-## Design gaps — reported, not filled in
+### Both padding tokens are mode-dependent
 
-1. **The horizontal padding is not bound to anything.** The node's auto-layout
-   is 4px vertical and 10px horizontal, but only the vertical side carries a
-   variable (`spacing/padding/xs`). The 10 is a raw number, and the semantic
-   padding scale has no 10 step — `xs=4, sm=8, md=16, lg=24, xl=32` — nor does
-   the core scale, which jumps 8 → 12. Authoring a 10px token is a design
-   decision, so the component binds the nearest step in the right family,
-   `spacing/padding/sm`, and **renders 61×24 where the node is 65×24**: 2px
-   narrower per side, same height. It sits behind one custom property,
-   `--lumo-badge-padding-inline` in `badge.css`, so closing the gap is a
-   one-line change. A designer should either bind the node's horizontal padding
-   to `spacing/padding/sm` or author the missing step and bind to that.
+Badge's padding is the one part of it that changes shape by platform, and
+**both** sides move, not just the horizontal one:
 
-2. **Success and Warning put an icon token on a text layer.** Three tones bind
-   their label to a `color/text/*` variable; Success binds `color/icon/positive`
-   (`#16e362`, green/600) and Warning binds `color/icon/warning` (`#e37316`,
-   orange/600). `color/text/positive` (green/800) and `color/text/warning`
-   (orange/700) both exist and are unused here. The code follows the design as
-   drawn. Worth a designer's eye for two reasons: it is inconsistent with the
-   other three tones, and `#16e362` on the `#effaf3` surface is by far the
-   weakest contrast pairing in the set — the Success badge is the one that is
-   hard to read.
+| Token | `web` | `mobile` | `admin` |
+|---|---|---|---|
+| `spacing/padding/xs` — block | 4 | 4 | **2** |
+| `spacing/padding/sm` — inline | 8 | 8 | **4** |
 
-3. **Pre-existing, repo-wide.** The token build still warns that
-   `border-style-*` and `motion-easing-*` have no value in the export. Badge
-   uses neither. Already recorded under `docs/card.md`.
+So the badge measures 60.67×24 in web and mobile and **52.67×20 in admin** —
+measured in Storybook with the platform switcher, not inferred from the token
+files. This is not a gap: both tokens exist and carry real values in all three
+modes, and halving the padding in a denser admin theme is the token doing
+exactly what it is for. It is recorded because the difference is invisible from
+the component source, which only ever says `var(--spacing-padding-sm)`, and
+because the Figma node is drawn in the web mode alone — anyone comparing the
+admin rendering against that node will see a 8×4 difference that is correct.
+
+## Contrast
+
+Measured foreground against each tone's own tonal surface. AA for this text size
+(12px, weight 500) is 4.5:1.
+
+| Tone | label on surface | ratio | |
+|---|---|---|---|
+| Primary | `#176e82` on `#eff8fa` | **5.43** | passes |
+| Neutral | `#636679` on `#ebedf4` | **4.84** | passes |
+| Success | `#17823e` on `#effaf3` | **4.57** | passes |
+| Warning | `#b15c16` on `#faf4ef` | **4.36** | under AA — gap 2 |
+| Danger  | `#e31628` on `#faeff0` | **4.23** | under AA — gap 2 |
+
+## Design gaps
+
+### 1. Horizontal padding — **resolved**
+
+Originally the node's horizontal padding was a raw 10px bound to no variable,
+while the semantic scale had no 10 step (`xs=4, sm=8, md=16, lg=24, xl=32`; the
+core scale jumps 8 → 12). Rather than author a token, the component was built
+against `spacing/padding/sm` and the gap reported.
+
+The designer has since **bound the node's `paddingLeft`/`paddingRight` to
+`spacing/padding/sm`**, which is the same token the component already used — so
+code and design now agree at token level, not merely by eye. Read back from the
+node to confirm.
+
+Badge renders **60.67×24 against the node's 61×24**. The residual 0.33px is text
+rasterisation, not layout: Figma lays "Primary" out at 45px and the browser at
+44.67. Padding, height and radius match exactly.
+
+`--lumo-badge-padding-inline` in `badge.css` stays a named property — it is the
+one measurement that had to be argued for rather than read off, and it is the
+one whose value moves between platform modes.
+
+### 2. Success and Warning rebound; Warning and Danger still under AA
+
+Success and Warning used to bind an **icon** token to a text layer where the
+other three tones bind a text token — inconsistent, and the reason the Success
+badge was close to unreadable. The designer has rebound both:
+
+| Tone | was | now | ratio |
+|---|---|---|---|
+| Success | `color/icon/positive` `#16e362` | `color/text/positive` `#17823e` | 1.61 → **4.57**, clears AA |
+| Warning | `color/icon/warning` `#e37316` | `color/text/warning` `#b15c16` | 2.86 → **4.36**, still under AA |
+
+So the inconsistency is closed and Success passes. **Two things remain open, and
+both need a designer:**
+
+- **Warning at 4.36:1** is a large improvement but has not cleared 4.5. It needs
+  a darker orange authored in Figma.
+- **Danger at 4.23:1** was never part of this rebind. It already binds
+  `color/text/negative`, so there is no rebinding left to do — `#e31628`
+  (red/600) is simply not dark enough on `#faeff0`. It needs a darker red.
+
+Neither is something to approximate in code: picking a replacement shade is a
+design decision, and the token that would carry it does not exist yet.
+
+### 3. Pre-existing, repo-wide
+
+The token build still warns that `border-style-*` and `motion-easing-*` have no
+value in the export. Badge uses neither. Already recorded under `docs/card.md`.
 
 ## Repo notes
 

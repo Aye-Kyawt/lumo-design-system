@@ -7,11 +7,15 @@
  * Neutral 17:1148). No size property, no state property, no sub-components.
  * Each variant is 65x24 with a single `Label` text layer.
  *
- * Known reported differences, see docs/badge.md:
- *   1. horizontal padding renders 8px (spacing/padding/sm) against the node's
- *      unbound 10px, so the badge measures 61x24, not 65x24.
- *   2. Success and Warning labels take colour/icon tokens, as the node binds
- *      them, not the darker colour/text equivalents.
+ * Both of the differences this file used to list are now closed in the design:
+ * the node's horizontal padding is bound to spacing/padding/sm, and the Success
+ * and Warning labels are rebound from colour/icon to colour/text. The badge
+ * measures 60.67x24 against the node's 61x24, the 0.33px being text
+ * rasterisation rather than layout.
+ *
+ * Still open, see docs/badge.md gap 2: Warning (4.36:1) and Danger (4.23:1) are
+ * under AA against their own surfaces, and clearing them needs darker shades
+ * authored in Figma.
  */
 import { Badge } from './badge.jsx';
 import './badge.stories.css';

@@ -1,0 +1,190 @@
+/*
+ * switch — Figma component set 17:1201, named "Toggle" on the canvas.
+ *
+ * One variant property, `On`, with two values. Only one thing changes between
+ * them: the track fill, and the side the knob sits on. Both ride on custom
+ * properties so the two variants are one rule each.
+ *
+ *   --lumo-switch-track-bg   the track fill
+ *
+ * ---------------------------------------------------------------------------
+ * A note on the geometry, because almost none of it came from a variable.
+ *
+ * `get_variable_defs` on 17:1201 returns exactly three bindings, all colour:
+ * bg/base, bg/primary/idle and border/primary/default. The track's 40x22 box,
+ * its 11px radius, the 16px knob and the 3px knob inset are raw numbers in the
+ * node with nothing behind them. Each is a design gap; see docs/switch.md.
+ *
+ * Rather than hardcode those numbers — CLAUDE.md forbids a raw px in a
+ * component — each is bound to the nearest semantic token whose *family*
+ * carries the right meaning, declared once below so that closing a gap is a
+ * one-line change. The consequence is that the switch is not 40x22 in every
+ * platform mode, and is 40x24 rather than 40x22 even in web. The exact
+ * rendered sizes per mode are tabulated in docs/switch.md.
+ */
+
+.lumo-switch {
+  /* ------------------------------------------------------- the geometry ---- */
+
+  /*
+   * DESIGN GAP 1 — the node's 40px track width binds no variable.
+   * `size/control/md` is the semantic name for "an interactive control at the
+   * middle size", which is what this is. It is 40px in web — the node's own
+   * number — but 32px in admin and 44px in mobile, so the track width follows
+   * the platform instead of being pinned to the web drawing.
+   */
+  --lumo-switch-track-width: var(--size-control-md);
+
+  /*
+   * DESIGN GAP 1 — the node's 16px knob binds no variable either.
+   * `size/icon/sm` resolves to 16px in all three platform modes, so this one
+   * is exact everywhere; only the name is borrowed.
+   */
+  --lumo-switch-knob-size: var(--size-icon-sm);
+
+  /*
+   * DESIGN GAP 1 — the node insets the knob by 3px, and no spacing token in
+   * any mode is 3. `spacing/padding/xs` is the smallest step in the right
+   * family: 4px in web and mobile, 2px in admin.
+   */
+  --lumo-switch-knob-inset: var(--spacing-padding-xs);
+
+  /*
+   * Derived, not measured. The node's 22px track height is knob + 2 x inset,
+   * and there is no 22px token anywhere in the export, so the height is
+   * computed from the two values above and the pill can never go lopsided.
+   * Renders 24px in web and mobile, 20px in admin, against the node's 22.
+   */
+  --lumo-switch-track-height: calc(
+    var(--lumo-switch-knob-size) + 2 * var(--lumo-switch-knob-inset)
+  );
+
+  /* What is left over once the knob and both insets are taken out. */
+  --lumo-switch-knob-travel: calc(
+    var(--lumo-switch-track-width) - var(--lumo-switch-knob-size) - 2 *
+      var(--lumo-switch-knob-inset)
+  );
+
+  /* ---------------------------------------------------------- the skin ---- */
+
+  /* `On=false`, node 17:1204 — the one colour variable that variant binds. */
+  --lumo-switch-track-bg: var(--color-border-primary-default);
+
+  /* ---------------------------------------------------------- the box ---- */
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  inline-size: var(--lumo-switch-track-width);
+  block-size: var(--lumo-switch-track-height);
+  padding: var(--lumo-switch-knob-inset);
+  margin: 0;
+  border: none;
+
+  /*
+   * DESIGN GAP 2 — the track's rx=11 on a 22px box is a pill, but binds no
+   * variable, and the semantic radius scale has no toggle/switch entry.
+   * `radius/chip` is the semantic pill; it resolves to radius/full in every
+   * mode, so the shape is exact and only the name is borrowed.
+   */
+  border-radius: var(--border-radius-chip);
+
+  background: var(--lumo-switch-track-bg);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* See the easing note in switchKnob.css — gap 4. */
+  transition: background-color var(--motion-duration-fast);
+}
+
+/* ------------------------------------------------- On — the two variants ---- */
+
+/* `On=true`, node 17:1202. */
+.lumo-switch--on {
+  --lumo-switch-track-bg: var(--color-bg-primary-idle);
+}
+
+/* ------------------------------------------------------------- states ---- */
+/*
+ * DESIGN GAP 3, reported not filled — docs/switch.md.
+ *
+ * The component set defines `On` and nothing else: no hovered, pressed,
+ * focused or disabled variant exists in Figma. But the component's own
+ * description calls it "one setting that takes effect immediately", so it is
+ * unarguably interactive, and CLAUDE.md asks an interactive component to
+ * carry its states as behaviour rather than decoration.
+ *
+ * So the states below are real behaviour bound to semantic tokens that
+ * already exist and whose names carry exactly these meanings. No token was
+ * invented. The *mapping*, however, is this build's reading and not a
+ * designer's decision — it needs confirming against a drawn variant.
+ */
+
+.lumo-switch:hover:not([aria-disabled='true']) {
+  --lumo-switch-track-bg: var(--color-border-primary-hovered);
+}
+
+.lumo-switch--on:hover:not([aria-disabled='true']) {
+  --lumo-switch-track-bg: var(--color-bg-primary-hovered);
+}
+
+/*
+ * Only the on state darkens on press. There is no `color.border.primary.
+ * pressed` in the export to match it with, so the off track keeps its hovered
+ * colour while held — raised as part of gap 3 rather than approximated.
+ */
+.lumo-switch--on:active:not([aria-disabled='true']) {
+  --lumo-switch-track-bg: var(--color-bg-primary-pressed);
+}
+
+/*
+ * `elevation/focused` is the export's own keyboard focus indicator, described
+ * in the token as exactly that. `:focus-visible` rather than `:focus` so a
+ * mouse click does not leave a ring behind.
+ */
+.lumo-switch:focus-visible {
+  outline: none;
+  box-shadow: var(--elevation-focused);
+}
+
+/*
+ * Disabled is an attribute, not a class, because the element is a real
+ * `<button>` and `aria-disabled` is what gets announced. The opacity token is
+ * the semantic one for a disabled control; dimming the whole switch keeps the
+ * on/off reading legible, which a flat `bg/disabled` fill would destroy.
+ */
+.lumo-switch[aria-disabled='true'] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------- forced colors ---- */
+/*
+ * Forced-colors mode drops the track fill, and on a switch the fill is half
+ * the message. The border keeps the pill a pill, and the knob (switchKnob.css)
+ * carries the state by its position.
+ */
+@media (forced-colors: active) {
+  .lumo-switch {
+    border: var(--border-width-default) solid ButtonText;
+  }
+
+  .lumo-switch[aria-disabled='true'] {
+    border-color: GrayText;
+    opacity: var(--opacity-100);
+  }
+
+  .lumo-switch:focus-visible {
+    outline: var(--border-width-focused) solid Highlight;
+    outline-offset: var(--border-width-focused);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-switch {
+    transition-duration: var(--motion-duration-instant);
+  }
+}

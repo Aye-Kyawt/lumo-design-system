@@ -154,3 +154,42 @@ visibility, so it is the one that can afford the vaguer name.
 `Value label` would free `Value` for the number and make the set read the way the code
 does. That is a design decision, not an engineering one, so nothing has been changed
 in Figma.
+
+---
+
+## `switch` is a reserved word, and the node is not called Switch anyway
+
+**Found while building:** Switch (`component/switch`)
+
+Two small collisions landed on the same component.
+
+**The node's name.** Figma calls the component set **Toggle** (17:1201), and
+its own description calls it a toggle throughout. The registry row, and the
+build request, call it **Switch**. Those are two different names for one thing
+and someone reading either artefact alone would not know the other existed.
+
+**Chosen name:** the folder, the files and the CSS namespace are `switch` —
+`src/components/switch/`, `.lumo-switch` — matching the registry, since that is
+what the rest of the pipeline keys off. Every file in the folder names node
+17:1201 and says "named Toggle on the canvas" so the trail back to Figma is
+never ambiguous.
+
+**The identifier.** `switch` is a reserved word in JavaScript, so
+`export function switch` is a syntax error. This does not affect the folder or
+the file name — only an identifier.
+
+**Chosen name:** the exported component is `Switch`, which is what PascalCase
+would have given anyway, so this costs nothing. `badge.jsx` already exports
+`Badge`, so the pattern is unchanged. The sub-component for the `Knob` layer
+(17:1203) is `switchKnob.jsx` exporting `SwitchKnob`, following `buttonIcon`.
+
+The variant property needed no renaming: Figma's `On` lowercases to `on`,
+per the rule the Card entry above established.
+
+**The general rule this suggests:** where the Figma name and the registry name
+for one component disagree, the registry name wins for the folder, the files
+and the CSS namespace — it is what the agents downstream resolve against — and
+the Figma name is recorded in a header comment in every file of the folder
+rather than being quietly dropped. Check a new component's name against the
+JavaScript reserved word list before choosing the folder name; a reserved word
+is fine as a file name and fatal as an identifier.

@@ -58,8 +58,8 @@ Nothing is a raw hex, px or font name.
 |---|---|---|
 | Primary | `--color-bg-primary-tonal-idle` | `--color-text-brand` |
 | Success | `--color-bg-positive-tonal-idle` | `--color-text-positive` |
-| Warning | `--color-bg-warning-tonal-idle` | `--color-text-warning` |
-| Danger  | `--color-bg-negative-tonal-idle` | `--color-text-negative` |
+| Warning | `--color-bg-warning-tonal-idle` | `--color-text-orange-twotone` |
+| Danger  | `--color-bg-negative-tonal-idle` | `--color-text-red-twotone` |
 | Neutral | `--color-bg-surfacesecondary` | `--color-text-secondary` |
 
 Measured in Storybook, every one of the ten colours resolves to exactly the hex
@@ -91,11 +91,15 @@ Measured foreground against each tone's own tonal surface. AA for this text size
 
 | Tone | label on surface | ratio | |
 |---|---|---|---|
+| Danger  | `#821720` on `#faeff0` | **8.92** | passes, AAA |
+| Warning | `#824717` on `#faf4ef` | **6.72** | passes |
 | Primary | `#176e82` on `#eff8fa` | **5.43** | passes |
 | Neutral | `#636679` on `#ebedf4` | **4.84** | passes |
 | Success | `#17823e` on `#effaf3` | **4.57** | passes |
-| Warning | `#b15c16` on `#faf4ef` | **4.36** | under AA — gap 2 |
-| Danger  | `#e31628` on `#faeff0` | **4.23** | under AA — gap 2 |
+
+**All five clear AA.** Danger and Warning, the two that used to fail, are now the
+two strongest — a side effect of the `twoTone` tier being built for exactly this
+pairing. See gap 2.
 
 ## Design gaps
 
@@ -119,28 +123,67 @@ rasterisation, not layout: Figma lays "Primary" out at 45px and the browser at
 one measurement that had to be argued for rather than read off, and it is the
 one whose value moves between platform modes.
 
-### 2. Success and Warning rebound; Warning and Danger still under AA
+### 2. Label contrast — **resolved**, in two passes
 
-Success and Warning used to bind an **icon** token to a text layer where the
-other three tones bind a text token — inconsistent, and the reason the Success
-badge was close to unreadable. The designer has rebound both:
+**Pass one.** Success and Warning bound an **icon** token to a text layer where
+the other three tones bound a text token — inconsistent, and the reason the
+Success badge was close to unreadable. Both were rebound to the text tier.
 
-| Tone | was | now | ratio |
+**Pass two.** That fixed Success but left Warning at 4.36 and Danger at 4.23,
+both under AA. The remedy was *not* a darker shade authored, and *not* a shared
+token retargeted. The system already has a matched **`twoTone` tier** — a
+`bg/<hue>/twoTone` and a `text/<hue>/twoTone` per hue, intended to be used as a
+pair — and Badge's surfaces already *were* those backgrounds. Only the labels
+were on the wrong tier.
+
+| Tone | pass one | pass two | ratio |
 |---|---|---|---|
-| Success | `color/icon/positive` `#16e362` | `color/text/positive` `#17823e` | 1.61 → **4.57**, clears AA |
-| Warning | `color/icon/warning` `#e37316` | `color/text/warning` `#b15c16` | 2.86 → **4.36**, still under AA |
+| Success | `icon/positive` `#16e362` → `text/positive` `#17823e` | — | 1.61 → **4.57** |
+| Warning | `icon/warning` `#e37316` → `text/warning` `#b15c16` | → `text/orange/twoTone` `#824717` | 2.86 → 4.36 → **6.72** |
+| Danger  | — | `text/negative` `#e31628` → `text/red/twoTone` `#821720` | 4.23 → **8.92** |
 
-So the inconsistency is closed and Success passes. **Two things remain open, and
-both need a designer:**
+The surfaces were already right, and not just coincidentally — they resolve to
+the *same primitive*, not merely the same hex:
 
-- **Warning at 4.36:1** is a large improvement but has not cleared 4.5. It needs
-  a darker orange authored in Figma.
-- **Danger at 4.23:1** was never part of this rebind. It already binds
-  `color/text/negative`, so there is no rebinding left to do — `#e31628`
-  (red/600) is simply not dark enough on `#faeff0`. It needs a darker red.
+| Badge binds | resolves to | twoTone pair | resolves to |
+|---|---|---|---|
+| `bg/warning/tonal/idle` | `orange/100` `#faf4ef` | `bg/orange/twoTone` | `orange/100` |
+| `bg/negative/tonal/idle` | `red/100` `#faeff0` | `bg/red/twoTone` | `red/100` |
 
-Neither is something to approximate in code: picking a replacement shade is a
-design decision, and the token that would carry it does not exist yet.
+**Why the tier and not a retarget.** The alternative was retargeting
+`color/text/negative` to something darker. `button.css` consumes that token for
+its error states, so it would have changed Button — which sits `Completed` with
+a production link — and invalidated Button's test evidence for a fix that had
+nothing to do with Button. The `twoTone` route changed Badge and nothing else.
+
+**Naming.** The generated custom properties lowercase the camelCase:
+`color/text/orange/twoTone` emits as `--color-text-orange-twotone`. Verified in
+`build/css/` for web, admin and mobile rather than inferred from the Figma name.
+
+### Open question — should Badge be on `twoTone` throughout?
+
+Not a gap, and **not implemented**: this is a visual change to tones that already
+pass, so it is a design decision nobody has made yet.
+
+Badge now straddles two tiers. Warning and Danger are on `twoTone`; Primary,
+Success and Neutral are on the general text tier. All five surfaces are already
+`<hue>/100`, which is what `bg/<hue>/twoTone` resolves to, so the tier is in
+effect half-adopted.
+
+| Tone | today | on `twoTone` | effect |
+|---|---|---|---|
+| Primary | `text/brand` `#176e82` — 5.43 | `text/aqua/twoTone` `#164d5a` — **8.68** | visibly darker |
+| Success | `text/positive` `#17823e` — 4.57 | `text/green/twoTone` `#17823e` — 4.57 | **no visual change** |
+
+Success is the telling one: `color/text/positive` and `color/text/green/twoTone`
+both resolve to `green/800`, so moving it is pure provenance — same pixels,
+different tier. Primary is a real visual change, and the one that needs a
+decision. Neutral has no `twoTone` counterpart at all: the tier covers aqua,
+purple, blue, mint, green, yellow, orange, red and pink, with no neutral or grey,
+so Neutral would stay on `text/secondary` regardless.
+
+If the answer is yes, Badge ends up consistently on one tier and Primary gains a
+lot of contrast. If no, this section is the record of why it is mixed.
 
 ### 3. Pre-existing, repo-wide
 

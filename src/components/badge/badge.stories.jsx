@@ -13,9 +13,14 @@
  * measures 60.67x24 against the node's 61x24, the 0.33px being text
  * rasterisation rather than layout.
  *
- * Still open, see docs/badge.md gap 2: Warning (4.36:1) and Danger (4.23:1) are
- * under AA against their own surfaces, and clearing them needs darker shades
- * authored in Figma.
+ * Contrast is also resolved. Warning and Danger have since moved onto the
+ * system's existing twoTone tier -- text/orange/twoTone and text/red/twoTone --
+ * so all five tones now clear AA against their own surfaces: Danger 8.92,
+ * Warning 6.72, Primary 5.43, Neutral 4.84, Success 4.57.
+ *
+ * Open, but a design decision rather than a defect: Badge straddles two tiers,
+ * with Warning and Danger on twoTone and the rest on the general text tier. See
+ * docs/badge.md, "should Badge be on twoTone throughout?".
  */
 import { Badge } from './badge.jsx';
 import './badge.stories.css';

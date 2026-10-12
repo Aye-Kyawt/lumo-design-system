@@ -67,20 +67,37 @@
 }
 
 /*
- * Success and Warning used to bind an ICON token to a text layer, where the
- * other three tones bind a text token -- inconsistent, and the reason the
- * Success badge was close to unreadable (color/icon/positive #16e362 on its
- * own tonal surface is 1.61:1). Reported as gap 2 rather than fixed here,
- * because the binding lives in Figma. The designer has since rebound both to
- * the text tokens, which is what these two rules now follow:
+ * Every tone now clears AA against its own surface. It took two rebinds in
+ * Figma, both followed here rather than decided here:
  *
- *   Success  #16e362 -> #17823e   1.61 -> 4.57  (AA)
- *   Warning  #e37316 -> #b15c16   2.86 -> 4.36  (still under AA)
+ *   Success  icon/positive  #16e362 -> text/positive       #17823e  1.61 -> 4.57
+ *   Warning  icon/warning   #e37316 -> text/warning        #b15c16  2.86 -> 4.36
+ *            text/warning   #b15c16 -> text/orange/twoTone #824717  4.36 -> 6.72
+ *   Danger   text/negative  #e31628 -> text/red/twoTone    #821720  4.23 -> 8.92
  *
- * Warning is much improved but has not cleared 4.5, and Danger was never part
- * of this rebind. Both are still open in docs/badge.md -- clearing them needs
- * a darker orange and a darker red authored in Figma, which is a designer's
- * decision, not something to approximate here.
+ * The second pass is the interesting one. Warning and Danger were not fixed by
+ * authoring darker shades -- they were moved onto the system's existing
+ * `twoTone` tier, which pairs a bg/<hue>/twoTone with a text/<hue>/twoTone
+ * meant to be used together. Badge's surfaces already WERE those backgrounds:
+ * bg/warning/tonal/idle and bg/orange/twoTone are both orange/100, and
+ * bg/negative/tonal/idle and bg/red/twoTone are both red/100 -- the same
+ * primitive, not merely the same hex. Only the labels were on the wrong tier.
+ *
+ * That choice also kept the blast radius at zero. The alternative was
+ * retargeting color/text/negative, which button.css consumes for its error
+ * states -- it would have changed Button while Button sits Completed with a
+ * production link, and invalidated its test evidence for a fix that was not
+ * about Button at all.
+ *
+ * Note the generated names lowercase the camelCase: color/text/orange/twoTone
+ * emits as --color-text-orange-twotone. Checked in build/css/ for web, admin
+ * and mobile rather than inferred from the Figma name.
+ *
+ * Success is correct but sits on the general text tier while Warning and
+ * Danger are on twoTone. color/text/positive and color/text/green/twoTone
+ * both resolve to green/800, so this is a provenance difference, not a visual
+ * one. See docs/badge.md for the open question about moving Badge onto the
+ * twoTone tier throughout.
  */
 .lumo-badge--success {
   --lumo-badge-bg: var(--color-bg-positive-tonal-idle);
@@ -89,12 +106,12 @@
 
 .lumo-badge--warning {
   --lumo-badge-bg: var(--color-bg-warning-tonal-idle);
-  --lumo-badge-fg: var(--color-text-warning);
+  --lumo-badge-fg: var(--color-text-orange-twotone);
 }
 
 .lumo-badge--danger {
   --lumo-badge-bg: var(--color-bg-negative-tonal-idle);
-  --lumo-badge-fg: var(--color-text-negative);
+  --lumo-badge-fg: var(--color-text-red-twotone);
 }
 
 .lumo-badge--neutral {

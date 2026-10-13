@@ -12,3 +12,7 @@ node_modules/
 
 # Registry IDs are a local decision. See .claude/registry.local.json.example
 .claude/registry.local.json
+
+# Isolated worktrees created for background agents. Each carries its own
+# node_modules, so this directory runs to hundreds of megabytes.
+.claude/worktrees/

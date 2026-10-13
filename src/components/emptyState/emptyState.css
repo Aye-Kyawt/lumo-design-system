@@ -1,0 +1,113 @@
+/*
+ * emptyState — Figma component set 94:1862.
+ *
+ * `Size` is the only variant property. Both values draw the same vertical
+ * auto-layout — centred, gap/md between rows — so the shared block below holds
+ * everything and each size block changes only three things: the medallion box
+ * and the two type styles.
+ *
+ * Four values in the node bind no variable. They are listed in
+ * docs/emptyState.md and flagged at their declaration here; none of them was
+ * invented, and none of them is a raw value.
+ */
+
+.lumo-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-gap-md);
+  box-sizing: border-box;
+
+  /* The node's frames are 360px (sm) and 520px (md) wide and neither width
+     binds a variable, nor does any token at any layer carry those numbers.
+     Rather than invent one, the component is fluid and the caller sizes it --
+     which is also what a design system component should do. docs/emptyState.md
+     gap 3. */
+  inline-size: 100%;
+
+  text-align: center;
+}
+
+/*
+ * The medallion. Figma binds the fill to color/bg/brand/subtle and the corner
+ * to core.border.radius.full -- the only place in this component where the
+ * design reaches past the semantic layer itself. docs/emptyState.md gap 2.
+ */
+.lumo-empty-state__medallion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: var(--border-radius-full);
+  background: var(--color-bg-brand-subtle);
+}
+
+.lumo-empty-state__title {
+  margin: 0;
+  inline-size: 100%;
+  color: var(--color-text-bold);
+  overflow-wrap: break-word;
+}
+
+.lumo-empty-state__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  overflow-wrap: break-word;
+
+  /* The node insets this line -- 320px inside a 360px frame, 420px inside 520
+     -- and binds neither number. No token at any layer carries 320 or 420, so
+     the line fills the container instead and the caller's width decides where
+     it wraps. docs/emptyState.md gap 4. */
+  inline-size: 100%;
+}
+
+/*
+ * The `↳Action` slot. In Figma it is an empty 100x100 square in both variants;
+ * here it is sized by whatever Button the caller puts in it, so a real empty
+ * state is shorter than the node measures. docs/emptyState.md gap 1.
+ */
+.lumo-empty-state__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  /* The slot holds one child in the node. The gap only matters when a caller
+     puts a second button beside the first, which the node does not draw. */
+  gap: var(--spacing-gap-horizontal-sm);
+}
+
+/* ---- Size=sm (94:7) ------------------------------------------------------ */
+
+.lumo-empty-state--sm .lumo-empty-state__medallion {
+  /* 56px, unbound in the node. core.size.56 is the exact value; there is no
+     semantic size token for a medallion. docs/emptyState.md gap 5. */
+  inline-size: var(--size-56);
+  block-size: var(--size-56);
+}
+
+.lumo-empty-state--sm .lumo-empty-state__title {
+  font: var(--body-body6-intense);
+}
+
+.lumo-empty-state--sm .lumo-empty-state__description {
+  font: var(--body-body3);
+}
+
+/* ---- Size=md (94:15) ----------------------------------------------------- */
+
+.lumo-empty-state--md .lumo-empty-state__medallion {
+  /* 72px, unbound in the node. core.size.72, same gap as above. */
+  inline-size: var(--size-72);
+  block-size: var(--size-72);
+}
+
+.lumo-empty-state--md .lumo-empty-state__title {
+  font: var(--heading-h4);
+}
+
+.lumo-empty-state--md .lumo-empty-state__description {
+  font: var(--body-body2);
+}

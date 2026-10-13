@@ -1,0 +1,49 @@
+/*
+ * Story scaffolding only -- not part of the component.
+ *
+ * The component is fluid, because the node's 360px and 520px frame widths bind
+ * no variable and no token at any layer carries either number (docs/emptyState.md
+ * gap 3). Something still has to give the stories a width, so the frames below
+ * use the nearest core sizes that exist -- core.size.400 for sm and
+ * core.size.560 for md -- rather than a raw value. They are 40px wider than the
+ * node in each case, so the description wraps a little later here than in the
+ * Figma screenshot. That is the story frame, not the component.
+ */
+
+.lumo-empty-state-frame {
+  box-sizing: border-box;
+  max-inline-size: 100%;
+}
+
+.lumo-empty-state-frame--sm {
+  inline-size: var(--size-400);
+}
+
+.lumo-empty-state-frame--md {
+  inline-size: var(--size-560);
+}
+
+.lumo-empty-state-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-gap-xl);
+}
+
+.lumo-empty-state-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-xl);
+}
+
+.lumo-empty-state-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-sm);
+}
+
+.lumo-empty-state-cell__head {
+  margin: 0;
+  font: var(--body-body3-intense);
+  color: var(--color-text-secondary);
+}

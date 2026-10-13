@@ -193,3 +193,62 @@ the Figma name is recorded in a header comment in every file of the folder
 rather than being quietly dropped. Check a new component's name against the
 JavaScript reserved word list before choosing the folder name; a reserved word
 is fine as a file name and fatal as an identifier.
+
+---
+
+## The set spells two different properties `Description`
+
+**Found while building:** Empty State (`component/empty-state`)
+
+The `empty-state` set (94:1862) has a boolean property `Description`, which
+shows or hides the supporting line, **and** a text property `Description`, which
+is what that line says. They are two properties with one name. One object cannot
+carry both.
+
+**Chosen names:**
+
+| Figma property | Prop | Note |
+|---|---|---|
+| `Description` (boolean) | `description` | lowercased only, per the Card rule |
+| `Description` (text) | `descriptionText` | the renamed one |
+
+The boolean keeps the plain name because it is the one that reads like a
+property at a call site — `<EmptyState description={false} />` — and because the
+other components in the library already spell their show/hide booleans this way
+(`text`, `iconLeft`, `iconRight` on Button; `header`, `footer`, `action` on
+Card). Figma's own code generator independently made the same split and chose
+the same two names, which is a reasonable tiebreak.
+
+**The general rule this suggests:** where a Figma set gives a boolean and a text
+property the same name, the boolean keeps the name and the text one takes a
+`...Text` suffix. Do not solve it the other way round, and do not solve it by
+merging them into one prop that is "false or a string" — `Description=false` and
+`Description=""` are different rows of the matrix and QA tests both.
+
+---
+
+## `↳Action` again, this time beside an `Action` boolean
+
+**Found while building:** Empty State (`component/empty-state`)
+
+Same collision Card hit, one level up. The set has an `Action` boolean and an
+`↳Action` slot, and `↳` is not a valid identifier.
+
+**Chosen names:** `action` for the boolean, `children` for the slot — exactly
+what Card did for `CardHeader`. This component has two slots, and the Card entry
+above says to use a named prop when there are several; the rule still lands here
+because the two slots are not peers. `↳Action` is the component's content, and
+`↳Icon` is a decoration on a fixed medallion.
+
+| Figma property | Prop |
+|---|---|
+| `Action` (boolean) | `action` |
+| `↳Action` (slot) | `children` |
+| `↳Icon` (slot) | `icon`, or `iconName` for just the glyph |
+
+**The general rule this suggests:** refine the Card rule rather than replace it.
+Where a component has several slots, `children` goes to the one that carries the
+component's *content* and the rest take named props — not "named props for all
+of them the moment there is more than one". A caller writing
+`<EmptyState><Button /></EmptyState>` is doing the obvious thing, and that is
+worth more than symmetry between the two slots.

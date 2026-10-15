@@ -257,13 +257,22 @@ Its description reads "Counts only test rows marked Passed. Feeds Synchronizatio
 `Synchronization %` references `Total Staging Tests` and `Staging Passed Count`. It does not
 reference `Staging Passed Tests` at all, which currently feeds nothing.
 
-**Flag 6 — `Staging Passed Count` may not count only passes.**
-It is a `count` over the same link field as `Total Staging Tests`, and the API exposes no
-filter on either. If it is in fact unfiltered, `Synchronization %` is structurally 100%
-whenever any test row exists, and is therefore meaningless. **This one is unverified**: all
-12 components have zero test rows today, so every row reads `0` and `0%` and the two counts
-cannot be told apart from the data. Check the filter in the Airtable UI before trusting that
-percentage, or before putting it on a dashboard.
+**Flag 6 — RESOLVED, 2026-10-13: `Staging Passed Count` does count only passes.**
+It is a `count` over the same link field as `Total Staging Tests` and the API exposes no
+filter on either, so the worry was that it might be unfiltered — which would make
+`Synchronization %` structurally 100% whenever any test row exists, and therefore meaningless.
+It was recorded as unverified because every component then had zero test rows, so both counts
+read `0` and could not be told apart from the data.
+
+They can now. `Switch` carries 28 test rows of which 26 have a `Passed` verdict and two were
+deliberately left blank, and the row reads `Total Staging Tests` = 28, `Staging Passed Count`
+= **26**, `Synchronization %` = **92.86%**. The two counts differ, so the count is filtered
+and the percentage is real. Two separate runs reached this independently off the same data.
+
+What this does **not** mean: a percentage below 100% is not necessarily a failure. Switch's
+missing 7.14% is two cases nobody executed, not two cases that failed — a blank verdict
+contributes to `Total` and not to `Passed`, and the `Development` ladder ignores it entirely
+(**Flag 4**). Read the rows before reading the percentage.
 
 **Flag 7 — `Astro Link`: the base and the repo name different owners.**
 The field description opens "🚀 DevOps owns this" and adds "📦 Release never writes this".

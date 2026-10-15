@@ -91,3 +91,31 @@
   color: var(--color-text-disabled);
   cursor: not-allowed;
 }
+
+/*
+ * The stand-in group for the `WithAGroupControl` story. Also NOT a component.
+ *
+ * It exists to show the one thing a `<label for>` cannot do: a radiogroup is
+ * not a labelable element, so it takes its accessible name from the label row's
+ * published id through `aria-labelledby`. The radios themselves are left
+ * unstyled on purpose — a Radio component does not exist in the registry, and
+ * drawing one here would be previewing a component nobody has built.
+ */
+
+.lumo-field-demo-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-xs);
+  padding-block: var(--spacing-padding-xs);
+}
+
+.lumo-field-demo-choice {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gap-horizontal-xs);
+  font-family: var(--typography-fontfamily-body);
+  font-weight: var(--typography-fontweight-regular);
+  font-size: var(--typography-fontsize-sm);
+  line-height: var(--typography-lineheight-sm);
+  color: var(--lumo-field-control-text-color);
+}

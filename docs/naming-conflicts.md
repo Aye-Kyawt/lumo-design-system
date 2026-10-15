@@ -323,3 +323,66 @@ asterisk is decoration and is `aria-hidden`, so the word a screen reader
 announces has to come from somewhere; this is it. A prop with no node behind it
 is documented as an addition rather than quietly presented as part of the
 design's API.
+
+---
+
+## `Close` is a boolean, so the handler needed another name
+
+**Found while building:** Toast (`component/toast`)
+
+The toast set gives `Close` as a **boolean** — it shows or hides the dismiss
+control. What the set has no property for is the thing that control is for:
+closing the toast. A static frame can draw an X; it cannot draw the X working.
+
+This is the Progress precedent almost exactly. There, `Value` was a boolean that
+toggled the percentage text and the number itself had to become `percent`. Here
+`Close` is a boolean that toggles the control, and the handler has to go
+somewhere else.
+
+**Chosen names:** `close` stays the Figma boolean. The handler is `onClose`,
+which is what React already calls this shape and what a caller would guess
+first. A third name, `closeLabel`, carries the control's accessible name.
+
+| Figma property | Prop |
+|---|---|
+| `Close` (boolean) | `close` |
+| — | `onClose`, the handler |
+| — | `closeLabel`, the accessible name |
+
+Neither addition is claimed as part of the design's API; both are documented as
+additions in `docs/toast.md`. `closeLabel` exists for the same reason
+`requiredText` does on Field — the glyph is `aria-hidden` decoration, so the
+word a screen reader announces has to come from somewhere.
+
+Note what was **not** done: `close` was not redefined as "false, or a handler".
+`Close=false` and "a close button with nothing wired to it" are different rows
+of the matrix, and the node draws the second one — the control is present in all
+four variants with nothing behind it. A toast rendered without `onClose` still
+shows the button and still lets you focus it, which is precisely what the design
+specifies.
+
+**The general rule this suggests:** the Empty State rule covered a boolean
+sitting on the name a *value* wanted; this is a boolean sitting on the name a
+*behaviour* wanted. Same resolution — the Figma boolean keeps the plain name,
+and the behaviour takes the `on...` prefix React already uses for it. Do not
+collapse the two into one polymorphic prop.
+
+---
+
+## The toast set spells two properties `Description`, again
+
+**Found while building:** Toast (`component/toast`)
+
+Exactly the collision Empty State hit: a boolean `Description` that shows or
+hides the second line, and a text `Description` that is what the line says.
+
+**Chosen names:** `description` for the boolean, `descriptionText` for the text —
+the Empty State rule applied unchanged, and Figma's own code generator again
+produced the same split with the same two names.
+
+Recording it rather than treating it as settled, because it is now the **second**
+set in this library with this exact defect. One is a slip; two is a pattern in
+how the sets are authored. A convention in Figma — the boolean named
+`Show description`, the text named `Description` — would fix it at the source for
+every set that comes after. That is a design decision and nothing has been
+changed in Figma.

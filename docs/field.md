@@ -209,28 +209,91 @@ All four were followed exactly as drawn and none was normalised:
 **What would close it:** a designer deciding, per bullet, whether the drawing is
 the intent.
 
+## Gap 7 — the component is fluid where the node is a fixed 320px frame
+
+Every variant in 141:3144 is drawn in a frame fixed at 320px wide. The built
+component sets `inline-size: 100%` and takes the width of whatever contains it,
+because a field wraps a control it does not own and is laid out by the form
+around it, not by itself.
+
+This has always been stated at its declaration in `field.css` (`.lumo-field`),
+and it is the reason `field.stories.jsx` needs a `lumo-field-frame` decorator at
+all: without a frame every story stretches to the Storybook canvas and no story
+can be held against the node's drawing. It was missing from this numbered list
+until QA counted the differences independently and found a seventh — so the list
+said six while the code said seven.
+
+**What would close it:** nothing in Figma, most likely. A fluid form field is
+almost certainly the intent and 320px is almost certainly just the canvas the
+variants were drawn on. But that is a designer's sentence to write, not this
+document's, so it is recorded as a difference rather than as a decision.
+
 ---
 
 ## Accessibility, which the node cannot draw
 
-- The label row **is** the `<label>`, with `htmlFor` pointing at the control in
-  the slot (`controlId`, defaulting to `${id}-control`). The two text layers stay
-  flex siblings inside it, so the node's gap still applies and a screen reader
-  still reads one label.
+- The label row **is** the `<label>`. The two text layers stay flex siblings
+  inside it, so the node's gap still applies and a screen reader still reads one
+  label.
+- **`htmlFor` is emitted only when `controlId` names a control**, and this is
+  the part to read before using the component. Pass `controlId` and the label
+  gets a `for`; omit it and the label gets **no** `for` at all. There is no
+  guessed default, deliberately — the field cannot see what is in its own slot,
+  and a `for` pointing at nothing is worse than no `for`, because it claims an
+  association and then hands assistive tech an empty reference.
+
+  `controlId` is only for an element `for` is allowed to name: `input`,
+  `select`, `textarea`, `button`, `meter`, `output`, `progress`. Nothing else.
+
+- The label row publishes `id="${id}-label"` in **every** case, named or not.
+  That is the path for a slot holding something `for` cannot address: a checkbox
+  group, a radio group, a custom combobox, or the placeholder itself. Those
+  point back at the label row with `aria-labelledby`, and the
+  `With a group control` story shows it.
+
+> **This changed in the repair, and it is a breaking change to the API.** The
+> component used to compute `controlId || `${id}-control``, falling back to
+> React's `useId` value when no `id` was passed either. Both halves of that
+> fallback guessed a target that did not exist:
+>
+> 1. With no `id`, the guess was `${generatedId}-control`. A `useId` value never
+>    reaches the caller, so no control anywhere could be holding it. **This is
+>    what QA failed in the first staging pass** — 7 of the 9 stories, every one
+>    using the `_Slot/Content` placeholder, advertised a target that was not in
+>    the document.
+> 2. With an `id`, the guess was `${id}-control`. Narrowing the fallback to this
+>    case was the first repair tried here, and it was wrong too: `id` says
+>    "seed my label and helper ids", not "and I wired a control to match". The
+>    `With a group control` story, written minutes later, passes `id` for the
+>    `aria-describedby` wiring and holds no labelable control at all — and the
+>    field happily emitted `for="demo-group-control"` pointing at nothing.
+>
+> Guessing cannot be made safe here. Only the caller knows what is in the slot,
+> so the field stops guessing and asks. Anything that relied on the
+> `${id}-control` convention must now pass `controlId` — in this repo that is
+> the `With a real control` story, and nothing else; no other component imports
+> `Field`.
 - The asterisk is `aria-hidden`; a visually hidden `requiredText` ("required")
   carries the word that is announced. `requiredText` is **not** a Figma property
   — an asterisk alone tells a screen reader nothing.
 - In `error` the helper row takes `role="alert"`, so the message is announced
   when it appears.
 - The helper row carries the id the control should point at with
-  `aria-describedby`; the `With a real control` story wires it.
+  `aria-describedby`; the `With a real control` and `With a group control`
+  stories both wire it.
 - The field itself has **no tab stop**, which is correct: it is a wrapper. Hover,
   focus and press belong to whatever is in the slot.
 
 ## Verified
 
-Local Storybook on port 6008, all nine stories, in web / admin / mobile and in
-light / dark. Measured off the rendered DOM, not eyeballed.
+Local Storybook, all ten stories, in web / admin / mobile and in light / dark.
+Measured off the rendered DOM, not eyeballed.
+
+The geometry and colour tables below were measured at commit `72bf468` and are
+unchanged by the label-association repair, which touches no CSS and no token.
+The label-association and `aria` behaviour under **Behaviour** was re-measured
+after the repair, on the branch build; the row it replaces is kept visible
+rather than deleted.
 
 Geometry, web / light:
 
@@ -276,8 +339,24 @@ helper stays red. Nothing is hardcoded to a light value.
 
 Behaviour:
 
-- The label's `for` resolves to the control's `id` in every story, and
-  `aria-describedby` resolves to the helper row's `id`.
+- The label's `for` resolves to the control's `id` in **`With a real control`,
+  the one story that passes `controlId`** — all three rows, each resolving to
+  its own `INPUT#demo-<state>-control`, and activating the label moved focus
+  onto `INPUT#demo-default-control`. The other **nine** stories pass no
+  `controlId` and render no `for` attribute at all; there is nothing to resolve,
+  which is the point. `aria-describedby` is wired in that story and in
+  `With a group control`, and resolves in both.
+
+  This line used to read "the label's `for` resolves to the control's `id` in
+  every story". That was a generalisation from one story to nine, and it was
+  false of seven of them on the deployed build. QA caught it. It is recorded
+  here rather than quietly rewritten, because the lesson is the generalisation —
+  one story was checked and the result was written as though all nine had been.
+- `With a group control`: the `radiogroup` takes its accessible name from the
+  label row through `aria-labelledby="demo-group-label"`, which resolves, and no
+  `for` is rendered — a `radiogroup` is not a labelable element, so there is
+  nothing `for` could have named. This is the story that makes the published
+  `${id}-label` provable rather than merely asserted above.
 - `role="alert"` is present on the helper row in `error` and absent in the other
   three.
 - The required asterisk is `aria-hidden="true"` and the announced word renders in
@@ -313,7 +392,7 @@ One console error appears on every story in this repo, Field or not:
 `GET /vite-inject-mocker-entry.js → 404`, requested by Storybook 10.6's own
 iframe bootstrap before any story module loads. It is pre-existing and not
 Field's. No other console error, and no React warning, appeared in any of the
-nine stories.
+ten stories.
 
 Not verified here: the deployed staging build. That is stage 5, and the registry
 cell that wakes QA is written only after the deployed URL has been opened and

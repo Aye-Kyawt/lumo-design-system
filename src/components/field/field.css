@@ -20,18 +20,20 @@
  * worked example.
  *
  * ---------------------------------------------------------------------------
- * Six differences from the node are reported in docs/field.md and flagged at
+ * Seven differences from the node are reported in docs/field.md and flagged at
  * their declarations below and in the two sub-component sheets. The short
  * version: the control height and the error icon box bind no variable, the
  * icon's fill binds no variable, the set's own `text/secondary` resolves to
  * two different colours, the control borrows `radius/card` rather than
- * `radius/input`, and the error border borrows the *focused* rung of the
- * negative ramp for a state that is not drawn focused.
+ * `radius/input`, the error border borrows the *focused* rung of the negative
+ * ramp for a state that is not drawn focused, and this component is fluid
+ * where the node is a fixed 320px frame — see `.lumo-field` immediately below,
+ * where that last one has always been stated but was missing from the list.
  */
 
 .lumo-field {
-  /* The node fixes the frame at 320px. A field wraps whatever control it is
-     given and is laid out by its form, so the width is the container's. */
+  /* Gap 7. The node fixes the frame at 320px. A field wraps whatever control it
+     is given and is laid out by its form, so the width is the container's. */
   display: flex;
   flex-direction: column;
   align-items: flex-start;

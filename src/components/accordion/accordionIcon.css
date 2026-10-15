@@ -1,0 +1,67 @@
+/*
+ * Chevron — Figma node 208:4900 / `Icon/expand_more` 208:4895.
+ *
+ * Material Symbols Outlined glyph, sized to size/icon/md, which is 20px in
+ * every platform mode and is exactly the node's 20×20 box.
+ */
+
+.lumo-accordion__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  inline-size: var(--size-icon-md);
+  block-size: var(--size-icon-md);
+
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--size-icon-md);
+  font-weight: var(--typography-fontweight-regular);
+  font-style: normal;
+  line-height: 1;
+
+  /*
+   * The node binds this fill to `semantic/color/text/secondary` and the
+   * exported SVG confirms the value — #636679, which is neutral/600, which is
+   * what `color/text/secondary` resolves to.
+   *
+   * So the colour is correct and the *family* is not: this is an icon taking a
+   * text token. The icon family has no neutral rung at all — `color/icon/*`
+   * offers brand, action, onAction, onHovered, onFocus, disabled, negative,
+   * positive, warning, info and update, and nothing for an ordinary grey
+   * glyph. Bound as the node binds it, and reported as gap 5 in
+   * docs/accordion.md rather than silently moved to a family that has no entry
+   * for it.
+   */
+  color: var(--color-text-secondary);
+
+  /*
+   * The rotation itself is set by accordion.css, under the two `data-state`
+   * selectors — the parent owns the state, and a transitioned `transform` must
+   * interpolate between two concrete values rather than through a custom
+   * property. The comment on those rules explains what breaks otherwise.
+   *
+   * This sheet owns only the transition. Easing is missing from the export —
+   * see accordion.css, gap 7.
+   */
+  transition: transform var(--motion-duration-fast);
+
+  /* Font axes, not design values — `opsz` tracks the 20px glyph box that
+     size/icon/md sets, and there is no token layer for a variable font axis. */
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+
+  direction: ltr;
+  white-space: nowrap;
+  word-wrap: normal;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-accordion__icon {
+    transition-duration: var(--motion-duration-instant);
+  }
+}

@@ -1,0 +1,61 @@
+/*
+ * _Slot/Content — Figma node 41:21, the content instance inside `State=open`
+ * (208:4904).
+ *
+ * This is the placeholder, not the component's content. It exists so the
+ * stories can stand `open` next to its Figma frame; product code passes real
+ * children instead. See accordionContentSlot.jsx.
+ */
+
+.lumo-accordion__slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: 100%;
+
+  /*
+   * The node draws this box 88px tall. There is no size token equal to 88 in
+   * any family or any platform mode — the scale steps 72, then 240 — so the
+   * height is composed from two tokens that do exist rather than written as a
+   * raw number: size/72 plus spacing/padding/md is exactly 88 in web.
+   *
+   * It is a composition, not a design decision, and it is only load-bearing
+   * for the placeholder: it keeps the `open` story the same 158px tall as
+   * frame 208:4904 so QA's comparison against the node is meaningful. Real
+   * content sizes itself. Reported with gap 3.
+   */
+  min-block-size: calc(var(--size-72) + var(--spacing-padding-md));
+
+  padding-inline: var(--spacing-padding-md);
+  background: var(--color-bg-surfaceprimary);
+
+  /*
+   * `dashed` is the CSS keyword. `lumo.semantic.border.style.dashed` exists in
+   * the export and has no value anywhere in it, so build-tokens.js skips it —
+   * see accordion.css, gap 6.
+   */
+  border: var(--border-width-default) dashed var(--color-border-primary-default);
+  border-radius: var(--border-radius-card);
+}
+
+.lumo-accordion__slotText {
+  /* `Body/Body3` — the type style the node names on this text layer. */
+  font: var(--body-body3);
+
+  /*
+   * The node reports this text as `semantic/color/text/secondary` and draws it
+   * at #bfc2cf. Those disagree: text/secondary is neutral/600 (#636679), while
+   * #bfc2cf is neutral/300, which this export carries as
+   * `color/text/placeholder` — and placeholder grey is what this text is.
+   *
+   * Bound by value, not by the reported name. This is the same contradiction
+   * the field build found on its own instance of 41:21 (docs/field.md, gap 4),
+   * which makes it a property of the shared slot component rather than of
+   * either parent.
+   */
+  color: var(--color-text-placeholder);
+
+  text-align: center;
+  white-space: nowrap;
+}

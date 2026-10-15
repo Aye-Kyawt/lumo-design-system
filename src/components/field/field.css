@@ -1,0 +1,200 @@
+/*
+ * field — Figma component set 141:3144.
+ *
+ * One variant property, `State`, four values: default (141:3118), error
+ * (141:3126), disabled (141:3136) and Type (258:258). Four things change
+ * across them and nothing else does:
+ *
+ *   --lumo-field-label-color           the label text
+ *   --lumo-field-helper-color          the helper text
+ *   --lumo-field-icon-color            the error icon, error only
+ *   --lumo-field-control-border-color  the control's outline
+ *   --lumo-field-control-text-color    the control's own text
+ *
+ * The last two are published for the control rather than used here. The
+ * component description says "Don't write the field's own error styling into
+ * the control; field carries it" — so the field states the colour and the
+ * control reads it, which lets an Input or a Select inherit the error skin
+ * without this component reaching into one it does not own. Anything dropped
+ * into the slot binds these two properties; `fieldControlSlot.css` is the
+ * worked example.
+ *
+ * ---------------------------------------------------------------------------
+ * Six differences from the node are reported in docs/field.md and flagged at
+ * their declarations below and in the two sub-component sheets. The short
+ * version: the control height and the error icon box bind no variable, the
+ * icon's fill binds no variable, the set's own `text/secondary` resolves to
+ * two different colours, the control borrows `radius/card` rather than
+ * `radius/input`, and the error border borrows the *focused* rung of the
+ * negative ramp for a state that is not drawn focused.
+ */
+
+.lumo-field {
+  /* The node fixes the frame at 320px. A field wraps whatever control it is
+     given and is laid out by its form, so the width is the container's. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  inline-size: 100%;
+  gap: var(--spacing-gap-xs);
+}
+
+/* --------------------------------------------------------- the label row ---- */
+
+.lumo-field__labelRow {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  gap: var(--spacing-gap-horizontal-xs);
+  overflow: clip;
+  white-space: nowrap;
+
+  /* `Label/Label1` — the type style the node names on this frame, bound as the
+     one composite token that carries it rather than decomposed into four. Both
+     text layers in the row inherit it, which is how the node draws them. */
+  font: var(--label-label1);
+}
+
+.lumo-field__label {
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--lumo-field-label-color);
+}
+
+/*
+ * `Required` (141:3121) keeps `color/text/negative` in every variant,
+ * including disabled — followed as drawn. Reported as gap 6 in docs/field.md,
+ * because a red asterisk on an otherwise greyed-out field reads as an error.
+ */
+.lumo-field__required {
+  flex: 0 0 auto;
+  color: var(--color-text-negative);
+}
+
+/* The announced half of the required mark. Not drawn in the node; the asterisk
+   alone tells a screen reader nothing. */
+.lumo-field__srOnly {
+  position: absolute;
+  /* Not a design value — the 1px box is the clip-to-nothing mechanic. The
+     semantic hairline token is borrowed so no raw px enters the sheet. */
+  inline-size: var(--border-width-default);
+  block-size: var(--border-width-default);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------- the control row ---- */
+
+.lumo-field__control {
+  inline-size: 100%;
+}
+
+/* -------------------------------------------------------- the helper row ---- */
+
+.lumo-field__helperRow {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  gap: var(--spacing-gap-horizontal-xs);
+  overflow: clip;
+}
+
+.lumo-field__helper {
+  flex: 1 0 0;
+  min-inline-size: 0;
+  margin: 0;
+
+  /* `Body/Body3` — the type style the node names on this text layer. */
+  font: var(--body-body3);
+  color: var(--lumo-field-helper-color);
+  overflow-wrap: break-word;
+}
+
+/* ------------------------------------------------ State — the four values ---- */
+
+/* `State=default`, node 141:3118. */
+.lumo-field[data-state='default'] {
+  --lumo-field-label-color: var(--color-text-primary);
+  --lumo-field-helper-color: var(--color-text-secondary);
+  --lumo-field-control-border-color: var(--color-border-primary-default);
+
+  /*
+   * The node reports this as `semantic/color/text/secondary` at #bfc2cf, while
+   * the helper text two rows below reports the SAME variable name at #636679.
+   * Only one of them can be text/secondary. #bfc2cf is neutral/300, which this
+   * export carries as `color/text/placeholder` — and placeholder is what the
+   * slot's grey text is. Bound by value, not by the reported name. Gap 4.
+   */
+  --lumo-field-control-text-color: var(--color-text-placeholder);
+}
+
+/* `State=error`, node 141:3126. */
+.lumo-field[data-state='error'] {
+  --lumo-field-label-color: var(--color-text-primary);
+  --lumo-field-helper-color: var(--color-text-negative);
+  --lumo-field-icon-color: var(--color-icon-negative);
+  --lumo-field-control-text-color: var(--color-text-placeholder);
+
+  /*
+   * The node binds `color/border/negative/focused` here, not
+   * `color/border/negative/default`, although the variant is not drawn
+   * focused and the default rung exists unused in the export. Followed
+   * exactly as drawn; raised as gap 5 in docs/field.md.
+   */
+  --lumo-field-control-border-color: var(--color-border-negative-focused);
+}
+
+/* `State=disabled`, node 141:3136. */
+.lumo-field[data-state='disabled'] {
+  --lumo-field-label-color: var(--color-text-disabled);
+  --lumo-field-helper-color: var(--color-text-disabled);
+  --lumo-field-control-text-color: var(--color-text-placeholder);
+
+  /*
+   * The node keeps the ordinary border here. `color/border/primary/disabled`
+   * and `color/bg/disabled` both exist in the export and neither is used by
+   * this variant, so a disabled field is outlined exactly like a live one.
+   * Followed as drawn, reported as gap 6.
+   */
+  --lumo-field-control-border-color: var(--color-border-primary-default);
+}
+
+/* `State=Type`, node 258:258 — the field with something typed into it. */
+.lumo-field[data-state='Type'] {
+  --lumo-field-label-color: var(--color-text-primary);
+  --lumo-field-control-border-color: var(--color-border-primary-default);
+
+  /* The one thing this variant changes: the control's text goes from
+     placeholder grey to primary, because there is now a value in it. */
+  --lumo-field-control-text-color: var(--color-text-primary);
+
+  /* And the helper drops to text/disabled, which neither `default` nor the
+     node's own disabled variant explains. Followed as drawn; gap 6. */
+  --lumo-field-helper-color: var(--color-text-disabled);
+}
+
+/* ------------------------------------------------------------- states ---- */
+/*
+ * The set draws no hovered and no focused variant, and that is correct here
+ * rather than a gap: a field is a wrapper, not a control. It has no tab stop
+ * and nothing to press. Hover, focus and press belong to whatever is in the
+ * slot, and the slot's own component carries them.
+ *
+ * What the field does own is `disabled`, and it owns only half of it — the
+ * label and helper grey out here, while the control inside must be disabled by
+ * its own `disabled` attribute. The field cannot and must not do that for it.
+ * The `WithRealControl` story shows both halves together.
+ */
+
+@media (forced-colors: active) {
+  /* Forced-colors drops the custom properties the control reads, so the slot
+     would lose its outline entirely. GrayText for the disabled field keeps the
+     state readable when the token colours are gone. */
+  .lumo-field[data-state='disabled'] {
+    --lumo-field-label-color: GrayText;
+    --lumo-field-helper-color: GrayText;
+  }
+}

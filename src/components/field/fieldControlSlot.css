@@ -1,0 +1,54 @@
+/*
+ * _Slot/Content — Figma node 41:21, the `↳Control` instance of every field
+ * variant.
+ *
+ * Every colour here is a `var()` on a property that `field.css` sets, not a
+ * token picked locally. That is deliberate: the field carries the control's
+ * state skin, so a real Input or Select dropped into the slot can bind the
+ * same two properties and inherit error styling without the field reaching
+ * into it. The contract is written out in docs/field.md.
+ */
+
+.lumo-field__slot {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  inline-size: 100%;
+
+  /*
+   * DESIGN GAP 1 — the node's 40px control height binds no variable.
+   * `size/control/md` is the semantic name for "an interactive control at the
+   * middle size", which is exactly what this box is. It is 40px in web — the
+   * node's own number — and 32px in admin, 44px in mobile, so the control
+   * follows the platform rather than being pinned to the web drawing.
+   */
+  block-size: var(--size-control-md);
+
+  padding-inline: var(--spacing-padding-md);
+  background: var(--color-bg-surfaceprimary);
+
+  /* Set by field.css per state — default/disabled/Type share one colour, error
+     swaps it. The fallback keeps the slot legible if it is ever used alone. */
+  border: var(--border-width-default) solid
+    var(--lumo-field-control-border-color, var(--color-border-primary-default));
+
+  /*
+   * The node binds `border/radius/card` here, not `border/radius/input`, even
+   * though the box is a text control. Followed exactly as drawn and raised as
+   * gap 5 in docs/field.md — a 12px control against the 8px the input token
+   * carries is a design decision, not an engineering one.
+   */
+  border-radius: var(--border-radius-card);
+}
+
+.lumo-field__slotText {
+  /* `Body/Body3` — the type style the node names on this text layer. */
+  font: var(--body-body3);
+
+  /* Placeholder grey in default/error/disabled, primary once `State=Type`. */
+  color: var(--lumo-field-control-text-color, var(--color-text-placeholder));
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

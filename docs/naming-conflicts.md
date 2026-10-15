@@ -252,3 +252,74 @@ component's *content* and the rest take named props — not "named props for all
 of them the moment there is more than one". A caller writing
 `<EmptyState><Button /></EmptyState>` is doing the obvious thing, and that is
 worth more than symmetry between the two slots.
+
+---
+
+## `State=Type` — a variant value that reads like a property name
+
+**Found while building:** Field (`component/field`)
+
+The field set's one variant property is `State`, and its four values are
+`default`, `error`, `disabled` and `Type` — capital T, as the set spells it.
+`Type` is the name of the filled state: the field with something typed into it.
+
+Three things make it awkward, and none of them is a true collision:
+
+1. It reads like a property. Every other set in this library that says "Type"
+   says it as a *property* — Button's variant property is literally `Type`
+   (`fill | outline | transparent`, see the entry above). Here the same word is
+   a value of `State`, so `state="Type"` looks at a glance like a mistake.
+2. It is the only value in the set that is capitalised, so it is the only one
+   that cannot be typed carelessly.
+3. It describes a cause ("someone typed") rather than a state ("filled"), which
+   is why it reads oddly beside `default`, `error` and `disabled`.
+
+**Chosen name:** `Type`, kept exactly. Variant *values* are matched as strictly
+as property names, because QA reads the value off the node and writes it into
+the `Variants` column of the registry — a value renamed in code is a row that no
+longer matches the design file. The component validates against the set's four
+spellings and falls back to `default` rather than rendering unstyled.
+
+**Suggested back to design:** rename the variant value to `filled`,
+lowercase, in the Figma set. It names the state rather than the action, it
+matches the casing of the other three, and it is the word the rest of the
+industry uses for this state. Until a designer makes that change, the code says
+`Type`.
+
+**The general rule this suggests:** this register has only covered property
+names so far. Extend it — a variant *value* is matched verbatim too, for the
+same reason and with the same escape hatch of reporting a suggestion here.
+
+---
+
+## `↳Control` is a slot, so it is `children` — and the field composes nothing
+
+**Found while building:** Field (`component/field`)
+
+The field's middle row is `↳Control`, an instance of `_Slot/Content` (41:21)
+whose own description says to swap it for the real component. `↳` is not a valid
+identifier, and the component has exactly one slot.
+
+**Chosen name:** `children`, per the Card rule — one slot, and it carries the
+component's content.
+
+| Figma property | Prop |
+|---|---|
+| `↳Control` (slot) | `children` |
+| `Label` | `label` |
+| `Required` (boolean) | `required` |
+| `Helper` | `helperText`, with `helper` for the boolean |
+| `State` | `state` |
+
+Two notes that are not conflicts but belong with the table:
+
+`Helper` follows the rule Empty State set above — the boolean keeps the plain
+name and the text takes the `...Text` suffix — even though the field's set draws
+the helper row in all four variants and gives no boolean. The boolean is this
+build's addition, for the case where a form has no helper line.
+
+`requiredText` is **not** a Figma property and is not claimed to be one. The
+asterisk is decoration and is `aria-hidden`, so the word a screen reader
+announces has to come from somewhere; this is it. A prop with no node behind it
+is documented as an addition rather than quietly presented as part of the
+design's API.

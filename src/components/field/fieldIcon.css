@@ -1,0 +1,45 @@
+/*
+ * Icon/close — Figma node 90:8, drawn in the error helper row (141:3133).
+ *
+ * DESIGN GAP 2 — the node's icon box is 14 x 14 and binds no variable.
+ * `size/icon/xs` is 12px and `size/icon/sm` is 16px; neither is 14. `sm` is
+ * borrowed because it equals the helper row's own line height
+ * (typography/lineHeight/sm = 16px), so the glyph sits on the text's line box
+ * instead of floating 1px off it. The consequence is a 16px icon against the
+ * node's 14px. Reported in docs/field.md rather than hardcoded.
+ *
+ * DESIGN GAP 3 — the icon's fill binds no variable either; it is exported as a
+ * flat SVG. `color/icon/negative` is the semantic name for "an icon carrying a
+ * negative meaning" and resolves to red/600, the same value the node's own
+ * helper text already binds through `color/text/negative`. So the colour is
+ * exact and only the name is this build's reading.
+ */
+
+.lumo-field__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  inline-size: var(--size-icon-sm);
+  block-size: var(--size-icon-sm);
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--size-icon-sm);
+  font-weight: var(--typography-fontweight-regular);
+  font-style: normal;
+  line-height: 1;
+  color: var(--lumo-field-icon-color);
+
+  /* Font axes, not design values — `opsz` tracks the glyph box that
+     size/icon/sm sets, and there is no token layer for a variable font axis. */
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+
+  direction: ltr;
+  white-space: nowrap;
+  word-wrap: normal;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}

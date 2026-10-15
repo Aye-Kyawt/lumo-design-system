@@ -1,0 +1,93 @@
+/*
+ * Story scaffolding only — not part of the component, and nothing here ships.
+ *
+ * The component is fluid: a field is laid out by the form it sits in, and the
+ * node's 320px frame binds no variable. The stories still need a width to hold
+ * against the Figma screenshot, and no token at any layer carries 320 — the
+ * core size scale jumps 256, 400. `size/400` is used rather than `size/256`
+ * because a 256px form field is narrower than anything the design draws, and
+ * because the helper line needs room to show it does not wrap. The frames are
+ * therefore 80px wider than the node, so the helper wraps later here than in
+ * the Figma frame. That is the story frame, not the component.
+ */
+
+.lumo-field-frame {
+  box-sizing: border-box;
+  inline-size: var(--size-400);
+  max-inline-size: 100%;
+}
+
+.lumo-field-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-xl);
+}
+
+.lumo-field-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-sm);
+}
+
+.lumo-field-cell__head {
+  margin: 0;
+  font-family: var(--typography-fontfamily-body);
+  font-weight: var(--typography-fontweight-medium);
+  font-size: var(--typography-fontsize-xs);
+  line-height: var(--typography-lineheight-xs);
+  color: var(--color-text-secondary);
+}
+
+/*
+ * The stand-in control for the `WithRealControl` story.
+ *
+ * This is NOT a component and is not a preview of one. It exists to show the
+ * contract the field publishes: its border and its text colour come from the
+ * two custom properties the field sets per state, so the error skin arrives
+ * without the field reaching into it. When the real Input component is built
+ * from its own node, it binds these same two properties and this goes away.
+ *
+ * Its geometry copies the slot's, including gap 1 — size/control/md stands in
+ * for the node's unbound 40px.
+ */
+
+.lumo-field-demo-input {
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: var(--size-control-md);
+  padding-inline: var(--spacing-padding-md);
+  background: var(--color-bg-surfaceprimary);
+  border: var(--border-width-default) solid var(--lumo-field-control-border-color);
+  border-radius: var(--border-radius-card);
+  font-family: var(--typography-fontfamily-body);
+  font-weight: var(--typography-fontweight-regular);
+  font-size: var(--typography-fontsize-sm);
+  line-height: var(--typography-lineheight-sm);
+  color: var(--lumo-field-control-text-color);
+}
+
+/* The control's own states, which the field has none of and must not invent
+   for it. Bound to the border ramp the export already carries. */
+.lumo-field-demo-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+/* `:not([aria-invalid])` so hover never paints over the field's error border —
+   that colour is the field's to set, which is the whole point of the contract. */
+.lumo-field-demo-input:hover:not(:disabled):not([aria-invalid]) {
+  border-color: var(--color-border-primary-hovered);
+}
+
+/* The export's own keyboard focus indicator. It rings the control and leaves
+   the border colour alone, so an invalid control stays visibly invalid. */
+.lumo-field-demo-input:focus-visible {
+  outline: none;
+  box-shadow: var(--elevation-focused);
+}
+
+.lumo-field-demo-input:disabled {
+  background: var(--color-bg-disabled);
+  border-color: var(--color-border-primary-disabled);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}

@@ -7,6 +7,22 @@
 > release happens, bumps the version and tags it. `CLAUDE.md`: a human approves, and no agent
 > approves its own work, ever.
 
+## Correction to the first issue of this review
+
+The first version of this report, committed earlier on 2026-10-16, ran gate 2 against
+`https://lumo-design-system-e3uu56e1x-…`, calling it `Production Storybook`. **That URL is the
+`Staging Storybook` cell.** The columns were transposed when the row was read, and the error
+was caught in review by another session.
+
+Switch's `Production Storybook` is `https://lumo-design-system-4twqf837q-…`. Confirmed two
+ways: requesting the field *by name* returns `fldJPlSgnkaiS4ElR` holding the `4twqf837q` URL,
+and the `Development` formula reads `fldJPlSgnkaiS4ElR` at rule 5 (`Completed`) and
+`fldOuJpSivewZrGyt` at rule 7 (`Ready for Testing`), which fixes the two roles.
+
+Gate 2 is re-run below against the right cell and it passes, as it did against the wrong one —
+Switch's code has never changed, so both deployments serve it identically. The verdict is
+unaffected: it turned on gate 5 then and it turns on gate 5 now.
+
 This replaces the review of 2026-10-15, which also recommended `Blocked`. Both of that
 review's reasons have since been addressed and were verified here rather than taken on trust
 — see *What changed since 2026-10-15*. Six of the seven checks below pass. The one that does
@@ -68,7 +84,7 @@ no test was re-run.
 ## Gate 2 — production serves the code that was reviewed
 
 **Pass.** `Production Storybook` is
-`https://lumo-design-system-e3uu56e1x-aye-kyawts-projects.vercel.app/?path=/story/components-switch--both-variants`.
+`https://lumo-design-system-4twqf837q-aye-kyawts-projects.vercel.app/?path=/story/components-switch--both-variants`.
 Opened, and Switch renders. Read from that deployment's DOM:
 
 | | On=true | On=false |
@@ -81,20 +97,27 @@ Opened, and Switch renders. Read from that deployment's DOM:
 
 Every one of those is what `75eb160` produces, including the `40×24` that `docs/switch.md`
 explains as the 3px inset rounding up to 4, and the 16px travel derived from
-`width − knob − 2 × inset`. The deployment's stylesheet also carries the two
-`@media (forced-colors: active)` blocks that commit introduced.
+`width − knob − 2 × inset`. The deployment also serves the component's forced-colors block
+intact, read from its own stylesheet:
 
-**Ancestry.** `75eb160` is the commit that *created* `src/components/switch/` — all seven files
-in one commit — and it is the only commit that has ever touched that folder. A build that
-renders Switch at all therefore necessarily contains it, and `75eb160` is an ancestor of the
-commit this deployment was built from. That is a content argument rather than a sha read off
-the build; see *Where this review's own evidence is weaker than it looks*.
+```
+@media (forced-colors: active) {
+  .lumo-switch { border: var(--border-width-default) solid ButtonText; }
+  .lumo-switch[aria-disabled="true"] { border-color: graytext; opacity: var(--opacity-100); }
+  .lumo-switch:focus-visible { outline: var(--border-width-focused) solid Highlight; outline-offset: var(--border-width-focused); }
+}
+```
 
-One thing to record about that deployment, which does not affect this gate: it is old. It
-serves a Badge built before `ebcd8f6` — `--color-icon-warning` on the warning label. Switch is
-unaffected because Switch's code has never moved, but it shows these cells are per-deployment
-snapshots rather than an alias, and there is no project-wide production alias to fall back on
-(`lumo-design-system.vercel.app` returns `404: NOT_FOUND`). Registry Flag 9; noted below.
+**Ancestry, established two ways.** `75eb160` is the commit that *created*
+`src/components/switch/` — all seven files in one commit — and it is the only commit that has
+ever touched that folder, so a build that renders Switch at all necessarily contains it.
+Independently, the deployment's `/index.json` lists `components-field`, and the Field build
+commit `72bf468` has `75eb160` as an ancestor, so the build commit does too.
+
+A sibling session reports the deployment as `dpl_2bttUcC3NYuUXK3opoRBx6vPfWEK` built from
+`e3165e1`. That sha was not read here — the Vercel connector has no project access on this
+account — but it is consistent: `git merge-base --is-ancestor 75eb160 e3165e1` returns true.
+This gate does not rest on it.
 
 ## Gate 3 — the test evidence is current
 
@@ -251,10 +274,16 @@ review does not make it; what it does is refuse to quietly soften a gate it was 
   mode, so `build-tokens.js` emits no `--motion-easing-*` property and the knob transition falls
   back to the browser default. Reported, not filled, and Switch is the component where it
   actually matters. **Owner: `human:designer`**, to give those tokens values.
-- **Per-component `Production Storybook` URLs are snapshots of different vintages.** Switch's
-  deployment serves a Badge two rebinds out of date. Harmless to Switch, and the general shape
-  is registry Flag 9: nothing in the registry observes a merge, and no cell updates when a
-  later commit ships. Closing it is a change to the base and therefore a human's.
+- **`Staging Storybook` points at a long-stale build.** The cell names
+  `lumo-design-system-e3uu56e1x-…`, which serves Switch correctly — Switch's code has never
+  moved — but serves a Badge from before `ebcd8f6`, two rebinds out of date. No gate covers the
+  staging cell and the ladder has moved past precedence 7, so it blocks nothing. **Owner:
+  `engineer`**, which owns `Staging Storybook`.
+- **Nothing in the registry observes a merge.** Registry Flag 9. `Production Storybook` means
+  "DevOps opened a build and wrote it down", not "this is what production serves"; there is no
+  project-wide alias (`lumo-design-system.vercel.app` returns `404: NOT_FOUND`), so each cell is
+  a per-deployment snapshot that nothing updates when a later commit ships. It happens to be
+  current for Switch. Closing it is a change to the base and therefore a human's.
 - **The staleness rule still cannot work as written.** `Last Modified` moves on any cell write
   — today's `Astro Link` write already moved it past `75eb160`, and writing this review's own
   two cells will move it again. The rule needs to compare against the component's code, not the
@@ -264,10 +293,13 @@ review does not make it; what it does is refuse to quietly soften a gate it was 
 
 - **The gate list is unratified**, and the single failure above rests entirely on its wording.
   Said at gate 5 and again at the verdict rather than left for a reader to notice.
-- **The deployment's build commit was not read from Vercel.** The Vercel connector has no
-  project access on this account, so gate 2's ancestry argument is made from what the build
-  serves and from `75eb160` being the only commit to touch the folder — not from a sha read off
-  deployment metadata. The argument is sound but it is inference from content.
+- **The deployment's build sha was not read from Vercel.** The connector has no project access,
+  so gate 2's ancestry rests on served content — `75eb160` being the only commit ever to touch
+  the folder, and a story index containing Field — rather than on deployment metadata. Both are
+  sound, and both are inference from what the build contains.
+- **This review got the production column wrong on its first pass** and was corrected by another
+  session. Gate 2's outcome did not change, because Switch's code has never moved. The
+  correction is recorded at the top rather than quietly folded in.
 - **Nothing here re-verified the Figma node.** Gates 4 and 6 compare the repo and the reference
   page; the page's claims about what Figma says were read from the page, which is the
   doc-generator's work, not this review's.

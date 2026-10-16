@@ -1,24 +1,41 @@
 # Release review — Badge
 
 **Component row:** `recmGZQtjDVLuQ7du` · **Reviewed at commit:** `9cad52f` ·
-**Reviewed:** 2026-10-16 · **Recommended verdict: `Blocked`**
+**Reviewed:** 2026-10-16 · **Recommended verdict: `Cleared`**
 
-> This verdict is a reading of the evidence, not an approval. A human decides whether the
+> **`Cleared` is a reading of the evidence, not an approval.** A human decides whether the
 > release happens, bumps the version and tags it. `CLAUDE.md`: a human approves, and no agent
-> approves its own work, ever.
+> approves its own work, ever. See *What writing this verdict does to the row* before acting
+> on it.
 
-This replaces the review of 2026-10-15, which also recommended `Blocked`. Both of that
-review's reasons have since been addressed — see *What changed since 2026-10-15* — and the
-block now rests on something neither review had established before: the deployment the
-registry calls production is not serving the reviewed commit.
+This replaces the review of 2026-10-15, which recommended `Blocked`. Both of that review's
+reasons have since been addressed, and both were verified here rather than taken on trust.
+Every gate now passes.
+
+## Correction to the first issue of this review
+
+The first version of this report, committed earlier on 2026-10-16, recommended `Blocked` on
+gate 2 and quoted `https://lumo-design-system-107qdzn14-…` as `Production Storybook`. **That
+URL is the `Staging Storybook` cell.** The columns were transposed when the row was read, and
+the error was caught in review by another session.
+
+Badge's `Production Storybook` is `https://lumo-design-system-4twqf837q-…`. Confirmed two ways:
+requesting the field *by name* returns `fldJPlSgnkaiS4ElR` holding the `4twqf837q` URL, and the
+`Development` formula reads `fldJPlSgnkaiS4ElR` at rule 5 (`Completed`) and `fldOuJpSivewZrGyt`
+at rule 7 (`Ready for Testing`), which fixes the two roles.
+
+Gate 2 is re-run below against the right cell and it passes. The 2026-10-15 review's reading of
+production was correct; this review's first reading was not. What was true about the
+`107qdzn14` build is still true — it serves pre-`9cad52f` CSS — but it is a staging cell, no
+gate covers it, and it is recorded below as a non-blocking finding.
 
 ## The trigger ordering is unresolved
 
 Stated in every report, per `.claude/agents/release.md`. `Completed` wakes this review, and
 DevOps sets `Completed`. But DevOps's version gate needs `Release Verdict = Cleared` before it
 cuts a version, so the review must run after DevOps promotes and before DevOps versions — and
-as drawn the loop has no entry point. The row still reads `Completed`, which is the trigger
-this review acted on, and the order was not quietly changed.
+as drawn the loop has no entry point. The row read `Completed`, which is the trigger this
+review acted on, and the order was not quietly changed.
 
 Nothing woke this re-review. `Blocked` is terminal with no owner (`docs/crew-spec.md`, open
 question 7), so a human started it.
@@ -32,26 +49,21 @@ from what those six reviews actually checked, and it opens with a banner saying 
 agreed to it. It is cited here as the best available criteria and not as settled policy. This
 report deliberately does not call them *the seven gates*.
 
-Where a gate's outcome turns on the reconstructed wording rather than on precedent, this
-report says so at that gate.
+A `Cleared` verdict rests on that unratified list more heavily than a `Blocked` one would. A
+block names a specific defect that stands on its own; a clear is a statement that nothing in
+the list failed, and the list is provisional. Said here rather than left for a reader to work
+out.
 
 ## What changed since 2026-10-15
 
-Both of the previous review's blocking reasons are gone, and each was verified here rather
-than taken on trust.
-
 | Previous reason | State now |
 |---|---|
-| `Astro Link` empty, and no site existed to hold a page | A Starlight site is live and the page carries all seven intent fields — gate 4 below |
-| `Commit` named `ebcd8f6`, one commit before what shipped | `Commit` now names `9cad52f` in full, and the `GitHub Commits` table carries a row for it — gate 5 below |
+| `Astro Link` empty, and no site existed to hold a page | A Starlight site is live and the page carries all seven intent fields — gate 4 |
+| `Commit` named `ebcd8f6`, one commit before what shipped | `Commit` now names `9cad52f` in full, and the `GitHub Commits` table carries a row for it — gate 5 |
 
-What has not changed, and what this review found, is gate 2. The 2026-10-15 review recorded
-the twoTone label colours — `rgb(130, 71, 23)` and `rgb(130, 23, 32)` — as read from "the
-deployed build at `Production Storybook`". Reading that cell's own URL today returns different
-values, and the difference is not a theme or a mode: the stylesheet the deployment serves
-binds different tokens. Those twoTone values are what the **staging** deployment serves. This
-report draws no conclusion about how the earlier reading was taken; it records that the URL in
-the cell does not serve them, with the rule text to show it.
+Nothing changed under the component. `9cad52f` is still the newest commit to touch
+`src/components/badge/`, so everything the 2026-10-15 review established about the code still
+holds; what moved was the documentation and the registry around it.
 
 ## Gate 1 — a QA pass exists, and was not re-run
 
@@ -68,54 +80,43 @@ no test was re-run.
 
 ## Gate 2 — production serves the code that was reviewed
 
-**FAIL. Owner: `devops`.**
+**Pass.** `Production Storybook` is
+`https://lumo-design-system-4twqf837q-aye-kyawts-projects.vercel.app/?path=/story/components-badge--all-tones`.
+Opened, and all five badges render — `60.67×24`, `999px` radius, Inter 12/500.
 
-`Production Storybook` is
-`https://lumo-design-system-107qdzn14-aye-kyawts-projects.vercel.app/?path=/story/components-badge--all-tones`.
-It was opened and Badge renders — five tones, `60.67×24`, `999px` radius, `4px 8px` padding,
-Inter 12/500. So the link is not dead.
-
-But the build behind it is not `9cad52f`. Read from that deployment's own stylesheet
-(`/assets/badge-C2ce1DeB.css`):
+**It serves the reviewed commit.** Read from that deployment's own stylesheet, the five tone
+rules are `badge.css` at `9cad52f` verbatim:
 
 ```
-.lumo-badge--warning { --lumo-badge-bg: var(--color-bg-warning-tonal-idle); --lumo-badge-fg: var(--color-text-warning); }
-.lumo-badge--danger  { --lumo-badge-bg: var(--color-bg-negative-tonal-idle); --lumo-badge-fg: var(--color-text-negative); }
+.lumo-badge--primary { --lumo-badge-bg: var(--color-bg-primary-tonal-idle);  --lumo-badge-fg: var(--color-text-brand); }
+.lumo-badge--success { --lumo-badge-bg: var(--color-bg-positive-tonal-idle); --lumo-badge-fg: var(--color-text-positive); }
+.lumo-badge--warning { --lumo-badge-bg: var(--color-bg-warning-tonal-idle);  --lumo-badge-fg: var(--color-text-orange-twotone); }
+.lumo-badge--danger  { --lumo-badge-bg: var(--color-bg-negative-tonal-idle); --lumo-badge-fg: var(--color-text-red-twotone); }
+.lumo-badge--neutral { --lumo-badge-bg: var(--color-bg-surfacesecondary);    --lumo-badge-fg: var(--color-text-secondary); }
 ```
 
-That is the source `badge.css` carried at `ebcd8f6`, verbatim. At `9cad52f` the two rules bind
-`--color-text-orange-twotone` and `--color-text-red-twotone` instead — that commit is *only*
-those two lines plus comments and the build report. The rendered labels follow:
+Warning and Danger bind the twoTone pair, which is the entire content of `9cad52f`. The
+rendered labels follow, and match the contrast table in `docs/badge.md`:
 
-| Tone | Served by `Production Storybook` | Expected at `9cad52f` |
-|---|---|---|
-| warning | `rgb(177, 92, 22)` = `#b15c16` — `text/warning` | `#824717` — `text/orange/twoTone` |
-| danger | `rgb(227, 22, 40)` = `#e31628` — `text/negative` | `#821720` — `text/red/twoTone` |
+| Tone | Rendered | Hex | Surface |
+|---|---|---|---|
+| primary | `rgb(23, 110, 130)` | `#176e82` | `#eff8fa` |
+| success | `rgb(23, 130, 62)` | `#17823e` | `#effaf3` |
+| warning | `rgb(130, 71, 23)` | `#824717` | `#faf4ef` |
+| danger | `rgb(130, 23, 32)` | `#821720` | `#faeff0` |
+| neutral | `rgb(99, 102, 121)` | `#636679` | `#ebedf4` |
 
-Both twoTone variables exist and resolve correctly in that same deployment
-(`--color-text-orange-twotone` reads `#824717`, `--color-text-red-twotone` reads `#821720`),
-so this is not a missing token. The CSS rule simply predates the rebind.
+**Ancestry, established two ways.** The twoTone bindings exist only at `9cad52f` and later —
+`ebcd8f6` bound `--color-text-warning` and `--color-text-negative`, and nothing has reverted
+them — so a build serving them necessarily contains that commit. Independently, the
+deployment's `/index.json` lists `components-field`, and the Field build commit `72bf468` has
+`9cad52f` as an ancestor (`git merge-base --is-ancestor` returns true), so the build commit
+does too.
 
-`9cad52f` reached `main` at merge `8942000` on 2026-10-13. The deployment also has no
-`components-empty-state` entry in its `index.json`, and Empty State merged at `07617b8`, after
-`8942000`. Both facts place the build before `9cad52f` was on `main`.
-
-**So `9cad52f` is not an ancestor of the commit this deployment was built from, and the gate
-fails as written.** The practical reading: the two tones this review's QA evidence exists to
-cover — the two that used to fail AA — are being served at their pre-fix values by the build
-the registry names as production. Warning at `#b15c16` on `#faf4ef` is 4.36:1, under AA;
-Danger at `#e31628` on `#faeff0` is 4.23:1, under AA. The reviewed commit clears both.
-
-**This is a recording failure, not a rebuild.** A deployment serving `9cad52f` exists: Badge's
-own `Staging Storybook` cell
-(`lumo-design-system-4twqf837q-…`) serves the twoTone rules and renders
-`rgb(130, 71, 23)` / `rgb(130, 23, 32)`. There is no project-wide production alias to fall back
-on — `lumo-design-system.vercel.app` returns `404: NOT_FOUND` — so `Production Storybook` is a
-per-deployment snapshot and nothing updates it when a later commit ships. That is registry
-Flag 9 showing up on a specific row.
-
-DevOps owns `Production Storybook`. This review did not write it, did not deploy, and did not
-promote anything.
+A sibling session reports the deployment as `dpl_2bttUcC3NYuUXK3opoRBx6vPfWEK` built from
+`e3165e1`. That sha was not read here — the Vercel connector has no project access on this
+account — but it is consistent: `git merge-base --is-ancestor 9cad52f e3165e1` returns true.
+This gate does not rest on it; it rests on the two checks above.
 
 ## Gate 3 — the test evidence is current
 
@@ -133,9 +134,9 @@ Run fresh today, against a repo that took sixteen commits on `main` since the la
 Field, Accordion, Toast, the reference site, the intent records and the gate file. None of them
 is under Badge or under `tokens/`.
 
-`Last Modified` on the row reads 2026-10-16 14:25, later than `9cad52f`. That is the
-`Astro Link` write, not a code change; see the standing finding below about why that comparison
-cannot work as the skill states it.
+`Last Modified` on the row reads later than `9cad52f`. That is the `Astro Link` write, not a
+code change; see the standing finding about why that comparison cannot work as the skill states
+it.
 
 ## Gate 4 — a reference page exists
 
@@ -157,8 +158,8 @@ All seven intent fields are present and each records something:
 None reads "Not yet recorded". The page also carries two disclosures worth a reader's
 attention: `anatomy` is the doc-generator's reading of a truncated field name on the source
 board, and `get_variable_defs` on 17:1139 returns a bare `color/primary: #5b4cf5` that neither
-source explains. Both are declared on the page rather than smoothed over, which is the
-behaviour this gate wants.
+source explains. Both are declared rather than smoothed over, which is the behaviour this gate
+wants.
 
 ## Gate 5 — the registry row names the right commit
 
@@ -170,8 +171,8 @@ behaviour this gate wants.
 
 Established independently rather than from the cell. `9cad52f` is the newest of exactly three
 commits that have ever touched `src/components/badge/` (`54c65d4` → `ebcd8f6` → `9cad52f`), it
-is an ancestor of `origin/main`, and nothing after it touches Badge. It is therefore the commit
-that shipped the reviewed code.
+is an ancestor of `origin/main`, nothing after it touches Badge, and the production build
+serves exactly its CSS. It is the commit that shipped the reviewed code.
 
 `GitHub Commits` links all three, and the row for `9cad52f` carries the right hash, message and
 `Date Committed` (`2026-10-12T14:41:22Z`, matching the commit's own timestamp). Both halves of
@@ -183,13 +184,13 @@ this gate name the same commit.
 against `badge.css` and `badge.jsx` at that commit:
 
 - the per-tone table names `--color-text-orange-twotone` and `--color-text-red-twotone` for
-  Warning and Danger, which is what the CSS binds;
+  Warning and Danger, which is what the CSS binds and what production serves;
 - the shared table's radius, both paddings and `--label-label1` match the rule;
 - the matrix is five tones, matching the `TONE` array in `badge.jsx`;
 - "no interaction states" matches a file with no `:hover`, `:active` or `:focus` rule and a
   `<span>` that takes no `onClick`;
-- the mode-dependence table and the five contrast ratios match the measurements the deployed
-  staging build returns.
+- the mode-dependence table and the five contrast ratios match what the production build
+  returns.
 
 One omission is recorded below as non-blocking rather than as a gate failure; the reasoning is
 given there, because a human may want to rule the other way.
@@ -201,35 +202,56 @@ given there, because a human may want to rule the other way.
 library. `Composed Into` is empty too, which follows — no component in `src/components/`
 imports Badge.
 
-## Why `Blocked`
+## Why `Cleared`
 
-**One gate fails: gate 2.** The deployment that `Production Storybook` names does not contain
-the reviewed commit, and the two tones it serves differently are the two whose contrast fix is
-the entire content of that commit. **Owner: `devops`**, which owns that cell. The fix is a
-deployment that contains `9cad52f`, opened and recorded — not a change to Badge, whose code,
-docs, tokens, QA evidence and reference page all check out.
+All seven checks pass. The QA pass is complete and was read row by row; the deployment the
+registry names as production serves the reviewed commit, established from its own stylesheet
+and from an ancestry check that does not depend on Vercel metadata; nothing has moved under the
+component or the tokens since QA tested it; the reference page records real intent in all seven
+fields; both halves of the commit record name `9cad52f`; the build report matches the code; and
+the dependency record is right.
 
-Gates 1, 3, 4, 5, 6 and 7 pass.
+**This is a reading of the evidence and it is not an approval.** It recommends that Badge's
+name may go into a version. A human decides whether that happens.
+
+### What writing this verdict does to the row
+
+Worth stating because it is automatic. `Development` rule 4 fires when `Astro Link`,
+`Release Review` and `Release Verdict = Cleared` are all set. All three now are, so **the row
+will read `Released`** as soon as these cells are written — the first component in this system
+to do so.
+
+`Released` appearing in the registry is the formula reading three cells. It is **not** a human
+having approved the release, and nothing in the base distinguishes the two. If anything
+downstream — DevOps's version gate in particular — treats either `Released` or this `Cleared`
+cell as the approval itself, that would make an agent the final approver, which `CLAUDE.md`
+forbids. Per `.claude/agents/release.md`, this review says so and stops here.
 
 ## Findings that are not blocking
 
+- **`Staging Storybook` points at a build older than the reviewed commit.** The cell names
+  `lumo-design-system-107qdzn14-…`, whose stylesheet binds `--color-text-warning` and
+  `--color-text-negative` — `badge.css` as it stood at `ebcd8f6`. It renders Warning at
+  `#b15c16` (4.36 against its surface) and Danger at `#e31628` (4.23), both under AA, which is
+  the failure `9cad52f` fixed. No gate covers the staging cell and the ladder has moved past
+  precedence 7, so this blocks nothing — but anyone sent to that link to look at Badge sees the
+  pre-fix component. **Owner: `engineer`**, which owns `Staging Storybook`.
 - **`docs/badge.md` says nothing about forced colors, though `badge.css` implements it.** At
   `9cad52f` the file carries `@media (forced-colors: active) { .lumo-badge { border:
-  var(--border-width-default) solid CanvasText; } }`, and the build report has no entry for it;
-  the only description lives in the CSS. The 2026-10-15 Switch review treated an equivalent
-  silence as part of a gate-6 failure, so this is a deliberate departure and the reasoning is
-  owed. That failure was carried jointly by a *false* claim — the doc said pressed was
-  unobserved when QA had observed it — and Badge makes no false claim. And the omission is
-  repo-wide, not Badge's: `docs/button.md`, `docs/field.md` and `docs/accordion.md` are silent
-  about forced-colors blocks their components implement, while `docs/card.md` and
-  `docs/progress.md` document theirs. That is a documentation convention nobody has written
-  down, not Badge misdescribing itself. **Owner: `engineer`**, and a human ratifying the gates
-  may reasonably decide the gate should cover silences too.
+  var(--border-width-default) solid CanvasText; } }`, and the build report has no entry for it.
+  The 2026-10-15 Switch review treated an equivalent silence as part of a gate-6 failure, so
+  this is a deliberate departure and the reasoning is owed. That failure was carried jointly by
+  a *false* claim — the doc said pressed was unobserved when QA had observed it — and Badge
+  makes no false claim. And the omission is repo-wide: `docs/button.md`, `docs/field.md` and
+  `docs/accordion.md` are silent about forced-colors blocks their components implement, while
+  `docs/card.md` and `docs/progress.md` document theirs. That is an unwritten documentation
+  convention, not Badge misdescribing itself. **Owner: `engineer`**, and a human ratifying the
+  gates may reasonably decide the gate should cover silences too. Given this verdict is
+  `Cleared`, this is the finding most worth a second opinion.
 - **No QA row covers Badge's forced-colors behaviour.** The five rows are one per tone. Stories
   exist for label lengths and in-context use, and there is a forced-colors rule in the CSS, and
   none of the three has a test row. Gate 1 as written asks only that a pass exists, which it
-  does, so this is not a block. **Owner: `qa`**, if a human decides coverage belongs in the
-  gate.
+  does. **Owner: `qa`**, if a human decides coverage belongs in the gate.
 - **`Attachment` is empty on all five rows.** QA has no host for evidence and `reports/` is
   gitignored, so the durable evidence that column exists to hold does not exist. Structural and
   not Badge's; unchanged since 2026-10-15.
@@ -237,32 +259,35 @@ Gates 1, 3, 4, 5, 6 and 7 pass.
   `Last Modified` is later than the commit it read, but `Last Modified` moves on *any* cell
   write — today's `Astro Link` write already moved it past `9cad52f`, and writing this review's
   own two cells will move it again. The rule needs to compare against the component's code, not
-  the row's last touch. Reported in 2026-10-15 and still open; it is open question 3 in the
-  gate file.
-- **Per-component `Production Storybook` URLs are snapshots of different vintages.** Switch's
-  production URL serves a Badge older still — `--color-icon-warning`, the pre-`ebcd8f6` build.
-  Six `Completed` components point at six different deployments, none of them an alias, and
-  nothing in the registry updates a cell when a later commit ships. The specific instance is
-  gate 2 above; the general shape is registry Flag 9, and closing it is a change to the base
-  and therefore a human's.
+  the row's last touch. Open question 3 in the gate file.
+- **Nothing in the registry observes a merge.** Registry Flag 9. `Production Storybook` means
+  "DevOps opened a build and wrote it down", not "this is what production serves"; there is no
+  project-wide alias (`lumo-design-system.vercel.app` returns `404: NOT_FOUND`), so each cell is
+  a per-deployment snapshot that nothing updates when a later commit ships. It happens to be
+  current for Badge. That is a fact about today, not a property of the mechanism. Closing it is
+  a change to the base and therefore a human's.
 
 ## Where this review's own evidence is weaker than it looks
 
-- **The gate list is unratified**, and gate 2's wording ("the commit the row names must be an
-  ancestor of the commit the deployment was built from") is a reconstruction. The underlying
-  judgement does not depend on it: the deployment serves a CSS rule that `9cad52f` deleted.
-- **The deployment's build commit was not read from Vercel.** The Vercel connector has no
-  project access on this account, so the build was dated from what it serves — a pre-`9cad52f`
-  CSS rule, and a story index with no Empty State — rather than from deployment metadata. Both
-  bound it to before `8942000`, which is enough for this gate, but it is inference from content
-  and not a commit sha read off the build.
+- **The gate list is unratified**, and a `Cleared` leans on the completeness of that list in a
+  way a `Blocked` would not.
+- **The deployment's build sha was not read from Vercel.** The connector has no project access,
+  so gate 2's ancestry rests on served content — the twoTone CSS rules, and a story index
+  containing Field — rather than on deployment metadata. Both are sound, and both are inference
+  from what the build contains.
+- **This review got the production column wrong on its first pass** and was corrected by another
+  session. The correction is recorded at the top rather than quietly folded in, because a report
+  that hides its own errors is worth less than one that shows them.
 - **Nothing here re-verified the Figma node.** Gates 4 and 6 compare the repo and the reference
-  page; the page's own claims about what Figma says were read from the page, which is the
+  page; the page's claims about what Figma says were read from the page, which is the
   doc-generator's work, not this review's.
+- **The behaviour evidence is QA's, not reproduced here.** That is the role working as intended
+  — this review confirms a pass exists and does not re-run it — but it means gate 1 carries QA's
+  confidence rather than a second independent one.
 
 ## Not done, deliberately
 
-No code, doc or registry cell was fixed — including `Production Storybook`, which is wrong and
-is `devops`'s to correct. No test was re-run. Nothing was deployed and no version was cut.
+No code, doc or registry cell was fixed — including `Staging Storybook`, which is stale and is
+`engineer`'s to correct. No test was re-run. Nothing was deployed and no version was cut.
 `Astro Link`, `Staging Storybook` and `Production Storybook` were not written. The two cells
 this review owns — `Release Review` and `Release Verdict` — were written together.

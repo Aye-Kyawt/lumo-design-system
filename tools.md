@@ -5,13 +5,17 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
 ## Stack
 
 - Framework : React 19 with Vite
-- Language : JavaScript with JSX. `typescript` is not installed and there is no `tsconfig.json`.
+- Language : JavaScript with JSX. `typescript` is not installed at the repo root and there is
+  no `tsconfig.json` there. `docs-site/` has one, because Astro ships its own TypeScript and
+  Starlight's content config is a `.ts` file; that does not make this a TypeScript repo.
   A component is `src/components/<name>/<name>.jsx` with `<name>.css`, `<name>.stories.jsx` and an
   `index.js`; subcomponents sit beside it in the same folder, camelCase (`buttonIcon.jsx`)
 - Package manager : npm
 - Styling : CSS custom properties, generated from tokens
 - Tokens : Style Dictionary v5, driven by `build-tokens.js`, reading the Figma "Design Tokens" plugin export
 - Component workshop : Storybook 10 (react-vite)
+- Reference site : Astro 7 with Starlight 0.42, in `docs-site/`. It has its **own**
+  `package.json` and its own `node_modules`, and is not a workspace of the root project
 
 ## Commands
 | Job | Command |
@@ -20,6 +24,12 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
 |Build tokens | `npm run build:tokens` |
 |Run Storybook | `npm run storybook` |
 |Build Storybook | `npm run build:storybook` (outputs `storybook-static/`) |
+|Install the reference site | `npm --prefix docs-site install` |
+|Run the reference site | `npm --prefix docs-site run dev` (port 4321) |
+|Build the reference site | `npm --prefix docs-site run build` (outputs `docs-site/dist/`) |
+
+The reference site's `dev` and `build` both run the root `build:tokens` first, the same
+way `build:storybook` does, so its token CSS is generated and never committed.
 
 ## Paths
 - Token source : `tokens/*.tokens.json` — 23 files plus `manifest.json`, exported from Figma, committed
@@ -29,6 +39,8 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
   `build/json/`, `build/ios/` and `build/android/`. Never edit by hand; gitignored. There is no
   `build/tokens/` directory
 - Components : `src/components/<Name>/`
+- Reference site : `docs-site/` — pages at `docs-site/src/content/docs/`, config at
+  `docs-site/astro.config.mjs`, output `docs-site/dist/` (gitignored)
 - Agents : `.claude/agents/`
 - Skills : `.claude/skills/`
 
@@ -69,6 +81,38 @@ intent so nobody re-adds them as commands that fail, and nobody assumes the guar
   to build it. Note for anyone re-reading that period — the flag only suppresses deployments
   triggered by a **git push**. Importing a project, or deploying from the dashboard or the CLI,
   is not a push and builds regardless
+
+## docs-site deployment — the reference site
+
+**Not deployed yet.** The site builds locally and renders; nothing has been imported into
+Vercel, so there is no URL and `Components/Astro Link` stays empty until there is one.
+
+- Intended shape : a **second** Vercel project on this same repo with the root directory set
+  to `docs-site`, leaving the existing repo-root Storybook project untouched. The root project
+  is fragile in a documented way (see above) and nothing here changes it
+- Build config : the site's own `package.json` — install `npm install`, build `npm run build`,
+  output `dist`. Framework detection is safe here, unlike at the root: Astro is a framework
+  Vercel detects correctly and `docs-site/` has a real entry point
+- Before the first deploy, set `site` in `docs-site/astro.config.mjs` to the production URL.
+  It is deliberately unset today, because a sitemap pointing at a URL nobody has seen is worse
+  than no sitemap. Astro warns about this on every build until it is set
+- `Astro Link` is the doc-generator's cell, and the rule on it is the same as for the two
+  Storybook cells: open the deployed page, see it render, then write it
+
+### Why Astro and Starlight were added
+
+Two dependencies, `astro` and `@astrojs/starlight`, both in `docs-site/`, neither at the root.
+
+They were not added to solve a problem the existing stack already solves. Storybook renders
+components; it does not carry intent — when to reach for a component, when not to, what it
+pairs with. `.claude/agents/doc-generator.md` names "the Astro Starlight site" as the thing it
+writes, and the registry's `Astro Link` column is a cell with nowhere to point. Six components
+currently sit at `Completed` with a `Blocked` release verdict, and the first reason in all six
+reviews is that no reference page exists and no site exists to hold one.
+
+Keeping them out of the root `package.json` is deliberate. The root carries `vite` for
+Storybook and Astro bundles its own; one `node_modules` for both invites a hoisting conflict
+in the only build that currently reaches production.
 
 ## Dependency rules
 - Match the package manager in this file. This project uses npm. not yarn or pnpm.

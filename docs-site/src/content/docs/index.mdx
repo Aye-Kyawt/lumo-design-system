@@ -1,0 +1,73 @@
+---
+title: Lumo Design System
+description: The reference for the Lumo Design System — what each component is for, what it is built from, and where it stands.
+template: splash
+hero:
+  tagline: One system, synced between design and development. Tokens are the only source of visual values.
+  actions:
+    - text: Browse components
+      link: /components/button/
+      icon: right-arrow
+    - text: Tokens
+      link: /tokens/
+      variant: minimal
+---
+
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## What this site is
+
+The reference layer of the Lumo Design System. Storybook shows you what a
+component *does*; this site says what it is *for* — when to reach for it, when
+not to, what it pairs with, and which tokens a correct use of it must supply.
+
+The two are deliberately separate. Storybook is built from the component source
+on every push. This site is written by reading the Figma documentation and the
+repo and reporting where the two disagree.
+
+<Aside type="caution" title="The intent records are not written yet">
+Every component page below is a shell: it carries the component's verified
+sources and its registry status, and marks each intent field as not yet
+recorded. The doc-generator owns that content and has not run against this site,
+because until now there was no site for it to write to.
+
+This matters for releases. A component reaches `Released` only when `Astro Link`,
+`Release Review` and `Release Verdict` = `Cleared` are all set. Six components
+currently sit at `Completed` with a `Blocked` verdict, and in all six reviews the
+first reason given is that no reference page existed. These shells are not those
+pages — they are the place those pages go.
+</Aside>
+
+## Components
+
+<CardGrid>
+  <LinkCard title="Badge" href="/components/badge/" description="Atoms · Completed" />
+  <LinkCard title="Button" href="/components/button/" description="Atoms · Completed" />
+  <LinkCard title="Progress" href="/components/progress/" description="Atoms · Completed" />
+  <LinkCard title="Switch" href="/components/switch/" description="Atoms · Completed" />
+  <LinkCard title="Empty State" href="/components/empty-state/" description="Molecules · Completed" />
+  <LinkCard title="Field" href="/components/field/" description="Molecules · To be deployed" />
+  <LinkCard title="Toast" href="/components/toast/" description="Molecules · Ready for Testing" />
+  <LinkCard title="Card" href="/components/card/" description="Organisms · Completed" />
+</CardGrid>
+
+Four further components — Table, Calendar, Chat Panel and Kanban — have a Figma
+node and a signed-off design but no code yet, so they have no page here.
+Accordion is built on an unmerged branch and awaits testing.
+
+## How a component gets here
+
+A component moves through the registry one written cell at a time. No status is
+set by hand; each is derived from evidence somebody wrote after seeing it.
+
+| Status | What it means | Who acts next |
+|---|---|---|
+| `To-do` | Figma node exists and the design is signed off | Engineer builds it |
+| `Ready for Testing` | A staging build exists and renders | QA tests every variant, size and state |
+| `To be fixed` / `Fixing` | A test case failed | Engineer repairs it |
+| `Fixed` | The repair is claimed | QA re-tests it |
+| `To be deployed` | Every test case passed | DevOps promotes it |
+| `Completed` | It is live in production | Doc-generator documents it; Release reviews it |
+| `Released` | Documented, reviewed and cleared | Nobody — it is done |
+
+A human approves a release. No agent approves its own work.

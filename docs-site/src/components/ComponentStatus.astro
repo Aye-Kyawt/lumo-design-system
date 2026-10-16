@@ -1,0 +1,111 @@
+---
+/**
+ * The status strip at the top of a component page — the page-level counterpart
+ * of the hero's release card.
+ *
+ * It reads `componentStatus.js`, the same snapshot the sidebar badges read, so
+ * a component's status cannot say one thing in the nav and another on its page.
+ *
+ * Every visual value is a Lumo semantic token. Tones come from `toneFor`, so
+ * the colour of a chip is decided by the registry's own vocabulary rather than
+ * chosen per page.
+ */
+import { components, toneFor, asOf } from '../componentStatus.js';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const c = components[slug];
+if (!c) {
+  throw new Error(
+    `ComponentStatus: no entry for "${slug}" in componentStatus.js. ` +
+    `Add it there rather than hard-coding a status on the page.`
+  );
+}
+
+const statusTone = toneFor(c.status);
+const verdictTone = c.verdict === 'Cleared' ? 'positive' : c.verdict ? 'negative' : 'neutral';
+const testsLabel = c.total === 0 ? 'Not yet tested' : `${c.passed} of ${c.total} passed`;
+const testsTone = c.total === 0 ? 'neutral' : c.passed === c.total ? 'positive' : 'negative';
+---
+
+<div class="lumo-status">
+  <ul class="lumo-status__chips">
+    <li class="lumo-status__chip lumo-status__chip--neutral">{c.level}</li>
+    <li class={`lumo-status__chip lumo-status__chip--${statusTone}`}>{c.status}</li>
+    <li class={`lumo-status__chip lumo-status__chip--${testsTone}`}>{testsLabel}</li>
+    <li class={`lumo-status__chip lumo-status__chip--${verdictTone}`}>
+      {c.verdict ? `Verdict: ${c.verdict}` : 'Not reviewed'}
+    </li>
+  </ul>
+  <p class="lumo-status__asof">
+    Registry snapshot, {asOf}. The registry is the source of truth; if these
+    disagree with it, this page is the one that is wrong.
+  </p>
+</div>
+
+<style>
+  .lumo-status {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-xs);
+    margin-block-end: var(--spacing-gap-lg);
+    padding-block-end: var(--spacing-padding-md);
+    border-block-end: var(--border-width-default) solid var(--color-border-primary-default);
+  }
+
+  .lumo-status__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-gap-horizontal-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lumo-status__chip {
+    font: var(--body-body4);
+    border-radius: var(--border-radius-chip);
+    border: var(--border-width-default) solid transparent;
+    padding-block: var(--spacing-padding-sm);
+    padding-inline: var(--spacing-padding-md);
+  }
+
+  .lumo-status__chip--positive {
+    background: var(--color-bg-positive-subtle);
+    color: var(--color-text-positive);
+    border-color: var(--color-border-positive-default);
+  }
+
+  .lumo-status__chip--negative {
+    background: var(--color-bg-negative-subtle);
+    color: var(--color-text-negative);
+    border-color: var(--color-border-negative-default);
+  }
+
+  .lumo-status__chip--info {
+    background: var(--color-bg-info-subtle);
+    color: var(--color-text-info);
+    border-color: var(--color-border-info-default);
+  }
+
+  .lumo-status__chip--warning {
+    background: var(--color-bg-warning-subtle);
+    color: var(--color-text-warning);
+    border-color: var(--color-border-warning-default);
+  }
+
+  .lumo-status__chip--neutral {
+    background: var(--color-bg-overlay-subtle);
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-primary-default);
+  }
+
+  .lumo-status__asof {
+    font: var(--body-body4);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+</style>

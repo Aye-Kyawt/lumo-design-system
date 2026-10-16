@@ -1,0 +1,20 @@
+/* Site-level styling for the reference site.
+ *
+ * Every value here references a generated semantic token. Starlight loads
+ * `build/css/web/tokens.css` and `tokens-dark.css` before this file, so the
+ * `--color-*`, `--spacing-*`, `--border-*` and type tokens are in scope.
+ *
+ * No fallback values. A `var(--x, 2px)` would paper over a missing token and
+ * hide exactly the design gap we are meant to report, so if a token named here
+ * does not exist the site should look wrong and say so.
+ *
+ * Starlight's own chrome variables (`--sl-*`) are mapped to Lumo tokens where a
+ * semantic token exists for them. Where one does not, Starlight's default is
+ * left in place rather than invented — see "Reported token gaps" in the repo's
+ * build report for this site. */
+
+:root {
+  --sl-font: var(--typography-fontfamily-body);
+  --sl-color-text: var(--color-text-primary);
+  --sl-color-bg: var(--color-bg-base);
+}

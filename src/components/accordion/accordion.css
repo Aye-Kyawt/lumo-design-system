@@ -1,0 +1,274 @@
+/*
+ * accordion — Figma component set 208:4912.
+ *
+ * One variant property, `State`, two values: closed (208:4897) and open
+ * (208:4904). Exactly two things change between them:
+ *
+ *   - the chevron's rotation: 0° closed, 180° open (wrapper 208:4907)
+ *   - the content region: absent closed, present open
+ *
+ * Nothing else in the card changes — not the border, not the surface, not the
+ * title colour. Followed as drawn.
+ *
+ * ---------------------------------------------------------------------------
+ * Seven differences from the node are reported in docs/accordion.md and
+ * flagged at their declarations below. The short version: the set draws no
+ * interaction state at all, the 480px frame is a raw number, the content
+ * region has no padding of its own, `radius/card` renders 12px against the
+ * node's 16px, the chevron binds a *text* token for an icon fill, the
+ * border-style tokens have no value anywhere in the export, and the motion
+ * easing scale has no value either.
+ */
+
+.lumo-accordion {
+  /*
+   * The node fixes the frame at 480px. An accordion is laid out by the FAQ
+   * list or the page column it sits in, so the width is the container's —
+   * the same reading field.css took of its own 320px frame. Gap 2.
+   */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  inline-size: 100%;
+
+  background: var(--color-bg-base);
+
+  /*
+   * `solid` is the CSS keyword, not a raw design value. The export *has* a
+   * token for it — `lumo.semantic.border.style.solid` — but build-tokens.js
+   * reports it as having no value anywhere in the Figma export and skips it,
+   * along with `border.style.dashed` and `border.style.dotted`. Nothing was
+   * invented to cover that; the keyword stands in and the gap is reported.
+   * Gap 6.
+   */
+  border: var(--border-width-default) solid var(--color-border-primary-default);
+
+  /*
+   * The node reports this corner as `semantic/border/radius/card` and renders
+   * it at 16px. In the export `border.radius.card` aliases `radius.lg`, which
+   * is 12px in web, admin and mobile alike — no mode resolves it to 16. The
+   * variable the node names is the one bound here, so the card renders 12px
+   * and the 4px difference is reported rather than papered over with
+   * `radius/xl`. Gap 4.
+   */
+  border-radius: var(--border-radius-card);
+}
+
+/* ------------------------------------------------------------- heading ---- */
+
+/*
+ * Only present when the caller passes `headingLevel`. The node draws no
+ * heading, so the element contributes outline semantics and no style of its
+ * own — it must not bring a browser default margin or font size with it.
+ */
+.lumo-accordion__heading {
+  margin: 0;
+  font: inherit;
+  inline-size: 100%;
+}
+
+/* ---------------------------------------------------------- the header ---- */
+
+.lumo-accordion__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: var(--spacing-padding-lg);
+  overflow: clip;
+
+  /* It is a <button>, so the UA brings a background, a border, a font and a
+     padding of its own. All four have to be cleared before the node's own
+     values mean anything. */
+  background: var(--lumo-accordion-header-bg, transparent);
+  border: none;
+  text-align: start;
+  cursor: pointer;
+
+  /* `Body/Body6-Intense` — the type style the node names on the title layer,
+     bound as the one composite token that carries it rather than decomposed
+     into four. 600 / fontsize-lg / lineheight-md / fontfamily-body, which is
+     exactly what the node reports. */
+  font: var(--body-body6-intense);
+  color: var(--color-text-primary);
+
+  /*
+   * The chevron rotation is the one thing that animates. `motion/easing/*` is
+   * the second half of a transition and the whole easing scale — standard,
+   * decelerate, accelerate, emphasized, linear — has no value anywhere in the
+   * export, so there is no easing token to name here and the browser default
+   * is what runs. Nothing invented. Gap 7.
+   */
+  transition: background-color var(--motion-duration-fast);
+}
+
+.lumo-accordion__title {
+  /* `flex-[1_0_0]` with `min-w-px` on the node: the title takes the row and
+     the chevron keeps its 20px, and a long question wraps rather than pushing
+     the chevron out of the card. */
+  flex: 1 0 0;
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+
+/* ----------------------------------------------------------- the panel ---- */
+
+/*
+ * The content region, `open` only.
+ *
+ * The node draws the `_Slot/Content` instance full-bleed — flush to the card's
+ * left, right and bottom edges, with no padding between the content and the
+ * border and no gap between it and the header. Reproduced exactly as drawn,
+ * which means real content put in this slot also runs to the card edge and
+ * across the bottom corner radius. That is very likely not what the design
+ * intends, but padding here would be a number nobody specified, so it is
+ * reported rather than invented. Gap 3.
+ */
+.lumo-accordion__panel {
+  inline-size: 100%;
+  box-sizing: border-box;
+}
+
+/*
+ * `hidden` is an attribute, and `display: flex` or `display: block` from any
+ * later rule would silently beat the UA's `[hidden] { display: none }`. Say it
+ * here so closing the panel cannot be undone by specificity.
+ */
+.lumo-accordion__panel[hidden] {
+  display: none;
+}
+
+/* ------------------------------------------------- State — the chevron ---- */
+
+/*
+ * `State=closed` (208:4897) draws the chevron upright; `State=open` (208:4904)
+ * wraps it in a container rotated 180° (208:4907). The parent owns the state,
+ * so the parent states what its state does to the chevron — which is exactly
+ * what that wrapper node is.
+ *
+ * These set `transform` directly rather than publishing the angle as a custom
+ * property for accordionIcon.css to read. That indirection was the first thing
+ * built here and it was WRONG in a way worth recording: a `transform:
+ * rotate(var(--x))` that is also transitioned cannot be interpolated, because
+ * `--x` is an unregistered custom property with no type for the engine to
+ * animate between. The result was not a janky rotation, it was no rotation at
+ * all — the transition stuck permanently in `running` with the computed
+ * transform pinned at the identity matrix, so the chevron never moved. It
+ * looked correct only in a story that renders `open` on first paint, where no
+ * transition ever starts. Transitioning between two concrete `rotate()` values
+ * is interpolatable and does what the node draws.
+ *
+ * `0deg` and `180deg` are the node's own geometry, not design values: there is
+ * no rotation family in the token export and a half-turn is not a thing a
+ * token would carry.
+ */
+.lumo-accordion[data-state='closed'] .lumo-accordion__icon {
+  transform: rotate(0deg);
+}
+
+.lumo-accordion[data-state='open'] .lumo-accordion__icon {
+  transform: rotate(180deg);
+}
+
+/* ------------------------------------------------------------- states ---- */
+/*
+ * GAP 1 — the set draws no interaction state at all.
+ *
+ * 208:4912 defines `State=closed` and `State=open` and nothing else. There is
+ * no hovered, pressed, focused, disabled, error or loading variant anywhere in
+ * it.
+ *
+ * That absence cannot be honoured the way Badge honoured it. Badge is read,
+ * not clicked. An accordion header is a button whose whole job is to be
+ * clicked, and a button with no focus ring and no disabled affordance is a
+ * defect — CLAUDE.md asks every component to cover the states the product
+ * uses.
+ *
+ * So the states below are implemented as behaviour, bound to semantic tokens
+ * that already exist and whose own descriptions carry these meanings. NO TOKEN
+ * WAS INVENTED. But the *mapping* is this build's reading of the token names,
+ * not a decision a designer made on the canvas, and it needs confirming
+ * against drawn variants. See docs/accordion.md, gap 1, for the table and for
+ * what would close it.
+ */
+
+/*
+ * Hover and press move the header's surface, not the card's border.
+ * `color/border/primary/hovered` exists and is deliberately NOT used: the
+ * header is what the pointer is over, and darkening the whole card's outline
+ * because the pointer is in its top half would claim the press target is
+ * bigger than it is.
+ *
+ * surfacePrimary and surfaceSecondary are the two neutral steps directly above
+ * `bg/base`, and surfacePrimary is already the surface this very component
+ * uses for its content region — so the hover colour is one the card contains
+ * rather than one brought in from elsewhere.
+ */
+.lumo-accordion__header:hover {
+  --lumo-accordion-header-bg: var(--color-bg-surfaceprimary);
+}
+
+.lumo-accordion__header:active {
+  --lumo-accordion-header-bg: var(--color-bg-surfacesecondary);
+}
+
+/*
+ * `:focus-visible` rather than `:focus`, so a mouse click does not leave a
+ * ring. `elevation/focused` is the export's own keyboard focus indicator —
+ * its description reads "Keyboard focus indicator (Aqua-600 at 40%, 3px
+ * spread)", which is this exact use.
+ *
+ * The negative outline offset pulls the 3px ring inside the card's own corner
+ * radius; without it the ring is a rectangle around a rounded card.
+ */
+.lumo-accordion__header:focus-visible {
+  outline: none;
+  box-shadow: var(--elevation-focused);
+  border-radius: var(--border-radius-card);
+}
+
+/*
+ * Disabled is `aria-disabled`, not the DOM attribute — the header stays
+ * focusable so a screen reader can reach it and read that it is unavailable,
+ * and the click guard lives in the handler. Styling therefore hangs off the
+ * ARIA attribute, which is also the thing that is actually true.
+ */
+.lumo-accordion__header[aria-disabled='true'] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.lumo-accordion__header[aria-disabled='true']:hover,
+.lumo-accordion__header[aria-disabled='true']:active {
+  --lumo-accordion-header-bg: transparent;
+}
+
+/* ----------------------------------------------------- reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-accordion__header {
+    transition-duration: var(--motion-duration-instant);
+  }
+}
+
+/* ------------------------------------------------------ forced colours ---- */
+
+@media (forced-colors: active) {
+  /* Forced-colors drops the token colours, so the card would lose its outline
+     and the focus ring its shadow. Keep both readable in system colours. */
+  .lumo-accordion {
+    border: var(--border-width-default) solid CanvasText;
+  }
+
+  .lumo-accordion__header:focus-visible {
+    outline: var(--border-width-focused) solid Highlight;
+    outline-offset: calc(-1 * var(--border-width-focused));
+  }
+
+  .lumo-accordion__header[aria-disabled='true'] {
+    /* `opacity` is not a reliable disabled signal when the palette is forced. */
+    color: GrayText;
+  }
+}

@@ -85,6 +85,39 @@ noted — `color.bg.*` is the family a fill would normally come from.
 | focused | `--elevation-focused` |
 | disabled | `--opacity-disabled` |
 
+### Forced colors — system colours, not tokens
+
+A forced palette throws the track's fill away, and on a switch that fill is
+doing half the work: a track flattened to `Canvas` says nothing about on or
+off. So the component stops leaning on colour there and leans on the two
+things a forced palette cannot take away — the shape of the pill, and where
+the knob sits inside it.
+
+| Condition | Behaviour | System colour |
+|---|---|---|
+| track, enabled | takes a border, so the pill is still read as a pill once its fill is gone | `ButtonText` |
+| knob, enabled | paints solid, so the state is carried by the knob's **position** rather than by the track's colour | `ButtonText` |
+| disabled | border and knob both drop to the disabled colour, and the `opacity/disabled` dim is released back to `opacity/100` — the UA discards that dim anyway, so the disabled reading has to come from colour instead | `GrayText` |
+| focused | the ring becomes a real `outline`, offset by its own width, because `elevation/focused` is a `box-shadow` and a `box-shadow` does not survive a forced palette | `Highlight` |
+
+Only the colours are system keywords. The border and outline widths still come
+from `border/width/default` and `border/width/focused`, and nothing else about
+the component changes — no geometry, no behaviour, no motion.
+
+**QA has driven all three of those rules** in a genuinely forced palette,
+confirming that the palette actually repainted rather than only the media
+query flipping, and driving focus with a real Tab rather than a programmatic
+`.focus()`. The knob still reads `translateX(16px)` for `On=true` against
+`translateX(0)` for `On=false` while the fill is flattened, so the state does
+survive on position alone. The disabled treatment was driven too. The row
+reads `Passed`.
+
+**Design standing, the same as gap 3.** Figma 17:1201 draws no high-contrast
+treatment, so the mapping onto `ButtonText`, `GrayText` and `Highlight` is this
+build's reading of what a forced palette leaves available, not a decision made
+on the canvas. It is reported rather than filled in — no designer has confirmed
+it.
+
 ---
 
 ## Gap 1 — the whole geometry is unbound
@@ -213,11 +246,19 @@ Behaviour:
   `cursor: not-allowed`, and neither click nor Space nor Enter moves it.
 - Both controlled and uncontrolled stories behave as documented.
 
-**Pressed was not observed live.** Holding a mouse button down across a
-measurement is not something the tooling does cleanly, so the `:active` rule
-was verified only by its token resolving (`bg/primary/pressed` → `#132f35`) and
-by the rule being present on the same custom property that hover was proven to
-drive. QA should press and hold it.
+**Pressed was not observed live by this build.** Holding a mouse button down
+across a measurement is not something the tooling does cleanly, so at build
+time the `:active` rule was verified only by its token resolving
+(`bg/primary/pressed` → `#132f35`) and by the rule being present on the same
+custom property that hover was proven to drive.
+
+**QA has since pressed and held it, and it holds.** On the **on** track a real
+press-and-hold — with the 0.1s transition disabled so the settled colour could
+be read instead of a mid-transition sample — gives `rgb(19, 47, 53)`, which is
+`bg/primary/pressed` exactly. The **off** track was held the same way and never
+produces a third colour: it moves between idle `rgb(191, 194, 207)` and hovered
+`rgb(160, 163, 177)` and nothing else, which is the sub-gap inside gap 3
+measured rather than assumed. Both rows read `Passed`.
 
 `npm run lint` could not be run: **that script does not exist** in
 `package.json`, which lists only `build:tokens`, `storybook` and

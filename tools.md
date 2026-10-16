@@ -90,9 +90,23 @@ Vercel, so there is no URL and `Components/Astro Link` stays empty until there i
 - Intended shape : a **second** Vercel project on this same repo with the root directory set
   to `docs-site`, leaving the existing repo-root Storybook project untouched. The root project
   is fragile in a documented way (see above) and nothing here changes it
-- Build config : the site's own `package.json` — install `npm install`, build `npm run build`,
-  output `dist`. Framework detection is safe here, unlike at the root: Astro is a framework
-  Vercel detects correctly and `docs-site/` has a real entry point
+- Build config : `docs-site/vercel.json` — framework `astro`, install
+  `npm install && npm --prefix .. install`, build `npm run build`, output `dist`. Framework
+  detection is safe here, unlike at the root: Astro is a framework Vercel detects correctly
+  and `docs-site/` has a real entry point
+- **Two settings that are not expressible in `vercel.json` and must be set on the project:**
+  1. Root Directory = `docs-site`
+  2. *Include source files outside of the Root Directory in the Build Step* = **on**
+
+  Both are needed for the same reason. The site's build runs the root `build:tokens` first, so
+  the build needs the repo root present (setting 2) and its devDependencies installed — which
+  is why the install command installs twice. `build-tokens.js` resolves its token source from
+  its own `__dirname` but writes `build/` relative to the working directory, so it has to run
+  with the repo root as cwd; `npm --prefix ..` does exactly that
+- **This build config has not been verified by a deploy.** It is derived from reading
+  `build-tokens.js` and the existing root project, not from a build that ran. The root
+  project's own history is a warning about trusting an untested Vercel config — check the
+  first build's logs rather than assuming
 - Before the first deploy, set `site` in `docs-site/astro.config.mjs` to the production URL.
   It is deliberately unset today, because a sitemap pointing at a URL nobody has seen is worse
   than no sitemap. Astro warns about this on every build until it is set

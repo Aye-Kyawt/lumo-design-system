@@ -103,10 +103,26 @@ Vercel, so there is no URL and `Components/Astro Link` stays empty until there i
   is why the install command installs twice. `build-tokens.js` resolves its token source from
   its own `__dirname` but writes `build/` relative to the working directory, so it has to run
   with the repo root as cwd; `npm --prefix ..` does exactly that
-- **This build config has not been verified by a deploy.** It is derived from reading
-  `build-tokens.js` and the existing root project, not from a build that ran. The root
-  project's own history is a warning about trusting an untested Vercel config — check the
-  first build's logs rather than assuming
+- **If setting 2 is off, the build fails like this.** Reproduced on 2026-10-16 by extracting
+  `docs-site/` on its own and running the two commands against it, which is exactly what
+  Vercel uploads when the setting is off:
+
+  ```
+  npm error enoent Could not read package.json: Error: ENOENT: no such file or
+  directory, open '<parent>/package.json'
+  ```
+
+  It fires twice — once in the install step at `npm --prefix .. install`, once in the build
+  at `npm --prefix .. run build:tokens`. The build can see `docs-site/` and nothing above
+  it, so `..` is an empty directory rather than the repo. `Could not read package.json` in
+  the build log means the checkbox, not the code
+- **Why this cannot be designed away.** Reading the generated tokens from `build/` is the
+  whole point — it is what stops the site restating values and drifting from them. Any route
+  to them crosses the root directory boundary, so the setting is required. Pointing the
+  project at the repo root instead does not work either: Vercel reads `vercel.json` from the
+  root directory, and the root one builds Storybook. The only alternative is committing
+  generated token CSS into `docs-site/`, which breaks the rule that `build/` is never
+  committed and reintroduces exactly the drift the tokens exist to prevent
 - Before the first deploy, set `site` in `docs-site/astro.config.mjs` to the production URL.
   It is deliberately unset today, because a sitemap pointing at a URL nobody has seen is worse
   than no sitemap. Astro warns about this on every build until it is set

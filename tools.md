@@ -84,8 +84,9 @@ intent so nobody re-adds them as commands that fail, and nobody assumes the guar
 
 ## docs-site deployment — the reference site
 
-**Not deployed yet.** The site builds locally and renders; nothing has been imported into
-Vercel, so there is no URL and `Components/Astro Link` stays empty until there is one.
+**Not deployed yet.** The project `lumo-reference-site` exists and the site builds locally and
+renders, but no deployment has succeeded, so there is no URL and `Components/Astro Link` stays
+empty until there is one.
 
 - Intended shape : a **second** Vercel project on this same repo with the root directory set
   to `docs-site`, leaving the existing repo-root Storybook project untouched. The root project
@@ -94,35 +95,58 @@ Vercel, so there is no URL and `Components/Astro Link` stays empty until there i
   `npm install && npm --prefix .. install`, build `npm run build`, output `dist`. Framework
   detection is safe here, unlike at the root: Astro is a framework Vercel detects correctly
   and `docs-site/` has a real entry point
-- **Two settings that are not expressible in `vercel.json` and must be set on the project:**
-  1. Root Directory = `docs-site`
-  2. *Include source files outside of the Root Directory in the Build Step* = **on**
+- **Root Directory = `docs-site` must be set on the project.** It is not expressible in
+  `vercel.json`, because `vercel.json` is itself read *from* the root directory — which is
+  exactly the trap below
+- **The failure when it is not set.** Every deployment up to 2026-10-16 failed this way, and
+  the message names a directory that has nothing to do with this site:
 
-  Both are needed for the same reason. The site's build runs the root `build:tokens` first, so
-  the build needs the repo root present (setting 2) and its devDependencies installed — which
-  is why the install command installs twice. `build-tokens.js` resolves its token source from
-  its own `__dirname` but writes `build/` relative to the working directory, so it has to run
-  with the repo root as cwd; `npm --prefix ..` does exactly that
-- **If setting 2 is off, the build fails like this.** Reproduced on 2026-10-16 by extracting
-  `docs-site/` on its own and running the two commands against it, which is exactly what
-  Vercel uploads when the setting is off:
+  ```
+  Error: [STATIC_BUILD_NO_OUT_DIR] No Output Directory named "storybook-static"
+  found after the Build completed.
+  ```
+
+  `storybook-static` is the repo root's `outputDirectory`. It appears in the root
+  `vercel.json` and nowhere else. Seeing it in this project's log means the project is
+  building at the **repo root** against the root config and has never looked at `docs-site/`
+  at all. The fix is the Root Directory field, not the build config
+
+  Worth keeping because it is counter-intuitive: a reference-site build that fails complaining
+  about Storybook is not a confused build. It is the right error for a project pointed at the
+  wrong directory
+
+- **A second, separate question, still unresolved.** The site's build runs the root
+  `build:tokens` first, so once the build *is* running inside `docs-site/` it needs the repo
+  root present and its devDependencies installed — which is why the install command installs
+  twice. `build-tokens.js` resolves its token source from its own `__dirname` but writes
+  `build/` relative to the working directory, so it must run with the repo root as cwd;
+  `npm --prefix ..` does that.
+
+  Whether Vercel makes the parent available by default is **not yet known**. Extracting
+  `docs-site/` on its own and running the two commands against it does fail:
 
   ```
   npm error enoent Could not read package.json: Error: ENOENT: no such file or
   directory, open '<parent>/package.json'
   ```
 
-  It fires twice — once in the install step at `npm --prefix .. install`, once in the build
-  at `npm --prefix .. run build:tokens`. The build can see `docs-site/` and nothing above
-  it, so `..` is an empty directory rather than the repo. `Could not read package.json` in
-  the build log means the checkbox, not the code
-- **Why this cannot be designed away.** Reading the generated tokens from `build/` is the
-  whole point — it is what stops the site restating values and drifting from them. Any route
-  to them crosses the root directory boundary, so the setting is required. Pointing the
-  project at the repo root instead does not work either: Vercel reads `vercel.json` from the
-  root directory, and the root one builds Storybook. The only alternative is committing
-  generated token CSS into `docs-site/`, which breaks the rule that `build/` is never
-  committed and reintroduces exactly the drift the tokens exist to prevent
+  — once at `npm --prefix .. install`, once at `npm --prefix .. run build:tokens`. But that
+  is a **local reproduction of a hypothesis, never observed in a real build**, and it was
+  reproduced while the real failure was the Root Directory one above. Treat it as a thing to
+  watch for in the first build that actually runs inside `docs-site/`, not as a known cause.
+
+  An older version of this section named a project setting, *"Include source files outside of
+  the Root Directory in the Build Step"*, as the required fix. **That was written from memory
+  and could not be found in the dashboard or in Vercel's current documentation.** Do not go
+  looking for it on this file's say-so; if the parent turns out to be missing, find out what
+  the current control is called before writing it down again
+- **Why the dependency on the parent is hard to remove.** Reading the generated tokens from
+  `build/` is the whole point — it is what stops the site restating values and drifting from
+  them, and every route to that output crosses the root directory boundary. Pointing the
+  project at the repo root instead does not work: Vercel reads `vercel.json` from the root
+  directory, and the root one builds Storybook — which is precisely the failure above. The
+  remaining alternative is committing generated token CSS into `docs-site/`, which breaks the
+  rule that `build/` is never committed and reintroduces the drift tokens exist to prevent
 - Before the first deploy, set `site` in `docs-site/astro.config.mjs` to the production URL.
   It is deliberately unset today, because a sitemap pointing at a URL nobody has seen is worse
   than no sitemap. Astro warns about this on every build until it is set

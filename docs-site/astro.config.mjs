@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { components as componentStatus, toneFor } from './src/componentStatus.js';
 
 // The reference site for the Lumo Design System.
 //
@@ -9,6 +10,29 @@ import starlight from '@astrojs/starlight';
 // Token CSS is read from the repo root's generated `build/` output rather than
 // restated here, so the site cannot drift from the tokens. `npm run build` in
 // this folder runs the root `build:tokens` first, which is what produces it.
+
+// Sidebar entries are generated from the same snapshot the pages read, so a
+// component's status cannot say one thing in the nav and another on its page.
+// Starlight's badge variants are mapped from the registry's own vocabulary.
+const badgeVariant = {
+  positive: 'success',
+  info: 'note',
+  negative: 'danger',
+  warning: 'caution',
+  neutral: 'default',
+};
+
+const group = (label, level) => ({
+  label,
+  items: Object.entries(componentStatus)
+    .filter(([, c]) => c.hasPage && c.level === level)
+    .map(([slug, c]) => ({
+      label: c.name,
+      slug: `components/${slug}`,
+      badge: { text: c.status, variant: badgeVariant[toneFor(c.status)] },
+    })),
+});
+
 export default defineConfig({
   outDir: './dist',
   integrations: [
@@ -53,28 +77,9 @@ export default defineConfig({
       },
       sidebar: [
         { label: 'Start here', link: '/' },
-        {
-          label: 'Atoms',
-          items: [
-            { label: 'Badge', slug: 'components/badge' },
-            { label: 'Button', slug: 'components/button' },
-            { label: 'Progress', slug: 'components/progress' },
-            { label: 'Switch', slug: 'components/switch' },
-          ],
-        },
-        {
-          label: 'Molecules',
-          items: [
-            { label: 'Accordion', slug: 'components/accordion' },
-            { label: 'Empty State', slug: 'components/empty-state' },
-            { label: 'Field', slug: 'components/field' },
-            { label: 'Toast', slug: 'components/toast' },
-          ],
-        },
-        {
-          label: 'Organisms',
-          items: [{ label: 'Card', slug: 'components/card' }],
-        },
+        group('Atoms', 'Atoms'),
+        group('Molecules', 'Molecules'),
+        group('Organisms', 'Organisms'),
         { label: 'Tokens', slug: 'tokens' },
         { label: 'Figma vs the repo', slug: 'disagreements' },
       ],

@@ -1,0 +1,83 @@
+/*
+ * Story scaffolding only — not part of the component.
+ *
+ * The component is fluid (gap 2), so every story has to say how wide it wants
+ * it to be. These rules pin the node's own 480px where a story is meant to be
+ * compared against a Figma frame, and otherwise just stack the cases.
+ */
+
+.lumo-accordion-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-gap-lg);
+
+  /* The node's frame width. `size/480` is a core token with no semantic token
+     in front of it, so this is story chrome binding a primitive — which a
+     component may not do, and which is itself part of gap 2. */
+  inline-size: var(--size-480);
+  max-inline-size: 100%;
+}
+
+.lumo-accordion-set {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-gap-xl);
+}
+
+.lumo-accordion-frame {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-sm);
+  inline-size: var(--size-480);
+  max-inline-size: 100%;
+}
+
+.lumo-accordion-frame__head,
+.lumo-accordion-case__head {
+  font: var(--body-body3-intense);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.lumo-accordion-case {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-sm);
+  inline-size: 100%;
+}
+
+.lumo-accordion-note {
+  font: var(--body-body3);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* The FAQ list the "one open at a time" story builds. */
+.lumo-accordion-faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gap-sm);
+  inline-size: var(--size-480);
+  max-inline-size: 100%;
+}
+
+/*
+ * The padding a caller supplies for real content, because the component does
+ * not supply it — see gap 3. This is the shape of the recommendation in
+ * docs/accordion.md, shown rather than built in.
+ */
+.lumo-accordion-answer {
+  padding: var(--spacing-padding-lg);
+  padding-block-start: 0;
+  font: var(--body-body2);
+  color: var(--color-text-secondary);
+}
+
+/* The same content with nothing applied, to show what the node actually draws. */
+.lumo-accordion-bare {
+  margin: 0;
+  font: var(--body-body2);
+  color: var(--color-text-secondary);
+}

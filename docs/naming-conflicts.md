@@ -386,3 +386,74 @@ how the sets are authored. A convention in Figma — the boolean named
 `Show description`, the text named `Description` — would fix it at the source for
 every set that comes after. That is a design decision and nothing has been
 changed in Figma.
+
+---
+
+## `title` collides with the global HTML `title` attribute
+
+**Found while building:** Accordion (`component/accordion`)
+
+The accordion's header text is the component's main text property — Figma's own code
+generator emits it as `title`, defaulting to the string the node draws, "How does pricing
+work?". `title` is also a **global** HTML attribute, present on every element, and it
+renders the browser's own hover tooltip.
+
+This is the Button `type` situation again, one notch less dangerous. A Button that
+forwarded an unset `type` to the DOM would submit a form; an Accordion that forwarded its
+heading text to the DOM `title` would merely grow a tooltip duplicating the text already
+on screen — annoying, not destructive, but still wrong, and a screen reader may read the
+tooltip and the visible text as two things.
+
+**Chosen names:** `title` stays the Figma property, per the rule that Figma names win. The
+DOM attribute is exposed separately as `htmlTitle`, and is **unset** by default.
+
+The Button entry says to give the DOM escape hatch a default that is safe when nobody
+sets it; here that default is "absent", because no tooltip is the correct behaviour and
+the node asks for none.
+
+`title` is spread onto the `<button>` explicitly rather than arriving through `...rest`,
+so the component decides what reaches the DOM instead of leaking whatever the caller
+passed.
+
+**The general rule this suggests:** the Button rule already covers this — when a Figma
+property name collides with a real attribute of the element the component renders, the
+Figma name keeps the prop and the DOM attribute gets a prefixed one. Extend it by one
+word: this applies to **global** attributes too, not just the element's own. `title`,
+`id`, `role`, `style`, `hidden` and `lang` are attributes of everything, so a Figma
+property with any of those names collides no matter what the component renders.
+
+---
+
+## `State=open` is a behaviour, not a skin — and `headingLevel` has no node
+
+**Found while building:** Accordion (`component/accordion`)
+
+Not a name collision, but it belongs beside the Switch entry because it is the same
+question one level further on.
+
+The accordion's one variant property is `State`, with values `closed` and `open`. In Figma
+those are two static frames. In code they are the component's disclosure state, which the
+user changes by clicking — so `state` cannot be only a styling prop the way Card's `State`
+is.
+
+**Chosen names:** `state` for the Figma property, kept verbatim with its two values, plus
+`defaultState` for the uncontrolled seed — exactly the pair `switch.jsx` established as
+`on` / `defaultOn`. Pass `state` and the parent owns it, which is what an FAQ list allowing
+one open answer needs; omit it and the component holds its own.
+
+`onToggle` rather than `onChange`, because the thing reported is which state the disclosure
+is moving to, not a value the control carries.
+
+**`headingLevel` is an addition with no Figma property behind it**, and is documented as one
+rather than presented as part of the design's API — the same treatment `requiredText` gets in
+`docs/field.md`. The node draws a card, not a document outline, so it has no heading level;
+but the component description asks for an FAQ list, and an FAQ whose questions are not
+headings cannot be navigated by a screen reader user. It defaults to `0`, meaning **no
+wrapper**, so the default output is exactly what the node draws and the addition costs
+nothing unless it is asked for.
+
+**The general rule this suggests:** where a Figma variant property describes a state the user
+can change rather than a skin the designer picks, give it the controlled/uncontrolled pair
+(`x` plus `defaultX`) and keep the Figma spelling on the controlled one. And where an
+accessibility requirement needs structure the node does not draw, add it **off by default**,
+so the node-exact rendering is what a caller gets without asking.

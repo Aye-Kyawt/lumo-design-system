@@ -69,7 +69,7 @@ One row per design system component. This is the spine of the pipeline.
 | `Category` | singleSelect — ATOMS · MOLECULES · ORGANISMS · TEMPLATES · UI | `human:designer` | Atomic level. A dependency is not a category: see `Composes`. |
 | `Figma` | url | `human:designer` | The node link. Feeds precedence **8**. |
 | `Staging Storybook` | url | `engineer` | Written after the engineer opened the staging build and saw it render. Feeds precedence **7**. |
-| `Production Storybook` | url | `devops` | Written after DevOps opened the deployed URL and saw it render. Feeds precedence **5**. |
+| `Production Storybook` | url | `devops` | Written after DevOps opened the deployed URL and saw it render. Feeds precedence **5**. It attests a render, **not** that the component is in production — see **Flag 9**. |
 | `Astro Link` | url | `doc-generator` | The component's page on the deployed Astro Starlight site, deep-linked. Feeds precedence **4**. Ownership is contested in the base — **Flag 7**. |
 | `Design` | singleSelect — To-do · In progress · In testing · Done · To be fixed | `human:designer` | Design sign-off. Feeds precedence **8**. Blank means not signed off. |
 | `Development` | formula | `derived` | The status ladder. **No agent may write it** — see below. |
@@ -82,8 +82,8 @@ One row per design system component. This is the spine of the pipeline.
 | `Release Verdict` | singleSelect — Cleared · Blocked | `release` | A *recommendation*, with reasons, in the report. Feeds precedence **4**. A human decides whether the release happens. |
 | `[Staging] Test Records` | link → Staging Testing | `derived` | The mirror of `Composed In`. QA writes the link from the test row, not from here. |
 | `Total Staging Tests` | count | `derived` | |
-| `Staging Passed Count` | count | `derived` | Feeds `Synchronization %`. **Flag 6.** |
-| `Staging Passed Tests` | rollup of `Testing Results` | `derived` | Feeds nothing. **Flag 5.** |
+| `Staging Passed Count` | count | `derived` | Filtered to passes; feeds `Synchronization %`. Flag 6 struck. |
+| `Staging Passed Tests` | rollup of `Testing Results` | `derived` | Feeds nothing **and counts nothing** — reads 0 even for fully green components. **Flag 5.** |
 | `Composes` | link → Components | `engineer` | The components this one imports. Build up, never sideways. |
 | `Composed Into` | link → Components | `derived` | Reverse of `Composes`. Answers the question nothing else here can: if this changes, who must be re-tested. |
 
@@ -249,30 +249,57 @@ whether the *rollup of `Testing Results`* is non-empty. Those differ in both dir
   would answer "do rows exist", and the formula does not use it.
 
 DevOps already refuses to promote on a partial pass and verifies every row reads `Passed`
-itself. That refusal is not a nicety; **it is the only thing standing between this hole and
-an untested component in production.**
+itself. That refusal is real and it is worth keeping — but an earlier version of this note
+called it *"the only thing standing between this hole and an untested component in
+production"*, and **that is no longer true**. See Flag 9: production is reached by merging
+to `main`, a route DevOps is not on. The refusal protects the registry's model of
+promotion, not the mechanism that actually deploys.
 
-**Flag 5 — `Staging Passed Tests` claims to feed `Synchronization %`, and does not.**
-Its description reads "Counts only test rows marked Passed. Feeds Synchronization %."
-`Synchronization %` references `Total Staging Tests` and `Staging Passed Count`. It does not
-reference `Staging Passed Tests` at all, which currently feeds nothing.
+**Flag 5 — `Staging Passed Tests` feeds nothing, and also counts nothing.**
+Its description reads "Counts only test rows marked Passed. Feeds Synchronization %." Both
+halves are false.
 
-**Flag 6 — RESOLVED, 2026-10-13: `Staging Passed Count` does count only passes.**
-It is a `count` over the same link field as `Total Staging Tests` and the API exposes no
-filter on either, so the worry was that it might be unfiltered — which would make
-`Synchronization %` structurally 100% whenever any test row exists, and therefore meaningless.
-It was recorded as unverified because every component then had zero test rows, so both counts
-read `0` and could not be told apart from the data.
+It feeds nothing: `Synchronization %` references `Total Staging Tests` and
+`Staging Passed Count`, and does not reference `Staging Passed Tests` at all.
 
-They can now. `Switch` carries 28 test rows of which 26 have a `Passed` verdict and two were
-deliberately left blank, and the row reads `Total Staging Tests` = 28, `Staging Passed Count`
-= **26**, `Synchronization %` = **92.86%**. The two counts differ, so the count is filtered
-and the percentage is real. Two separate runs reached this independently off the same data.
+It counts nothing: the field reads **0 for every component in the base, including fully
+green ones**. Verified live across four — Button 15 passed, Card 28 passed, Badge 5 passed,
+Progress 0 — and the rollup reads `0` on all four. Confirmed not to be lag; a separate QA
+run checked it specifically after a re-test.
 
-What this does **not** mean: a percentage below 100% is not necessarily a failure. Switch's
-missing 7.14% is two cases nobody executed, not two cases that failed — a blank verdict
-contributes to `Total` and not to `Passed`, and the `Development` ladder ignores it entirely
-(**Flag 4**). Read the rows before reading the percentage.
+Nothing downstream depends on it, so it is harmless to the ladder. But anyone who opens that
+cell to answer "how many passed" gets `0` for a component that passed everything. Read
+`Staging Passed Count` instead.
+
+**Flag 6 — STRUCK. `Staging Passed Count` is filtered and `Synchronization %` is
+trustworthy.**
+This flag previously said the field might count rows rather than passes, because the API
+exposes no filter on either count field, and that it could not be told apart from the data
+while every component had zero test rows. It can now, and it is correct. Three observations,
+taken on different days from different components and by different runs:
+
+| Component | Rows | `Staging Passed Count` | Unfiltered would read |
+|---|---|---|---|
+| Card, 2 of 28 failing | 28 | **26** | 28 |
+| Badge, 5 of 5 failing | 5 | **0** | 5 |
+| Switch, 2 of 28 unexecuted | 28 | **26** | 28 |
+
+Either of the first two alone rules out "always equals total"; Badge's `0` rules out the
+other ways it could have been broken. The field tracks passes and the percentage means what
+it says.
+
+**What this does not mean: a reading below 100% is not necessarily a failure.** Switch's
+missing 7.14% was two cases nobody executed, not two that failed — a blank verdict
+contributes to `Total Staging Tests` and not to `Staging Passed Count`, and the
+`Development` ladder ignores it entirely (**Flag 4**). Read the rows before reading the
+percentage. Switch is also the case that proves the distinction matters: it sat at
+`To be deployed` with those two cases untested, and only a row-by-row count caught it.
+
+**Worth keeping as a lesson rather than a flag.** A DevOps run later re-reported this field
+as confirmed broken, reasoning that the schema exposes no filter, therefore there is none.
+Schema silence is not evidence — exactly the move that nearly produced a wrong answer about
+which branch Vercel deploys, where the deployment records settled what `vercel.json` could
+not. Check the data before concluding from an absence in the API.
 
 **Flag 7 — `Astro Link`: the base and the repo name different owners.**
 The field description opens "🚀 DevOps owns this" and adds "📦 Release never writes this".
@@ -289,13 +316,59 @@ ladder with no error anywhere. Note that the repo writes this choice as `Fixed (
 several places, which with a capital `R` would **not** match. The live choice name is
 `Fixed (To re-test)`. Use the live name, from `get_table_schema`.
 
+**Flag 9 — nothing in the registry observes a merge to `main`, and `main` is production.**
+This is the most serious entry on this list. The other flags are columns that describe
+themselves wrongly; this one is a hole in what the ladder can see at all.
+
+Every production deployment on the Vercel project carries `githubCommitRef: "main"`,
+verified from the deployment records rather than inferred from `vercel.json`, which names no
+production branch. So **merging a pull request into `main` ships to users immediately**.
+
+No column observes that merge. No agent is woken by it. `Production Storybook` is written by
+DevOps *after the fact*, so the registry learns a component shipped only when an agent
+happens to look. Three consequences, each observed today rather than theorised:
+
+- **Shipping is not gated by the registry.** Badge reached production before QA had run at
+  all — merged at 09:30, staging link written at 09:34, QA verdicts at 13:49. Nothing
+  recorded that the artifact was public the whole time.
+- **The registry misdescribed reality and nothing could have revealed it.** Between the
+  merge and DevOps's write, Button was live in production while `Development` read
+  `To be deployed`. Anyone reading the registry then would have concluded it had not
+  shipped.
+- **The gate's meaning has inverted.** DevOps's Role assumes DevOps performs the merge, so
+  "all rows `Passed`" gates *the merge*. Because the merge is upstream and independent, the
+  pass now gates only *the recording*. DevOps is bookkeeping after shipping, not the gate
+  between tested and shipped.
+
+So `Production Storybook` does not mean "this is in production". It means "DevOps opened a
+build and wrote it down". Those came apart the moment production was wired to a branch
+rather than to the agent, and the field's description should say what the cell actually
+attests.
+
+**The minimum that would close it:** observe the production commit — the merge sha and its
+branch recorded as evidence, through the existing `GitHub Commits` table or a new
+`Production Commit` column — so the ladder can tell *shipped* from *recorded*, and so a
+merge that outruns QA is visible in the registry instead of silent. That is a change to the
+base and therefore a human's to make.
+
+**Stacked with Flag 4**, the registry currently cannot reliably distinguish *fully passed*
+from *partially tested*, nor *shipped* from *not shipped*. The second is the more serious.
+
 ### Dangling references
 
 Not contradictions, but references in the base that point at files which do not exist in
 this repo: `Release Review` and `Release Verdict` both cite
 `.claude/skills/release-review/SKILL.md` for "the seven gates", and `Release Verdict` cites
-`VERSIONING.md`. Neither file is present. The release agent cannot follow a skill that has
-not been written, so this blocks its first run.
+`VERSIONING.md`. Neither file is present. `.claude/agents/release.md` cites the same missing
+skill a third time, in its own Role table.
+
+**Confirmed by use, not only by inspection.** Six release reviews have since been written —
+Badge, Switch, Button, Card, Progress and Empty State — and every one of them had to record
+that the gate list it was told to run does not exist, and to review against what the role
+file itself states instead. None invented the seven gates, which is the correct behaviour
+and also an expensive one: six reports each carry the same paragraph because the one file
+that would have replaced it was never written. The reviews are at
+`docs/release-reviews/`.
 
 ---
 

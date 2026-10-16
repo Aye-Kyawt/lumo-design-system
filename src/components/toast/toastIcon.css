@@ -1,0 +1,37 @@
+/*
+ * Icon — the status glyph, Figma nodes 151:131 / 151:139 / 151:147 / 151:155.
+ *
+ * The box is 16 x 16 and binds `size/icon/sm`, so both the box and the glyph
+ * size come straight off the node. The colour is the one thing that changes
+ * across the four statuses, and `toast.css` sets it per status on the root as
+ * `--lumo-toast-icon-color`; this sheet only consumes it.
+ */
+
+.lumo-toast__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  inline-size: var(--size-icon-sm);
+  block-size: var(--size-icon-sm);
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--size-icon-sm);
+  font-weight: var(--typography-fontweight-regular);
+  font-style: normal;
+  line-height: 1;
+  color: var(--lumo-toast-icon-color);
+
+  /* Font axes, not design values — `opsz` tracks the glyph box that
+     size/icon/sm sets, and there is no token layer for a variable font axis. */
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+
+  direction: ltr;
+  white-space: nowrap;
+  word-wrap: normal;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,135 @@
+/*
+ * toast — Figma component set 151:162.
+ *
+ * One variant property, `Status`, four values: positive (151:130), negative
+ * (151:138), warning (151:146) and info (151:154). Exactly one thing changes
+ * across them:
+ *
+ *   --lumo-toast-icon-color   the status glyph
+ *
+ * Everything else — the surface, the stroke, the radius, the elevation, the
+ * padding, both gaps, both type styles and the close control — is identical in
+ * all four. That is why the four status rules at the bottom of this sheet set
+ * one property each and nothing more.
+ *
+ * ---------------------------------------------------------------------------
+ * Six differences from the node are reported in docs/toast.md and flagged at
+ * their declarations here and in the two sub-component sheets. The short
+ * version: the 400px frame width binds nothing, the same `check` glyph is drawn
+ * in all four statuses, the close icon's fill binds no variable, the close
+ * control has no states at all, `radius/card` reads 16 in the live Figma file
+ * and 12 in the committed token export, and the node uses `elevation/level2`
+ * while the elevation scale reserves `level4` for toasts by name.
+ */
+
+.lumo-toast {
+  /*
+   * DESIGN GAP 1 — the node fixes the frame at 400px wide and that width binds
+   * no variable; no token at any layer carries 400. A toast is positioned and
+   * sized by whatever stacks it, so the width is the container's and the
+   * caller sets it. The node's 400 is reproduced in the stories' own wrapper,
+   * not here.
+   */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+  inline-size: 100%;
+  gap: var(--spacing-gap-horizontal-sm);
+  padding: var(--spacing-padding-md);
+  background: var(--color-bg-base);
+
+  /*
+   * Figma draws this edge as an inside stroke and the node's own measurements
+   * prove it: the icon sits at x=17 against a 16px padding, and the frame is
+   * 74 tall for 1 + 16 + 40 + 16 + 1. So a real border on a border-box is the
+   * exact translation here — unlike `card`, which needed an inset shadow
+   * because its focused variant changes the stroke width without changing its
+   * height. Nothing in this set changes the stroke, so nothing needs that.
+   */
+  border: var(--border-width-default) solid var(--color-border-primary-default);
+
+  /*
+   * DESIGN GAP 5 — the node binds `semantic.border.radius.card`, which is the
+   * right name and the wrong number: the live Figma variable reads 16, and the
+   * committed token export resolves it to `core.radius.lg` = 12px in all three
+   * platform modes. `docs/field.md` recorded the same token as 12px when field
+   * was built, so the Figma value has moved since that export. The token name
+   * is bound, not the number — a re-export is the Token Runner's to make, and
+   * picking `radius/xl` here to hit 16 would be inventing agreement.
+   */
+  border-radius: var(--border-radius-card);
+
+  /*
+   * DESIGN GAP 6 — the node applies the effect style `elevation/level2`, whose
+   * two shadows match `--elevation-level2` exactly (0 2 4 -1 at 6%, 0 4 8 -2 at
+   * 10%). But that token's own description reads "Dropdowns, menus, popovers,
+   * tooltips", while `--elevation-level4` reads "Modals, dialogs, toasts —
+   * highest emphasis". The node and the scale disagree about which rung a toast
+   * sits on. The node wins here, because the node is what QA tests; the
+   * contradiction is reported rather than resolved.
+   */
+  box-shadow: var(--elevation-level2);
+}
+
+/* ------------------------------------------------------------- the text ---- */
+
+.lumo-toast__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+
+  /* The node's own `min-w-px`: without it a long unbroken word would push the
+     close control out of the frame instead of wrapping. */
+  min-inline-size: 0;
+  gap: var(--spacing-gap-xs);
+  overflow: clip;
+  word-break: break-word;
+}
+
+/* Body/Body2-Intense, bound style for style. */
+.lumo-toast__title {
+  margin: 0;
+  inline-size: 100%;
+  font-family: var(--typography-fontfamily-body);
+  font-size: var(--typography-fontsize-md);
+  font-weight: var(--typography-fontweight-semibold);
+  line-height: var(--typography-lineheight-md);
+  color: var(--color-text-primary);
+}
+
+/* Body/Body3. */
+.lumo-toast__description {
+  margin: 0;
+  inline-size: 100%;
+  font-family: var(--typography-fontfamily-body);
+  font-size: var(--typography-fontsize-sm);
+  font-weight: var(--typography-fontweight-regular);
+  line-height: var(--typography-lineheight-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------- the statuses ---- */
+/*
+ * One declaration each, because one thing changes. Every value is the exact
+ * fill the node's own exported SVG carries: #16E362, #E31628, #E37316, #1665E3
+ * are green/600, red/600, orange/600 and blue/600, and the four
+ * `color/icon/<status>` tokens are the semantic names in front of them.
+ */
+
+.lumo-toast--positive {
+  --lumo-toast-icon-color: var(--color-icon-positive);
+}
+
+.lumo-toast--negative {
+  --lumo-toast-icon-color: var(--color-icon-negative);
+}
+
+.lumo-toast--warning {
+  --lumo-toast-icon-color: var(--color-icon-warning);
+}
+
+.lumo-toast--info {
+  --lumo-toast-icon-color: var(--color-icon-info);
+}

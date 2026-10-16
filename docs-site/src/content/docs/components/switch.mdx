@@ -32,43 +32,200 @@ independently re-verify that they still render.
 
 ## Intent
 
-<Aside type="caution" title="Intent not yet recorded">
-The intent record for this component has not been written. The
-doc-generator owns it, and writes it by reading the Figma documentation
-and this repo and reporting where the two disagree — not by inference
-from the code alone.
+<Aside type="note" title="How this record was made">
+Written by the doc-generator on 2026-10-16 from two sources, read and compared:
+the component's own documentation in Figma, read live over the Figma MCP
+connection against node `17:1201`, and this repo — `src/components/switch/`,
+its stories, and [`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/main/docs/switch.md).
 
-Until it exists, this page is a shell. Treat nothing below as decided.
+Where the two agree, the field says so. Where they disagree, both sides are
+given and neither is picked — resolving a disagreement is a designer's call,
+not a documenter's. Where neither source states something, the field says that
+rather than inventing a plausible sentence nobody decided.
+
+**The trigger was assumed.** The source board runs an unconditional dashed line
+into the doc-generator; `Completed` is the inferred trigger, not a drawn one.
+Switch reads `Completed`, which is why it was documented — but no condition on
+the board says so.
+
+**`anatomy` is an unconfirmed field name.** The source board truncates the last
+field of the intent contract as `any…`. `anatomy` is this agent's reading of it
+and has not been confirmed against the board.
+</Aside>
+
+<Aside type="caution" title="This component has two names">
+The Figma component set `17:1201` is called **Toggle**. The registry row, the
+repo folder and this page are called **Switch**. The exported identifier is
+`Switch` because `switch` is a reserved word in JavaScript, and the folder
+matches the registry row. Both notes are recorded in
+[`docs/naming-conflicts.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/main/docs/naming-conflicts.md).
+Everything below describes one component under both names.
 </Aside>
 
 ### `use_when`
 
-*Not yet recorded.* When to reach for this component.
+**Both sources agree, in the same words.** Figma's description on the `Toggle`
+component set reads *"Use a toggle for one setting that takes effect
+immediately — 'Write summary with AI' in the report builder."* `switch.jsx`
+and `docs/switch.md` both quote it verbatim.
+
+Two things are decided here and both matter downstream: *one* setting, and
+*takes effect immediately*. The second is what the repo reasons from to make
+the component a real interactive control — see `variant_intent`.
 
 ### `dont_use_when`
 
-*Not yet recorded.* When to reach for something else instead.
+**Both sources agree, in the same words.** Figma: *"Don't use it when the
+change needs a Save action; use Checkbox for that."* The repo quotes the same
+sentence.
+
+**The replacement exists in Figma and not in the repo.** `Checkbox` is a
+published component set in the Lumo.Web library, and its description closes the
+loop — *"Don't use it for a single settings toggle that takes effect
+immediately; use Toggle instead."* There is no checkbox in `src/components/`.
+
+**A near-miss worth naming, so nobody imports it by accident.** Searching Figma
+for "Toggle" also returns far longer, far more prescriptive Toggle
+documentation — DO / DON'T / ACCESSIBILITY / SPEC sections covering label
+placement, four supported states, a 50×26px track and a 22px thumb. Those
+belong to **different design systems** (`Design System.Component In Progress`
+and `Component Library`), not to Lumo.Web. They are not this component, their
+geometry contradicts Lumo's, and nothing in them has been used here.
 
 ### `variant_intent`
 
-*Not yet recorded.* What each variant is for, variant by variant.
+**The shape is agreed, and it is very small.** One variant property, `On`, with
+two values: `On=true` (`17:1202`) and `On=false` (`17:1204`). No size property
+and no state property, in either source. `On=true` is the set's default
+variant, which is why `defaultOn` defaults to `true`.
+
+Each variant's meaning is self-evident from its name and neither source adds to
+it. There is nothing here that needed deciding and was not decided.
+
+**Figma draws no interaction state at all, and the repo implemented six
+anyway.** This is the sharpest Figma/repo divergence in Switch, and
+`docs/switch.md` gap 3 states it as such. The reasoning on the repo side: a
+badge with no states is correct because a badge is read, but a control whose
+setting *"takes effect immediately"* with no focus ring and no disabled
+affordance is a defect, and `CLAUDE.md` asks every component to cover the
+states the product uses. So hovered, pressed, focused and disabled were
+implemented as behaviour, bound to semantic tokens that already exist. **No
+token was invented** — but the *mapping* is the build's reading of the token
+names, not a decision a designer made on the canvas, and it needs confirming
+against drawn variants.
+
+One sub-gap inside it: there is no `color/border/primary/pressed` in the
+export, so the **off** track has nothing to darken to while held and keeps its
+hovered colour. Approximation by omission, flagged rather than filled.
+
+What would close it: draw `State` as a second variant property on `17:1201`,
+or at minimum confirm the six mappings in `docs/switch.md`.
 
 ### `placement`
 
-*Not yet recorded.* Where it belongs in a layout.
+**Neither source states where a Switch belongs in a layout.** Lumo.Web's
+Toggle description says nothing about placement, and neither does the repo.
+
+This is a real absence rather than a quiet one, because the node has **no label
+layer**. Nothing in either source says whether the label goes before or after
+the switch, or how a column of settings should line up. The repo's `In context`
+story shows a settings list with labels on the left — an illustration, not a
+rule, and not stated as one.
+
+The prescriptive Toggle documentation that *does* state placement (*"Place the
+label before the Toggle and keep toggles in a consistent column in settings
+lists"*) belongs to a different design system, as noted under
+`dont_use_when`, and has deliberately not been adopted here.
 
 ### `pairs_with`
 
-*Not yet recorded.* The components it is normally used alongside.
+**Neither source states a pairing for Switch.** Figma names `Checkbox` as the
+alternative when a Save action is involved, which is a substitution rather than
+a pairing. No Lumo.Web component's description mentions a Toggle in a slot.
+
+**What both sources do agree the caller must supply is a name.** The node has
+no label layer, so the accessible name has to come from outside the component.
+The repo takes this literally and adds no `label` prop, because *"inventing a
+text slot would be inventing an API the design does not have"*; the caller
+passes `aria-label` or `aria-labelledby`. Whether that text should also be a
+visible label, and what component it should be, is unstated in both sources.
+
+(`list item` in the Lumo.Mobile library describes a switch as a trailing
+element — a different library and a different component, listed only so it is
+not mistaken for Lumo.Web documentation.)
 
 ### `required_tokens`
 
-*Not yet recorded.* The tokens a correct use of it must supply.
+**Figma binds three tokens. The repo needs twelve.** This is the gap that
+defines this component, and `get_variable_defs` on `17:1201` confirmed it live
+today: it returns exactly three variables, and all three are colour.
+
+**Bound in Figma:**
+
+| Property | Token |
+|---|---|
+| Track fill, `On=true` | `color/bg/primary/idle` |
+| Track fill, `On=false` | `color/border/primary/default` |
+| Knob fill | `color/bg/base` |
+
+The off track takes a **border** token as a **fill**. The repo reproduces it as
+drawn and flags it: `color/bg/*` is the family a fill would normally come from.
+
+**Not bound in Figma, chosen by the repo:** the track's 40×22 box, the 16px
+knob and the 3px knob inset are raw numbers in the node, and the export has
+**no token equal to 22 or to 3** in any family or any platform mode. Rather
+than hardcode four raw px values, each is bound to the nearest semantic token
+whose family carries the right meaning — `size/control/md`, `size/icon/sm`,
+`spacing/padding/xs` — with the track height and knob travel *derived* from
+those so the pill can never go lopsided. Two consequences stated plainly in
+`docs/switch.md`:
+
+1. **The switch is not 40×22, even in web.** It is 40×24, because the inset
+   rounds 3 up to 4.
+2. **The switch is a different size per platform mode** — 40/4 in web, 32/2 in
+   admin, 44/4 in mobile — because both borrowed tokens are mode-dependent. The
+   node draws one fixed size. Whether a toggle *should* scale with the platform
+   is a design decision and has not been made.
+
+**No radius token is named for a toggle.** `radius/chip` and `radius/avatar`
+are borrowed; both resolve to `radius/full` in every mode, so the rendered
+shape is exact and only the name is wrong. What would close it:
+`semantic.border.radius.toggle`, aliased to `radius.full`.
+
+**The knob cannot ease.** All five `motion/easing/*` tokens are declared in the
+export with no value in any mode, so `build-tokens.js` skips them and emits no
+`--motion-easing-*` property. The knob transition carries
+`--motion-duration-fast` and falls back to the browser default easing. Nothing
+was invented to cover it. This is the one component where easing is the motion
+property actually needed.
 
 ### `anatomy`
 
-*Not yet recorded.* Its parts, named. The source board truncates this field as `any…`; `anatomy` is the doc-generator's reading of it and is not yet confirmed.
+*The field name is unconfirmed — see the note at the top of this section.*
 
-## Anatomy and API
+**Both sources agree on the parts, and there are only two.** A track and a
+knob. Figma: both variants are 40×22, each holding one child layer, an ellipse
+named `Knob` (`17:1203`), 16×16, vertically centred, at x=21 when on and x=3
+when off — a 3px inset from whichever end it is at. The repo builds that layer
+as the `switchKnob` sub-component. The set imports no other component in the
+library, so `Composes` in the registry is empty.
 
-The component’s documented API is its props. Until this page carries it, the build report at [`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/main/docs/switch.md) is the current record of the variant matrix, the token map and the states.
+**There is no third part, and that is the notable thing.** No label layer, no
+icon, no text. See `pairs_with`.
+
+**What the repo adds and Figma has no counterpart for.** Because the setting
+takes effect immediately, the component renders a real
+`<button role="switch">` with `aria-checked`; it is focusable, and Space and
+Enter operate it. `disabled` uses `aria-disabled` rather than the DOM
+`disabled` attribute, so the control stays reachable by keyboard and can be
+read before it is skipped — which puts the click guard in the handler rather
+than in the DOM. None of this is drawn in the node.
+
+## API and the full matrix
+
+The component's documented API is its props — `on`, `defaultOn`, `disabled`,
+`onChange`. Only `on` maps to a Figma property; the other three have no
+counterpart in the node and each is explained above. The two variant node ids,
+the full token table, the per-mode measurements and the four design gaps are in
+the build report,
+[`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/main/docs/switch.md).

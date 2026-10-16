@@ -25,17 +25,21 @@ The two are deliberately separate. Storybook is built from the component source
 on every push. This site is written by reading the Figma documentation and the
 repo and reporting where the two disagree.
 
-<Aside type="caution" title="The intent records are not written yet">
-Every component page below is a shell: it carries the component's verified
-sources and its registry status, and marks each intent field as not yet
-recorded. The doc-generator owns that content and has not run against this site,
-because until now there was no site for it to write to.
+<Aside type="note" title="Six components are documented; three are still shells">
+Button, Badge, Card, Switch, Progress and Empty State carry a written intent
+record — every field of the contract answered, from two sources read and
+compared. Accordion, Field and Toast have not shipped yet and are still
+shells.
 
-This matters for releases. A component reaches `Released` only when `Astro Link`,
-`Release Review` and `Release Verdict` = `Cleared` are all set. Six components
-currently sit at `Completed` with a `Blocked` verdict, and in all six reviews the
-first reason given is that no reference page existed. These shells are not those
-pages — they are the place those pages go.
+Each record says where the Figma documentation and the repo **disagree**,
+giving both sides without picking one, and says plainly where **neither**
+source states something rather than inventing a sentence nobody decided. Every
+disagreement is collected on one page: [Figma vs the repo](/disagreements/).
+
+This does not release anything. A component reaches `Released` only when
+`Astro Link`, `Release Review` and `Release Verdict` = `Cleared` are all set.
+`Astro Link` is deliberately still empty — that cell is a page somebody opened
+and watched render, and this site has not deployed successfully yet.
 </Aside>
 
 ## Components

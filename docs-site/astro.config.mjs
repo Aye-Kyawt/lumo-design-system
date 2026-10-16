@@ -71,6 +71,7 @@ export default defineConfig({
           items: [{ label: 'Card', slug: 'components/card' }],
         },
         { label: 'Tokens', slug: 'tokens' },
+        { label: 'Figma vs the repo', slug: 'disagreements' },
       ],
     }),
   ],

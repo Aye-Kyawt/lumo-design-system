@@ -1,0 +1,379 @@
+---
+title: Figma vs the repo
+description: Every place the Figma documentation and the component library say different things, across the six components that have shipped.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Written by the doc-generator on 2026-10-16, alongside the intent records for
+the six components that read `Completed` in the registry — Button, Badge,
+Card, Switch, Progress and Empty State.
+
+Each entry gives **both sides and says which is which**. None of them is
+resolved here. Resolving a disagreement between the design file and the code
+is a designer's or an engineer's decision, and this agent makes neither.
+
+<Aside type="caution" title="Two things to know before reading">
+**The trigger was assumed.** The source board runs an unconditional dashed
+line into the doc-generator. `Completed` is the inferred trigger for this
+work, not a drawn one: all six components read `Completed`, but no condition
+on the board says that is what wakes this agent.
+
+**`anatomy` is an unconfirmed field name.** The intent contract's last field is
+truncated on the source board as `any…`. Every intent record written today
+answers it as `anatomy`, which is this agent's reading and has not been
+confirmed.
+</Aside>
+
+## How the two sources were read
+
+**Figma**, live over the MCP connection: the component description on each of
+the six component sets, and `get_variable_defs` on each node — `26:1665`
+(button), `17:1139` (Badge), `65:230` (card), `17:1201` (Toggle), `69:1151`
+(progress), `94:1862` (empty-state). All six sets resolve to the published
+library `Lumo.Web.Component.V1.0.Complete`.
+
+**The repo**: `src/components/<name>/`, its stories, and the build report in
+`docs/<name>.md`.
+
+Where the two agree there is no entry here. They agree on a great deal — most
+importantly, **all six Figma component descriptions are quoted verbatim in the
+repo**, five of them in both the component source and the build report.
+
+---
+
+## A. The six "don't use this" sentences point at components that do not exist
+
+The strongest pattern across all six, and it is one disagreement repeated.
+Every Figma description closes with a substitution — *use X instead* — and
+Figma has every one of those X's as a published component set. The repo has
+none of them.
+
+| Component | Figma says to use instead | In Figma | In `src/components/` |
+|---|---|---|---|
+| Badge | Chip | ✅ `chip` | ❌ |
+| Switch | Checkbox | ✅ `Checkbox` | ❌ |
+| Progress | Spinner | ✅ `spinner` | ❌ |
+| Button | *(nothing named)* | — | — |
+| Card | *(nothing named — "don't nest")* | — | — |
+| Empty State | *(nothing named — "always give the action")* | — | — |
+
+Three of the six route a developer to a component this library cannot give
+them. `spinner` in turn routes on to `skeleton`, which is also unbuilt.
+
+**Button is the sharper case of the same thing.** Its description says *"Don't
+use it for opening external link"* and names no replacement — and there is no
+Link component in Lumo.Web either, only an `Additional links` set with no
+description at all. So for Button the question "then what?" is unanswered in
+both sources, not just in one.
+
+**Which is which:** Figma is complete and the repo is not. This is a build
+backlog, not a contradiction — but it makes three shipped components'
+documented advice unfollowable today.
+
+---
+
+## B. Card: Figma documents six sub-components, the repo built three
+
+The largest single divergence.
+
+| Figma component | Built? |
+|---|---|
+| `card/header` | ✅ `cardHeader.jsx` |
+| `card/footer` | ✅ `cardFooter.jsx` |
+| `card/layout/vertical` | ✅ `cardLayoutVertical.jsx` |
+| `card/media` | ❌ |
+| `card/layout/horizontal` | ❌ |
+| `card/layout/metric` | ❌ |
+
+Each of the three missing ones has a written description in Figma saying what
+it is for. `card/layout/horizontal` is referenced by `card/layout/vertical`'s
+own description (*"Don't use it when the card leads with an image or chart; use
+card/layout/horizontal"*), so the built component points at an unbuilt one.
+
+`docs/card.md` lists the four files it built and does not record the three it
+did not.
+
+**Which is which:** Figma has six, the repo has three, and the repo's own
+build report does not note the absence.
+
+---
+
+## C. Composition documented in Figma and not demonstrated in the repo
+
+Figma's `card/header` is *"an Action slot for a button, badge or avatar"*, and
+`card/footer` is *"a slot for the card's own actions or meta"*. The repo's
+`card.stories.jsx` imports only `Card` and `CardLayoutVertical` and fills both
+slots with a dashed placeholder — it never puts a real Button or Badge there.
+
+The same pattern holds for Badge: Figma documents five host components for a
+badge (`card/header`, `card/layout/metric`, `table/cell`, `kanban/card`,
+`marketing/pricing-card`), and `badge.stories.jsx` imports nothing but Badge.
+Four of those five hosts have no code at all.
+
+**The counter-example, and it is the good one.** Empty State is the one place
+where both sources say the same thing and the repo proves it:
+`emptyState.stories.jsx` imports the real `Button` into the `↳Action` slot,
+which is exactly what Figma's empty slot and its *"always give the action"*
+ask for.
+
+**Which is which:** Figma documents the pairings; the repo demonstrates one of
+them.
+
+---
+
+## D. Switch is called Toggle in Figma
+
+The Figma component set `17:1201` is named **Toggle**. The registry row, the
+repo folder, the exported identifier and this site all say **Switch**.
+
+The repo's reasons are recorded in `docs/naming-conflicts.md`: `switch` is a
+reserved word in JavaScript, and the folder follows the registry row.
+
+**Which is which:** Figma says Toggle, everything else says Switch. Both are
+deliberate and they have not been reconciled.
+
+**A related trap, worth stating so nobody falls into it.** Searching Figma for
+"Toggle" returns much longer, much more prescriptive Toggle documentation —
+DO / DON'T / ACCESSIBILITY / SPEC, label placement rules, four supported
+states, a 50×26px track with a 22px thumb. That belongs to **other design
+systems** in the same Figma account (`Design System.Component In Progress`,
+`Component Library`), not to Lumo.Web. Its geometry contradicts Lumo's. None
+of it has been used in Lumo's intent record.
+
+---
+
+## E. Switch: Figma draws two variants, the repo ships six states
+
+Figma's `17:1201` has one variant property, `On`, and nothing else. No
+hovered, pressed, focused, disabled, error or loading variant exists anywhere
+in the set.
+
+The repo implemented hovered, pressed, focused and disabled as behaviour,
+bound to semantic tokens that already exist. `docs/switch.md` gap 3 states the
+reasoning and does not hide it: a control whose setting *"takes effect
+immediately"* with no focus ring and no disabled affordance is a defect, and
+`CLAUDE.md` asks every component to cover the states the product uses. **No
+token was invented** — but the mapping of state to token is the build's reading
+of the token names, not a designer's decision.
+
+One sub-gap inside it: there is no `color/border/primary/pressed` in the
+export, so the **off** track has nothing to darken to while held and keeps its
+hovered colour.
+
+**Which is which:** Figma draws two states, the repo ships six, and the four
+extra ones are the engineer's reading awaiting a designer's confirmation.
+
+**Note the contrast with the other two.** Badge and Progress also have no
+drawn states, and in both cases the repo added none — because a badge is read
+rather than clicked and progress is an output rather than a control. The three
+components were treated differently on purpose, and each build report says
+why.
+
+---
+
+## F. Three token bindings where the node and the code name different tokens
+
+All three resolve to the same rendered value, so nothing looks wrong. All
+three mean the code and the design file are not saying the same thing.
+
+| Component | Figma binds | Repo writes | Both resolve to |
+|---|---|---|---|
+| Button | `color/text/accent/aqua` | `--color-text-accent-aqualight` | `#16bee3` |
+| Button | `color/border/disabled` | `--color-border-primary-disabled` | `#dadce7` |
+| Card | `color/border/disabled` | `--color-border-primary-disabled` | `#dadce7` |
+
+**The aqua one has a known cause and it is still live.** `docs/button.md`
+gap 3 records that the library holds *both* `color/text/accent/aqua`
+(`#176e82`) and `color/text/accent/aquaLight` (`#16bee3`), **carrying
+identical descriptions**, and that the Figma MCP renders both under the single
+name `--lumo-semantic-color-text-accent-aqua`. Reading `26:1665` live today
+still returns one collapsed name at the `aquaLight` value. The descriptions
+need to be made distinct.
+
+**The disabled-border one is unexplained in both directions.**
+`get_variable_defs` returns `color/border/disabled` on both nodes, while
+`docs/card.md` gap 4 reports the opposite shape of problem — that
+`color/border/primary/disabled` is *described* in Figma with the older path
+`lumo.semantic.color.border.disabled`. Whether the nodes bind two different
+variables, or one variable whose description is stale, is not settled by
+either source and is not settled here.
+
+---
+
+## G. `motion/duration/fast` is in the code and not on the node
+
+Button and Card both transition their state changes with
+`--motion-duration-fast`, and `docs/card.md` lists `motion/duration/fast` as a
+Figma variable in its token map. `get_variable_defs` on `26:1665` and on
+`65:230` returns **no motion variable at all**.
+
+**Which is which:** either the binding sits on a child the node query does not
+reach, or the transition is the repo's addition and the build report recorded
+a binding that is not there. Neither source settles it.
+
+---
+
+## H. The node's own fill contradicts the node's own value text (Progress)
+
+Every variant of `69:1151` draws the `Indicator` at a fixed **158px** while
+the value text reads **72%**. The track in that layout is about 246px wide, so
+the drawn fill is about **64%**. The two cannot both be right.
+
+The repo drives the fill from `percent`, so 72% renders at 72%. **The coded
+component will therefore not match a pixel measurement of the node's
+indicator, and that is correct.**
+
+**Which is which:** this is a contradiction *inside Figma*, not between the
+two sources. `docs/progress.md` reads it as unfillable rather than as a bug —
+a static frame has no way to express "the fill follows the number" — and
+records it because QA will measure it.
+
+---
+
+## I. The Empty State action slot is 100px of height that will never exist
+
+`94:14` and `94:22` are both empty slots measuring exactly **100×100**. That
+square is most of the node's published height: `sm` is 360×256 and `md` is
+520×284, and a real Button is 36px tall. So the node's own sizes are about
+100px taller than any empty state with a real button in it.
+
+The repo sizes the slot by its contents — an `sm` empty state with one button
+is about 192px, not 256px.
+
+**Which is which:** Figma's number is 100×100 and the repo's is hug.
+`docs/emptyState.md` declines to decide it, and says why: rendering a fixed
+square would put a 36px button in the top-left of a large empty box, which is
+plainly not what the design means — but "plainly" is a judgement and the
+number is in the node. **A designer should either fill the slot in Figma with
+the Button component or shrink it to hug.**
+
+---
+
+## J. Geometry that binds no token, by component
+
+Not Figma-versus-repo disagreements so much as places the design file is
+silent and the code had to choose. Each is reported in the component's build
+report and each was confirmed live today.
+
+| Component | What binds nothing | What the repo did |
+|---|---|---|
+| Switch | track 40×22, knob 16, inset 3 — and **no token equal to 22 or 3 exists** in any family or mode | borrowed `size/control/md`, `size/icon/sm`, `spacing/padding/xs`; derived height and travel |
+| Switch | track and knob radius | borrowed `radius/chip` and `radius/avatar`, both of which resolve to `radius/full` |
+| Progress | the two track heights, 6 and 8 — **the only thing `Size` changes** | composed from core spacing primitives exactly |
+| Progress | track radius binds `core/border/radius/full`, skipping the semantic layer | reproduced the core binding as drawn |
+| Empty State | medallion radius binds `core/border/radius/full` | reproduced the core binding as drawn |
+| Empty State | medallion sizes 56 and 72 | used core `size/56` and `size/72` |
+| Empty State | frame widths 360/520 and description insets 20/50 | made the component fluid; the caller sizes it |
+
+Two of these have a consequence worth stating. **The switch is not 40×22 even
+in web** — it is 40×24, because the borrowed inset rounds 3 up to 4 — and
+**it is a different size in each platform mode** (40/4 web, 32/2 admin, 44/4
+mobile) because both borrowed tokens are mode-dependent, while the node draws
+one fixed size.
+
+And the Empty State medallion is the subtlest: Switch borrowed a semantic
+alias where the node bound *nothing*, but here the node binds **core
+explicitly**. Substituting a semantic alias would be deciding which meaning
+the medallion has. A designer should add `semantic.border.radius.medallion`,
+or point the node at `radius/avatar`.
+
+---
+
+## K. Intent nobody has written, in either source
+
+These are not disagreements. They are the fields where both sources are
+silent, collected because a reader of the intent records will notice the same
+sentence six times and should know it is deliberate.
+
+**No component in this set documents what its variants are *for*.** Every one
+of the six names its variant properties and values; not one says which value
+to reach for when. No variant inside any of the six component sets carries a
+description of its own, and the repo describes mechanics only — *"Type picks
+the skin"*, *"tone picks the tonal surface and the label colour"*, *"status
+picks the indicator colour"*.
+
+| Component | Undecided |
+|---|---|
+| Button | which `Type` a primary, secondary or destructive action takes |
+| Badge | which `Tone` a given status takes |
+| Card | which `Padding` step to use when |
+| Progress | what each `Status` means; when `sm` rather than `md` |
+| Empty State | when `sm` rather than `md`; how the four causes named in `use_when` map onto anything |
+| Switch | *(nothing — `On=true` / `On=false` need no explanation)* |
+
+**Placement is unstated by five of the six.** Only Empty State's own
+description names where it goes. For the rest, the placement evidence that
+exists belongs to *other* components' documentation — `card/header` saying it
+has an Action slot, `table/cell` saying what can be dropped into it,
+`learning/video-player` saying *"Don't put the progress bar inside it"*. Those
+are statements by those components about themselves, and the intent records
+list them as evidence rather than promoting them into rules.
+
+### The one place where a rule exists, in the wrong library
+
+Lumo.Web's `progress` does not say what `Status` means. Two sibling platform
+libraries do, and **they disagree with each other**:
+
+| Library | What its `progress` description states |
+|---|---|
+| `Lumo.Mobile` | *"Tone: primary default, positive on track/complete, warning slipping, negative at risk."* |
+| `Lumo.AdminSystem` | *"Tone=danger above 90% utilisation or when blocked; warning when at risk."* |
+
+Three things differ. They call the property **`Tone`** where the web set calls
+it **`Status`**. Mobile names the fourth value **`negative`** and Admin names
+it **`danger`** — and within Lumo.Web itself, *Badge* uses `Danger` while
+*Progress* uses `negative`, so both spellings are live. And the two
+descriptions disagree about what "at risk" means: Mobile says it is
+`negative`, Admin says it is `warning`.
+
+**None of this has been adopted into the web component's intent record.** It
+is recorded here because it is the closest thing to a decision that exists,
+and because whoever makes the web decision should know these two already exist
+and conflict.
+
+---
+
+## L. Repo-internal: three tokens used in code and missing from the build report
+
+Not a Figma/repo disagreement — the node and the code agree. The build report
+is what is incomplete.
+
+`get_variable_defs` on `65:230` returns
+`--lumo-semantic-color-bg-surfacePrimary` (`#f5f6fa`), and
+`src/components/card/` uses `--color-bg-surfaceprimary`. The token map in
+`docs/card.md` does not list it. The same applies to `--body-body3-intense`
+and `--spacing-gap-lg`, both used in the card stylesheets and both absent from
+that map.
+
+---
+
+## M. One live reading neither source explains
+
+`get_variable_defs` on `17:1139` returns, alongside the sixteen Lumo semantic
+variables Badge uses, a bare **`color/primary: #5b4cf5`**.
+
+That is not a Lumo token. `#5b4cf5` appears nowhere in the component, the
+build report, or the generated CSS in `build/css/`. `17:1139` is a wrapper
+frame around the five Tone variants, so it most likely belongs to the frame
+rather than to any badge — but neither source says what it is or where it came
+from.
+
+Reported, not resolved.
+
+---
+
+## What is not on this list
+
+**The `Astro Link` registry cell.** The doc-generator owns it and it has
+deliberately not been written. The contract says that cell is a link somebody
+opened and watched render; the site has not deployed successfully yet, because
+the Vercel project is pointed at `main` and `main` has no `docs-site/`.
+Writing the link from a local build would make the cell a lie, and the rest of
+the crew acts on these cells.
+
+**`Release Verdict`.** All six components currently read `Blocked`, and the
+first reason given in all six release reviews is that no reference page
+existed. These pages are that reference page — but whether that unblocks
+anything is the Release agent's call and then a human's, not this agent's.
+Documenting a component is not reviewing it.

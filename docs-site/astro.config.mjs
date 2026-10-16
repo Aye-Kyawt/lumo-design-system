@@ -60,6 +60,7 @@ export default defineConfig({
         {
           label: 'Molecules',
           items: [
+            { label: 'Accordion', slug: 'components/accordion' },
             { label: 'Empty State', slug: 'components/empty-state' },
             { label: 'Field', slug: 'components/field' },
             { label: 'Toast', slug: 'components/toast' },

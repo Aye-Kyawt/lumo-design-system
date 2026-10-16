@@ -1,0 +1,200 @@
+---
+/**
+ * Starlight's Hero, overridden.
+ *
+ * Structure follows the pattern used by large public design-system sites: the
+ * system's name, a tagline, a release card carrying the version, and a pair of
+ * calls to action split by audience (design / build).
+ *
+ * Every visual value here is a Lumo semantic token. Starlight's own `--sl-*`
+ * variables are used only for structural measurements (content width), never
+ * for colour, type, spacing or radius. There are no raw hex, px or font values.
+ *
+ * Two things the reference pattern does that this hero deliberately does not:
+ * an oversized version wordmark, and a gradient wash behind it. Lumo has no
+ * type scale above `--heading-h1` and no gradient tokens, and inventing either
+ * would put a visual decision in code instead of in Figma. Both are reported
+ * as design gaps rather than filled in.
+ */
+import { version, tagged, releaseNotesHref } from '../releaseInfo';
+
+const route = Astro.locals.starlightRoute;
+const hero = route?.entry?.data?.hero;
+const title = hero?.title ?? route?.entry?.data?.title ?? 'Lumo Design System';
+const tagline = hero?.tagline ?? '';
+const actions = hero?.actions ?? [];
+---
+
+<div class="lumo-hero">
+  <div class="lumo-hero__inner">
+    <p class="lumo-hero__eyebrow">Design system</p>
+    <h1 class="lumo-hero__title" set:html={title} />
+    {tagline && <p class="lumo-hero__tagline" set:html={tagline} />}
+
+    <div class="lumo-hero__release">
+      <div class="lumo-hero__release-text">
+        <p class="lumo-hero__release-label">Version</p>
+        <p class="lumo-hero__release-line">
+          <span class="lumo-hero__chip">{version}</span>
+          <span class="lumo-hero__release-note">
+            {tagged
+              ? 'Latest release'
+              : 'Not released — no tag, no notes, nothing cleared yet'}
+          </span>
+        </p>
+      </div>
+      {releaseNotesHref && (
+        <a class="lumo-hero__release-link" href={releaseNotesHref}>Release notes</a>
+      )}
+    </div>
+
+    {actions.length > 0 && (
+      <div class="lumo-hero__actions">
+        {actions.map((action: any) => (
+          <a
+            class:list={['lumo-hero__action', `lumo-hero__action--${action.variant ?? 'primary'}`]}
+            href={action.link}
+          >
+            {action.text}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .lumo-hero {
+    background: var(--color-bg-base);
+    border-block-end: var(--border-width-default) solid var(--color-border-primary-default);
+    padding-block: var(--spacing-padding-xl);
+    padding-inline: var(--spacing-padding-lg);
+  }
+
+  .lumo-hero__inner {
+    max-inline-size: var(--sl-content-width);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-md);
+  }
+
+  .lumo-hero__eyebrow {
+    font: var(--body-body4);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .lumo-hero__title {
+    font: var(--heading-h1);
+    color: var(--color-text-bold);
+    margin: 0;
+  }
+
+  .lumo-hero__tagline {
+    font: var(--body-body1);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* The release card — the element the version lives in. */
+  .lumo-hero__release {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-gap-sm);
+    background: var(--color-bg-brand-subtle);
+    border: var(--border-width-default) solid var(--color-border-brand-default);
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-padding-md);
+    margin-block-start: var(--spacing-gap-sm);
+  }
+
+  .lumo-hero__release-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-xs);
+  }
+
+  .lumo-hero__release-label {
+    font: var(--label-label1);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .lumo-hero__release-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-gap-horizontal-sm);
+    margin: 0;
+  }
+
+  .lumo-hero__chip {
+    font: var(--body-body3-intense);
+    color: var(--color-text-brand);
+    background: var(--color-bg-base);
+    border: var(--border-width-default) solid var(--color-border-brand-default);
+    border-radius: var(--border-radius-chip);
+    padding-block: var(--spacing-padding-sm);
+    padding-inline: var(--spacing-padding-md);
+  }
+
+  .lumo-hero__release-note {
+    font: var(--body-body3);
+    color: var(--color-text-secondary);
+  }
+
+  .lumo-hero__release-link {
+    font: var(--button-button2);
+    color: var(--color-text-action);
+  }
+
+  .lumo-hero__release-link:hover {
+    color: var(--color-text-actionhovered);
+  }
+
+  .lumo-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-gap-sm);
+    margin-block-start: var(--spacing-gap-sm);
+  }
+
+  .lumo-hero__action {
+    font: var(--button-button1);
+    border-radius: var(--border-radius-button);
+    padding-block: var(--spacing-padding-sm);
+    padding-inline: var(--spacing-padding-lg);
+    text-decoration: none;
+    border: var(--border-width-default) solid transparent;
+    transition: background var(--motion-duration-fast), color var(--motion-duration-fast);
+  }
+
+  .lumo-hero__action--primary {
+    background: var(--color-bg-primary-idle);
+    color: var(--color-text-inverse);
+  }
+
+  .lumo-hero__action--primary:hover {
+    background: var(--color-bg-primary-hovered);
+  }
+
+  .lumo-hero__action--minimal {
+    color: var(--color-text-action);
+    border-color: var(--color-border-primary-default);
+  }
+
+  .lumo-hero__action--minimal:hover {
+    color: var(--color-text-actionhovered);
+    border-color: var(--color-border-primary-hovered);
+  }
+
+  .lumo-hero__action:focus-visible {
+    outline: var(--border-width-focused) solid var(--color-border-brand-focused);
+    outline-offset: var(--border-width-focused);
+  }
+</style>

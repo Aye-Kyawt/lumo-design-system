@@ -15,7 +15,7 @@
  *                        Required, WithoutHelper  (both are node properties —
  *                        the `Required` layer and the Helper row — shown at
  *                        their other value)
- *   This build's reading: WithRealControl, LongText
+ *   This build's reading: WithRealControl, WithAGroupControl, LongText
  *
  * WithRealControl is the important one and it is not drawn in Figma at all.
  * A field is a wrapper with no tab stop, so hover, focus and press belong to
@@ -23,7 +23,21 @@
  * states can be clicked through, and shows the custom-property contract by
  * which the field hands its error skin to a control it does not own.
  *
- * KNOWN REPORTED DIFFERENCES — all six are in docs/field.md:
+ * LABEL-TO-CONTROL ASSOCIATION, AND WHY MOST OF THESE STORIES HAVE NONE
+ *
+ * `Field` emits the label's `for` only when `controlId` names a control. There
+ * is no guessed default, because the field cannot see what is in the slot.
+ * `WithRealControl` is the only story that names one, and it is the only story
+ * whose `for` resolves and whose label is clickable. Every story that fills the
+ * slot with the `_Slot/Content` placeholder names nothing and carries no `for`,
+ * which is the truth of those stories: the placeholder is a `<div>`, and a
+ * `<label for>` cannot name a `<div>`.
+ *
+ * The label row publishes `id="${id}-label"` in every story regardless. That is
+ * the path for a slot holding something `for` is not allowed to address at all,
+ * and `WithAGroupControl` is there to show it working.
+ *
+ * KNOWN REPORTED DIFFERENCES — all seven are in docs/field.md:
  *   1. The control's 40px height binds no variable. Bound to size/control/md,
  *      so it is 40px in web, 32px in admin, 44px in mobile. Check the Admin
  *      platform in the toolbar to see it move.
@@ -40,6 +54,9 @@
  *   6. `disabled` keeps the ordinary border and the red asterisk, while
  *      `Type` greys its helper to text/disabled. All three followed as drawn
  *      and raised rather than normalised.
+ *   7. The component is fluid where the node is a fixed 320px frame. Always
+ *      stated at its declaration in field.css; it is why these stories need
+ *      the `lumo-field-frame` decorator below to be held against the node.
  */
 import { Field } from './field.jsx';
 import { FieldControlSlot } from './fieldControlSlot.jsx';
@@ -331,6 +348,7 @@ export const WithRealControl = {
               state={state}
               helperText={helperText}
               id={`demo-${state}`}
+              controlId={`demo-${state}-control`}
               required={state === 'error'}
             >
               <input
@@ -347,6 +365,56 @@ export const WithRealControl = {
           </div>
         </div>
       ))}
+    </div>
+  ),
+};
+
+/**
+ * Not drawn in Figma. The other half of the association story: a slot holding
+ * something `<label for>` cannot reach.
+ */
+export const WithAGroupControl = {
+  name: 'With a group control',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Not from the node, and the reason the label row publishes an `id`. The ' +
+          'component description says field wraps “Input, Select, Textarea and Checkbox ' +
+          'groups alike” — but a checkbox or radio *group* is not a labelable element, ' +
+          'and HTML’s `for` only reaches `input`, `select`, `textarea`, `button`, ' +
+          '`meter`, `output` and `progress`. So `for` can never associate this one. The ' +
+          'group points back at the label row with `aria-labelledby="${id}-label"` ' +
+          'instead, and `aria-describedby` picks up the helper row the same way ' +
+          '`With a real control` does. Inspect the radiogroup: its accessible name is ' +
+          'the label row’s text, and no `for` is rendered because nothing could carry ' +
+          'the id it would name.',
+      },
+    },
+  },
+  render: (args) => (
+    <div className="lumo-field-frame">
+      <Field
+        {...args}
+        state="default"
+        id="demo-group"
+        label="Visibility"
+        helperText="Who can see this initiative on the roadmap."
+      >
+        <div
+          role="radiogroup"
+          aria-labelledby="demo-group-label"
+          aria-describedby="demo-group-helper"
+          className="lumo-field-demo-group"
+        >
+          {['Everyone', 'My team', 'Only me'].map((option, i) => (
+            <label className="lumo-field-demo-choice" key={option}>
+              <input type="radio" name="demo-group-visibility" defaultChecked={i === 0} />
+              {option}
+            </label>
+          ))}
+        </div>
+      </Field>
     </div>
   ),
 };

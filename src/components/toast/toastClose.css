@@ -1,0 +1,100 @@
+/*
+ * Close — Figma nodes 151:136 / 151:144 / 151:152 / 151:160 (`Icon/close`, 90:8).
+ *
+ * DESIGN GAP 3 — the close icon's fill binds no variable; it is exported as a
+ * flat SVG at #636679. That value is `color/neutral/600` exactly, and the
+ * semantic token in front of it is `color/text/secondary`. There is no neutral
+ * token in the `color/icon/*` family at all — it holds brand, onAction,
+ * onHovered, onFocus, disabled, negative, positive, warning, info, update and
+ * the four action rungs, and none of those means "a neutral icon on a surface".
+ * So the idle colour here is exact and only the *name* is this build's reading:
+ * a text token used on an icon, because the icon family has no neutral rung.
+ * Reported in docs/toast.md.
+ *
+ * DESIGN GAP 4 — the set draws no hovered, pressed, focused or disabled state
+ * for this control, and it is the only interactive thing in a toast. CLAUDE.md
+ * requires every state the product uses, so the three below are bound rather
+ * than left out, and each is flagged as a reading of the neutral ramp rather
+ * than a designed value:
+ *
+ *   hovered  text/primary  (neutral/800)  one rung darker than idle
+ *   pressed  text/bold     (neutral/1000) one rung darker again
+ *   focused  elevation/focused — the token whose own description reads
+ *            "Keyboard focus indicator", so this one is a designed value used
+ *            for its stated purpose; only its application here is new.
+ *
+ * The focused glyph stays at the hovered colour, which is the convention the
+ * token set itself uses: `text/actionFocus` is documented as "matches hovered".
+ *
+ * No hover *background* and no padding are added. The node fixes this control
+ * at 16 x 16 and a background plate would need a radius and an inset that no
+ * token carries for it — undesigned geometry. The hover affordance is therefore
+ * a colour change only, which is the most this can say using values that exist.
+ */
+
+.lumo-toast__close {
+  /* The node's box, exactly: a 16 x 16 icon instance and nothing around it. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  inline-size: var(--size-icon-sm);
+  block-size: var(--size-icon-sm);
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-secondary); /* GAP 3 — exact value, borrowed name. */
+  border-radius: var(--border-radius-full);
+
+  transition: color var(--motion-duration-fast);
+}
+
+.lumo-toast__closeGlyph {
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--size-icon-sm);
+  font-weight: var(--typography-fontweight-regular);
+  font-style: normal;
+  line-height: 1;
+
+  /* Font axes, not design values. */
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+
+  direction: ltr;
+  white-space: nowrap;
+  word-wrap: normal;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* GAP 4 — none of the four below is drawn in the node. */
+
+.lumo-toast__close:hover:not(:disabled) {
+  color: var(--color-text-primary);
+}
+
+.lumo-toast__close:active:not(:disabled) {
+  color: var(--color-text-bold);
+}
+
+.lumo-toast__close:focus-visible {
+  color: var(--color-text-primary);
+  outline: none;
+  box-shadow: var(--elevation-focused);
+}
+
+.lumo-toast__close:disabled {
+  color: var(--color-icon-disabled);
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-toast__close {
+    transition: none;
+  }
+}

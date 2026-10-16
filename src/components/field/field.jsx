@@ -31,8 +31,8 @@
  * Any control dropped into the slot binds those and inherits the state. The
  * contract is spelled out in docs/field.md.
  *
- * Every difference from the node — six of them — is in docs/field.md. None was
- * guessed; the unbound values are each bound to the nearest semantic token
+ * Every difference from the node — seven of them — is in docs/field.md. None
+ * was guessed; the unbound values are each bound to the nearest semantic token
  * whose family carries the right meaning, and flagged at their declaration.
  */
 import { useId } from 'react';
@@ -69,10 +69,19 @@ const STATE = ['default', 'error', 'disabled', 'Type'];
  *   Textarea or Checkbox group here. Named `children` per the Card precedent
  *   in docs/naming-conflicts.md, since the field has exactly one slot.
  * @param {string} [props.id]
- *   Seeds the ids the label and helper row need. Generated when absent.
+ *   Seeds the ids of the label row (`${id}-label`) and the helper row
+ *   (`${id}-helper`), so a control in the slot can reference either. Generated
+ *   when absent — and a generated id is useless to you, so pass one whenever
+ *   you need to wire `aria-labelledby` or `aria-describedby`.
  * @param {string} [props.controlId]
- *   The `id` of the control inside the slot, so the label can point at it.
- *   Defaults to `${id}-control` — set that `id` on your control, or pass this.
+ *   The `id` of the labelable control inside the slot. Pass it and the label
+ *   gets `for`; omit it and the label gets no `for` at all. There is no
+ *   guessed default: the field cannot see what you put in the slot, and a `for`
+ *   pointing at nothing is worse than none. Only pass this for an element `for`
+ *   can legally name — input, select, textarea, button, meter, output,
+ *   progress. For anything else (a checkbox or radio group, a custom
+ *   combobox), leave it off and point that thing at `${id}-label` with
+ *   `aria-labelledby`.
  * @param {string} [props.className]
  */
 export function Field({
@@ -91,8 +100,44 @@ export function Field({
 }) {
   const generatedId = useId();
   const fieldId = id || generatedId;
+  const labelId = `${fieldId}-label`;
   const helperId = `${fieldId}-helper`;
-  const targetId = controlId || `${fieldId}-control`;
+
+  // `for` is emitted when, and only when, the caller has NAMED the control —
+  // that is, passed `controlId`. There is no longer a `${id}-control` fallback,
+  // and that removal is the repair.
+  //
+  // The fallback was `controlId || `${fieldId}-control``, which guessed a
+  // target in two situations where no target existed:
+  //
+  //   1. No `id` either, so `fieldId` was React's `useId` value — opaque, never
+  //      reaching the caller, so no control anywhere could be holding
+  //      `${fieldId}-control`. QA found this on the deployed build in 7 of the
+  //      9 stories: every story filling the slot with the `_Slot/Content`
+  //      placeholder (Staging Testing, "label-to-control association through
+  //      the slot").
+  //   2. `id` passed, which says only "seed my label and helper ids" and does
+  //      NOT say "and I put `${id}-control` on a control". Narrowing the guess
+  //      to this case was the first repair attempted here, and the group story
+  //      below broke it immediately: it passes `id` for the helper wiring and
+  //      has no labelable control at all, and the field dutifully emitted
+  //      `for="demo-group-control"` pointing at nothing.
+  //
+  // A `for` pointing at no element is worse than no `for`: it tells assistive
+  // tech the label has a target and then hands over an empty reference, and
+  // clicking the label moves focus nowhere. Guessing cannot be made safe here,
+  // because only the caller knows what is in the slot — so the field stops
+  // guessing and asks.
+  //
+  // `labelId` is the other half, and it is published in every case. A slot can
+  // hold something `<label for>` is not allowed to address at all: a checkbox
+  // group, a radio group, a custom combobox, or the placeholder — `for` reaches
+  // only input, select, textarea, button, meter, output and progress. Those
+  // point back at the label row with `aria-labelledby` instead.
+  //
+  // There is no `targetId` local any more, deliberately: `controlId` now goes
+  // straight onto `htmlFor` below, so there is no place left for a default to
+  // creep back in.
 
   // An unknown `state` would silently drop every colour, because the whole skin
   // hangs off the `data-state` attribute. Fall back to the set's own default
@@ -105,8 +150,10 @@ export function Field({
     <div {...rest} className={classes} data-state={resolvedState}>
       {/* The `Label row` frame (141:3119) is the `<label>` itself, so the two
           text layers stay flex siblings separated by the node's own gap token
-          while a screen reader still reads one label element. */}
-      <label className="lumo-field__labelRow" htmlFor={targetId}>
+          while a screen reader still reads one label element. `htmlFor` is
+          `undefined` when no control has been named, and React then omits the
+          attribute rather than writing an empty reference. */}
+      <label className="lumo-field__labelRow" id={labelId} htmlFor={controlId}>
         <span className="lumo-field__label">{label}</span>
         {required && (
           <>

@@ -361,6 +361,61 @@ from.
 
 Reported, not resolved.
 
+## N. `border/radius/card` resolves to two different values in one file
+
+Added 2026-10-17, from the QA rows that put Toast and Accordion into
+`To be fixed`. Both failed on the same thing, and neither is a component
+defect — both rows say so, and both are right.
+
+**The same variable, read live on three nodes in the same file:**
+
+| Node | `var(--lumo-semantic-border-radius-card)` |
+|---|---|
+| Card `65:230` | **12** |
+| Accordion `208:4912` | **16** |
+| Toast `151:162` | **16** |
+
+**The committed export agrees with Card.**
+`tokens/lumo.semantic.border.value.tokens.json` aliases `border-radius-card` to
+`{border-radius-lg}`, and `--border-radius-lg` is `12px`. `--border-radius-xl`
+is already `16px`, and `border-radius-modal` is what points at it.
+
+So Toast and Accordion render a 12px corner while the nodes they were built
+from read 16, and the 4px gap is not a rendering artefact — 16px exists in the
+export under a different name.
+
+**Why a token re-export does not fix this.** Both QA rows suggested routing it
+to the Token Runner for a re-export. A re-export would re-read the variable and
+get `12` — the value Card's node resolves and the value already committed.
+Nothing would move. The disagreement is not between Figma and the export; it is
+**inside the Figma file**, between nodes using one variable name.
+
+**Two readings, and choosing between them is a designer's call:**
+
+- Those nodes sit under a **mode** that resolves `radius/card` to 16, and the
+  export captures only one mode. `CLAUDE.md` is explicit that a token which
+  exists in one mode and not another is a design gap to report rather than
+  fill in.
+- Or the 16 is a **detached override** still carrying the variable's name, in
+  which case the nodes should be re-bound and the export is already correct.
+
+The second is the likelier reading on the evidence here: Card's own node and
+the export agree at 12, and Card's 28 test rows recorded 12px as expected and
+passed. It is not resolved here, because resolving it means deciding what the
+card corner *is*, and that decision belongs on the canvas.
+
+**What must not happen in code:** re-pointing `toast.css` or `accordion.css` at
+`--border-radius-xl` to make the number match. Both components bind the token
+their node names. Changing the binding to chase a value would manufacture
+agreement between the file and the code — the failure `CLAUDE.md` calls out by
+name.
+
+Verified independently of the QA rows: all three Figma readings taken live over
+the MCP connection, and the export read from the committed `tokens/` source and
+the generated `build/css/web/tokens.css`.
+
+---
+
 ---
 
 ## What is not on this list

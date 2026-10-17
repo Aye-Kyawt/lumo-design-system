@@ -84,20 +84,54 @@ intent so nobody re-adds them as commands that fail, and nobody assumes the guar
 
 ## docs-site deployment — the reference site
 
-**Not deployed yet.** The project `lumo-reference-site` exists and the site builds locally and
-renders, but no deployment has succeeded, so there is no URL and `Components/Astro Link` stays
-empty until there is one.
+**Deployed and live.** This section said "not deployed yet" until 2026-10-17. That was stale:
+a production deployment succeeded on **2026-10-16 15:13:42Z** from ref `439929d`, and the site
+is serving. Checked on 2026-10-17 by fetching it, not by reading a dashboard.
+
+**Live URL: <https://lumo-reference-site.vercel.app>**
+
+Confirmed to be *this* repo's site rather than someone else's holding a plausible name: the
+switch page serves this repo's own wording — Figma node `17:1201`, "Write summary with AI",
+and the note about `switch` being a reserved word — and the nav matches `astro.config.mjs`
+(Atoms / Molecules / Organisms / Tokens / Figma vs the repo). `/`, `/components/switch/`,
+`/disagreements/` and `/tokens/` all return 200.
+
+Note which URL to use. The per-deployment address,
+`https://lumo-reference-site-19rndlkh9-aye-kyawts-projects.vercel.app`, is behind Deployment
+Protection and redirects to a Vercel login page — fetching it returns the login HTML with a
+200, so a naive status check on it looks like success and proves nothing. The project's stable
+production alias above is the one to record and to open.
+
+### The record
+
+| | |
+|---|---|
+| Folder | `docs-site/` — its own npm package, own `package.json`, own `package-lock.json`, own `node_modules`. Not a workspace of the root project |
+| Vercel project | `lumo-reference-site`, id `prj_nMiPqBsAvTBRhsBOqFTI0ZrKTLrK`, team `team_NczYOAM1tl42j4eOPDDd7dsx`. It already existed; no second project was created |
+| Root Directory | **`docs-site`, and already set.** Not read from a settings page — inferred from real output: a commit carrying `{"git": {"deploymentEnabled": false}}` at `docs-site/vercel.json` produced no reference-site deployment at all, and the only way the project could have read that file is if it is rooted there |
+| Production branch | **`main` today; it should be `astro`.** The live production deployment is at ref `439929d`, which is `origin/main`. Changing it is the one thing still outstanding — see "What is still blocked" |
+| Production URL | **<https://lumo-reference-site.vercel.app>** — fetched and confirmed as this repo's site on 2026-10-17 |
+| Deployment Protection | on for per-deployment URLs. Those redirect to Vercel login; the stable alias above is public |
 
 - Intended shape : a **second** Vercel project on this same repo with the root directory set
   to `docs-site`, leaving the existing repo-root Storybook project untouched. The root project
   is fragile in a documented way (see above) and nothing here changes it
-- Build config : `docs-site/vercel.json` — framework `astro`, install
+- Build config : `docs-site/vercel.json` **on branch `astro`** — framework `astro`, install
   `npm install && npm --prefix .. install`, build `npm run build`, output `dist`. Framework
   detection is safe here, unlike at the root: Astro is a framework Vercel detects correctly
-  and `docs-site/` has a real entry point
-- **Root Directory = `docs-site` must be set on the project.** It is not expressible in
-  `vercel.json`, because `vercel.json` is itself read *from* the root directory — which is
-  exactly the trap below
+  and `docs-site/` has a real entry point.
+
+  The install command runs `npm install` twice rather than `npm ci`, for the reason the root
+  project documents: a lockfile written on macOS can omit packages Linux needs and `npm ci`
+  refuses it. The second half, `npm --prefix .. install`, is **not** optional padding — the
+  build's first act is the root `build:tokens`, so the repo root's devDependencies have to be
+  there. Reducing this to a bare `npm install` breaks the build at the token step
+- **On every other branch `docs-site/vercel.json` contains only
+  `{"git": {"deploymentEnabled": false}}`** — see "Why the config differs per branch" below
+- **Root Directory = `docs-site`.** Set, as of the successful deploy above. Keep the note anyway:
+  it is not expressible in `vercel.json`, because `vercel.json` is itself read *from* the root
+  directory — which is exactly the trap below, and the reason the deploy-disable flag does
+  nothing unless this field is right
 - **The failure when it is not set.** Every deployment up to 2026-10-16 failed this way, and
   the message names a directory that has nothing to do with this site:
 
@@ -152,6 +186,72 @@ empty until there is one.
   than no sitemap. Astro warns about this on every build until it is set
 - `Astro Link` is the doc-generator's cell, and the rule on it is the same as for the two
   Storybook cells: open the deployed page, see it render, then write it
+
+### Why the config differs per branch
+
+`docs-site/vercel.json` is **not the same file on every branch**, on purpose:
+
+- on `astro` — the real build config (framework, install, build, output)
+- everywhere else, `main` and `staging` included — only `{"git": {"deploymentEnabled": false}}`
+
+The reason is that the docs project watches the whole repo. Without this, every push to every
+branch asks it for a deployment and hangs a check on the PR. `deploymentEnabled: false` is read
+from the branch being pushed, so a push to `main` finds the flag and stops; a push to `astro`
+finds the real config and builds production.
+
+Three things about this are easy to get wrong:
+
+1. **It only works because Root Directory is `docs-site`.** Vercel reads `vercel.json` *from the
+   root directory*. Had the project still been pointed at the repo root, `docs-site/vercel.json`
+   would be a file it never opens, on any branch, and this flag would be inert. Verified working
+   rather than assumed: the commit carrying the flag produced **no reference-site deployment at
+   all**, while the previous commit on `staging` (`9970566`), without it, produced one. The
+   repo-root Storybook project deployed normally on both, which is correct — it reads the root
+   `vercel.json` and this change does not touch it
+2. **The flag only suppresses deployments triggered by a git push.** Importing a project, or
+   deploying from the dashboard or the CLI, is not a push and will build regardless — the same
+   note already recorded against the repo root. A manual deploy from `main` would therefore run
+   with no framework, build command or output directory, and should be expected to fail. That is
+   not a bug to chase; it is this file doing its job
+3. **`astro` and `main` now conflict on this file forever.** Every merge in either direction hits
+   it. `astro` carries no other commits of its own — at the time of writing it is the same commit
+   as `origin/main` — so keeping it current means merging `main` into it and keeping `astro`'s
+   side of `docs-site/vercel.json` each time. A future alternative worth considering is dropping
+   the per-branch split and using the project's own ignored-build-step setting instead, which
+   would keep one config in the repo
+
+### What is still blocked
+
+**One setting: Production branch = `astro`.** It is `main` today. Everything else is in place —
+the project exists, it is rooted at `docs-site`, and it deploys.
+
+Why it could not be changed from here: the Vercel connector authenticates and lists projects,
+but **every per-project and per-deployment call returns**
+
+```
+403 forbidden — Not authorized: Trying to access resource under scope "aye-kyawts-projects".
+You must re-authenticate to this scope or use a token with access to this scope.
+```
+
+and the error itself says not to retry it or expect re-authentication to fix it. The Vercel CLI
+is not installed on this machine, so the fallback that error suggests is unavailable too. The
+production branch has to be changed by a human in the dashboard:
+
+> Project `lumo-reference-site` → Settings → Git → Production Branch → `astro`
+
+**How to tell whether the flip took**, without a dashboard: `astro` carries the `site` setting
+in `docs-site/astro.config.mjs` and `main` does not, so only `astro` builds a sitemap.
+
+```
+curl -o /dev/null -w '%{http_code}\n' https://lumo-reference-site.vercel.app/sitemap-index.xml
+```
+
+`404` means production is still building `main`. `200` means it is building `astro`. As of
+2026-10-17 it is `404`.
+
+Nothing is broken meanwhile — the two branches are otherwise the same content, so the live site
+is correct either way. It starts to matter with the first commit that lands on one and not the
+other.
 
 ### Why Astro and Starlight were added
 

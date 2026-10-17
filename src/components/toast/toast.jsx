@@ -31,7 +31,6 @@
  */
 import { ToastIcon } from './toastIcon.jsx';
 import { ToastClose } from './toastClose.jsx';
-import './toast.css';
 
 /** `Status`, exactly as the Figma set spells its four values. */
 const STATUS = ['positive', 'negative', 'warning', 'info'];

@@ -1,0 +1,47 @@
+/**
+ * The design system's one stylesheet.
+ *
+ * Every component sheet is imported here and nowhere else. Component files
+ * carry no `import './x.css'` of their own, so a consumer who imports a single
+ * component does not silently pull in a stylesheet; they load this file once:
+ *
+ *   import '@aye-kyawt/lumo-design-system/tokens.css';
+ *   import '@aye-kyawt/lumo-design-system/styles.css';
+ *
+ * tokens.css must come first — every declaration below reads from it.
+ *
+ * Order is parent, then that parent's subcomponents. Each component namespaces
+ * its own selectors (`lumo-card__`, `lumo-toast__`), so the order is for
+ * reading, not for specificity. Story-only sheets (`*.stories.css`) are
+ * deliberately absent: they are Storybook scaffolding, not shipped styles.
+ */
+
+@import './components/accordion/accordion.css';
+@import './components/accordion/accordionIcon.css';
+@import './components/accordion/accordionContentSlot.css';
+
+@import './components/badge/badge.css';
+
+@import './components/button/button.css';
+@import './components/button/buttonIcon.css';
+
+@import './components/card/card.css';
+@import './components/card/cardLayoutVertical.css';
+@import './components/card/cardHeader.css';
+@import './components/card/cardFooter.css';
+
+@import './components/emptyState/emptyState.css';
+@import './components/emptyState/emptyStateIcon.css';
+
+@import './components/field/field.css';
+@import './components/field/fieldIcon.css';
+@import './components/field/fieldControlSlot.css';
+
+@import './components/progress/progress.css';
+
+@import './components/switch/switch.css';
+@import './components/switch/switchKnob.css';
+
+@import './components/toast/toast.css';
+@import './components/toast/toastIcon.css';
+@import './components/toast/toastClose.css';

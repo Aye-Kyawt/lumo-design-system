@@ -15,7 +15,6 @@
  * `iconName` lets a caller pass another glyph; the default is what the node
  * draws.
  */
-import './toastIcon.css';
 
 /**
  * @param {object} props

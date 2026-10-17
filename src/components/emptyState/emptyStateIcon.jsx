@@ -11,7 +11,6 @@
  * defines, so outside a button it renders with no colour at all. The system has
  * no shared Icon component to import — see docs/emptyState.md, gap 5.
  */
-import './emptyStateIcon.css';
 
 /**
  * @param {object} props

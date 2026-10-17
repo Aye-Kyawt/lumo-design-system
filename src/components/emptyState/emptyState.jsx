@@ -16,7 +16,6 @@
  * component. See docs/emptyState.md for every difference from the node.
  */
 import { EmptyStateIcon } from './emptyStateIcon.jsx';
-import './emptyState.css';
 
 const SIZE = ['sm', 'md'];
 

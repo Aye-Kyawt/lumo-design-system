@@ -9,7 +9,6 @@
  * Reported, not filled: the node's 14px box and the icon's fill colour bind no
  * variable. See docs/field.md, gaps 2 and 3.
  */
-import './fieldIcon.css';
 
 /**
  * @param {object} props

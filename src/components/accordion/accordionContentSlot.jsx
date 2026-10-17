@@ -16,7 +16,6 @@
  * instance of 41:21, and the two are deliberately separate: each carries its
  * parent's CSS namespace, so neither reaches into a sheet it does not own.
  */
-import './accordionContentSlot.css';
 
 /**
  * @param {object} props

@@ -7,7 +7,6 @@
  */
 import { CardHeader } from './cardHeader.jsx';
 import { CardFooter } from './cardFooter.jsx';
-import './cardLayoutVertical.css';
 
 /**
  * @param {object} props

@@ -5,7 +5,6 @@
  * Sub-component of Card. A divider above a right-aligned row of actions.
  * Hidden by default in the card layout.
  */
-import './cardFooter.css';
 
 /**
  * @param {object} props

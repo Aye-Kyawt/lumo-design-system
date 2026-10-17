@@ -9,7 +9,6 @@
  * Presentational and inert on purpose — the parent is the `<button>`, so the
  * knob must not be focusable or announced.
  */
-import './switchKnob.css';
 
 /**
  * @param {object} props

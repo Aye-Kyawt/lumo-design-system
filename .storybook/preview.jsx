@@ -2,6 +2,11 @@ import { useLayoutEffect } from 'react';
 
 import '../stories/lib/docs.css';
 
+// Component files no longer import their own sheets -- the library ships one
+// stylesheet and so does the workshop. Without this, every story renders
+// unstyled. See src/styles.css.
+import '../src/styles.css';
+
 // Every stylesheet is imported as a string rather than injected by Vite: the
 // platform toolbar swaps which one is live, and three `:root` sheets loaded at
 // once would just fight each other.

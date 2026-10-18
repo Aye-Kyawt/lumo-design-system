@@ -6,10 +6,10 @@ resources, and documented in Storybook.
 
 ## Install
 
-The package is **`@aye-kyawt/lumo-design-system`**.
+The package is **`@ds-house/lumo-design-system`**.
 
 ```bash
-npm install @aye-kyawt/lumo-design-system
+npm install @ds-house/lumo-design-system
 ```
 
 > **Not published yet.** `package.json` carries `"private": true` as a deliberate guard, there
@@ -27,14 +27,14 @@ Load the two stylesheets once, at your app's entry point. **`tokens.css` must co
 every component declaration reads from it:
 
 ```js
-import '@aye-kyawt/lumo-design-system/tokens.css';
-import '@aye-kyawt/lumo-design-system/styles.css';
+import '@ds-house/lumo-design-system/tokens.css';
+import '@ds-house/lumo-design-system/styles.css';
 ```
 
 Then import the components you need:
 
 ```jsx
-import { Badge, Button, Card, CardLayoutVertical } from '@aye-kyawt/lumo-design-system';
+import { Badge, Button, Card, CardLayoutVertical } from '@ds-house/lumo-design-system';
 
 export function ReleaseRow({ onPublish }) {
   return (

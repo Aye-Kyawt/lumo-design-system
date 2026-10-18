@@ -7,8 +7,8 @@
  *
  * Styles are not imported here on purpose. A consumer loads them once:
  *
- *   import '@aye-kyawt/lumo-design-system/tokens.css';
- *   import '@aye-kyawt/lumo-design-system/styles.css';
+ *   import '@ds-house/lumo-design-system/tokens.css';
+ *   import '@ds-house/lumo-design-system/styles.css';
  */
 export { Accordion } from './components/accordion/accordion.jsx';
 export { Badge } from './components/badge/badge.jsx';

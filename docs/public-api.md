@@ -67,8 +67,8 @@ consumer genuinely fills.
 Two export paths, loaded once by the consuming app, `tokens.css` first:
 
 ```js
-import '@aye-kyawt/lumo-design-system/tokens.css';
-import '@aye-kyawt/lumo-design-system/styles.css';
+import '@ds-house/lumo-design-system/tokens.css';
+import '@ds-house/lumo-design-system/styles.css';
 ```
 
 - `styles.css` — every component sheet, via `@import`. Component files import

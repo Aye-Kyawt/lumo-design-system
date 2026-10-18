@@ -58,7 +58,7 @@ Run all four, report all failures at once, and halt. Do not fix one and carry on
 3. **`README.md` exists at the repo root and names the package and its install command.**
    **This fails today.** The README names no package — it opens on the token pipeline and its
    `## Commands` section lists `npm install`, `build:tokens` and `storybook`, which are *this
-   repo's* commands, not a consumer's install line. There is no `@aye-kyawt/lumo-design-system`
+   repo's* commands, not a consumer's install line. There is no `@ds-house/lumo-design-system`
    anywhere in it. Halt and say so; the fix is a human's.
 4. **npm auth resolves.** `npm whoami` returns a user, and `npm token list` shows a **granular**
    token rather than a **Publish** token.

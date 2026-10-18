@@ -5,8 +5,8 @@
  * carry no `import './x.css'` of their own, so a consumer who imports a single
  * component does not silently pull in a stylesheet; they load this file once:
  *
- *   import '@aye-kyawt/lumo-design-system/tokens.css';
- *   import '@aye-kyawt/lumo-design-system/styles.css';
+ *   import '@ds-house/lumo-design-system/tokens.css';
+ *   import '@ds-house/lumo-design-system/styles.css';
  *
  * tokens.css must come first — every declaration below reads from it.
  *

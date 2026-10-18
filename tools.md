@@ -17,7 +17,7 @@ Stack facts and commands only. Rules about how we work live in 'CLAUDE.md'.
 - Package manager : npm
 - Library build : `tsup` 8, config at `tsup.config.js`. One entry, `src/index.ts`; ESM + CJS +
   `.d.ts`; `react` and `react-dom` external. Output `dist/`, gitignored
-- Published package : scoped, `@aye-kyawt/lumo-design-system`, at `0.1.0`. `private: true` sits
+- Published package : scoped, `@ds-house/lumo-design-system`, at `0.1.0`. `private: true` sits
   in `package.json` as a guard so a stray `npm publish` is refused; `npm run release:publish` is
   the only command that lifts it, and it puts it straight back
 - Styling : CSS custom properties, generated from tokens

@@ -1,5 +1,5 @@
 {
-  "name": "@aye-kyawt/lumo-design-system",
+  "name": "@ds-house/lumo-design-system",
   "version": "0.1.0",
   "description": "Lumo Design System — React components built from Figma, styled only from generated tokens.",
   "license": "ISC",

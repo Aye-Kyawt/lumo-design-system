@@ -59,6 +59,8 @@ way `build:storybook` does, so its token CSS is generated and never committed.
   `build/json/`, `build/ios/` and `build/android/`. Never edit by hand; gitignored. There is no
   `build/tokens/` directory
 - Components : `src/components/<Name>/`
+- Versioning : `VERSIONING.md` at the repo root — the scheme, what is public, and what a given
+  version promises. `release-review` gate 7 reads it
 - Public surface : `src/index.ts` — the only thing published as API. What is in it and what is
   deliberately left out is recorded in `docs/public-api.md`
 - One stylesheet : `src/styles.css` — `@import`s every shipped component sheet. Component files

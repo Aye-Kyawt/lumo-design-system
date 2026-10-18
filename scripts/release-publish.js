@@ -242,7 +242,18 @@ if (dryRun) {
   say(`    skipped — dry run would tag v${version}`);
 } else {
   run(`git add package.json package-lock.json`);
-  run(`git commit -m "Release ${version}"`);
+  // Commit only if the version bump actually changed something. `npm version`
+  // at the version package.json already carries writes the same value back, so
+  // there may be no diff -- and an unconditional `git commit` would throw here,
+  // AFTER the publish had succeeded, leaving the package on the registry with
+  // no tag behind it. The tag is the point of this step; the commit is not
+  // worth failing it for.
+  const staged = capture('git diff --cached --name-only');
+  if (staged) {
+    run(`git commit -m "Release ${version}"`);
+  } else {
+    say('    no version diff to commit -- package.json already read ' + version);
+  }
   run(`git tag -a v${version} -m "${name} ${version}"`);
   say(`    tagged v${version} locally. Push it yourself when you mean to:`);
   say(`        git push origin ${branch} --follow-tags`);

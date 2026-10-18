@@ -13,7 +13,6 @@
  * The chevron and that attribute say the same thing, and a screen reader
  * should hear it once.
  */
-import './accordionIcon.css';
 
 /**
  * @param {object} props

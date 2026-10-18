@@ -38,7 +38,6 @@
 import { useId } from 'react';
 
 import { FieldIcon } from './fieldIcon.jsx';
-import './field.css';
 
 /** `State`, exactly as the Figma set spells its four values. */
 const STATE = ['default', 'error', 'disabled', 'Type'];

@@ -24,7 +24,6 @@
 import { useState } from 'react';
 
 import { SwitchKnob } from './switchKnob.jsx';
-import './switch.css';
 
 /**
  * @param {object} props

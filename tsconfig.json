@@ -1,0 +1,23 @@
+{
+  "//": "Added only so tsup can emit .d.ts from the JSDoc on the JSX sources, and so `npm run typecheck` is a real command. This does not make the repo TypeScript: `checkJs` is off and the sources stay .jsx. See tools.md.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+
+    "allowJs": true,
+    "checkJs": false,
+
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false
+  },
+  "include": ["src", "tsup.config.js"],
+  "exclude": ["src/**/*.stories.jsx"]
+}

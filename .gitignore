@@ -6,6 +6,9 @@ node_modules/
 /build/
 /storybook-static/
 
+# The published library build, produced by build:package.
+/dist/
+
 # QA run artifacts. Regenerated every test pass, so a committed set goes stale
 # the moment the component is fixed -- as happened on PR #7.
 /reports/

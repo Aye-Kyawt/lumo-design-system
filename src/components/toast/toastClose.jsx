@@ -14,7 +14,6 @@
  * reachable by keyboard and announces as a button; the glyph itself is
  * `aria-hidden` decoration and the accessible name comes from `label`.
  */
-import './toastClose.css';
 
 /**
  * @param {object} props

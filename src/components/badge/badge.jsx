@@ -10,7 +10,6 @@
  * interaction state, which follows from that description — a badge is read,
  * so it renders as a <span> and carries no hover, focus or disabled behaviour.
  */
-import './badge.css';
 
 const TONE = ['primary', 'success', 'warning', 'danger', 'neutral'];
 

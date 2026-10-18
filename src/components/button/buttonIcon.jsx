@@ -6,7 +6,6 @@
  * `.storybook/preview-head.html` — the glyph is a font character, not an SVG
  * asset, so it inherits colour and needs nothing downloaded.
  */
-import './buttonIcon.css';
 
 /**
  * @param {object} props

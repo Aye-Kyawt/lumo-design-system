@@ -5,7 +5,6 @@
  * Sub-component of Card. Holds the card title, an optional supporting line and
  * an Action slot for a button, badge or avatar. Not for use outside a card.
  */
-import './cardHeader.css';
 
 /**
  * @param {object} props

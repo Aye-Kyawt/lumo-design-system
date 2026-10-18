@@ -6,7 +6,6 @@
  * owns the surface, border, radius and padding; everything inside comes from a
  * card layout placed in the `↳Layout` slot. Don't nest a card inside a card.
  */
-import './card.css';
 
 const PADDING = ['none', 'md', 'lg', 'xl'];
 const STATE = ['default', 'hovered', 'focused', 'disabled'];

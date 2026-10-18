@@ -7,7 +7,6 @@
  * State x Type, 5 x 3. Type picks the skin; State picks the colours within it.
  */
 import { ButtonIcon } from './buttonIcon.jsx';
-import './button.css';
 
 const TYPE = ['fill', 'outline', 'transparent'];
 const STATE = ['default', 'hovered', 'focused', 'disabled', 'error'];

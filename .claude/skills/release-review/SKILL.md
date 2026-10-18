@@ -152,13 +152,20 @@ and the code does not implement is a failure.
 There is a written answer to "what does the number this component is about to enter mean", and
 to what a consumer may rely on at that number.
 
-**This gate fails today, for every component.** The repo carries no `VERSIONING.md`, no
-`CHANGELOG`, and no git tags; `package.json` reads `0.1.0`, `private: true`, and
-`docs-site/src/releaseInfo.ts` records `tagged = false` precisely so the site does not imply a
-release nobody cut. Until a human writes what the versioning scheme is, no review can establish
-this, and every review must say so rather than passing it quietly.
+**`VERSIONING.md` now exists**, written and owned by a human on 2026-10-19. It states the
+scheme, what counts as each kind of bump, that at `0.x` anything may change in a minor, exactly
+what is public (the named exports of `src/index.ts`, the two stylesheet entry points, and the
+shipped custom property names), and what `0.1.0` specifically does and does not promise.
 
-Do not resolve it by choosing a scheme. **Owner of a failure:** a human.
+So this gate is now evaluable: read `VERSIONING.md` and check that the version the component is
+about to enter means what that file says it means. It still **fails** for a component whose
+entry would contradict it — a removed prop going into a patch, say.
+
+Note what `VERSIONING.md` says about `0.1.0` itself: no component had a `Cleared` verdict when
+it was published, because the registry was not reachable from the release machinery. A review of
+a later version should not read that as precedent.
+
+Do not resolve a conflict by rewriting the scheme. **Owner of a failure:** a human.
 
 ## The six checks
 

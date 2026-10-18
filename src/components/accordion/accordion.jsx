@@ -50,7 +50,6 @@
 import { useId, useState } from 'react';
 
 import { AccordionIcon } from './accordionIcon.jsx';
-import './accordion.css';
 
 /** `State`, exactly as the Figma set spells its two values. */
 const STATE = ['closed', 'open'];

@@ -17,7 +17,6 @@
  * behind the component description's instruction: "Don't write the field's own
  * error styling into the control; field carries it."
  */
-import './fieldControlSlot.css';
 
 /**
  * @param {object} props

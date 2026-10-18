@@ -23,7 +23,6 @@
  */
 import { useId } from 'react';
 
-import './progress.css';
 
 const STATUS = ['brand', 'positive', 'warning', 'negative'];
 const SIZE = ['sm', 'md'];

@@ -1,0 +1,28 @@
+---
+title: Upgrading
+description: How to move between versions of the Lumo Design System.
+---
+## From nothing to `0.1.0`
+
+```bash
+npm install @ds-house/lumo-design-system
+```
+
+Then load the two stylesheets once, at your app's entry point, **tokens first**:
+
+```js
+import '@ds-house/lumo-design-system/tokens.css';
+import '@ds-house/lumo-design-system/styles.css';
+```
+
+`tokens.css` must come first — every component declaration reads from it. See [Developing](/developing/introduction/).
+
+## Between `0.x` versions
+
+:::caution[There is no upgrade history yet]
+`0.1.0` is the only published version, so there is nothing to upgrade from and no breaking-change list to give you. This page will carry one per release once there is more than one.
+
+**Owner:** a human — cut the next release.
+:::
+
+When there is: at `0.x` a minor bump may break you, so read the release's own notes before moving. [Versioning](/get-started/versioning/) says why.

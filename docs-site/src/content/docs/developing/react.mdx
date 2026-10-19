@@ -1,0 +1,30 @@
+---
+title: React
+description: Using the Lumo Design System with React 19.
+---
+## Peer dependencies, not bundled
+
+`react` and `react-dom` are peers and are left external in the build. Bundling React would give you two copies and break hooks, so the package resolves to whichever React your app already has — 19 or newer.
+
+## Controlled and uncontrolled
+
+Two components keep their own state unless you drive them:
+
+- **`Switch`** — pass `on` to control it; leave it out and it keeps its own, seeded from `defaultOn`. `onChange(on, event)` reports the value it is moving to.
+- **`Accordion`** — pass `state` to control it; leave it out and it keeps its own, seeded from `defaultState`. `onToggle(state, event)` likewise.
+
+When you control one, the component does not move on its own — the value you pass wins, and acting on the callback is your job.
+
+## Accessible names
+
+Some components cannot name themselves, because the design draws no label layer:
+
+- `Switch` needs `aria-label` or `aria-labelledby` from you.
+- `Field` renders the label and you supply the control; `controlId` is what ties them together.
+- An icon-only `Button` takes its name from `label`.
+
+Each component's **Usage** tab lists its accessibility facts with a link to the line that makes each one true.
+
+## Server rendering
+
+Every component renders to static markup with `react-dom/server`; the test suite asserts it for both the ESM and the CJS build.

@@ -1,0 +1,35 @@
+---
+title: Roadmap
+description: What is planned for the Lumo Design System.
+---
+
+{/*
+  GENERATED — do not edit by hand.
+  The roadmap. Carries only what a source states.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+:::caution[There is no roadmap source]
+Nothing in this repository records planned work with a date, an owner or a priority. This page deliberately lists nothing rather than inferring a plan from open questions and TODOs: a date nobody committed to is read as a commitment.
+
+What *is* recorded, and is not a roadmap, is the set of open questions in `tools.md` and in the release-review skill.
+
+**Owner:** a human
+:::
+
+
+## Known gaps, without dates
+
+These are stated in the repository as unresolved. None carries a date, an owner or a priority, so none is given one here.
+
+| Gap | What is recorded |
+|---|---|
+| No component has a `Cleared` release verdict | The registry is not reachable from the release machinery, so no release review has run. |
+| The reference site is not the production branch | The Vercel project still builds `main`; this site is specified to be built from `astro`. |
+| Five named alternatives do not exist | The usage guidance points at `Chip`, `Checkbox`, `Spinner`, `Modal or an Alert` and `card/layout/horizontal`, none of which is implemented. |
+| Variant meanings are unwritten | Every component description says what the component is for, never what an individual variant value means. |
+| No accessibility audit | `@storybook/addon-a11y` is not installed, so the per-state a11y checks are manual. |
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

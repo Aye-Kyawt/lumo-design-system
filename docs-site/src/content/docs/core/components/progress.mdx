@@ -1,0 +1,501 @@
+---
+title: Progress
+description: Progress in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Progress.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--brand-sm">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=69-1151">Figma node 69:1151</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/progress/progress.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use progress to show how far along a measurable thing is — a score against a target, an initiative’s completion, a multi-step flow.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `progress` description, read 2026-10-19.</small>
+
+### Where it goes
+- in a card body beneath a metric, and in a kanban card
+
+### When not to use it
+- Don’t use it for an unknown wait; use Spinner instead.
+  - **Use instead:** `Spinner` — not implemented in this library yet.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `status` | `brand` | _not stated in the source_ |
+| `status` | `positive` | _not stated in the source_ |
+| `status` | `warning` | _not stated in the source_ |
+| `status` | `negative` | _not stated in the source_ |
+| `size` | `sm` | _not stated in the source_ |
+| `size` | `md` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- role="progressbar" sits on the track, not the wrapper: a progressbar’s contents are not exposed to assistive tech, so putting it on the wrapper would swallow the label and the value text  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/progress/progress.jsx#L87">src/components/progress/progress.jsx:87</a></small>
+- carries aria-valuenow, aria-valuemin and aria-valuemax, with the percent clamped to 0-100  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/progress/progress.jsx#L95">src/components/progress/progress.jsx:95</a></small>
+- named by reference via aria-labelledby when a label is shown, and by aria-label when it is not, so the bar is never unnamed  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/progress/progress.jsx#L99">src/components/progress/progress.jsx:99</a></small>
+
+### Composition
+Nothing in the stories shows this component composed with another.
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Label off
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--no-label&globals=theme:light"
+  title="Label off — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--no-label&globals=theme:dark"
+  title="Label off — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Value off
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--no-value&globals=theme:light"
+  title="Value off — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--no-value&globals=theme:dark"
+  title="Value off — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Label and Value off
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--bar-only&globals=theme:light"
+  title="Label and Value off — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--bar-only&globals=theme:dark"
+  title="Label and Value off — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Value text — not a percentage
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--custom-value-text&globals=theme:light"
+  title="Value text — not a percentage — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--custom-value-text&globals=theme:dark"
+  title="Value text — not a percentage — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Fill — 0, 50 and 100
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--fill-range&globals=theme:light"
+  title="Fill — 0, 50 and 100 — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--fill-range&globals=theme:dark"
+  title="Fill — 0, 50 and 100 — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Fluid width
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--fluid&globals=theme:light"
+  title="Fluid width — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--fluid&globals=theme:dark"
+  title="Fluid width — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### In context
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--in-context&globals=theme:light"
+  title="In context — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--in-context&globals=theme:dark"
+  title="In context — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { Progress } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `status` | `'brand'|'positive'|'warning'|'negative'` | `'brand'` | Figma `Status`. Picks the indicator colour. Nothing else changes. |
+| `size` | `'sm'|'md'` | `'sm'` | Figma `Size`. Picks the track height, and nothing else. |
+| `label` | `boolean` | `true` | Figma `Label`. Shows the label line above the bar. |
+| `labelText` | `string` | `'Commercial strategy'` | Figma `Label text`. Names what is progressing. Still used as the bar's accessible name when `label` is false, so it is never pointless to set. |
+| `value` | `boolean` | `true` | Figma `Value`. Shows the value text beside the bar. |
+| `valueText` | `string` | — | Figma `Value text`. Defaults to `percent` rendered as a percentage. |
+| `percent` | `number` | `72` | How far along, 0–100. Code-only — Figma draws the fill at a fixed width and has no property for it. See docs/naming-conflicts.md and docs/progress.md. |
+| `className` | `string` | `''` |  |
+
+### Union types
+- `status`: `'brand'|'positive'|'warning'|'negative'`
+- `size`: `'sm'|'md'`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--body-body3` | `400 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body)` | — |
+| `--border-radius-full` | `999px` | — |
+| `--border-width-default` | `var(--border-width-1)` | — |
+| `--color-bg-negative-idle` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-bg-positive-idle` | `var(--color-green-800)` | `#b6f1cc` |
+| `--color-bg-primary-idle` | `var(--color-aqua-700)` | `#16bee3` |
+| `--color-bg-surfacesecondary` | `var(--color-neutral-100)` | `#30344b` |
+| `--color-bg-warning-idle` | `var(--color-orange-700)` | `#edb587` |
+| `--color-text-primary` | `var(--color-neutral-800)` | `#ffffff` |
+| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
+| `--label-label1` | `500 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-label)` | — |
+| `--spacing-2` | `2px` | — |
+| `--spacing-4` | `4px` | — |
+| `--spacing-8` | `8px` | — |
+| `--spacing-gap-horizontal-sm` | `var(--spacing-8)` | — |
+| `--spacing-gap-xs` | `var(--spacing-4)` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--brand-sm&viewMode=docs" title="Progress props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D69-1151" title="Progress in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### Status=brand, Size=sm
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--brand-sm">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--brand-sm&globals=theme:light"
+  title="Status=brand, Size=sm — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--brand-sm&globals=theme:dark"
+  title="Status=brand, Size=sm — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=brand, Size=md
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--brand-md">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--brand-md&globals=theme:light"
+  title="Status=brand, Size=md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--brand-md&globals=theme:dark"
+  title="Status=brand, Size=md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=positive, Size=sm
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--positive-sm">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--positive-sm&globals=theme:light"
+  title="Status=positive, Size=sm — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--positive-sm&globals=theme:dark"
+  title="Status=positive, Size=sm — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=positive, Size=md
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--positive-md">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--positive-md&globals=theme:light"
+  title="Status=positive, Size=md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--positive-md&globals=theme:dark"
+  title="Status=positive, Size=md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=warning, Size=sm
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--warning-sm">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--warning-sm&globals=theme:light"
+  title="Status=warning, Size=sm — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--warning-sm&globals=theme:dark"
+  title="Status=warning, Size=sm — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=warning, Size=md
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--warning-md">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--warning-md&globals=theme:light"
+  title="Status=warning, Size=md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--warning-md&globals=theme:dark"
+  title="Status=warning, Size=md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=negative, Size=sm
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--negative-sm">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--negative-sm&globals=theme:light"
+  title="Status=negative, Size=sm — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--negative-sm&globals=theme:dark"
+  title="Status=negative, Size=sm — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Status=negative, Size=md
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--negative-md">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--negative-md&globals=theme:light"
+  title="Status=negative, Size=md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--negative-md&globals=theme:dark"
+  title="Status=negative, Size=md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### All eight variants
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-progress--all-variants">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--all-variants&globals=theme:light"
+  title="All eight variants — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-progress--all-variants&globals=theme:dark"
+  title="All eight variants — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+— reported, not filled
+
+###### Gap 1 — `Size` is the whole point of the property and neither value is bound
+
+The node draws the track 6px tall at `sm` and 8px at `md`, both as raw numbers with no
+variable behind them. There is no token near those values anywhere in the system: the
+core size scale starts at 12, and the semantic size families are `icon`, `control`,
+`avatar`, `touchTarget` and `layout` — none of which means "the height of a progress
+track".
+
+Snapping to the nearest step in a plausible family, the way Badge did with its unbound
+10px padding, is not available here: the nearest step to 6 is 4, which would render
+`sm` a third thinner than drawn and make the two sizes read as 4/8 rather than 6/8 —
+and the height is the *only* thing `Size` changes.
+
+**What the code does instead:** composes the two heights from core spacing primitives,
+exactly — `calc(var(--spacing-4) + var(--spacing-2))` and `var(--spacing-8)`. That
+reaches past the semantic layer, which a component should not do. Both are isolated in
+`--lumo-progress-track-height`, one declaration per size, so closing the gap is a
+one-line change each.
+
+**What would close it:** a semantic size family for the bar — `size/progress/sm` = 6
+and `size/progress/md` = 8, or whatever the designer prefers to call it — with the
+node's `Track` frame bound to it.
+
+###### Gap 2 — the track radius binds a core token, skipping the semantic layer
+
+`Track` and `Indicator` are both bound to `core/border/radius/full`, not to a semantic
+radius. The semantic radii that resolve to the same 999 are `border/radius/chip` and
+`border/radius/avatar`; a progress track is neither, so borrowing one of those names
+would be a lie about meaning dressed up as a fix.
+
+**What the code does instead:** reproduces the binding the node actually has,
+`var(--border-radius-full)`, isolated as `--lumo-progress-radius`.
+
+**What would close it:** a `border/radius/progress` (or a shared `border/radius/pill`)
+semantic alias, with the node bound to that.
+
+###### Gap 3 — the fill cannot animate, because the easings have no value
+
+A bar whose fill moves wants a transition, and a transition needs a duration and an
+easing. The duration tokens exist. All five easing tokens —
+`motion-easing-standard`, `-decelerate`, `-accelerate`, `-emphasized` and `-linear` —
+are declared in the Figma export with **no value in any mode**, so `build-tokens.js`
+skips them and emits no `--motion-easing-*` custom property at all. The token build
+says so on every run.
+
+The node binds no easing, so nothing was dropped from the design. But Progress is the
+component in this system most likely to want one, and it cannot have it.
+
+**What the code does instead:** nothing. The fill snaps. A substituted cubic-bezier
+would be a design decision taken by an engineer, and a CSS keyword such as `ease`
+presented as the bound value would be worse — it would look resolved.
+
+**What would close it:** give the five easings values in Figma and re-export. One
+`transition` declaration on `.lumo-progress__indicator` then covers it.
+
+###### Gap 4 — the node's fill does not agree with its own value text
+
+Every variant draws `Indicator` at a fixed **158px** while the value text reads
+**72%**. The track in that layout is ~246px wide, so the drawn fill is about **64%**.
+The two cannot both be right.
+
+This is not fillable as a token, and it is not really a bug in the design either — a
+static Figma frame has no way to express "the fill follows the number". It is recorded
+because QA will measure it.
+
+**What the code does instead:** drives the fill from `percent`, so 72% renders at 72%
+(177px of 246px in the `web` mode at 280px wide). The coded component will therefore
+*not* match a pixel measurement of the node's indicator, and that is correct.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/progress.md">docs/progress.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`d64f7e7`](https://github.com/Aye-Kyawt/lumo-design-system/commit/d64f7e7) | 2026-10-10 | _unknown_ | Build Progress from Figma 69:1151 — eight variants, four gaps reported |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

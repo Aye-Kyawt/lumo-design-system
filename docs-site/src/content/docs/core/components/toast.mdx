@@ -1,0 +1,377 @@
+---
+title: Toast
+description: Toast in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Toast.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--positive">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=151-162">Figma node 151:162</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/toast/toast.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use a toast to confirm that something happened after the user acted — saved, sent, deleted, failed — without interrupting what they are doing.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `toast` description, read 2026-10-19.</small>
+
+### Where it goes
+- overlaid, away from the content the user is working in
+
+### When not to use it
+- Don’t use it for anything the user must act on; that is a Modal or an Alert.
+  - **Use instead:** `Modal or an Alert` — not implemented in this library yet.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `status` | `positive` | _not stated in the source_ |
+| `status` | `negative` | _not stated in the source_ |
+| `status` | `warning` | _not stated in the source_ |
+| `status` | `info` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- is role="status" with aria-live="polite", so it is announced when it appears without stealing focus  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/toast/toast.jsx#L23">src/components/toast/toast.jsx:23</a></small>
+- the close control is a real &lt;button&gt; whose accessible name comes from closeLabel  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/toast/toastClose.jsx#L35">src/components/toast/toastClose.jsx:35</a></small>
+- the status icon is aria-hidden decoration; the title carries the meaning  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/toast/toastIcon.jsx#L28">src/components/toast/toastIcon.jsx:28</a></small>
+
+### Composition
+Nothing in the stories shows this component composed with another.
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Dismissible
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--dismissible&globals=theme:light"
+  title="Dismissible — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--dismissible&globals=theme:dark"
+  title="Dismissible — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Long text
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--long-text&globals=theme:light"
+  title="Long text — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--long-text&globals=theme:dark"
+  title="Long text — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Other glyphs
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--other-glyphs&globals=theme:light"
+  title="Other glyphs — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--other-glyphs&globals=theme:dark"
+  title="Other glyphs — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { Toast } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `status` | `'positive'|'negative'|'warning'|'info'` | `'positive'` | Figma `Status`. The only variant property in the set. |
+| `title` | `string` | `'Report saved'` | Figma `Title` (151:134). The bold first line. |
+| `description` | `boolean` | `true` | Figma `Description`, the boolean. Shows or hides the second line. |
+| `descriptionText` | `string` | `'Q3 2026 AI value report is ready to share.'` | Figma `Description`, the text. Renamed per the Empty State precedent — the set spells the boolean and the text with one name. See docs/naming-conflicts.md. |
+| `close` | `boolean` | `true` | Figma `Close`. Shows or hides the dismiss control. |
+| `iconName` | `string` | `'check'` | Figma `↳Icon`, as a Material Symbols glyph name rather than a node — the Button precedent in docs/naming-conflicts.md. Defaults to `check`, which is what the node draws in all four statuses (gap 2). |
+| `onClose` | `() =&gt; void` | — | Not a Figma property. The close control is drawn but has nothing to do in a static frame; this is what it does. Without it the button still renders and is still focusable, because the node draws it — it simply has no handler, exactly as the design specifies it. |
+| `closeLabel` | `string` | `'Close'` | Not a Figma property. The accessible name for the close control, whose glyph is `aria-hidden` decoration. |
+| `className` | `string` | `''` |  |
+
+### Union types
+- `status`: `'positive'|'negative'|'warning'|'info'`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--border-radius-card` | `var(--border-radius-lg)` | — |
+| `--border-radius-full` | `999px` | — |
+| `--border-width-default` | `var(--border-width-1)` | — |
+| `--color-bg-base` | `var(--color-neutral-0)` | `#101323` |
+| `--color-border-primary-default` | `var(--color-neutral-300)` | `#636679` |
+| `--color-icon-disabled` | `var(--color-neutral-400)` | `#dadce7` |
+| `--color-icon-info` | `var(--color-blue-600)` | `#4c89eb` |
+| `--color-icon-negative` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-icon-positive` | `var(--color-green-600)` | `#4ceb86` |
+| `--color-icon-warning` | `var(--color-orange-600)` | `#eb944c` |
+| `--color-text-bold` | `var(--color-neutral-1000)` | `#ffffff` |
+| `--color-text-primary` | `var(--color-neutral-800)` | `#ffffff` |
+| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
+| `--elevation-focused` | `0px 0px 0px 3px rgb(8.6275% 74.51% 89.02% / 0.4)` | — |
+| `--elevation-level2` | `0px 2px 4px -1px rgb(6.2745% 7.451% 13.725% / 0.06), 0px 4px 8px -2px rgb(6.2745% 7.451% 13.725% / 0.1)` | — |
+| `--motion-duration-fast` | `var(--motion-duration-100)` | — |
+| `--size-icon-sm` | `var(--size-16)` | — |
+| `--spacing-gap-horizontal-sm` | `var(--spacing-8)` | — |
+| `--spacing-gap-xs` | `var(--spacing-4)` | — |
+| `--spacing-padding-md` | `var(--spacing-16)` | — |
+| `--typography-fontfamily-body` | `var(--typography-fontfamily-inter)` | — |
+| `--typography-fontsize-md` | `var(--typography-fontsize-14)` | — |
+| `--typography-fontsize-sm` | `var(--typography-fontsize-12)` | — |
+| `--typography-fontweight-regular` | `400` | — |
+| `--typography-fontweight-semibold` | `600` | — |
+| `--typography-lineheight-md` | `var(--typography-lineheight-20)` | — |
+| `--typography-lineheight-sm` | `var(--typography-lineheight-16)` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--positive&viewMode=docs" title="Toast props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D151-162" title="Toast in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### Positive
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--positive">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--positive&globals=theme:light"
+  title="Positive — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--positive&globals=theme:dark"
+  title="Positive — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Negative
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--negative">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--negative&globals=theme:light"
+  title="Negative — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--negative&globals=theme:dark"
+  title="Negative — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Warning
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--warning">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--warning&globals=theme:light"
+  title="Warning — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--warning&globals=theme:dark"
+  title="Warning — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Info
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--info">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--info&globals=theme:light"
+  title="Info — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--info&globals=theme:dark"
+  title="Info — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### All statuses
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--all-statuses">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--all-statuses&globals=theme:light"
+  title="All statuses — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--all-statuses&globals=theme:dark"
+  title="All statuses — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Description=false
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--without-description">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--without-description&globals=theme:light"
+  title="Description=false — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--without-description&globals=theme:dark"
+  title="Description=false — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Close=false
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--without-close">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--without-close&globals=theme:light"
+  title="Close=false — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--without-close&globals=theme:dark"
+  title="Close=false — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Description=false, Close=false
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--title-only">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--title-only&globals=theme:light"
+  title="Description=false, Close=false — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--title-only&globals=theme:dark"
+  title="Description=false, Close=false — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Close control states
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-toast--close-control-states">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--close-control-states&globals=theme:light"
+  title="Close control states — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-toast--close-control-states&globals=theme:dark"
+  title="Close control states — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+The build report [`docs/toast.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/toast.md) records no "Design gaps" section.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/toast.md">docs/toast.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`5959849`](https://github.com/Aye-Kyawt/lumo-design-system/commit/5959849) | 2026-10-15 | _unknown_ | Build Toast from Figma 151:162 — four statuses, six gaps reported |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

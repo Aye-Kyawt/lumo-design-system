@@ -1,0 +1,20 @@
+{
+  "_source": "Written by the doc-generator each run, per .claude/skills/astro-page/SKILL.md. Component name, status and shipped version only — NEVER an Airtable record id, which is a local decision (.claude/registry.local.json, gitignored) and must not reach the repo or a public page.",
+  "_unavailable": {
+    "reason": "The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.",
+    "owner": "a human — authorize the connector in claude.ai connector settings",
+    "read_attempted_on": "2026-10-19"
+  },
+  "components": {
+    "accordion":          { "development": null, "shipped_in": null },
+    "badge":              { "development": null, "shipped_in": null },
+    "button":             { "development": null, "shipped_in": null },
+    "card":               { "development": null, "shipped_in": null },
+    "cardLayoutVertical": { "development": null, "shipped_in": null },
+    "emptyState":         { "development": null, "shipped_in": null },
+    "field":              { "development": null, "shipped_in": null },
+    "progress":           { "development": null, "shipped_in": null },
+    "switch":             { "development": null, "shipped_in": null },
+    "toast":              { "development": null, "shipped_in": null }
+  }
+}

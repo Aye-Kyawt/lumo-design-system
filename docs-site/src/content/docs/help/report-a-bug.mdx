@@ -1,0 +1,20 @@
+---
+title: Report a bug
+description: How to report a bug in the Lumo Design System.
+---
+Open an issue on the repository: **[Aye-Kyawt/lumo-design-system](https://github.com/Aye-Kyawt/lumo-design-system/issues)**.
+
+## What makes a report actionable
+
+- **The component and the version.** `npm ls @ds-house/lumo-design-system` gives the version.
+- **Which props you passed.** Several components have non-obvious defaults; the exact props matter.
+- **What you expected and what you got.** If it is visual, a screenshot in both themes.
+- **Whether the token or the component is wrong.** If a colour looks wrong, check the token's value on the [Tokens](/core/tokens/) page first — a wrong token value is a different fix from a wrong component.
+
+## What is already known
+
+Before reporting, check the component's **Design** tab. Values Figma never bound are recorded there as design gaps, and a component rendering a borrowed value is usually a known gap rather than a new bug.
+
+## What is not a bug
+
+A component not matching Figma on a value the design never bound. That is a design gap, and it is recorded.

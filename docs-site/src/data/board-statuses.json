@@ -1,20 +1,19 @@
 {
-  "_source": "Written by the doc-generator each run, per .claude/skills/astro-page/SKILL.md. Component name, status and shipped version only — NEVER an Airtable record id, which is a local decision (.claude/registry.local.json, gitignored) and must not reach the repo or a public page.",
-  "_unavailable": {
-    "reason": "The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.",
-    "owner": "a human — authorize the connector in claude.ai connector settings",
-    "read_attempted_on": "2026-10-19"
-  },
+  "_source": "Written by the doc-generator each run from the Airtable Components table, per .claude/skills/astro-page/SKILL.md. Component name, status, verdict and shipped version only — NEVER an Airtable record id, which is a local decision (.claude/registry.local.json, gitignored) and must not reach the repo or a public page.",
+  "_read_on": "2026-10-19",
+  "_shipped_in": "Derived, not read from a column: the board has no field for the version a component shipped in. v0.1.0 is the only tag in the repository, and src/index.ts at that tag exports all ten public components, so every one of them shipped in 0.1.0. A component with no public export has null here.",
+  "_development_is_derived": "`Development` is an Airtable formula. It is reproduced here as read, never written — the way to change it is to change the evidence underneath it.",
   "components": {
-    "accordion":          { "development": null, "shipped_in": null },
-    "badge":              { "development": null, "shipped_in": null },
-    "button":             { "development": null, "shipped_in": null },
-    "card":               { "development": null, "shipped_in": null },
-    "cardLayoutVertical": { "development": null, "shipped_in": null },
-    "emptyState":         { "development": null, "shipped_in": null },
-    "field":              { "development": null, "shipped_in": null },
-    "progress":           { "development": null, "shipped_in": null },
-    "switch":             { "development": null, "shipped_in": null },
-    "toast":              { "development": null, "shipped_in": null }
+    "accordion":          { "development": "To be fixed", "verdict": null,      "shipped_in": "0.1.0" },
+    "badge":              { "development": "Released",    "verdict": "Cleared", "shipped_in": "0.1.0" },
+    "button":             { "development": "Released",    "verdict": "Cleared", "shipped_in": "0.1.0" },
+    "card":               { "development": "Released",    "verdict": "Cleared", "shipped_in": "0.1.0" },
+    "cardLayoutVertical": { "development": null,          "verdict": null,      "shipped_in": "0.1.0",
+                            "_note": "No row exists in the Components table for this layout. It is a card sub-component in Figma and has no registry row of its own, so it has no status to show — that is a gap in the board, not a failed read." },
+    "emptyState":         { "development": "Released",    "verdict": "Cleared", "shipped_in": "0.1.0" },
+    "field":              { "development": "Completed",   "verdict": null,      "shipped_in": "0.1.0" },
+    "progress":           { "development": "Released",    "verdict": "Cleared", "shipped_in": "0.1.0" },
+    "switch":             { "development": "Completed",   "verdict": "Blocked", "shipped_in": "0.1.0" },
+    "toast":              { "development": "To be fixed", "verdict": null,      "shipped_in": "0.1.0" }
   }
 }

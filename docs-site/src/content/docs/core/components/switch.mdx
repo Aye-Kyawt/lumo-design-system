@@ -8,26 +8,21 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 {/*
   GENERATED — do not edit by hand.
   The reference page for Switch.
-  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Written by docs-site/scripts/generate.mjs from commit 7ccfbbb53757.
   Fix the generator or its inputs, never this file: a hand edit is overwritten
   by the next run and is indistinguishable from generated text until then.
 */}
 
 <div class="lumo-strip">
-<span class="lumo-strip__status" data-status="unknown">status unknown</span>
-<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__status" data-status="Completed">Completed</span>
+<span class="lumo-strip__version">shipped in 0.1.0</span>
+<span class="lumo-strip__verdict" data-verdict="Blocked">Blocked</span>
 <span class="lumo-strip__links">
 <a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-switch--on-true">Storybook</a>
 <a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=17-1201">Figma node 17:1201</a>
-<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx">Source</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/switch/switch.jsx">Source</a>
 </span>
 </div>
-
-:::caution[Status and version are not available]
-The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
-
-**Owner:** a human — authorize the connector in claude.ai connector settings
-:::
 
 <Tabs>
 <TabItem label="Usage">
@@ -58,23 +53,23 @@ The component description says what the component is for, never what an individu
 
 ### Accessibility
 - renders a real &lt;button role="switch"&gt; with aria-checked, so Space and Enter operate it and a screen reader reads the state  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx#L19">src/components/switch/switch.jsx:19</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/switch/switch.jsx#L19">src/components/switch/switch.jsx:19</a></small>
 - uses aria-disabled rather than the DOM disabled attribute, so a disabled switch stays focusable and can still be read  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx#L78">src/components/switch/switch.jsx:78</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/switch/switch.jsx#L78">src/components/switch/switch.jsx:78</a></small>
 - the node carries no label layer, so the accessible name must come from the caller via aria-label or aria-labelledby  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx#L22">src/components/switch/switch.jsx:22</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/switch/switch.jsx#L22">src/components/switch/switch.jsx:22</a></small>
 - the knob is aria-hidden; the parent button is the control, so the knob must not be focusable or announced  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switchKnob.jsx#L18">src/components/switch/switchKnob.jsx:18</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/switch/switchKnob.jsx#L18">src/components/switch/switchKnob.jsx:18</a></small>
 
 ### Composition
 Nothing in the stories shows this component composed with another.
 
 ### What this version promises
 See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
-:::caution[No release review]
-No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+:::caution[This component is Blocked]
+Its release verdict reads **Blocked**, so it is documented and shipped but has not been cleared for release. Its `Development` status reads **Completed**. The reasons are in its release review; `Blocked` is terminal and only a human restarts it.
 
-**Owner:** release
+**Owner:** a human
 :::
 
 </TabItem>
@@ -148,24 +143,24 @@ import { Switch } from '@ds-house/lumo-design-system';
 ### Tokens it needs
 | Token | Light | Dark |
 |---|---|---|
-| `--border-radius-avatar` | `var(--border-radius-full)` | — |
-| `--border-radius-chip` | `var(--border-radius-full)` | — |
-| `--border-width-default` | `var(--border-width-1)` | — |
-| `--border-width-focused` | `var(--border-width-2)` | — |
-| `--color-bg-base` | `var(--color-neutral-0)` | `#101323` |
-| `--color-bg-primary-hovered` | `var(--color-aqua-800)` | `#4cceeb` |
-| `--color-bg-primary-idle` | `var(--color-aqua-700)` | `#16bee3` |
-| `--color-bg-primary-pressed` | `var(--color-aqua-1000)` | `#87daed` |
-| `--color-border-primary-default` | `var(--color-neutral-300)` | `#636679` |
-| `--color-border-primary-hovered` | `var(--color-neutral-400)` | `#808393` |
-| `--elevation-focused` | `0px 0px 0px 3px rgb(8.6275% 74.51% 89.02% / 0.4)` | — |
-| `--motion-duration-fast` | `var(--motion-duration-100)` | — |
-| `--motion-duration-instant` | `var(--motion-duration-0)` | — |
-| `--opacity-100` | `1` | — |
-| `--opacity-disabled` | `var(--opacity-40)` | — |
-| `--size-control-md` | `var(--size-40)` | — |
-| `--size-icon-sm` | `var(--size-16)` | — |
-| `--spacing-padding-xs` | `var(--spacing-4)` | — |
+| `--border-radius-avatar` | _not in the build_ | — |
+| `--border-radius-chip` | _not in the build_ | — |
+| `--border-width-default` | _not in the build_ | — |
+| `--border-width-focused` | _not in the build_ | — |
+| `--color-bg-base` | _not in the build_ | — |
+| `--color-bg-primary-hovered` | _not in the build_ | — |
+| `--color-bg-primary-idle` | _not in the build_ | — |
+| `--color-bg-primary-pressed` | _not in the build_ | — |
+| `--color-border-primary-default` | _not in the build_ | — |
+| `--color-border-primary-hovered` | _not in the build_ | — |
+| `--elevation-focused` | _not in the build_ | — |
+| `--motion-duration-fast` | _not in the build_ | — |
+| `--motion-duration-instant` | _not in the build_ | — |
+| `--opacity-100` | _not in the build_ | — |
+| `--opacity-disabled` | _not in the build_ | — |
+| `--size-control-md` | _not in the build_ | — |
+| `--size-icon-sm` | _not in the build_ | — |
+| `--spacing-padding-xs` | _not in the build_ | — |
 
 A dash under **Dark** means the token does not change between themes.
 
@@ -254,11 +249,11 @@ Each row as the set draws it, in both themes.
 
 
 ### What Figma never bound, and the gaps recorded against it
-The build report [`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/switch.md) records no "Design gaps" section.
+The build report [`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs/switch.md) records no "Design gaps" section.
 
-<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/switch.md">docs/switch.md</a>.</small>
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs/switch.md">docs/switch.md</a>.</small>
 
-Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs-site/src/content/docs/disagreements.mdx).
 </TabItem>
 <TabItem label="Changelog">
 Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
@@ -273,4 +268,4 @@ Every commit touching this component **and its subcomponents** — a change to a
 </TabItem>
 </Tabs>
 
-<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd"><code>7ccfbbb53757</code></a>.</small>

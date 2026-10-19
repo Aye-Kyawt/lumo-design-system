@@ -8,26 +8,21 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 {/*
   GENERATED — do not edit by hand.
   The reference page for Badge.
-  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Written by docs-site/scripts/generate.mjs from commit 7ccfbbb53757.
   Fix the generator or its inputs, never this file: a hand edit is overwritten
   by the next run and is indistinguishable from generated text until then.
 */}
 
 <div class="lumo-strip">
-<span class="lumo-strip__status" data-status="unknown">status unknown</span>
-<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__status" data-status="Released">Released</span>
+<span class="lumo-strip__version">shipped in 0.1.0</span>
+<span class="lumo-strip__verdict" data-verdict="Cleared">Cleared</span>
 <span class="lumo-strip__links">
 <a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-badge--primary">Storybook</a>
 <a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=17-1139">Figma node 17:1139</a>
-<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/badge/badge.jsx">Source</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/badge/badge.jsx">Source</a>
 </span>
 </div>
-
-:::caution[Status and version are not available]
-The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
-
-**Owner:** a human — authorize the connector in claude.ai connector settings
-:::
 
 <Tabs>
 <TabItem label="Usage">
@@ -61,19 +56,14 @@ The component description says what the component is for, never what an individu
 
 ### Accessibility
 - renders a &lt;span&gt;, so it is not focusable and carries no interactive role — the set defines no interaction state because a badge is read, not clicked  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/badge/badge.jsx#L33">src/components/badge/badge.jsx:33</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/badge/badge.jsx#L33">src/components/badge/badge.jsx:33</a></small>
 
 ### Composition
 Nothing in the stories shows this component composed with another.
 
 ### What this version promises
 See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
-:::caution[No release review]
-No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
-
-**Owner:** release
-:::
-
+This component's release verdict is **Cleared** and its `Development` status reads **Released**. A `Cleared` verdict is a recommendation with reasons, recorded in its release review — [a human decides whether a release happens](/get-started/versioning/), and no agent approves its own work.
 </TabItem>
 <TabItem label="Examples">
 Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
@@ -130,21 +120,21 @@ import { Badge } from '@ds-house/lumo-design-system';
 ### Tokens it needs
 | Token | Light | Dark |
 |---|---|---|
-| `--border-radius-chip` | `var(--border-radius-full)` | — |
-| `--border-width-default` | `var(--border-width-1)` | — |
-| `--color-bg-negative-tonal-idle` | `var(--color-red-100)` | `#351315` |
-| `--color-bg-positive-tonal-idle` | `var(--color-green-100)` | `#13351f` |
-| `--color-bg-primary-tonal-idle` | `var(--color-aqua-100)` | `#132f35` |
-| `--color-bg-surfacesecondary` | `var(--color-neutral-100)` | `#30344b` |
-| `--color-bg-warning-tonal-idle` | `var(--color-orange-100)` | `#352213` |
-| `--color-text-brand` | `var(--color-aqua-800)` | `#b6e6f1` |
-| `--color-text-orange-twotone` | `var(--color-orange-800)` | `#f1d1b6` |
-| `--color-text-positive` | `var(--color-green-800)` | `#b6f1cc` |
-| `--color-text-red-twotone` | `var(--color-red-800)` | `#f1b6bb` |
-| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
-| `--label-label1` | `500 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-label)` | — |
-| `--spacing-padding-sm` | `var(--spacing-8)` | — |
-| `--spacing-padding-xs` | `var(--spacing-4)` | — |
+| `--border-radius-chip` | _not in the build_ | — |
+| `--border-width-default` | _not in the build_ | — |
+| `--color-bg-negative-tonal-idle` | _not in the build_ | — |
+| `--color-bg-positive-tonal-idle` | _not in the build_ | — |
+| `--color-bg-primary-tonal-idle` | _not in the build_ | — |
+| `--color-bg-surfacesecondary` | _not in the build_ | — |
+| `--color-bg-warning-tonal-idle` | _not in the build_ | — |
+| `--color-text-brand` | _not in the build_ | — |
+| `--color-text-orange-twotone` | _not in the build_ | — |
+| `--color-text-positive` | _not in the build_ | — |
+| `--color-text-red-twotone` | _not in the build_ | — |
+| `--color-text-secondary` | _not in the build_ | — |
+| `--label-label1` | _not in the build_ | — |
+| `--spacing-padding-sm` | _not in the build_ | — |
+| `--spacing-padding-xs` | _not in the build_ | — |
 
 A dash under **Dark** means the token does not change between themes.
 
@@ -354,9 +344,9 @@ lot of contrast. If no, this section is the record of why it is mixed.
 The token build still warns that `border-style-*` and `motion-easing-*` have no
 value in the export. Badge uses neither. Already recorded under `docs/card.md`.
 
-<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/badge.md">docs/badge.md</a>.</small>
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs/badge.md">docs/badge.md</a>.</small>
 
-Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs-site/src/content/docs/disagreements.mdx).
 </TabItem>
 <TabItem label="Changelog">
 Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
@@ -373,4 +363,4 @@ Every commit touching this component **and its subcomponents** — a change to a
 </TabItem>
 </Tabs>
 
-<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd"><code>7ccfbbb53757</code></a>.</small>

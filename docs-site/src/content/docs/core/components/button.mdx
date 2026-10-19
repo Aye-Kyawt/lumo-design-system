@@ -8,26 +8,21 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 {/*
   GENERATED — do not edit by hand.
   The reference page for Button.
-  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Written by docs-site/scripts/generate.mjs from commit 7ccfbbb53757.
   Fix the generator or its inputs, never this file: a hand edit is overwritten
   by the next run and is indistinguishable from generated text until then.
 */}
 
 <div class="lumo-strip">
-<span class="lumo-strip__status" data-status="unknown">status unknown</span>
-<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__status" data-status="Released">Released</span>
+<span class="lumo-strip__version">shipped in 0.1.0</span>
+<span class="lumo-strip__verdict" data-verdict="Cleared">Cleared</span>
 <span class="lumo-strip__links">
 <a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-button--fill-default">Storybook</a>
 <a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=26-1657">Figma node 26:1657</a>
-<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx">Source</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/button/button.jsx">Source</a>
 </span>
 </div>
-
-:::caution[Status and version are not available]
-The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
-
-**Owner:** a human — authorize the connector in claude.ai connector settings
-:::
 
 <Tabs>
 <TabItem label="Usage">
@@ -64,25 +59,20 @@ The component description says what the component is for, never what an individu
 
 ### Accessibility
 - state="disabled" sets the real DOM disabled attribute, and rest props are spread first so a caller cannot reach past the component and re-enable it  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx#L73">src/components/button/button.jsx:73</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/button/button.jsx#L73">src/components/button/button.jsx:73</a></small>
 - an icon-only button takes its accessible name from label via aria-label, because no text is drawn  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx#L74">src/components/button/button.jsx:74</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/button/button.jsx#L74">src/components/button/button.jsx:74</a></small>
 - the icons are aria-hidden decoration  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/buttonIcon.jsx#L17">src/components/button/buttonIcon.jsx:17</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/button/buttonIcon.jsx#L17">src/components/button/buttonIcon.jsx:17</a></small>
 - htmlType defaults to "button", so it cannot submit a form by accident  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx#L41">src/components/button/button.jsx:41</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/button/button.jsx#L41">src/components/button/button.jsx:41</a></small>
 
 ### Composition
 Nothing in the stories shows this component composed with another.
 
 ### What this version promises
 See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
-:::caution[No release review]
-No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
-
-**Owner:** release
-:::
-
+This component's release verdict is **Cleared** and its `Development` status reads **Released**. A `Cleared` verdict is a recommendation with reasons, recorded in its release review — [a human decides whether a release happens](/get-started/versioning/), and no agent approves its own work.
 </TabItem>
 <TabItem label="Examples">
 Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
@@ -453,39 +443,39 @@ import { Button } from '@ds-house/lumo-design-system';
 ### Tokens it needs
 | Token | Light | Dark |
 |---|---|---|
-| `--border-radius-input` | `var(--border-radius-md)` | — |
-| `--border-width-default` | `var(--border-width-1)` | — |
-| `--border-width-focused` | `var(--border-width-2)` | — |
-| `--button-button1` | `600 var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body)` | — |
-| `--color-bg-base` | `var(--color-neutral-0)` | `#101323` |
-| `--color-bg-disabled` | `var(--color-neutral-200)` | `#474b62` |
-| `--color-bg-negative-idle` | `var(--color-red-600)` | `#eb4c59` |
-| `--color-bg-primary-hovered` | `var(--color-aqua-800)` | `#4cceeb` |
-| `--color-bg-primary-idle` | `var(--color-aqua-700)` | `#16bee3` |
-| `--color-bg-primary-pressed` | `var(--color-aqua-1000)` | `#87daed` |
-| `--color-bg-primary-tonal-idle` | `var(--color-aqua-100)` | `#132f35` |
-| `--color-border-brand-hovered` | `var(--color-aqua-400)` | `#1695b1` |
-| `--color-border-primary-disabled` | `var(--color-neutral-200)` | `#474b62` |
-| `--color-border-primary-focused` | `var(--color-neutral-1000)` | `#ffffff` |
-| `--color-icon-actionpressed` | `var(--color-aqua-800)` | `#b6e6f1` |
-| `--color-icon-brand` | `var(--color-aqua-600)` | `#4cceeb` |
-| `--color-icon-disabled` | `var(--color-neutral-400)` | `#dadce7` |
-| `--color-icon-negative` | `var(--color-red-600)` | `#eb4c59` |
-| `--color-icon-onaction` | `var(--color-neutral-0)` | `#101323` |
-| `--color-icon-onfocus` | `var(--color-neutral-0)` | `#101323` |
-| `--color-icon-onhovered` | `var(--color-neutral-0)` | `#101323` |
-| `--color-text-accent-aqualight` | `var(--color-aqua-600)` | `#4cceeb` |
-| `--color-text-actionpressed` | `var(--color-aqua-1000)` | `#eff8fa` |
-| `--color-text-brand` | `var(--color-aqua-800)` | `#b6e6f1` |
-| `--color-text-disabled` | `var(--color-neutral-400)` | `#dadce7` |
-| `--color-text-negative` | `var(--color-red-600)` | `#eb4c59` |
-| `--color-text-onaction` | `var(--color-neutral-0)` | `#101323` |
-| `--color-text-onfocus` | `var(--color-neutral-0)` | `#101323` |
-| `--color-text-onhovered` | `var(--color-neutral-0)` | `#101323` |
-| `--motion-duration-fast` | `var(--motion-duration-100)` | — |
-| `--size-icon-md` | `var(--size-20)` | — |
-| `--spacing-padding-sm` | `var(--spacing-8)` | — |
-| `--typography-fontweight-regular` | `400` | — |
+| `--border-radius-input` | _not in the build_ | — |
+| `--border-width-default` | _not in the build_ | — |
+| `--border-width-focused` | _not in the build_ | — |
+| `--button-button1` | _not in the build_ | — |
+| `--color-bg-base` | _not in the build_ | — |
+| `--color-bg-disabled` | _not in the build_ | — |
+| `--color-bg-negative-idle` | _not in the build_ | — |
+| `--color-bg-primary-hovered` | _not in the build_ | — |
+| `--color-bg-primary-idle` | _not in the build_ | — |
+| `--color-bg-primary-pressed` | _not in the build_ | — |
+| `--color-bg-primary-tonal-idle` | _not in the build_ | — |
+| `--color-border-brand-hovered` | _not in the build_ | — |
+| `--color-border-primary-disabled` | _not in the build_ | — |
+| `--color-border-primary-focused` | _not in the build_ | — |
+| `--color-icon-actionpressed` | _not in the build_ | — |
+| `--color-icon-brand` | _not in the build_ | — |
+| `--color-icon-disabled` | _not in the build_ | — |
+| `--color-icon-negative` | _not in the build_ | — |
+| `--color-icon-onaction` | _not in the build_ | — |
+| `--color-icon-onfocus` | _not in the build_ | — |
+| `--color-icon-onhovered` | _not in the build_ | — |
+| `--color-text-accent-aqualight` | _not in the build_ | — |
+| `--color-text-actionpressed` | _not in the build_ | — |
+| `--color-text-brand` | _not in the build_ | — |
+| `--color-text-disabled` | _not in the build_ | — |
+| `--color-text-negative` | _not in the build_ | — |
+| `--color-text-onaction` | _not in the build_ | — |
+| `--color-text-onfocus` | _not in the build_ | — |
+| `--color-text-onhovered` | _not in the build_ | — |
+| `--motion-duration-fast` | _not in the build_ | — |
+| `--size-icon-md` | _not in the build_ | — |
+| `--spacing-padding-sm` | _not in the build_ | — |
+| `--typography-fontweight-regular` | _not in the build_ | — |
 
 A dash under **Dark** means the token does not change between themes.
 
@@ -567,9 +557,9 @@ Each row as the set draws it, in both themes.
    `spacing/padding/sm` rather than `spacing/gap/horizontal/sm`. Both are 8px so
    nothing renders wrong, but the roles are not interchangeable.
 
-<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/button.md">docs/button.md</a>.</small>
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs/button.md">docs/button.md</a>.</small>
 
-Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs-site/src/content/docs/disagreements.mdx).
 </TabItem>
 <TabItem label="Changelog">
 Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
@@ -585,4 +575,4 @@ Every commit touching this component **and its subcomponents** — a change to a
 </TabItem>
 </Tabs>
 
-<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd"><code>7ccfbbb53757</code></a>.</small>

@@ -1,79 +1,47 @@
 ---
 title: Lumo Design System
-description: The reference for the Lumo Design System — what each component is for, what it is built from, and where it stands.
+description: The reference for the Lumo Design System — what each component is for, when to reach for it, and which tokens it is built from.
 template: splash
 hero:
-  title: Lumo Design System
-  tagline: One system, synced between design and development. Tokens are the only source of visual values.
+  tagline: |
+    Design tokens exported from the Figma file `Lumo.Token.V1.0.Complete`, built with Style Dictionary into CSS, Swift and Android resources, and documented in Storybook.
   actions:
-    - text: Start building
-      link: /components/button/
-      variant: primary
     - text: Start designing
-      link: https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.Complete
-      variant: minimal
+      link: /designing/introduction/
+      icon: right-arrow
+      variant: primary
+    - text: Start coding
+      link: /developing/introduction/
+      icon: right-arrow
+    - text: Open Storybook
+      link: https://lumo-design-system-aye-kyawts-projects.vercel.app/
+      icon: external
+      attrs:
+        target: _blank
 ---
 
-import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-## What this site is
+{/*
+  GENERATED — do not edit by hand.
+  The home page.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
 
-The reference layer of the Lumo Design System. Storybook shows you what a
-component *does*; this site says what it is *for* — when to reach for it, when
-not to, what it pairs with, and which tokens a correct use of it must supply.
+## The latest release
+**v0.1.0**
 
-The two are deliberately separate. Storybook is built from the component source
-on every push. This site is written by reading the Figma documentation and the
-repo and reporting where the two disagree.
-
-<Aside type="note" title="Six components are documented; three are still shells">
-Button, Badge, Card, Switch, Progress and Empty State carry a written intent
-record — every field of the contract answered, from two sources read and
-compared. Accordion, Field and Toast have not shipped yet and are still
-shells.
-
-Each record says where the Figma documentation and the repo **disagree**,
-giving both sides without picking one, and says plainly where **neither**
-source states something rather than inventing a sentence nobody decided. Every
-disagreement is collected on one page: [Figma vs the repo](/disagreements/).
-
-This does not release anything. A component reaches `Released` only when
-`Astro Link`, `Release Review` and `Release Verdict` = `Cleared` are all set.
-`Astro Link` now points at these pages for all six — written after each was
-opened and watched render. The verdicts still read `Blocked`, so none of the
-six is released, and the version in the hero is not a release either.
-</Aside>
-
-## Components
+```bash
+npm install @ds-house/lumo-design-system@0.1.0
+```
 
 <CardGrid>
-  <LinkCard title="Badge" href="/components/badge/" description="Atoms · Completed" />
-  <LinkCard title="Button" href="/components/button/" description="Atoms · Completed" />
-  <LinkCard title="Progress" href="/components/progress/" description="Atoms · Completed" />
-  <LinkCard title="Switch" href="/components/switch/" description="Atoms · Completed" />
-  <LinkCard title="Accordion" href="/components/accordion/" description="Molecules · Ready for Testing" />
-  <LinkCard title="Empty State" href="/components/empty-state/" description="Molecules · Completed" />
-  <LinkCard title="Field" href="/components/field/" description="Molecules · To be deployed" />
-  <LinkCard title="Toast" href="/components/toast/" description="Molecules · Ready for Testing" />
-  <LinkCard title="Card" href="/components/card/" description="Organisms · Completed" />
+  <LinkCard title="Designing" description="What the system is for, and how to work in the Figma library." href="/designing/introduction/" />
+  <LinkCard title="Developing" description="Install it, import it, and load the two stylesheets in the right order." href="/developing/introduction/" />
+  <LinkCard title="Components" description="All ten public components, each with usage, examples, code, design and history." href="/core/components/" />
+  <LinkCard title="Tokens" description="Every generated token, with its light and dark value." href="/core/tokens/" />
 </CardGrid>
 
-Four further components — Table, Calendar, Chat Panel and Kanban — have a Figma
-node and a signed-off design but no code yet, so they have no page here.
-
-## How a component gets here
-
-A component moves through the registry one written cell at a time. No status is
-set by hand; each is derived from evidence somebody wrote after seeing it.
-
-| Status | What it means | Who acts next |
-|---|---|---|
-| `To-do` | Figma node exists and the design is signed off | Engineer builds it |
-| `Ready for Testing` | A staging build exists and renders | QA tests every variant, size and state |
-| `To be fixed` / `Fixing` | A test case failed | Engineer repairs it |
-| `Fixed` | The repair is claimed | QA re-tests it |
-| `To be deployed` | Every test case passed | DevOps promotes it |
-| `Completed` | It is live in production | Doc-generator documents it; Release reviews it |
-| `Released` | Documented, reviewed and cleared | Nobody — it is done |
-
-A human approves a release. No agent approves its own work.
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

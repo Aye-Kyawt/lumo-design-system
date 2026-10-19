@@ -1,0 +1,27 @@
+---
+title: Embedding
+description: Embedding Lumo components and Storybook stories elsewhere.
+---
+## Embedding a story
+
+Every story on this site is embedded from the deployed Storybook. The same URLs work anywhere:
+
+```html
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-badge--success&globals=theme:light"></iframe>
+```
+
+`globals=theme:light` or `theme:dark` drives Storybook's real theme toolbar rather than a copy of it. `platform` and `breakpoint` work the same way, with values `web`/`mobile`/`admin` and `mobile`/`tablet`/`desktop`/`wide`.
+
+Story ids come from the Storybook index at `/index.json`.
+
+## Embedding a component in your own app
+
+Install the package rather than embedding an iframe. See [Developing](/developing/introduction/).
+
+## Embedding the Figma node
+
+Each component's **Design** tab embeds its Figma node. The design file is team-only, so those frames may not load for you — a 403 from a team-only file is expected, not a broken link. The header strip on each page links the node directly.
+
+## What not to embed
+
+Do not copy a component's compiled CSS or markup into another project. Import the component; a copy stops tracking the tokens and drifts silently.

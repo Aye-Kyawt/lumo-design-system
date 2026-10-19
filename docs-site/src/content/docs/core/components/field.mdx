@@ -1,0 +1,340 @@
+---
+title: Field
+description: Field in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Field.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--default">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=141-3144">Figma node 141:3144</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use field to wrap any input control with a label, an optional required mark and helper or error text — used by Input, Select, Textarea and Checkbox groups alike.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `field` description, read 2026-10-19.</small>
+
+### Where it goes
+- in a form, wrapping one input control
+
+### When not to use it
+- Don’t write the field’s own error styling into the control; field carries it.
+  - **No alternative named.** The source states the prohibition without saying what to reach for instead.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `state` | `default` | _not stated in the source_ |
+| `state` | `error` | _not stated in the source_ |
+| `state` | `disabled` | _not stated in the source_ |
+| `state` | `Type` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- renders exactly one &lt;label&gt; whose htmlFor points at the caller own control, so the label and the control are genuinely associated  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L155">src/components/field/field.jsx:155</a></small>
+- htmlFor is omitted entirely when no control has been named, rather than writing an empty reference  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L155">src/components/field/field.jsx:155</a></small>
+- in the error state the helper row becomes role="alert", so a validation message is announced when it appears  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L176">src/components/field/field.jsx:176</a></small>
+- the required asterisk is aria-hidden and the announced word is in a screen-reader-only span, so "required" is read rather than "star"  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L163">src/components/field/field.jsx:163</a></small>
+- the error icon is decoration  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/fieldIcon.jsx#L22">src/components/field/fieldIcon.jsx:22</a></small>
+
+### Composition
+Nothing in the stories shows this component composed with another.
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Required
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--required&globals=theme:light"
+  title="Required — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--required&globals=theme:dark"
+  title="Required — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Without helper
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--without-helper&globals=theme:light"
+  title="Without helper — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--without-helper&globals=theme:dark"
+  title="Without helper — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### With a real control
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--with-real-control&globals=theme:light"
+  title="With a real control — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--with-real-control&globals=theme:dark"
+  title="With a real control — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### With a group control
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--with-a-group-control&globals=theme:light"
+  title="With a group control — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--with-a-group-control&globals=theme:dark"
+  title="With a group control — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Long label and helper
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--long-text&globals=theme:light"
+  title="Long label and helper — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--long-text&globals=theme:dark"
+  title="Long label and helper — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { Field } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `state` | `'default'|'error'|'disabled'|'Type'` | `'default'` | Figma `State`. `Type` is the set's own spelling for the filled state — see docs/naming-conflicts.md for why it was kept and what was suggested back. |
+| `label` | `string` | `''` | Figma `Label` (141:3120). The text of the label row. |
+| `required` | `boolean` | `false` | Figma `Required` (141:3121), the mark hidden in all four variants. Shows the red asterisk and appends `requiredText` for screen readers. |
+| `requiredText` | `string` | `'required'` | Not a Figma property. The asterisk is decoration, so the word a screen reader announces has to come from somewhere; this is it. |
+| `helper` | `boolean` | `true` | Whether the helper row shows at all. The node draws it in every variant. |
+| `helperText` | `string` | `''` | Figma `Helper` (141:3125 / 141:3135). In `error` this is the error message and the row grows an icon. |
+| `iconName` | `string` | `'close'` | Material Symbols glyph for the error icon. Defaults to `close`, which is what node 90:8 draws. |
+| `children` | `React.ReactNode` | — | The `↳Control` slot (141:3122 and friends). Put the real Input, Select, Textarea or Checkbox group here. Named `children` per the Card precedent in docs/naming-conflicts.md, since the field has exactly one slot. |
+| `id` | `string` | — | Seeds the ids of the label row (`$&#123;id&#125;-label`) and the helper row (`$&#123;id&#125;-helper`), so a control in the slot can reference either. Generated when absent — and a generated id is useless to you, so pass one whenever you need to wire `aria-labelledby` or `aria-describedby`. |
+| `controlId` | `string` | — | The `id` of the labelable control inside the slot. Pass it and the label gets `for`; omit it and the label gets no `for` at all. There is no guessed default: the field cannot see what you put in the slot, and a `for` pointing at nothing is worse than none. Only pass this for an element `for` can legally name — input, select, textarea, button, meter, output, progress. For anything else (a checkbox or radio group, a custom combobox), leave it off and point that thing at `$&#123;id&#125;-label` with `aria-labelledby`. |
+| `className` | `string` | `''` |  |
+
+### Union types
+- `state`: `'default'|'error'|'disabled'|'Type'`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--body-body3` | `400 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body)` | — |
+| `--border-radius-card` | `var(--border-radius-lg)` | — |
+| `--border-width-default` | `var(--border-width-1)` | — |
+| `--color-bg-surfaceprimary` | `var(--color-neutral-50)` | `#1d2135` |
+| `--color-border-negative-focused` | `var(--color-red-500)` | `#e31628` |
+| `--color-border-primary-default` | `var(--color-neutral-300)` | `#636679` |
+| `--color-icon-negative` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-text-disabled` | `var(--color-neutral-400)` | `#dadce7` |
+| `--color-text-negative` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-text-placeholder` | `var(--color-neutral-300)` | `#a0a3b1` |
+| `--color-text-primary` | `var(--color-neutral-800)` | `#ffffff` |
+| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
+| `--label-label1` | `500 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-label)` | — |
+| `--size-control-md` | `var(--size-40)` | — |
+| `--size-icon-sm` | `var(--size-16)` | — |
+| `--spacing-gap-horizontal-xs` | `var(--spacing-4)` | — |
+| `--spacing-gap-xs` | `var(--spacing-4)` | — |
+| `--spacing-padding-md` | `var(--spacing-16)` | — |
+| `--typography-fontweight-regular` | `400` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--default&viewMode=docs" title="Field props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D141-3144" title="Field in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### Default
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--default">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--default&globals=theme:light"
+  title="Default — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--default&globals=theme:dark"
+  title="Default — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Error
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--error-state">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--error-state&globals=theme:light"
+  title="Error — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--error-state&globals=theme:dark"
+  title="Error — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Disabled
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--disabled">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--disabled&globals=theme:light"
+  title="Disabled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--disabled&globals=theme:dark"
+  title="Disabled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Type
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--type">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--type&globals=theme:light"
+  title="Type — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--type&globals=theme:dark"
+  title="Type — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### All states
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--all-states">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--all-states&globals=theme:light"
+  title="All states — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-field--all-states&globals=theme:dark"
+  title="All states — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+The build report [`docs/field.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/field.md) records no "Design gaps" section.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/field.md">docs/field.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`bada657`](https://github.com/Aye-Kyawt/lumo-design-system/commit/bada657) | 2026-10-15 | _unknown_ | Field: stop guessing the label's target, and correct two doc claims |
+| [`72bf468`](https://github.com/Aye-Kyawt/lumo-design-system/commit/72bf468) | 2026-10-15 | _unknown_ | Build Field from Figma 141:3144 — four states, six gaps reported |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

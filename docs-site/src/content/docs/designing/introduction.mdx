@@ -1,0 +1,27 @@
+---
+title: Introduction
+description: What the Lumo Design System is for, and how to work in the Figma library.
+---
+## What this system is
+
+A component library whose visual values come only from tokens exported from Figma. Every colour, space, radius and font value in a component references a token; a component carrying a raw hex is a defect, not a shortcut.
+
+## The libraries
+
+The published web library is **`Lumo.Web.Component.V1.0.Complete`**. Component descriptions in that library are the source for every "when to use" and "when not to use" statement on this site — they are transposed verbatim, never paraphrased.
+
+:::caution[Documentation pages could not be found]
+The component-intent process names each component's **documentation page**, and its usage region, as the first source for usage guidance. No such page could be located in the design file: it enumerates one top-level page, holding only a cover frame.
+
+So usage text on this site comes from each component set's **description** instead. That is designer-authored and says the right kind of thing, but it is a different surface — and it is why no component has per-variant guidance. If the documentation pages exist, say where and the transposition can be redone.
+
+**Owner:** a human — a designer who owns the library.
+:::
+
+## What a component owes
+
+Every component covers every interaction state the product uses — default, hovered, pressed, focused, disabled, error, loading, as applicable — and every variant and state has a story. A state the design does not define is a design gap, recorded and reported rather than invented.
+
+## Where design and code disagree
+
+Disagreements are recorded, not resolved quietly. Each component's **Design** tab lists what Figma never bound and the gaps raised against it.

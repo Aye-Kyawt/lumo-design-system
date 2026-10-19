@@ -1,0 +1,36 @@
+---
+title: Contributing
+description: How to work on the Lumo Design System.
+---
+## The branch rule
+
+A component branch never merges into `main`. **`main` accepts pull requests from `staging` only.**
+
+## Build and check
+
+```bash
+npm install
+npm run build:package
+```
+
+| Job | Command |
+|---|---|
+| Build tokens | `npm run build:tokens` |
+| Build the library | `npm run build:lib` |
+| Build everything | `npm run build:package` |
+| Type check | `npm run typecheck` |
+| Tests | `npm test` |
+| Storybook | `npm run storybook` |
+| This site | `npm --prefix docs-site run dev` |
+
+## The rules that matter
+
+- **Tokens are the only source of visual values.** A component referencing a raw hex is wrong.
+- **Never edit anything in `build/`.** It is generated from `tokens/`.
+- **Never invent a token.** Report the gap and stop.
+- **Prop names match the Figma property names exactly.** Where they cannot — a reserved word, a DOM collision — the divergence is recorded in `docs/naming-conflicts.md`.
+- **Never edit a generated page on this site.** Fix `docs-site/scripts/generate.mjs` or its inputs.
+
+## Where design and code disagree
+
+Recorded in [the disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/main/docs-site/src/content/docs/disagreements.mdx), and per component on each **Design** tab. That page is no longer in this site's navigation; it is kept as a record and linked from where it is relevant.

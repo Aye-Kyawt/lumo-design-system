@@ -1,0 +1,588 @@
+---
+title: Button
+description: Button in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Button.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-button--fill-default">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=26-1657">Figma node 26:1657</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use this component when need CTA.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `button` description, read 2026-10-19.</small>
+
+### Where it goes
+- in a card footer action row, and in an empty state Action slot
+
+### When not to use it
+- Don't use it for opening external link.
+  - **No alternative named.** The source states the prohibition without saying what to reach for instead.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `type` | `fill` | _not stated in the source_ |
+| `type` | `outline` | _not stated in the source_ |
+| `type` | `transparent` | _not stated in the source_ |
+| `state` | `default` | _not stated in the source_ |
+| `state` | `hovered` | _not stated in the source_ |
+| `state` | `focused` | _not stated in the source_ |
+| `state` | `disabled` | _not stated in the source_ |
+| `state` | `error` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- state="disabled" sets the real DOM disabled attribute, and rest props are spread first so a caller cannot reach past the component and re-enable it  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx#L73">src/components/button/button.jsx:73</a></small>
+- an icon-only button takes its accessible name from label via aria-label, because no text is drawn  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx#L74">src/components/button/button.jsx:74</a></small>
+- the icons are aria-hidden decoration  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/buttonIcon.jsx#L17">src/components/button/buttonIcon.jsx:17</a></small>
+- htmlType defaults to "button", so it cannot submit a form by accident  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/button/button.jsx#L41">src/components/button/button.jsx:41</a></small>
+
+### Composition
+Nothing in the stories shows this component composed with another.
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Fill Default
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-default&globals=theme:light"
+  title="Fill Default — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-default&globals=theme:dark"
+  title="Fill Default — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Fill Hovered
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-hovered&globals=theme:light"
+  title="Fill Hovered — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-hovered&globals=theme:dark"
+  title="Fill Hovered — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Fill Focused
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-focused&globals=theme:light"
+  title="Fill Focused — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-focused&globals=theme:dark"
+  title="Fill Focused — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Fill Disabled
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-disabled&globals=theme:light"
+  title="Fill Disabled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-disabled&globals=theme:dark"
+  title="Fill Disabled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Fill Error
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-error&globals=theme:light"
+  title="Fill Error — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-error&globals=theme:dark"
+  title="Fill Error — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Outline Default
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-default&globals=theme:light"
+  title="Outline Default — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-default&globals=theme:dark"
+  title="Outline Default — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Outline Hovered
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-hovered&globals=theme:light"
+  title="Outline Hovered — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-hovered&globals=theme:dark"
+  title="Outline Hovered — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Outline Focused
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-focused&globals=theme:light"
+  title="Outline Focused — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-focused&globals=theme:dark"
+  title="Outline Focused — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Outline Disabled
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-disabled&globals=theme:light"
+  title="Outline Disabled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-disabled&globals=theme:dark"
+  title="Outline Disabled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Outline Error
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-error&globals=theme:light"
+  title="Outline Error — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--outline-error&globals=theme:dark"
+  title="Outline Error — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Transparent Default
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-default&globals=theme:light"
+  title="Transparent Default — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-default&globals=theme:dark"
+  title="Transparent Default — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Transparent Hovered
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-hovered&globals=theme:light"
+  title="Transparent Hovered — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-hovered&globals=theme:dark"
+  title="Transparent Hovered — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Transparent Focused
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-focused&globals=theme:light"
+  title="Transparent Focused — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-focused&globals=theme:dark"
+  title="Transparent Focused — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Transparent Disabled
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-disabled&globals=theme:light"
+  title="Transparent Disabled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-disabled&globals=theme:dark"
+  title="Transparent Disabled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Transparent Error
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-error&globals=theme:light"
+  title="Transparent Error — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-error&globals=theme:dark"
+  title="Transparent Error — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Content Permutations
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--content-permutations&globals=theme:light"
+  title="Content Permutations — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--content-permutations&globals=theme:dark"
+  title="Content Permutations — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Icon Names
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--icon-names&globals=theme:light"
+  title="Icon Names — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--icon-names&globals=theme:dark"
+  title="Icon Names — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Transparent — on a surface
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-on-surface&globals=theme:light"
+  title="Transparent — on a surface — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--transparent-on-surface&globals=theme:dark"
+  title="Transparent — on a surface — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Interactive
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--interactive&globals=theme:light"
+  title="Interactive — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--interactive&globals=theme:dark"
+  title="Interactive — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Disabled — genuinely inert
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--disabled-is-inert&globals=theme:light"
+  title="Disabled — genuinely inert — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--disabled-is-inert&globals=theme:dark"
+  title="Disabled — genuinely inert — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Icon only — still labelled
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--icon-only-is-labelled&globals=theme:light"
+  title="Icon only — still labelled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--icon-only-is-labelled&globals=theme:dark"
+  title="Icon only — still labelled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { Button } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `type` | `'fill'|'outline'|'transparent'` | `'fill'` | Figma `Type`. The skin. Note this is **not** the DOM button type — see `htmlType`, and `docs/naming-conflicts.md` for why. |
+| `state` | `'default'|'hovered'|'focused'|'disabled'|'error'` | `'default'` | Figma `State`. Forces the visual state. Left at `default` the button still reacts to real hover, focus and the disabled attribute. |
+| `label` | `string` | `'Button'` | Figma `label`. The button text. |
+| `text` | `boolean` | `true` | Figma `text`. Shows the label. |
+| `iconLeft` | `boolean` | `true` | Figma `iconLeft`. Shows the leading icon. |
+| `iconRight` | `boolean` | `true` | Figma `iconRight`. Shows the trailing icon. |
+| `iconLeftName` | `string` | `'add'` | Material Symbols glyph for the leading icon. |
+| `iconRightName` | `string` | `'add'` | Material Symbols glyph for the trailing icon. |
+| `htmlType` | `'button'|'submit'|'reset'` | `'button'` | The real DOM `type` attribute. |
+| `onClick` | `() =&gt; void` | — |  |
+| `className` | `string` | `''` |  |
+
+### Union types
+- `type`: `'fill'|'outline'|'transparent'`
+- `state`: `'default'|'hovered'|'focused'|'disabled'|'error'`
+- `htmlType`: `'button'|'submit'|'reset'`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--border-radius-input` | `var(--border-radius-md)` | — |
+| `--border-width-default` | `var(--border-width-1)` | — |
+| `--border-width-focused` | `var(--border-width-2)` | — |
+| `--button-button1` | `600 var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body)` | — |
+| `--color-bg-base` | `var(--color-neutral-0)` | `#101323` |
+| `--color-bg-disabled` | `var(--color-neutral-200)` | `#474b62` |
+| `--color-bg-negative-idle` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-bg-primary-hovered` | `var(--color-aqua-800)` | `#4cceeb` |
+| `--color-bg-primary-idle` | `var(--color-aqua-700)` | `#16bee3` |
+| `--color-bg-primary-pressed` | `var(--color-aqua-1000)` | `#87daed` |
+| `--color-bg-primary-tonal-idle` | `var(--color-aqua-100)` | `#132f35` |
+| `--color-border-brand-hovered` | `var(--color-aqua-400)` | `#1695b1` |
+| `--color-border-primary-disabled` | `var(--color-neutral-200)` | `#474b62` |
+| `--color-border-primary-focused` | `var(--color-neutral-1000)` | `#ffffff` |
+| `--color-icon-actionpressed` | `var(--color-aqua-800)` | `#b6e6f1` |
+| `--color-icon-brand` | `var(--color-aqua-600)` | `#4cceeb` |
+| `--color-icon-disabled` | `var(--color-neutral-400)` | `#dadce7` |
+| `--color-icon-negative` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-icon-onaction` | `var(--color-neutral-0)` | `#101323` |
+| `--color-icon-onfocus` | `var(--color-neutral-0)` | `#101323` |
+| `--color-icon-onhovered` | `var(--color-neutral-0)` | `#101323` |
+| `--color-text-accent-aqualight` | `var(--color-aqua-600)` | `#4cceeb` |
+| `--color-text-actionpressed` | `var(--color-aqua-1000)` | `#eff8fa` |
+| `--color-text-brand` | `var(--color-aqua-800)` | `#b6e6f1` |
+| `--color-text-disabled` | `var(--color-neutral-400)` | `#dadce7` |
+| `--color-text-negative` | `var(--color-red-600)` | `#eb4c59` |
+| `--color-text-onaction` | `var(--color-neutral-0)` | `#101323` |
+| `--color-text-onfocus` | `var(--color-neutral-0)` | `#101323` |
+| `--color-text-onhovered` | `var(--color-neutral-0)` | `#101323` |
+| `--motion-duration-fast` | `var(--motion-duration-100)` | — |
+| `--size-icon-md` | `var(--size-20)` | — |
+| `--spacing-padding-sm` | `var(--spacing-8)` | — |
+| `--typography-fontweight-regular` | `400` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--fill-default&viewMode=docs" title="Button props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D26-1657" title="Button in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### All Variants
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-button--all-variants">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--all-variants&globals=theme:light"
+  title="All Variants — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-button--all-variants&globals=theme:dark"
+  title="All Variants — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+— reported, not filled in
+
+1. **`transparent/focused` has no focus indicator.** Node `29:1800` renders no
+   border and no ring at all — the variant is distinguished only by a darker
+   label. (`get_variable_defs` does list `border/width/focused` against the
+   node, but `get_design_context` returns no border properties, so there is no
+   edge to resolve a colour for. Don't go looking for a half-finished binding;
+   there is nothing there to complete.) A focusable control with no visible
+   focus indicator fails WCAG 2.4.7. The `state="focused"` prop reproduces the
+   node exactly so QA can compare, but **real keyboard focus gets the ring that
+   fill and outline already use** (`border-primary-focused` at
+   `border-width-focused`) rather than an invented value. A designer should
+   decide what transparent focus looks like.
+
+2. **Outline stroke alignment is inconsistent.** Four outline variants are
+   120x38 (1px outside stroke); `outline/focused` is 118x36 (2px inside). These
+   cannot both be right. The component uses an inside stroke throughout — see
+   above — but the node needs fixing either way.
+
+3. **Two accent-aqua variables share one description.** The library has both
+   `color/text/accent/aqua` (aqua/800, `#176e82`) and
+   `color/text/accent/aquaLight` (aqua/600, `#16bee3`), and **both carry the
+   identical description** "lumo.semantic.color.text.accent.aqua — Accent Colors
+   · aqua foreground". The Figma MCP compounds this by rendering both as
+   `--lumo-semantic-color-text-accent-aqua`, with only the resolved value to
+   tell them apart. Button binds `aquaLight`; this was caught by measuring the
+   rendered colour against the node, not by reading the name. The descriptions
+   should be made distinct before this trips someone else.
+
+4. **Icon tokens are doing border duty.** `outline/default` takes its border
+   from `color/icon/brand` and `outline/error` from `color/icon/negative`, while
+   `color/border/brand/default` and `color/border/negative/default` both exist
+   and are unused here. The component follows what the node binds. Worth a
+   designer's pass — the border roles exist for this.
+
+5. **`transparent/focused` colours the label with a background token.**
+   `color/bg/primary/pressed` is used as a text colour. It resolves to a
+   readable value, but the role is wrong; `color/text/actionPressed` is what
+   `outline/focused` uses for the same job.
+
+6. **Gap uses a padding token.** Every variant sets its flex gap from
+   `spacing/padding/sm` rather than `spacing/gap/horizontal/sm`. Both are 8px so
+   nothing renders wrong, but the roles are not interchangeable.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/button.md">docs/button.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`d501bea`](https://github.com/Aye-Kyawt/lumo-design-system/commit/d501bea) | 2026-10-03 | _unknown_ | Fix QA findings F1, F2, F3, F5 on Button |
+| [`74ef51a`](https://github.com/Aye-Kyawt/lumo-design-system/commit/74ef51a) | 2026-10-03 | _unknown_ | Add Button component, built from Figma node 26:1657 |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

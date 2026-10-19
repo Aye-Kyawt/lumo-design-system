@@ -8,7 +8,7 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 {/*
   GENERATED — do not edit by hand.
   The reference page for Accordion.
-  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Written by docs-site/scripts/generate.mjs from commit aa6635fbc068.
   Fix the generator or its inputs, never this file: a hand edit is overwritten
   by the next run and is indistinguishable from generated text until then.
 */}
@@ -19,7 +19,7 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 <span class="lumo-strip__links">
 <a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-accordion--closed">Storybook</a>
 <a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=208-4912">Figma node 208:4912</a>
-<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx">Source</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/accordion/accordion.jsx">Source</a>
 </span>
 </div>
 
@@ -58,15 +58,15 @@ The component description says what the component is for, never what an individu
 
 ### Accessibility
 - the header is a real &lt;button&gt; carrying aria-expanded and aria-controls over a role="region" panel — the disclosure pattern, so Space and Enter operate it  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L150">src/components/accordion/accordion.jsx:150</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/accordion/accordion.jsx#L150">src/components/accordion/accordion.jsx:150</a></small>
 - the panel is role="region" labelled by the header button, so its content is reachable and named  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L37">src/components/accordion/accordion.jsx:37</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/accordion/accordion.jsx#L37">src/components/accordion/accordion.jsx:37</a></small>
 - uses aria-disabled rather than the DOM attribute, keeping a disabled header focusable so it can still be read  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L152">src/components/accordion/accordion.jsx:152</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/accordion/accordion.jsx#L152">src/components/accordion/accordion.jsx:152</a></small>
 - the chevron is aria-hidden decoration; aria-expanded already conveys the state, so announcing it twice is worse  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordionIcon.jsx#L12">src/components/accordion/accordionIcon.jsx:12</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/accordion/accordionIcon.jsx#L12">src/components/accordion/accordionIcon.jsx:12</a></small>
 - headingLevel wraps the header in a real heading, which is what lets a screen reader jump between questions in an FAQ list  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L168">src/components/accordion/accordion.jsx:168</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/accordion/accordion.jsx#L168">src/components/accordion/accordion.jsx:168</a></small>
 
 ### Composition
 Nothing in the stories shows this component composed with another.
@@ -318,11 +318,11 @@ Each row as the set draws it, in both themes.
 
 
 ### What Figma never bound, and the gaps recorded against it
-The build report [`docs/accordion.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/accordion.md) records no "Design gaps" section.
+The build report [`docs/accordion.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/docs/accordion.md) records no "Design gaps" section.
 
-<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/accordion.md">docs/accordion.md</a>.</small>
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/docs/accordion.md">docs/accordion.md</a>.</small>
 
-Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/docs-site/src/content/docs/disagreements.mdx).
 </TabItem>
 <TabItem label="Changelog">
 Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
@@ -337,4 +337,4 @@ Every commit touching this component **and its subcomponents** — a change to a
 </TabItem>
 </Tabs>
 
-<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/aa6635fbc068f4b7388080dfc48f2197204ad7d1"><code>aa6635fbc068</code></a>.</small>

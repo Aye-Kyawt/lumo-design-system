@@ -8,7 +8,7 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 {/*
   GENERATED — do not edit by hand.
   The reference page for Switch.
-  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Written by docs-site/scripts/generate.mjs from commit aa6635fbc068.
   Fix the generator or its inputs, never this file: a hand edit is overwritten
   by the next run and is indistinguishable from generated text until then.
 */}
@@ -19,7 +19,7 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 <span class="lumo-strip__links">
 <a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-switch--on-true">Storybook</a>
 <a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=17-1201">Figma node 17:1201</a>
-<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx">Source</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/switch/switch.jsx">Source</a>
 </span>
 </div>
 
@@ -58,13 +58,13 @@ The component description says what the component is for, never what an individu
 
 ### Accessibility
 - renders a real &lt;button role="switch"&gt; with aria-checked, so Space and Enter operate it and a screen reader reads the state  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx#L19">src/components/switch/switch.jsx:19</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/switch/switch.jsx#L19">src/components/switch/switch.jsx:19</a></small>
 - uses aria-disabled rather than the DOM disabled attribute, so a disabled switch stays focusable and can still be read  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx#L78">src/components/switch/switch.jsx:78</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/switch/switch.jsx#L78">src/components/switch/switch.jsx:78</a></small>
 - the node carries no label layer, so the accessible name must come from the caller via aria-label or aria-labelledby  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switch.jsx#L22">src/components/switch/switch.jsx:22</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/switch/switch.jsx#L22">src/components/switch/switch.jsx:22</a></small>
 - the knob is aria-hidden; the parent button is the control, so the knob must not be focusable or announced  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/switch/switchKnob.jsx#L18">src/components/switch/switchKnob.jsx:18</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/src/components/switch/switchKnob.jsx#L18">src/components/switch/switchKnob.jsx:18</a></small>
 
 ### Composition
 Nothing in the stories shows this component composed with another.
@@ -254,11 +254,11 @@ Each row as the set draws it, in both themes.
 
 
 ### What Figma never bound, and the gaps recorded against it
-The build report [`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/switch.md) records no "Design gaps" section.
+The build report [`docs/switch.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/docs/switch.md) records no "Design gaps" section.
 
-<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/switch.md">docs/switch.md</a>.</small>
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/docs/switch.md">docs/switch.md</a>.</small>
 
-Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/aa6635fbc068f4b7388080dfc48f2197204ad7d1/docs-site/src/content/docs/disagreements.mdx).
 </TabItem>
 <TabItem label="Changelog">
 Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
@@ -273,4 +273,4 @@ Every commit touching this component **and its subcomponents** — a change to a
 </TabItem>
 </Tabs>
 
-<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/aa6635fbc068f4b7388080dfc48f2197204ad7d1"><code>aa6635fbc068</code></a>.</small>

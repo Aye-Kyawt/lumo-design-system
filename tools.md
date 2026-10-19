@@ -245,12 +245,27 @@ Three things about this are easy to get wrong:
    note already recorded against the repo root. A manual deploy from `main` would therefore run
    with no framework, build command or output directory, and should be expected to fail. That is
    not a bug to chase; it is this file doing its job
-3. **`astro` and `main` now conflict on this file forever.** Every merge in either direction hits
-   it. `astro` carries no other commits of its own — at the time of writing it is the same commit
-   as `origin/main` — so keeping it current means merging `main` into it and keeping `astro`'s
-   side of `docs-site/vercel.json` each time. A future alternative worth considering is dropping
-   the per-branch split and using the project's own ignored-build-step setting instead, which
-   would keep one config in the repo
+3. **Merging into `astro` silently disables it, and git does not warn you.** This file used to
+   say the two branches "conflict on this file forever". **They do not, and that is worse.**
+
+   Observed on 2026-10-19, merging `staging` into `astro`: `astro` had not touched
+   `docs-site/vercel.json` since the split, so git fast-forwarded that path to the other side and
+   replaced the real build config with `{"git": {"deploymentEnabled": false}}` — **cleanly, with
+   no conflict and no prompt.** Pushed as merged, that stops `astro` deploying too, and then **no
+   branch in the repository can build the docs site at all**. A conflict would have stopped the
+   merge and asked; a clean fast-forward just does it.
+
+   So every merge into `astro` must **check and restore** `docs-site/vercel.json` afterwards, not
+   wait to be asked about it:
+
+   ```
+   git merge origin/staging
+   git show <astro's pre-merge sha>:docs-site/vercel.json > docs-site/vercel.json
+   ```
+
+   The real alternative is dropping the per-branch split and using the project's own
+   ignored-build-step setting instead, which would keep one config in the repo and remove this
+   trap entirely. Worth doing the next time anyone touches this
 
 ### What is still blocked
 

@@ -1,0 +1,114 @@
+{
+  "component": "accordion",
+  "figma_component": "accordion",
+  "figma_node": "208:4912",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use an accordion to let the user expand one answer at a time without leaving the page — an FAQ list on a marketing page.",
+      "verbatim": "Use an accordion to let the user expand one answer at a time without leaving the page — an FAQ list on a marketing page.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "accordion",
+        "node": "208:4912",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t use it for primary content the user needs to see without an extra click.",
+      "use_instead": null,
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "accordion",
+        "node": "208:4912",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "state": {
+      "closed": {
+        "meaning": null,
+        "source": null
+      },
+      "open": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "stacked in a list, as an FAQ",
+      "source": "src/components/accordion/accordion.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--body-body3",
+    "--body-body6-intense",
+    "--border-radius-card",
+    "--border-width-default",
+    "--border-width-focused",
+    "--color-bg-base",
+    "--color-bg-surfaceprimary",
+    "--color-bg-surfacesecondary",
+    "--color-border-primary-default",
+    "--color-text-placeholder",
+    "--color-text-primary",
+    "--color-text-secondary",
+    "--elevation-focused",
+    "--motion-duration-fast",
+    "--motion-duration-instant",
+    "--opacity-disabled",
+    "--size-72",
+    "--size-icon-md",
+    "--spacing-padding-lg",
+    "--spacing-padding-md",
+    "--typography-fontweight-regular"
+  ],
+  "a11y": [
+    {
+      "fact": "the header is a real <button> carrying aria-expanded and aria-controls over a role=\"region\" panel — the disclosure pattern, so Space and Enter operate it",
+      "source": "src/components/accordion/accordion.jsx:150"
+    },
+    {
+      "fact": "the panel is role=\"region\" labelled by the header button, so its content is reachable and named",
+      "source": "src/components/accordion/accordion.jsx:37"
+    },
+    {
+      "fact": "uses aria-disabled rather than the DOM attribute, keeping a disabled header focusable so it can still be read",
+      "source": "src/components/accordion/accordion.jsx:152"
+    },
+    {
+      "fact": "the chevron is aria-hidden decoration; aria-expanded already conveys the state, so announcing it twice is worse",
+      "source": "src/components/accordion/accordionIcon.jsx:12"
+    },
+    {
+      "fact": "headingLevel wraps the header in a real heading, which is what lets a screen reader jump between questions in an FAQ list",
+      "source": "src/components/accordion/accordion.jsx:168"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.closed",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.open",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

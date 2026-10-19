@@ -1,0 +1,328 @@
+---
+title: Empty State
+description: Empty State in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Empty State.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--playground">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=94-1862">Figma node 94:1862</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/emptyState/emptyState.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use an empty state when a list, card or page has nothing to show — no results, nothing created yet, a failed load, or no permission.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `empty-state` description, read 2026-10-19.</small>
+
+### Where it goes
+- in the empty region of a list, card or page
+
+### When not to use it
+- Don’t leave the user without a next step; always give the action.
+  - **No alternative named.** The source states the prohibition without saying what to reach for instead.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `size` | `sm` | _not stated in the source_ |
+| `size` | `md` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- the title is a &lt;p&gt; by default and titleAs promotes it to a real heading, so a page-level empty state can take its place in the outline  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/emptyState/emptyState.jsx#L44">src/components/emptyState/emptyState.jsx:44</a></small>
+- the medallion icon is decoration  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/emptyState/emptyStateIcon.jsx#L22">src/components/emptyState/emptyStateIcon.jsx:22</a></small>
+
+### Composition
+Nothing in the stories shows this component composed with another.
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Playground
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--playground&globals=theme:light"
+  title="Playground — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--playground&globals=theme:dark"
+  title="Playground — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### ↳Icon slot
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--icon-slot&globals=theme:light"
+  title="↳Icon slot — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--icon-slot&globals=theme:dark"
+  title="↳Icon slot — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### ↳Action slot (composes Button)
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--action-slot&globals=theme:light"
+  title="↳Action slot (composes Button) — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--action-slot&globals=theme:dark"
+  title="↳Action slot (composes Button) — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### In context (inside Card)
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--in-card&globals=theme:light"
+  title="In context (inside Card) — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--in-card&globals=theme:dark"
+  title="In context (inside Card) — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { EmptyState } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `size` | `'sm'|'md'` | `'sm'` | Figma `Size`. Picks the medallion size and the title/description type styles. |
+| `title` | `string` | `'No use cases match these filters'` | Figma `Title`. The headline. Always shown — the node has no boolean for it. |
+| `description` | `boolean` | `true` | Figma `Description` (the boolean property). Shows the supporting line. |
+| `descriptionText` | `string` | `'Try removing a filter, or ask our team to research a custom use case.'` | Figma `Description` (the text property). Renamed because the set spells two different properties `Description`; see docs/naming-conflicts.md. |
+| `action` | `boolean` | `true` | Figma `Action`. Reveals the `↳Action` slot. |
+| `children` | `React.ReactNode` | `null` | The `↳Action` slot. Put a `Button` here — the component description says to always give the user a next step. Named `children` per the Card precedent in docs/naming-conflicts.md, because `action` is taken by the boolean above. |
+| `icon` | `React.ReactNode` | `null` | The `↳Icon` slot. Swaps what sits inside the medallion. Defaults to the node's own `Icon/check` instance (94:10 / 94:18). |
+| `iconName` | `string` | `'check'` | Material Symbols glyph for the default icon, when `icon` is not supplied. |
+| `titleAs` | `'p'|'h1'|'h2'|'h3'|'h4'|'h5'|'h6'` | — | Not a Figma property. The node's title is a text layer, so `p` is the faithful default; pass a heading tag when the empty state owns a region of the page and a screen reader should be able to jump to it. |
+| `className` | `string` | `''` |  |
+
+### Union types
+- `size`: `'sm'|'md'`
+- `titleAs`: `'p'|'h1'|'h2'|'h3'|'h4'|'h5'|'h6'`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--body-body2` | `400 var(--typography-fontsize-md)/var(--typography-lineheight-md) var(--typography-fontfamily-body)` | — |
+| `--body-body3` | `400 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body)` | — |
+| `--body-body6-intense` | `600 var(--typography-fontsize-lg)/var(--typography-lineheight-md) var(--typography-fontfamily-body)` | — |
+| `--border-radius-full` | `999px` | — |
+| `--color-bg-brand-subtle` | `var(--color-aqua-100)` | `#132f35` |
+| `--color-icon-brand` | `var(--color-aqua-600)` | `#4cceeb` |
+| `--color-text-bold` | `var(--color-neutral-1000)` | `#ffffff` |
+| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
+| `--heading-h4` | `600 var(--typography-fontsize-xl)/var(--typography-lineheight-xl) var(--typography-fontfamily-title)` | — |
+| `--size-56` | `56px` | — |
+| `--size-72` | `72px` | — |
+| `--size-icon-md` | `var(--size-20)` | — |
+| `--spacing-gap-horizontal-sm` | `var(--spacing-8)` | — |
+| `--spacing-gap-md` | `var(--spacing-16)` | — |
+| `--typography-fontweight-regular` | `400` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--playground&viewMode=docs" title="Empty State props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D94-1862" title="Empty State in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### Size = sm (94:7)
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--size-sm">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--size-sm&globals=theme:light"
+  title="Size = sm (94:7) — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--size-sm&globals=theme:dark"
+  title="Size = sm (94:7) — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Size = md (94:15)
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--size-md">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--size-md&globals=theme:light"
+  title="Size = md (94:15) — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--size-md&globals=theme:dark"
+  title="Size = md (94:15) — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Description = false
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--without-description">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--without-description&globals=theme:light"
+  title="Description = false — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--without-description&globals=theme:dark"
+  title="Description = false — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Action = false
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--without-action">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--without-action&globals=theme:light"
+  title="Action = false — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--without-action&globals=theme:dark"
+  title="Action = false — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Description = false, Action = false
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--title-only">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--title-only&globals=theme:light"
+  title="Description = false, Action = false — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--title-only&globals=theme:dark"
+  title="Description = false, Action = false — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Matrix
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-empty-state--matrix">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--matrix&globals=theme:light"
+  title="Matrix — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-empty-state--matrix&globals=theme:dark"
+  title="Matrix — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+The build report [`docs/emptyState.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/emptyState.md) records no "Design gaps" section.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/emptyState.md">docs/emptyState.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`50cd21b`](https://github.com/Aye-Kyawt/lumo-design-system/commit/50cd21b) | 2026-10-12 | _unknown_ | Build Empty State from Figma 94:1862 — two sizes, six gaps reported |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

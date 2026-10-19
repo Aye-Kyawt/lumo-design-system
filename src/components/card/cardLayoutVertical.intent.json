@@ -1,0 +1,125 @@
+{
+  "component": "cardLayoutVertical",
+  "figma_component": "card/layout/vertical",
+  "figma_node": "63:98",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Card layout. Stacks header, body and footer down the card — the default arrangement used across Lumo screens.",
+      "verbatim": "Card layout. Stacks header, body and footer down the card — the default arrangement used across Lumo screens.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "card/layout/vertical",
+        "node": "63:98",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t use it when the card leads with an image or chart; use card/layout/horizontal.",
+      "use_instead": "card/layout/horizontal",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "card/layout/vertical",
+        "node": "63:98",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "header": {
+      "true": {
+        "meaning": null,
+        "source": null
+      },
+      "false": {
+        "meaning": null,
+        "source": null
+      }
+    },
+    "footer": {
+      "true": {
+        "meaning": null,
+        "source": null
+      },
+      "false": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "inside Card, filling its Layout slot",
+      "source": "src/components/card/card.stories.jsx"
+    }
+  ],
+  "pairs_with": [
+    {
+      "component": "Card",
+      "source": "src/components/card/card.stories.jsx"
+    }
+  ],
+  "required_tokens": [
+    "--body-body3",
+    "--border-radius-card",
+    "--border-width-default",
+    "--border-width-focused",
+    "--color-bg-base",
+    "--color-bg-disabled",
+    "--color-border-primary-default",
+    "--color-border-primary-disabled",
+    "--color-border-primary-focused",
+    "--color-border-primary-hovered",
+    "--color-text-primary",
+    "--color-text-secondary",
+    "--heading-h5",
+    "--motion-duration-fast",
+    "--spacing-gap-horizontal-md",
+    "--spacing-gap-horizontal-sm",
+    "--spacing-gap-md",
+    "--spacing-gap-sm",
+    "--spacing-gap-xs",
+    "--spacing-padding-lg",
+    "--spacing-padding-md",
+    "--spacing-padding-sm",
+    "--spacing-padding-xl"
+  ],
+  "a11y": [
+    {
+      "fact": "a layout frame only: it adds no role of its own, so the card around it decides whether the surface is operable",
+      "source": "src/components/card/cardLayoutVertical.jsx:30"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.header.true",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.header.false",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.footer.true",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.footer.false",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

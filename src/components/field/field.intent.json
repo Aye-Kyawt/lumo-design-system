@@ -1,0 +1,130 @@
+{
+  "component": "field",
+  "figma_component": "field",
+  "figma_node": "141:3144",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use field to wrap any input control with a label, an optional required mark and helper or error text — used by Input, Select, Textarea and Checkbox groups alike.",
+      "verbatim": "Use field to wrap any input control with a label, an optional required mark and helper or error text — used by Input, Select, Textarea and Checkbox groups alike.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "field",
+        "node": "141:3144",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t write the field’s own error styling into the control; field carries it.",
+      "use_instead": null,
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "field",
+        "node": "141:3144",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "state": {
+      "default": {
+        "meaning": null,
+        "source": null
+      },
+      "error": {
+        "meaning": null,
+        "source": null
+      },
+      "disabled": {
+        "meaning": null,
+        "source": null
+      },
+      "Type": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "in a form, wrapping one input control",
+      "source": "src/components/field/field.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--body-body3",
+    "--border-radius-card",
+    "--border-width-default",
+    "--color-bg-surfaceprimary",
+    "--color-border-negative-focused",
+    "--color-border-primary-default",
+    "--color-icon-negative",
+    "--color-text-disabled",
+    "--color-text-negative",
+    "--color-text-placeholder",
+    "--color-text-primary",
+    "--color-text-secondary",
+    "--label-label1",
+    "--size-control-md",
+    "--size-icon-sm",
+    "--spacing-gap-horizontal-xs",
+    "--spacing-gap-xs",
+    "--spacing-padding-md",
+    "--typography-fontweight-regular"
+  ],
+  "a11y": [
+    {
+      "fact": "renders exactly one <label> whose htmlFor points at the caller own control, so the label and the control are genuinely associated",
+      "source": "src/components/field/field.jsx:155"
+    },
+    {
+      "fact": "htmlFor is omitted entirely when no control has been named, rather than writing an empty reference",
+      "source": "src/components/field/field.jsx:155"
+    },
+    {
+      "fact": "in the error state the helper row becomes role=\"alert\", so a validation message is announced when it appears",
+      "source": "src/components/field/field.jsx:176"
+    },
+    {
+      "fact": "the required asterisk is aria-hidden and the announced word is in a screen-reader-only span, so \"required\" is read rather than \"star\"",
+      "source": "src/components/field/field.jsx:163"
+    },
+    {
+      "fact": "the error icon is decoration",
+      "source": "src/components/field/fieldIcon.jsx:22"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.default",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.error",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.disabled",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.Type",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

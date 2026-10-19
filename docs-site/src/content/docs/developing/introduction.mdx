@@ -1,0 +1,36 @@
+---
+title: Introduction
+description: Install the Lumo Design System, import a component, and load the stylesheets in the right order.
+---
+## Install
+
+```bash
+npm install @ds-house/lumo-design-system
+```
+
+`react` and `react-dom` are peer dependencies — 19 or newer. The package ships ESM and CJS builds with TypeScript declarations generated from the JSDoc on the components.
+
+## Load the stylesheets once
+
+**`tokens.css` must come first.** Every component declaration reads from it, so loading `styles.css` alone gives you unstyled components.
+
+```js
+import '@ds-house/lumo-design-system/tokens.css';
+import '@ds-house/lumo-design-system/styles.css';
+```
+
+## Import a component
+
+```jsx
+import { Badge, Button } from '@ds-house/lumo-design-system';
+```
+
+Ten components are exported. Everything else is internal and may change in a patch.
+
+## Dark mode
+
+Dark mode is the system's own: `tokens.css` scopes its overrides to `[data-theme="dark"]`, so setting that attribute on `<html>` is the whole of it. There is no second palette to maintain.
+
+## What the components do not import
+
+Component files import no CSS of their own, so importing one component does not pull a stylesheet in as a side effect. That is why the two imports above are not optional.

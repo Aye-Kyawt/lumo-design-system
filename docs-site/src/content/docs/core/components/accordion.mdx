@@ -1,0 +1,340 @@
+---
+title: Accordion
+description: Accordion in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Accordion.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-accordion--closed">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=208-4912">Figma node 208:4912</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use an accordion to let the user expand one answer at a time without leaving the page — an FAQ list on a marketing page.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `accordion` description, read 2026-10-19.</small>
+
+### Where it goes
+- stacked in a list, as an FAQ
+
+### When not to use it
+- Don’t use it for primary content the user needs to see without an extra click.
+  - **No alternative named.** The source states the prohibition without saying what to reach for instead.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `state` | `closed` | _not stated in the source_ |
+| `state` | `open` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- the header is a real &lt;button&gt; carrying aria-expanded and aria-controls over a role="region" panel — the disclosure pattern, so Space and Enter operate it  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L150">src/components/accordion/accordion.jsx:150</a></small>
+- the panel is role="region" labelled by the header button, so its content is reachable and named  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L37">src/components/accordion/accordion.jsx:37</a></small>
+- uses aria-disabled rather than the DOM attribute, keeping a disabled header focusable so it can still be read  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L152">src/components/accordion/accordion.jsx:152</a></small>
+- the chevron is aria-hidden decoration; aria-expanded already conveys the state, so announcing it twice is worse  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordionIcon.jsx#L12">src/components/accordion/accordionIcon.jsx:12</a></small>
+- headingLevel wraps the header in a real heading, which is what lets a screen reader jump between questions in an FAQ list  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/accordion/accordion.jsx#L168">src/components/accordion/accordion.jsx:168</a></small>
+
+### Composition
+Nothing in the stories shows this component composed with another.
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Disabled — not drawn in Figma
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--disabled&globals=theme:light"
+  title="Disabled — not drawn in Figma — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--disabled&globals=theme:dark"
+  title="Disabled — not drawn in Figma — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### It works — uncontrolled
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--uncontrolled&globals=theme:light"
+  title="It works — uncontrolled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--uncontrolled&globals=theme:dark"
+  title="It works — uncontrolled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### It works — one open at a time
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--one-at-a-time&globals=theme:light"
+  title="It works — one open at a time — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--one-at-a-time&globals=theme:dark"
+  title="It works — one open at a time — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### With real content — shows gap 3
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--with-real-content&globals=theme:light"
+  title="With real content — shows gap 3 — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--with-real-content&globals=theme:dark"
+  title="With real content — shows gap 3 — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Heading level — an addition
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--with-heading&globals=theme:light"
+  title="Heading level — an addition — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--with-heading&globals=theme:dark"
+  title="Heading level — an addition — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Long title — wraps, chevron holds
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--long-title&globals=theme:light"
+  title="Long title — wraps, chevron holds — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--long-title&globals=theme:dark"
+  title="Long title — wraps, chevron holds — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { Accordion } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `state` | `'closed'|'open'` | — | Figma `State`. Supply it to drive the accordion from your own state — an FAQ list that allows only one open answer does exactly that; leave it out and the accordion keeps its own, seeded from `defaultState`. |
+| `defaultState` | `'closed'|'open'` | `'closed'` | Starting value when `state` is not supplied. Defaults to `closed`, which is the set's own first variant (208:4897). |
+| `title` | `string` | `''` | The header text (208:4899 / 208:4906). `title` is also a global HTML attribute, so the DOM one is exposed separately as `htmlTitle` — see docs/naming-conflicts.md for why the Figma name keeps the prop. |
+| `htmlTitle` | `string` | — | The DOM `title` attribute, i.e. the browser's own hover tooltip. Nothing in the node asks for one; this is the escape hatch that keeps `title` free for the Figma property. Unset by default. |
+| `disabled` | `boolean` | `false` | Not a variant in Figma — see docs/accordion.md, gap 1. Blocks the toggle and is announced, while the header stays focusable so it can be read. |
+| `iconName` | `string` | `'expand_more'` | Material Symbols glyph for the chevron. Defaults to `expand_more`, which is what node 208:4895 draws. |
+| `headingLevel` | `number` | `0` | Not a Figma property and not claimed to be one. The node draws a card, not a document outline, so it has no heading level. Pass 1–6 to wrap the header button in that heading element, which is what lets a screen reader user jump between the questions in an FAQ list. Defaults to `0` — no wrapper — so the default output is exactly what the node draws. |
+| `onToggle` | `(state: 'closed'|'open', event: React.MouseEvent) =&gt; void` | — | Called with the state the accordion is moving to. |
+| `children` | `React.ReactNode` | — | The content region — the `_Slot/Content` instance (41:21) in the `open` variant. Named `children` per the Card precedent in docs/naming-conflicts.md, since the accordion has exactly one slot. |
+| `className` | `string` | `''` |  |
+| `id` | `string` | — | Seeds the ids the button and the panel need to point at each other. Generated when absent. |
+
+### Union types
+- `state`: `'closed'|'open'`
+- `defaultState`: `'closed'|'open'`
+- `onToggle`: `(state: 'closed'|'open', event: React.MouseEvent) =&gt; void`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--body-body3` | `400 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body)` | — |
+| `--body-body6-intense` | `600 var(--typography-fontsize-lg)/var(--typography-lineheight-md) var(--typography-fontfamily-body)` | — |
+| `--border-radius-card` | `var(--border-radius-lg)` | — |
+| `--border-width-default` | `var(--border-width-1)` | — |
+| `--border-width-focused` | `var(--border-width-2)` | — |
+| `--color-bg-base` | `var(--color-neutral-0)` | `#101323` |
+| `--color-bg-surfaceprimary` | `var(--color-neutral-50)` | `#1d2135` |
+| `--color-bg-surfacesecondary` | `var(--color-neutral-100)` | `#30344b` |
+| `--color-border-primary-default` | `var(--color-neutral-300)` | `#636679` |
+| `--color-text-placeholder` | `var(--color-neutral-300)` | `#a0a3b1` |
+| `--color-text-primary` | `var(--color-neutral-800)` | `#ffffff` |
+| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
+| `--elevation-focused` | `0px 0px 0px 3px rgb(8.6275% 74.51% 89.02% / 0.4)` | — |
+| `--motion-duration-fast` | `var(--motion-duration-100)` | — |
+| `--motion-duration-instant` | `var(--motion-duration-0)` | — |
+| `--opacity-disabled` | `var(--opacity-40)` | — |
+| `--size-72` | `72px` | — |
+| `--size-icon-md` | `var(--size-20)` | — |
+| `--spacing-padding-lg` | `var(--spacing-24)` | — |
+| `--spacing-padding-md` | `var(--spacing-16)` | — |
+| `--typography-fontweight-regular` | `400` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--closed&viewMode=docs" title="Accordion props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D208-4912" title="Accordion in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### Closed
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-accordion--closed">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--closed&globals=theme:light"
+  title="Closed — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--closed&globals=theme:dark"
+  title="Closed — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Open
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-accordion--open">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--open&globals=theme:light"
+  title="Open — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--open&globals=theme:dark"
+  title="Open — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Both variants — as the set is drawn
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-accordion--both-variants">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--both-variants&globals=theme:light"
+  title="Both variants — as the set is drawn — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--both-variants&globals=theme:dark"
+  title="Both variants — as the set is drawn — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### States — not drawn in Figma
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-accordion--states">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--states&globals=theme:light"
+  title="States — not drawn in Figma — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-accordion--states&globals=theme:dark"
+  title="States — not drawn in Figma — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+The build report [`docs/accordion.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/accordion.md) records no "Design gaps" section.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/accordion.md">docs/accordion.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`445d407`](https://github.com/Aye-Kyawt/lumo-design-system/commit/445d407) | 2026-10-15 | _unknown_ | Build Accordion from Figma 208:4912 — two states, seven gaps reported |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

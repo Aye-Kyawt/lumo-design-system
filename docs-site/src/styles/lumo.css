@@ -18,3 +18,69 @@
   --sl-color-text: var(--color-text-primary);
   --sl-color-bg: var(--color-bg-base);
 }
+
+/* ---------------------------------------------------------------------------
+ * The component page's own furniture.
+ *
+ * Two local properties so the generated pages have one name to reference
+ * rather than repeating a token in every iframe style attribute. They are
+ * aliases, not values: each resolves to a semantic token, and neither
+ * introduces a value of its own.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  --lumo-docs-border: var(--color-border-primary-default);
+  --lumo-docs-surface: var(--color-bg-surfacesecondary);
+}
+
+/* The header strip: status, the version it shipped in, then the links out. */
+.lumo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-padding-sm);
+  padding: var(--spacing-padding-sm) var(--spacing-padding-md);
+  margin-block: var(--spacing-padding-md);
+  border: var(--border-width-default) solid var(--lumo-docs-border);
+  border-radius: var(--border-radius-card);
+  background: var(--lumo-docs-surface);
+  font: var(--label-label1);
+}
+
+.lumo-strip__status {
+  padding: var(--spacing-padding-xs) var(--spacing-padding-sm);
+  border-radius: var(--border-radius-chip);
+  background: var(--color-bg-primary-tonal-idle);
+  color: var(--color-text-brand);
+}
+
+/* A status nobody could read is not dressed up as one that was. */
+.lumo-strip__status[data-status='unknown'] {
+  background: var(--color-bg-surfacesecondary);
+  color: var(--color-text-secondary);
+}
+
+.lumo-strip__version {
+  color: var(--color-text-secondary);
+}
+
+.lumo-strip__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-padding-md);
+  margin-inline-start: auto;
+}
+
+/* Light and dark side by side, stacking on a narrow screen. */
+.lumo-embeds {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-padding-sm);
+  margin-block: var(--spacing-padding-sm);
+}
+
+@media (max-width: 50rem) {
+  .lumo-embeds {
+    grid-template-columns: 1fr;
+  }
+}

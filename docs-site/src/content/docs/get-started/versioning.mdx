@@ -1,0 +1,30 @@
+---
+title: Versioning
+description: What a version number means, and what you may rely on at one.
+---
+This page is the repository's `VERSIONING.md`, which is the authority. Read it there if the two ever disagree.
+
+## The scheme
+
+Semantic versioning, with the pre-1.0 rule stated rather than assumed.
+
+| Change | Bump |
+|---|---|
+| A public component removed, renamed, or given a different default | major |
+| A prop removed, renamed, or its type narrowed | major |
+| A shipped CSS custom property renamed or removed | major |
+| A new public component, a new optional prop, a new variant value | minor |
+| A fix that changes no documented behaviour | patch |
+| A change to a token's **value** (not its name) | patch |
+
+## While the major version is 0
+
+At `0.x`, anything may change in a minor bump — a `0.2.0` may remove a component or change a default that `0.1.0` documented. Pin an exact version if that matters to you.
+
+The `1.0.0` that ends this is not a date. It is the point at which every component has a `Cleared` release verdict and a reference page, because that is the first moment the whole public surface has been independently reviewed.
+
+## What is public
+
+The named exports of `src/index.ts`, the two stylesheet entry points, and **the CSS custom property names those sheets declare**. That last one is the easiest to forget: the properties are shipped and overridable, so renaming one is a breaking change even though no JavaScript export moved.
+
+Internal components, the layout inside `dist/`, source maps and declaration internals are not API.

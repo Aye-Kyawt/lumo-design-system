@@ -8,26 +8,20 @@ import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
 {/*
   GENERATED — do not edit by hand.
   The reference page for Field.
-  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Written by docs-site/scripts/generate.mjs from commit 7ccfbbb53757.
   Fix the generator or its inputs, never this file: a hand edit is overwritten
   by the next run and is indistinguishable from generated text until then.
 */}
 
 <div class="lumo-strip">
-<span class="lumo-strip__status" data-status="unknown">status unknown</span>
-<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__status" data-status="Completed">Completed</span>
+<span class="lumo-strip__version">shipped in 0.1.0</span>
 <span class="lumo-strip__links">
 <a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-field--default">Storybook</a>
 <a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=141-3144">Figma node 141:3144</a>
-<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx">Source</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/field/field.jsx">Source</a>
 </span>
 </div>
-
-:::caution[Status and version are not available]
-The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
-
-**Owner:** a human — authorize the connector in claude.ai connector settings
-:::
 
 <Tabs>
 <TabItem label="Usage">
@@ -60,15 +54,15 @@ The component description says what the component is for, never what an individu
 
 ### Accessibility
 - renders exactly one &lt;label&gt; whose htmlFor points at the caller own control, so the label and the control are genuinely associated  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L155">src/components/field/field.jsx:155</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/field/field.jsx#L155">src/components/field/field.jsx:155</a></small>
 - htmlFor is omitted entirely when no control has been named, rather than writing an empty reference  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L155">src/components/field/field.jsx:155</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/field/field.jsx#L155">src/components/field/field.jsx:155</a></small>
 - in the error state the helper row becomes role="alert", so a validation message is announced when it appears  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L176">src/components/field/field.jsx:176</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/field/field.jsx#L176">src/components/field/field.jsx:176</a></small>
 - the required asterisk is aria-hidden and the announced word is in a screen-reader-only span, so "required" is read rather than "star"  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/field.jsx#L163">src/components/field/field.jsx:163</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/field/field.jsx#L163">src/components/field/field.jsx:163</a></small>
 - the error icon is decoration  
-  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/field/fieldIcon.jsx#L22">src/components/field/fieldIcon.jsx:22</a></small>
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/src/components/field/fieldIcon.jsx#L22">src/components/field/fieldIcon.jsx:22</a></small>
 
 ### Composition
 Nothing in the stories shows this component composed with another.
@@ -76,7 +70,7 @@ Nothing in the stories shows this component composed with another.
 ### What this version promises
 See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
 :::caution[No release review]
-No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+No release verdict has been recorded for this component, and its `Development` status reads **Completed**. It has not been independently reviewed against its Figma node by anything but the test suite, which compares it against its own documented API.
 
 **Owner:** release
 :::
@@ -193,25 +187,25 @@ import { Field } from '@ds-house/lumo-design-system';
 ### Tokens it needs
 | Token | Light | Dark |
 |---|---|---|
-| `--body-body3` | `400 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body)` | — |
-| `--border-radius-card` | `var(--border-radius-lg)` | — |
-| `--border-width-default` | `var(--border-width-1)` | — |
-| `--color-bg-surfaceprimary` | `var(--color-neutral-50)` | `#1d2135` |
-| `--color-border-negative-focused` | `var(--color-red-500)` | `#e31628` |
-| `--color-border-primary-default` | `var(--color-neutral-300)` | `#636679` |
-| `--color-icon-negative` | `var(--color-red-600)` | `#eb4c59` |
-| `--color-text-disabled` | `var(--color-neutral-400)` | `#dadce7` |
-| `--color-text-negative` | `var(--color-red-600)` | `#eb4c59` |
-| `--color-text-placeholder` | `var(--color-neutral-300)` | `#a0a3b1` |
-| `--color-text-primary` | `var(--color-neutral-800)` | `#ffffff` |
-| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
-| `--label-label1` | `500 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-label)` | — |
-| `--size-control-md` | `var(--size-40)` | — |
-| `--size-icon-sm` | `var(--size-16)` | — |
-| `--spacing-gap-horizontal-xs` | `var(--spacing-4)` | — |
-| `--spacing-gap-xs` | `var(--spacing-4)` | — |
-| `--spacing-padding-md` | `var(--spacing-16)` | — |
-| `--typography-fontweight-regular` | `400` | — |
+| `--body-body3` | _not in the build_ | — |
+| `--border-radius-card` | _not in the build_ | — |
+| `--border-width-default` | _not in the build_ | — |
+| `--color-bg-surfaceprimary` | _not in the build_ | — |
+| `--color-border-negative-focused` | _not in the build_ | — |
+| `--color-border-primary-default` | _not in the build_ | — |
+| `--color-icon-negative` | _not in the build_ | — |
+| `--color-text-disabled` | _not in the build_ | — |
+| `--color-text-negative` | _not in the build_ | — |
+| `--color-text-placeholder` | _not in the build_ | — |
+| `--color-text-primary` | _not in the build_ | — |
+| `--color-text-secondary` | _not in the build_ | — |
+| `--label-label1` | _not in the build_ | — |
+| `--size-control-md` | _not in the build_ | — |
+| `--size-icon-sm` | _not in the build_ | — |
+| `--spacing-gap-horizontal-xs` | _not in the build_ | — |
+| `--spacing-gap-xs` | _not in the build_ | — |
+| `--spacing-padding-md` | _not in the build_ | — |
+| `--typography-fontweight-regular` | _not in the build_ | — |
 
 A dash under **Dark** means the token does not change between themes.
 
@@ -317,11 +311,11 @@ Each row as the set draws it, in both themes.
 
 
 ### What Figma never bound, and the gaps recorded against it
-The build report [`docs/field.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/field.md) records no "Design gaps" section.
+The build report [`docs/field.md`](https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs/field.md) records no "Design gaps" section.
 
-<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/field.md">docs/field.md</a>.</small>
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs/field.md">docs/field.md</a>.</small>
 
-Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd/docs-site/src/content/docs/disagreements.mdx).
 </TabItem>
 <TabItem label="Changelog">
 Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
@@ -337,4 +331,4 @@ Every commit touching this component **and its subcomponents** — a change to a
 </TabItem>
 </Tabs>
 
-<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/7ccfbbb53757d90dfe7402dd76d23bd858fe33bd"><code>7ccfbbb53757</code></a>.</small>

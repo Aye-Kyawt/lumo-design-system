@@ -209,6 +209,9 @@ function componentPage(c) {
   } else {
     L.push('<span class="lumo-strip__version">no shipped version</span>');
   }
+  if (status.verdict) {
+    L.push(`<span class="lumo-strip__verdict" data-verdict="${status.verdict}">${status.verdict}</span>`);
+  }
   L.push('<span class="lumo-strip__links">');
   if (sbTop) L.push(`<a href="${STORYBOOK}/?path=/story/${sbTop.id}">Storybook</a>`);
   if (intent?.figma_node) L.push(`<a href="${FIGMA_FILE}?node-id=${intent.figma_node.replace(':', '-')}">Figma node ${intent.figma_node}</a>`);
@@ -217,12 +220,14 @@ function componentPage(c) {
   L.push('</div>');
   L.push('');
 
-  if (!status.development || !status.shipped_in) {
+  if (!status.development) {
     L.push(
       notice(
-        'Status and version are not available',
-        board._unavailable?.reason ?? 'The board could not be read.',
-        board._unavailable?.owner,
+        'This component has no status',
+        status._note ??
+          board._unavailable?.reason ??
+          'The registry has no row for this component, so there is no status to show.',
+        board._unavailable?.owner ?? 'human:designer',
       ),
     );
   }
@@ -294,7 +299,34 @@ function componentPage(c) {
     L.push('### What this version promises');
     L.push(`See [Versioning](/get-started/versioning/). At \`${pkg.version}\` the public surface is the named exports of \`src/index.ts\`; this component is one of them.`);
     if (!TAGS.length) L.push('');
-    L.push(notice('No release review', 'No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.', 'release'));
+    if (status.verdict === 'Cleared') {
+      L.push(
+        `This component's release verdict is **Cleared** and its \`Development\` status reads ` +
+          `**${status.development}**. A \`Cleared\` verdict is a recommendation with reasons, ` +
+          'recorded in its release review — [a human decides whether a release happens]' +
+          '(/get-started/versioning/), and no agent approves its own work.',
+      );
+    } else if (status.verdict === 'Blocked') {
+      L.push(
+        notice(
+          'This component is Blocked',
+          `Its release verdict reads **Blocked**, so it is documented and shipped but has not been ` +
+            `cleared for release. Its \`Development\` status reads **${status.development}**. ` +
+            'The reasons are in its release review; `Blocked` is terminal and only a human restarts it.',
+          'a human',
+        ),
+      );
+    } else {
+      L.push(
+        notice(
+          'No release review',
+          `No release verdict has been recorded for this component${status.development ? `, and its \`Development\` status reads **${status.development}**` : ''}. ` +
+            'It has not been independently reviewed against its Figma node by anything but the test suite, ' +
+            'which compares it against its own documented API.',
+          'release',
+        ),
+      );
+    }
   }
   L.push('</TabItem>');
 

@@ -84,3 +84,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* The release verdict, beside the status. Cleared and Blocked are the only
+   two values the registry allows, and they must not look alike. */
+.lumo-strip__verdict {
+  padding: var(--spacing-padding-xs) var(--spacing-padding-sm);
+  border-radius: var(--border-radius-chip);
+  background: var(--color-bg-positive-tonal-idle);
+  color: var(--color-text-positive);
+}
+
+.lumo-strip__verdict[data-verdict='Blocked'] {
+  background: var(--color-bg-negative-tonal-idle);
+  color: var(--color-text-red-twotone);
+}

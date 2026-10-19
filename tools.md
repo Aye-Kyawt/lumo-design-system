@@ -141,7 +141,7 @@ production alias above is the one to record and to open.
 | Folder | `docs-site/` — its own npm package, own `package.json`, own `package-lock.json`, own `node_modules`. Not a workspace of the root project |
 | Vercel project | `lumo-reference-site`, id `prj_nMiPqBsAvTBRhsBOqFTI0ZrKTLrK`, team `team_NczYOAM1tl42j4eOPDDd7dsx`. It already existed; no second project was created |
 | Root Directory | **`docs-site`, and already set.** Not read from a settings page — inferred from real output: a commit carrying `{"git": {"deploymentEnabled": false}}` at `docs-site/vercel.json` produced no reference-site deployment at all, and the only way the project could have read that file is if it is rooted there |
-| Production branch | **`main` today; it should be `astro`.** The live production deployment is at ref `439929d`, which is `origin/main`. Changing it is the one thing still outstanding — see "What is still blocked" |
+| Production branch | **`main`, and that is now the design.** The site deploys from `main`; `docs-site/vercel.json` there carries the build config and a per-branch `deploymentEnabled`. The earlier plan was to point production at `astro` instead — see "Why the site deploys from main" for why that was dropped |
 | Production URL | **<https://lumo-reference-site.vercel.app>** — fetched and confirmed as this repo's site on 2026-10-17 |
 | Deployment Protection | on for per-deployment URLs. Those redirect to Vercel login; the stable alias above is public |
 
@@ -223,13 +223,22 @@ production alias above is the one to record and to open.
 
 `docs-site/vercel.json` is **not the same file on every branch**, on purpose:
 
-- on `astro` — the real build config (framework, install, build, output)
-- everywhere else, `main` and `staging` included — only `{"git": {"deploymentEnabled": false}}`
+`main` carries the build config **and** a per-branch rule, and that one file is inherited by
+every branch cut from it:
 
-The reason is that the docs project watches the whole repo. Without this, every push to every
-branch asks it for a deployment and hangs a check on the PR. `deploymentEnabled: false` is read
-from the branch being pushed, so a push to `main` finds the flag and stops; a push to `astro`
-finds the real config and builds production.
+```json
+"git": { "deploymentEnabled": { "*": false, "*/*": false, "*/*/*": false, "main": true, "astro": true } }
+```
+
+The reason is that the docs project watches the whole repo. Without a rule, every push to every
+branch asks it for a deployment and hangs a check on the PR. With this, `main` deploys production,
+`astro` still deploys a preview, and nothing else deploys at all.
+
+**The catch-alls are not optional and the pattern count is not arbitrary.** Vercel's own
+documentation states that when `deploymentEnabled` is an object, *an unspecified branch defaults
+to `true`* — so `{"main": true}` alone would re-enable every branch. Three patterns because this
+repo's branches are slashed (`crew/…`, `docs/…`, `tooling/…`) and `*` does not cross a slash. A
+rule evaluating true wins, which is what lets `main` and `astro` through.
 
 Three things about this are easy to get wrong:
 
@@ -267,38 +276,52 @@ Three things about this are easy to get wrong:
    ignored-build-step setting instead, which would keep one config in the repo and remove this
    trap entirely. Worth doing the next time anyone touches this
 
-### What is still blocked
+### Why the site deploys from main
 
-**One setting: Production branch = `astro`.** It is `main` today. Everything else is in place —
-the project exists, it is rooted at `docs-site`, and it deploys.
+**It is live, from `main`, since 2026-10-19.** `/sitemap-index.xml` returns 200 and every
+generated page resolves.
 
-Why it could not be changed from here: the Vercel connector authenticates and lists projects,
-but **every per-project and per-deployment call returns**
+The original design pointed production at a long-lived `astro` branch. That was dropped, for two
+reasons, and the second is the stronger one.
+
+**It could not be done from here.** The Vercel connector authenticates and lists projects, but
+every per-project and per-deployment call returns
 
 ```
 403 forbidden — Not authorized: Trying to access resource under scope "aye-kyawts-projects".
-You must re-authenticate to this scope or use a token with access to this scope.
 ```
 
-and the error itself says not to retry it or expect re-authentication to fix it. The Vercel CLI
-is not installed on this machine, so the fallback that error suggests is unavailable too. The
-production branch has to be changed by a human in the dashboard:
+and the error says not to retry or expect re-authentication to help. No CLI on the machine
+either. Production branch is a dashboard-only field.
 
-> Project `lumo-reference-site` → Settings → Git → Production Branch → `astro`
+**And the `astro` branch was a design that breaks by default.** It had to be merged forward from
+`main` forever, and *every* such merge silently replaced its build config — no conflict, no
+prompt, because it had not touched that file since the split (see the trap recorded above). A
+long-lived branch that quietly disables itself on a routine merge is worse than no branch.
 
-**How to tell whether the flip took**, without a dashboard: `astro` carries the `site` setting
-in `docs-site/astro.config.mjs` and `main` does not, so only `astro` builds a sitemap.
+So `main` deploys instead. `main` is where every change lands anyway, it already carried the
+generator and all the generated pages, and the per-branch rule above keeps every other branch
+from deploying. `astro` keeps its own config and still produces a preview, but nothing depends on
+it; it has no commits `main` lacks and is safe to delete.
+
+**How to check the site is serving the current build**, without a dashboard — only the generated
+site sets `site` in `astro.config.mjs`, so only it builds a sitemap:
 
 ```
-curl -o /dev/null -w '%{http_code}\n' https://lumo-reference-site.vercel.app/sitemap-index.xml
+curl -o /dev/null -w '%{http_code}
+' https://lumo-reference-site.vercel.app/sitemap-index.xml
 ```
 
-`404` means production is still building `main`. `200` means it is building `astro`. As of
-2026-10-17 it is `404`.
+`200` is correct. A `404` means production is serving a build from before the site was generated.
 
-Nothing is broken meanwhile — the two branches are otherwise the same content, so the live site
-is correct either way. It starts to matter with the first commit that lands on one and not the
-other.
+### What is still blocked
+
+**The Airtable connector is not authorized**, so the component registry cannot be read. The
+consequences reach the live site: every component page shows `status unknown` and
+`no shipped version`, no `Astro Link` is written to the board, and no component can be given a
+`Release Verdict` — which is why `0.1.0` shipped with nothing independently reviewed.
+
+A human authorizes it in the claude.ai connector settings. Nothing in this repository can.
 
 ### Why Astro and Starlight were added
 

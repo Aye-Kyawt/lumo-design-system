@@ -1,0 +1,130 @@
+{
+  "component": "toast",
+  "figma_component": "toast",
+  "figma_node": "151:162",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use a toast to confirm that something happened after the user acted — saved, sent, deleted, failed — without interrupting what they are doing.",
+      "verbatim": "Use a toast to confirm that something happened after the user acted — saved, sent, deleted, failed — without interrupting what they are doing.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "toast",
+        "node": "151:162",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t use it for anything the user must act on; that is a Modal or an Alert.",
+      "use_instead": "Modal or an Alert",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "toast",
+        "node": "151:162",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "status": {
+      "positive": {
+        "meaning": null,
+        "source": null
+      },
+      "negative": {
+        "meaning": null,
+        "source": null
+      },
+      "warning": {
+        "meaning": null,
+        "source": null
+      },
+      "info": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "overlaid, away from the content the user is working in",
+      "source": "src/components/toast/toast.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--border-radius-card",
+    "--border-radius-full",
+    "--border-width-default",
+    "--color-bg-base",
+    "--color-border-primary-default",
+    "--color-icon-disabled",
+    "--color-icon-info",
+    "--color-icon-negative",
+    "--color-icon-positive",
+    "--color-icon-warning",
+    "--color-text-bold",
+    "--color-text-primary",
+    "--color-text-secondary",
+    "--elevation-focused",
+    "--elevation-level2",
+    "--motion-duration-fast",
+    "--size-icon-sm",
+    "--spacing-gap-horizontal-sm",
+    "--spacing-gap-xs",
+    "--spacing-padding-md",
+    "--typography-fontfamily-body",
+    "--typography-fontsize-md",
+    "--typography-fontsize-sm",
+    "--typography-fontweight-regular",
+    "--typography-fontweight-semibold",
+    "--typography-lineheight-md",
+    "--typography-lineheight-sm"
+  ],
+  "a11y": [
+    {
+      "fact": "is role=\"status\" with aria-live=\"polite\", so it is announced when it appears without stealing focus",
+      "source": "src/components/toast/toast.jsx:23"
+    },
+    {
+      "fact": "the close control is a real <button> whose accessible name comes from closeLabel",
+      "source": "src/components/toast/toastClose.jsx:35"
+    },
+    {
+      "fact": "the status icon is aria-hidden decoration; the title carries the meaning",
+      "source": "src/components/toast/toastIcon.jsx:28"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.positive",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.negative",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.warning",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.info",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

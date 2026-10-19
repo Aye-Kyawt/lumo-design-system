@@ -1,0 +1,169 @@
+{
+  "component": "card",
+  "figma_component": "card",
+  "figma_node": "65:230",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use a card to group related content into one surface a user can scan or act on. The card owns the surface, border, radius and padding; everything inside comes from a card layout placed in ↳Layout.",
+      "verbatim": "Use a card to group related content into one surface a user can scan or act on. The card owns the surface, border, radius and padding; everything inside comes from a card layout placed in ↳Layout.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "card",
+        "node": "65:230",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t nest a card inside another card.",
+      "use_instead": null,
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "card",
+        "node": "65:230",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "padding": {
+      "none": {
+        "meaning": null,
+        "source": null
+      },
+      "md": {
+        "meaning": null,
+        "source": null
+      },
+      "lg": {
+        "meaning": null,
+        "source": null
+      },
+      "xl": {
+        "meaning": null,
+        "source": null
+      }
+    },
+    "state": {
+      "default": {
+        "meaning": null,
+        "source": null
+      },
+      "hovered": {
+        "meaning": null,
+        "source": null
+      },
+      "focused": {
+        "meaning": null,
+        "source": null
+      },
+      "disabled": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "as a page-level surface holding a card layout in its Layout slot",
+      "source": "src/components/card/card.stories.jsx"
+    }
+  ],
+  "pairs_with": [
+    {
+      "component": "CardLayoutVertical",
+      "source": "src/components/card/card.stories.jsx"
+    }
+  ],
+  "required_tokens": [
+    "--body-body3",
+    "--border-radius-card",
+    "--border-width-default",
+    "--border-width-focused",
+    "--color-bg-base",
+    "--color-bg-disabled",
+    "--color-border-primary-default",
+    "--color-border-primary-disabled",
+    "--color-border-primary-focused",
+    "--color-border-primary-hovered",
+    "--color-text-primary",
+    "--color-text-secondary",
+    "--heading-h5",
+    "--motion-duration-fast",
+    "--spacing-gap-horizontal-md",
+    "--spacing-gap-horizontal-sm",
+    "--spacing-gap-md",
+    "--spacing-gap-sm",
+    "--spacing-gap-xs",
+    "--spacing-padding-lg",
+    "--spacing-padding-md",
+    "--spacing-padding-sm",
+    "--spacing-padding-xl"
+  ],
+  "a11y": [
+    {
+      "fact": "becomes operable only when given an onClick and not disabled: it then takes role=\"button\" and tabIndex 0, so it is never a focusable element with nothing to do",
+      "source": "src/components/card/card.jsx:70"
+    },
+    {
+      "fact": "when interactive, Enter activates on key down and Space on key up, which is how a real button behaves",
+      "source": "src/components/card/card.jsx:49"
+    },
+    {
+      "fact": "aria-disabled marks a disabled card without removing it from the accessibility tree",
+      "source": "src/components/card/card.jsx:72"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.padding.none",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.padding.md",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.padding.lg",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.padding.xl",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.default",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.hovered",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.focused",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.disabled",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

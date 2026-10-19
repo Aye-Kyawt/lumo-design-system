@@ -1,0 +1,96 @@
+{
+  "component": "emptyState",
+  "figma_component": "empty-state",
+  "figma_node": "94:1862",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use an empty state when a list, card or page has nothing to show — no results, nothing created yet, a failed load, or no permission.",
+      "verbatim": "Use an empty state when a list, card or page has nothing to show — no results, nothing created yet, a failed load, or no permission.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "empty-state",
+        "node": "94:1862",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t leave the user without a next step; always give the action.",
+      "use_instead": null,
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "empty-state",
+        "node": "94:1862",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "size": {
+      "sm": {
+        "meaning": null,
+        "source": null
+      },
+      "md": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "in the empty region of a list, card or page",
+      "source": "src/components/emptyState/emptyState.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--body-body2",
+    "--body-body3",
+    "--body-body6-intense",
+    "--border-radius-full",
+    "--color-bg-brand-subtle",
+    "--color-icon-brand",
+    "--color-text-bold",
+    "--color-text-secondary",
+    "--heading-h4",
+    "--size-56",
+    "--size-72",
+    "--size-icon-md",
+    "--spacing-gap-horizontal-sm",
+    "--spacing-gap-md",
+    "--typography-fontweight-regular"
+  ],
+  "a11y": [
+    {
+      "fact": "the title is a <p> by default and titleAs promotes it to a real heading, so a page-level empty state can take its place in the outline",
+      "source": "src/components/emptyState/emptyState.jsx:44"
+    },
+    {
+      "fact": "the medallion icon is decoration",
+      "source": "src/components/emptyState/emptyStateIcon.jsx:22"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.size.sm",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.size.md",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

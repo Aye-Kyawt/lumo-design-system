@@ -1,0 +1,178 @@
+{
+  "component": "button",
+  "figma_component": "button",
+  "figma_node": "26:1657",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use this component when need CTA.",
+      "verbatim": "Use this component when need CTA.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "button",
+        "node": "26:1657",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don't use it for opening external link.",
+      "use_instead": null,
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "button",
+        "node": "26:1657",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "type": {
+      "fill": {
+        "meaning": null,
+        "source": null
+      },
+      "outline": {
+        "meaning": null,
+        "source": null
+      },
+      "transparent": {
+        "meaning": null,
+        "source": null
+      }
+    },
+    "state": {
+      "default": {
+        "meaning": null,
+        "source": null
+      },
+      "hovered": {
+        "meaning": null,
+        "source": null
+      },
+      "focused": {
+        "meaning": null,
+        "source": null
+      },
+      "disabled": {
+        "meaning": null,
+        "source": null
+      },
+      "error": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "in a card footer action row, and in an empty state Action slot",
+      "source": "src/components/button/button.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--border-radius-input",
+    "--border-width-default",
+    "--border-width-focused",
+    "--button-button1",
+    "--color-bg-base",
+    "--color-bg-disabled",
+    "--color-bg-negative-idle",
+    "--color-bg-primary-hovered",
+    "--color-bg-primary-idle",
+    "--color-bg-primary-pressed",
+    "--color-bg-primary-tonal-idle",
+    "--color-border-brand-hovered",
+    "--color-border-primary-disabled",
+    "--color-border-primary-focused",
+    "--color-icon-actionpressed",
+    "--color-icon-brand",
+    "--color-icon-disabled",
+    "--color-icon-negative",
+    "--color-icon-onaction",
+    "--color-icon-onfocus",
+    "--color-icon-onhovered",
+    "--color-text-accent-aqualight",
+    "--color-text-actionpressed",
+    "--color-text-brand",
+    "--color-text-disabled",
+    "--color-text-negative",
+    "--color-text-onaction",
+    "--color-text-onfocus",
+    "--color-text-onhovered",
+    "--motion-duration-fast",
+    "--size-icon-md",
+    "--spacing-padding-sm",
+    "--typography-fontweight-regular"
+  ],
+  "a11y": [
+    {
+      "fact": "state=\"disabled\" sets the real DOM disabled attribute, and rest props are spread first so a caller cannot reach past the component and re-enable it",
+      "source": "src/components/button/button.jsx:73"
+    },
+    {
+      "fact": "an icon-only button takes its accessible name from label via aria-label, because no text is drawn",
+      "source": "src/components/button/button.jsx:74"
+    },
+    {
+      "fact": "the icons are aria-hidden decoration",
+      "source": "src/components/button/buttonIcon.jsx:17"
+    },
+    {
+      "fact": "htmlType defaults to \"button\", so it cannot submit a form by accident",
+      "source": "src/components/button/button.jsx:41"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.type.fill",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.type.outline",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.type.transparent",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.default",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.hovered",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.focused",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.disabled",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.state.error",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

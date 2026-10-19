@@ -34,6 +34,15 @@ const group = (label, level) => ({
 });
 
 export default defineConfig({
+  // The production URL of the `lumo-reference-site` Vercel project, confirmed
+  // live on 2026-10-17. Starlight needs it for the sitemap and for canonical
+  // URLs; without it Astro warns and skips the sitemap on every build.
+  //
+  // This is the project's stable production alias, not a per-deployment URL.
+  // Per-deployment addresses sit behind Deployment Protection and redirect to
+  // a Vercel login page, so one of those here would produce a sitemap full of
+  // links that only work for someone signed in to this Vercel team.
+  site: 'https://lumo-reference-site.vercel.app',
   outDir: './dist',
   integrations: [
     starlight({

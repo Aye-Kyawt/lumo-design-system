@@ -124,7 +124,7 @@ for it.
 6. **Regenerate**, so Home, Changelog and News carry the published version. Before the publish
    there was no version to carry; this is why phase 2 regenerates rather than pushing phase 1's
    output.
-7. **Commit to the `astro` branch and push.** Vercel deploys it — **never deploy by hand.** Then
+7. **Commit to `main` — through `staging`, by PR — and push.** Vercel deploys `main`, which is the production branch; **never deploy by hand.** `CLAUDE.md` is unchanged here: main accepts PRs from staging only, so phase 2 opens a PR rather than pushing to main directly. Then
    **wait until that commit's deployment reads success.** Not the project's latest deployment:
    that commit's.
 8. **Fetch every live page** and check it the way `astro-page` says: every page 200; every
@@ -173,8 +173,8 @@ owns it, and DevOps's file claims only `Production Storybook`. Follow the contra
 the contradiction rather than acting on the description.
 
 Outside the registry: the Figma documentation, read-only; the component library repo, read-only
-**except** the intent files and the Astro site source, which you write; the `astro` branch, which
-you push in phase 2 and never otherwise.
+**except** the intent files and the Astro site source, which you write; and the branch you open
+phase 2's pull request from, never `main` directly.
 
 **Two preconditions that are not satisfied today.** Say so rather than failing obscurely:
 

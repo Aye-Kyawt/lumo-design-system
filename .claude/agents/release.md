@@ -172,7 +172,8 @@ the thing the card exists to surface, and its status is the reason.
    one working tree. Confirm it is on `main` before relying on it.
 
 10. **Tell `doc-generator`:** `published <package>@<version>, go live`. That starts Job B phase 2:
-    regenerate so Home, Changelog and News carry the published version, push `astro`, wait for
+    regenerate so Home, Changelog and News carry the published version, land it on `main` through
+    `staging`, wait for
     that commit's deployment, fetch every page, then write `Astro Link` per verified page.
 
 11. **Report:** what published; the docs site result; what the board now reads; what is still

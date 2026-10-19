@@ -56,7 +56,7 @@ home. Do not copy its words, its components or its design system; it is a refere
 | | |
 |---|---|
 | Folder | `docs-site/` — its own npm package, own `package.json`, own lockfile, own `node_modules`. Not a workspace of the root |
-| Branch | `astro`. It is the only branch the docs Vercel project builds — every other branch carries `docs-site/vercel.json` containing only `{"git": {"deploymentEnabled": false}}` |
+| Branch | **`main`.** The site deploys from `main`, which is the project's production branch. `docs-site/vercel.json` there carries the build config and a per-branch `deploymentEnabled` that lets `main` and `astro` deploy and stops every other branch. The earlier design used a long-lived `astro` branch; `tools.md` records why it was dropped |
 | Vercel project | `lumo-reference-site` |
 | Live URL | `tools.md` records it. **Read it from there**, never from memory |
 
@@ -312,10 +312,16 @@ that an embed loaded, or that dark mode resolves.
 
 ### 6 · Push
 
-Push `astro`. Confirm the deployment is the one you are about to verify: the production branch
-must be `astro`, or the live URL is still serving whatever `main` last produced.
+Land the run on `main`, by pull request through `staging` — `CLAUDE.md` says main accepts PRs
+from staging only, and that is not relaxed for this. The merge to `main` is what deploys.
 
-**Check:** the deployment finished, and it was built from the pinned sha.
+Then confirm the deployment you are about to verify is **this** one: find the deployment for the
+merge commit and check it reads success, rather than reading the project's latest deployment and
+assuming. A production deployment from an older commit will serve a site that looks right and is
+not yours.
+
+**Check:** the deployment finished, it is a Production deployment, and it was built from a commit
+containing the pinned sha.
 
 ### 7 · Verify the live site
 
@@ -388,17 +394,21 @@ and the report says why.
 - [ ] Guides re-read against the code this run
 - [ ] Build exits 0 **and** a link check ran and found nothing
 - [ ] Home, one component page's five tabs, and Tokens, seen locally in both themes
-- [ ] Production branch is `astro`, so the live URL is what I pushed
+- [ ] The run landed on `main` by PR through `staging`, and the **Production** deployment for that merge commit reads success
 - [ ] Every live page 200; every header link 200, or 403 only for team-only Figma
 - [ ] `Astro Link` written only because every one of those passed
 
 ## Open questions for a human
 
 1. **Fonts.** Self-hosted here, Google Fonts CDN in `CLAUDE.md`. One of the two has to change.
-2. **The sidebar restructure**, and where `disagreements.mdx` goes once it is out of the nav.
-3. **Versioning.** The sidebar asks for a Versioning page, the component header strip asks for
-   the version a component shipped in, and the changelog asks to mark commits with versions.
-   None of it exists. Until it does, this skill produces notices in four places.
+2. ~~The sidebar restructure, and where `disagreements.mdx` goes.~~ **Settled 2026-10-19.** The
+   audience-ordered sidebar is live; `disagreements.mdx` is kept, out of the nav, and linked from
+   each component's Design tab and from Contributing.
+3. **Versioning — partly settled.** `VERSIONING.md` exists, the Versioning page is generated, and
+   `v0.1.0` is a real tag, so the Home release block and the Versioning page no longer render
+   notices. Two places still do, and both need a human: no component records **which version it
+   shipped in** (that comes from the registry, which is unreachable), and the per-component
+   changelog cannot mark a commit with a version until there is more than one tag to sit between.
 4. **The README's first paragraph** describes the token pipeline, not the design system. The hero
    line will read oddly until a human rewrites the README.
 5. **Who owns `Astro Link`?** Registry Flag 7 records the ownership as contested, and this skill

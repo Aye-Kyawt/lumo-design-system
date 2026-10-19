@@ -1,0 +1,29 @@
+---
+title: Theming
+description: How to theme the Lumo Design System, and how this site is themed.
+---
+## The seam
+
+Every visual value is a CSS custom property declared by `tokens.css`. Overriding a token changes every component that reads it, which is the only supported way to theme the system.
+
+```css
+:root {
+  --color-action-primary: /* your value */;
+}
+```
+
+Token **names** are public API, so they will not be renamed in a patch. Token **values** may change in a patch. [Versioning](/get-started/versioning/) states the difference.
+
+## Dark mode
+
+`tokens.css` scopes its dark overrides to `[data-theme="dark"]`. Set that attribute on `<html>` and the whole system follows. There is no second palette, and no component carries its own dark variant.
+
+## How this site is themed
+
+This site wears the system's own tokens. One stylesheet maps Starlight's variables onto semantic tokens and **contains no hex of its own** — the values behind Starlight's variables are always `var(--color-…)`. A hex in that file would be the same failure as a hex in a component: the site would stop being evidence of its own tokens.
+
+Starlight's theme toggle sets the same `data-theme` attribute the generated dark sheet is scoped to, so the two line up with nothing to maintain.
+
+## What is not themeable
+
+Component structure and class names are not a theming surface. Overriding `.lumo-badge__label` works until the component changes; overriding the token it reads does not.

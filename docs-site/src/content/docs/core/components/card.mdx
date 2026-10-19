@@ -1,0 +1,642 @@
+---
+title: Card
+description: Card in the Lumo Design System — what it is for, how to use it, and what it is built from.
+---
+
+import { Tabs, TabItem, Badge as SlBadge } from '@astrojs/starlight/components';
+
+{/*
+  GENERATED — do not edit by hand.
+  The reference page for Card.
+  Written by docs-site/scripts/generate.mjs from commit 2b948097505e.
+  Fix the generator or its inputs, never this file: a hand edit is overwritten
+  by the next run and is indistinguishable from generated text until then.
+*/}
+
+<div class="lumo-strip">
+<span class="lumo-strip__status" data-status="unknown">status unknown</span>
+<span class="lumo-strip__version">no shipped version</span>
+<span class="lumo-strip__links">
+<a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-card--default-padding-none">Storybook</a>
+<a href="https://www.figma.com/design/UbWxCGi4FaV4Ficg2iDnu0/Lumo.Web.Component.V1.0.In-Progress?node-id=65-230">Figma node 65:230</a>
+<a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/card/card.jsx">Source</a>
+</span>
+</div>
+
+:::caution[Status and version are not available]
+The Airtable connector is not authorized in this session, so the Components table could not be read. Every status below is null rather than guessed. A null renders as the missing-source notice the astro-page skill requires.
+
+**Owner:** a human — authorize the connector in claude.ai connector settings
+:::
+
+<Tabs>
+<TabItem label="Usage">
+### When to use it
+> Use a card to group related content into one surface a user can scan or act on. The card owns the surface, border, radius and padding; everything inside comes from a card layout placed in ↳Layout.
+
+<small>From the Lumo.Web.Component.V1.0.Complete library — the `card` description, read 2026-10-19.</small>
+
+### Where it goes
+- as a page-level surface holding a card layout in its Layout slot
+
+### When not to use it
+- Don’t nest a card inside another card.
+  - **No alternative named.** The source states the prohibition without saying what to reach for instead.
+
+### What each variant is for
+| Property | Value | What it is for |
+|---|---|---|
+| `padding` | `none` | _not stated in the source_ |
+| `padding` | `md` | _not stated in the source_ |
+| `padding` | `lg` | _not stated in the source_ |
+| `padding` | `xl` | _not stated in the source_ |
+| `state` | `default` | _not stated in the source_ |
+| `state` | `hovered` | _not stated in the source_ |
+| `state` | `focused` | _not stated in the source_ |
+| `state` | `disabled` | _not stated in the source_ |
+
+:::caution[Variant meanings are not stated]
+The component description says what the component is for, never what an individual value means. Every value above is implemented and tested; what each one is *for* is a design decision nobody has written down.
+
+**Owner:** human:designer
+:::
+
+
+### Accessibility
+- becomes operable only when given an onClick and not disabled: it then takes role="button" and tabIndex 0, so it is never a focusable element with nothing to do  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/card/card.jsx#L70">src/components/card/card.jsx:70</a></small>
+- when interactive, Enter activates on key down and Space on key up, which is how a real button behaves  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/card/card.jsx#L49">src/components/card/card.jsx:49</a></small>
+- aria-disabled marks a disabled card without removing it from the accessibility tree  
+  <small><a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/src/components/card/card.jsx#L72">src/components/card/card.jsx:72</a></small>
+
+### Composition
+- Used with `CardLayoutVertical`
+
+### What this version promises
+See [Versioning](/get-started/versioning/). At `0.1.0` the public surface is the named exports of `src/index.ts`; this component is one of them.
+:::caution[No release review]
+No component in this library has a `Cleared` release verdict, because the registry is not reachable from the release machinery. Nothing here has been independently reviewed against its Figma node by anything but the test suite.
+
+**Owner:** release
+:::
+
+</TabItem>
+<TabItem label="Examples">
+### The README's own example
+```jsx
+import { Badge, Button, Card, CardLayoutVertical } from '@ds-house/lumo-design-system';
+
+export function ReleaseRow({ onPublish }) {
+  return (
+    <Card padding="lg">
+      <CardLayoutVertical
+        headerProps={{ title: 'Release 0.2.0', subtitle: false }}
+        body={<Badge tone="success" label="Cleared" />}
+        footer
+        footerContent={
+          <Button label="Publish" iconLeft={false} iconRight={false} onClick={onPublish} />
+        }
+      />
+    </Card>
+  );
+}
+```
+
+Every story that is not a variant-matrix row, embedded live from the deployed Storybook in both themes. The matrix itself is on the **Design** tab.
+
+#### Default Padding None
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-none&globals=theme:light"
+  title="Default Padding None — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-none&globals=theme:dark"
+  title="Default Padding None — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Hovered Padding None
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-none&globals=theme:light"
+  title="Hovered Padding None — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-none&globals=theme:dark"
+  title="Hovered Padding None — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Focused Padding None
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-none&globals=theme:light"
+  title="Focused Padding None — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-none&globals=theme:dark"
+  title="Focused Padding None — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Disabled Padding None
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-none&globals=theme:light"
+  title="Disabled Padding None — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-none&globals=theme:dark"
+  title="Disabled Padding None — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Default Padding Md
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-md&globals=theme:light"
+  title="Default Padding Md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-md&globals=theme:dark"
+  title="Default Padding Md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Hovered Padding Md
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-md&globals=theme:light"
+  title="Hovered Padding Md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-md&globals=theme:dark"
+  title="Hovered Padding Md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Focused Padding Md
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-md&globals=theme:light"
+  title="Focused Padding Md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-md&globals=theme:dark"
+  title="Focused Padding Md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Disabled Padding Md
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-md&globals=theme:light"
+  title="Disabled Padding Md — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-md&globals=theme:dark"
+  title="Disabled Padding Md — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Default Padding Lg
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-lg&globals=theme:light"
+  title="Default Padding Lg — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-lg&globals=theme:dark"
+  title="Default Padding Lg — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Hovered Padding Lg
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-lg&globals=theme:light"
+  title="Hovered Padding Lg — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-lg&globals=theme:dark"
+  title="Hovered Padding Lg — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Focused Padding Lg
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-lg&globals=theme:light"
+  title="Focused Padding Lg — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-lg&globals=theme:dark"
+  title="Focused Padding Lg — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Disabled Padding Lg
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-lg&globals=theme:light"
+  title="Disabled Padding Lg — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-lg&globals=theme:dark"
+  title="Disabled Padding Lg — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Default Padding Xl
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-xl&globals=theme:light"
+  title="Default Padding Xl — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-xl&globals=theme:dark"
+  title="Default Padding Xl — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Hovered Padding Xl
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-xl&globals=theme:light"
+  title="Hovered Padding Xl — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--hovered-padding-xl&globals=theme:dark"
+  title="Hovered Padding Xl — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Focused Padding Xl
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-xl&globals=theme:light"
+  title="Focused Padding Xl — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--focused-padding-xl&globals=theme:dark"
+  title="Focused Padding Xl — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Disabled Padding Xl
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-xl&globals=theme:light"
+  title="Disabled Padding Xl — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--disabled-padding-xl&globals=theme:dark"
+  title="Disabled Padding Xl — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Header — with action
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--header-with-action&globals=theme:light"
+  title="Header — with action — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--header-with-action&globals=theme:dark"
+  title="Header — with action — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Header — no subtitle
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--header-without-subtitle&globals=theme:light"
+  title="Header — no subtitle — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--header-without-subtitle&globals=theme:dark"
+  title="Header — no subtitle — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Header — action, no subtitle
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--header-with-action-without-subtitle&globals=theme:light"
+  title="Header — action, no subtitle — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--header-with-action-without-subtitle&globals=theme:dark"
+  title="Header — action, no subtitle — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Layout — with footer
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--with-footer&globals=theme:light"
+  title="Layout — with footer — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--with-footer&globals=theme:dark"
+  title="Layout — with footer — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Layout — no header
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--without-header&globals=theme:light"
+  title="Layout — no header — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--without-header&globals=theme:dark"
+  title="Layout — no header — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Layout — footer, no header
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--with-footer-without-header&globals=theme:light"
+  title="Layout — footer, no header — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--with-footer-without-header&globals=theme:dark"
+  title="Layout — footer, no header — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Interactive
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--interactive&globals=theme:light"
+  title="Interactive — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--interactive&globals=theme:dark"
+  title="Interactive — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Interactive — disabled
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--interactive-disabled&globals=theme:light"
+  title="Interactive — disabled — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--interactive-disabled&globals=theme:dark"
+  title="Interactive — disabled — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+#### Long Title
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--long-title&globals=theme:light"
+  title="Long Title — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--long-title&globals=theme:dark"
+  title="Long Title — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+</TabItem>
+<TabItem label="Code">
+### Import
+```js
+import { Card } from '@ds-house/lumo-design-system';
+```
+
+### Props
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `state` | `'default'|'hovered'|'focused'|'disabled'` | `'default'` | Figma `State`. Forces the visual state. Left at `default` the card still reacts to real hover and focus when it is interactive. |
+| `padding` | `'none'|'md'|'lg'|'xl'` | `'none'` | Figma `Padding`. |
+| `children` | `React.ReactNode` | `null` | The `↳Layout` slot. |
+| `onClick` | `() =&gt; void` | — | Supplying this makes the card an activatable surface: it takes focus, it answers Enter and Space, and hover and focus-visible drive the states the design draws. Without it the card is a plain, inert surface. |
+| `className` | `string` | `''` |  |
+
+### Union types
+- `state`: `'default'|'hovered'|'focused'|'disabled'`
+- `padding`: `'none'|'md'|'lg'|'xl'`
+
+### Tokens it needs
+| Token | Light | Dark |
+|---|---|---|
+| `--body-body3` | `400 var(--typography-fontsize-sm)/var(--typography-lineheight-sm) var(--typography-fontfamily-body)` | — |
+| `--border-radius-card` | `var(--border-radius-lg)` | — |
+| `--border-width-default` | `var(--border-width-1)` | — |
+| `--border-width-focused` | `var(--border-width-2)` | — |
+| `--color-bg-base` | `var(--color-neutral-0)` | `#101323` |
+| `--color-bg-disabled` | `var(--color-neutral-200)` | `#474b62` |
+| `--color-border-primary-default` | `var(--color-neutral-300)` | `#636679` |
+| `--color-border-primary-disabled` | `var(--color-neutral-200)` | `#474b62` |
+| `--color-border-primary-focused` | `var(--color-neutral-1000)` | `#ffffff` |
+| `--color-border-primary-hovered` | `var(--color-neutral-400)` | `#808393` |
+| `--color-text-primary` | `var(--color-neutral-800)` | `#ffffff` |
+| `--color-text-secondary` | `var(--color-neutral-600)` | `#f5f6fa` |
+| `--heading-h5` | `500 var(--typography-fontsize-lg)/var(--typography-lineheight-lg) var(--typography-fontfamily-title)` | — |
+| `--motion-duration-fast` | `var(--motion-duration-100)` | — |
+| `--spacing-gap-horizontal-md` | `var(--spacing-12)` | — |
+| `--spacing-gap-horizontal-sm` | `var(--spacing-8)` | — |
+| `--spacing-gap-md` | `var(--spacing-16)` | — |
+| `--spacing-gap-sm` | `var(--spacing-8)` | — |
+| `--spacing-gap-xs` | `var(--spacing-4)` | — |
+| `--spacing-padding-lg` | `var(--spacing-24)` | — |
+| `--spacing-padding-md` | `var(--spacing-16)` | — |
+| `--spacing-padding-sm` | `var(--spacing-8)` | — |
+| `--spacing-padding-xl` | `var(--spacing-32)` | — |
+
+A dash under **Dark** means the token does not change between themes.
+
+### Storybook's own props table
+<iframe src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--default-padding-none&viewMode=docs" title="Card props table" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+</TabItem>
+<TabItem label="Design">
+### The Figma node
+<iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUbWxCGi4FaV4Ficg2iDnu0%2FLumo.Web.Component.V1.0.In-Progress%3Fnode-id%3D65-230" title="Card in Figma" loading="lazy" style="width:100%;height:420px;border:1px solid var(--lumo-docs-border);border-radius:8px"></iframe>
+
+:::caution[The embed may not load]
+The Figma file is team-only. If the frame above is blank, open the node directly from the header link — a 403 from a team-only file is expected, not a broken link.
+:::
+
+
+### The variant matrix
+Each row as the set draws it, in both themes.
+
+#### All Variants
+<small><a href="https://lumo-design-system-aye-kyawts-projects.vercel.app/?path=/story/components-card--all-variants">Open in Storybook</a></small>
+<div class="lumo-embeds">
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--all-variants&globals=theme:light"
+  title="All Variants — light"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+<iframe
+  src="https://lumo-design-system-aye-kyawts-projects.vercel.app/iframe.html?id=components-card--all-variants&globals=theme:dark"
+  title="All Variants — dark"
+  loading="lazy"
+  style="width:100%;height:220px;border:1px solid var(--lumo-docs-border);border-radius:8px;background:var(--lumo-docs-surface)"
+></iframe>
+</div>
+
+
+### What Figma never bound, and the gaps recorded against it
+— reported, not filled in
+
+1. **`border/style/*` and `motion/easing/*` have no values in the export.**
+   The token build warns that `border-style-{solid,dashed,dotted}` and
+   `motion-easing-{standard,decelerate,accelerate,emphasized,linear}` "have no
+   real value anywhere in the export and were skipped". Checked against the
+   Figma source over the MCP: `border/style/solid` and `border/style/dashed`
+   **do exist**, in both the `lumo.core` and `lumo.semantic.border` collections
+   of `Lumo.Token.V1.0.Complete`. So this is an **export-scope problem, not
+   missing design work** — the collections holding those values were left out of
+   the export, and a re-export with them selected should fix it without a
+   designer authoring anything. Until then the component writes `solid` /
+   `dashed` as plain CSS keywords and leaves the transition's easing at the CSS
+   default. This is pre-existing and affects the whole repo, not just Card.
+
+2. **Disabled text is not dimmed.** The `State=disabled` variants bind title and
+   subtitle to `color/text/primary` and `color/text/secondary`, the same as
+   every other state, while the surface moves to `color/bg/disabled` (`#dadce7`).
+   `color/text/disabled` exists and is unused here. The code follows the design
+   as drawn. Worth a designer's eye: the intent may have been to dim the content
+   too, and the subtitle on the disabled surface is the weakest pairing in the set.
+
+3. **The placeholder's fallback colour disagrees with its variable.** In
+   `_Slot/Content` the text is bound to `color/text/secondary` (`#636679`) but
+   carries a fallback of `#bfc2cf`, which is `color/border/primary/default`.
+   Cosmetic, and only affects a placeholder, but it suggests the binding was
+   changed without the fallback following.
+
+4. **A token description is stale.** `color/border/primary/disabled` is
+   described as `lumo.semantic.color.border.disabled` — an older path. The
+   variable itself is correct and correctly exported; only the description text
+   is out of date.
+
+<small>From the build report, <a href="https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs/card.md">docs/card.md</a>.</small>
+
+Where Figma and this repo disagree across the system, see the [disagreements record](https://github.com/Aye-Kyawt/lumo-design-system/blob/2b948097505e3eec0e7c1aee564d25f770e8b477/docs-site/src/content/docs/disagreements.mdx).
+</TabItem>
+<TabItem label="Changelog">
+Every commit touching this component **and its subcomponents** — a change to a subcomponent changes the component, and a log that reads only the parent file misses it.
+
+| Commit | Date | Shipped in | Subject |
+|---|---|---|---|
+| [`2b94809`](https://github.com/Aye-Kyawt/lumo-design-system/commit/2b94809) | 2026-10-19 | _unknown_ | Write the ten component intent files |
+| [`c8bc699`](https://github.com/Aye-Kyawt/lumo-design-system/commit/c8bc699) | 2026-10-18 | _unknown_ | Add the test suite, and retire the deliberate stop |
+| [`9525e0f`](https://github.com/Aye-Kyawt/lumo-design-system/commit/9525e0f) | 2026-10-17 | _unknown_ | Make the repo a publishable npm package |
+| [`5c7687c`](https://github.com/Aye-Kyawt/lumo-design-system/commit/5c7687c) | 2026-10-10 | _unknown_ | Close the two uncovered boolean pairs on Card's subcomponents |
+| [`cd47fe6`](https://github.com/Aye-Kyawt/lumo-design-system/commit/cd47fe6) | 2026-10-03 | _unknown_ | Add Card component, built from Figma node 64:113 |
+
+</TabItem>
+</Tabs>
+
+<small>Generated from commit <a href="https://github.com/Aye-Kyawt/lumo-design-system/commit/2b948097505e3eec0e7c1aee564d25f770e8b477"><code>2b948097505e</code></a>.</small>

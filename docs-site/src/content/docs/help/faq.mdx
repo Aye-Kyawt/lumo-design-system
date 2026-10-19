@@ -1,0 +1,27 @@
+---
+title: FAQ
+description: Common questions about the Lumo Design System.
+---
+## Why do my components render unstyled?
+
+You loaded `styles.css` without `tokens.css`, or loaded them in the wrong order. `tokens.css` must come first — every component declaration reads from it. See [Developing](/developing/introduction/).
+
+## Why does `<Button label="Save" />` show two plus icons?
+
+`iconLeft` and `iconRight` both default to `true`, with `iconLeftName` and `iconRightName` defaulting to `add`. The defaults come from the Figma component set. Pass `iconLeft={false} iconRight={false}` for a text-only button.
+
+## Why can I not import `CardHeader`?
+
+It is internal. Its own Figma description says "Don't use it outside a card", and `CardLayoutVertical` renders it from `headerProps`. Ten components are public; the rest may change in a patch.
+
+## Why is the status on every component page "unknown"?
+
+The component registry is not reachable from this site's generator, so no status could be read. Every page says so rather than guessing.
+
+## Why does no component have a release verdict?
+
+For the same reason — no release review has run. `0.1.0` is published and tested, but nothing in it has been independently reviewed against its Figma node.
+
+## Is this accessible?
+
+Each component's **Usage** tab lists the accessibility facts it actually guarantees, each linked to the line that makes it true. That is narrower than an audit, and no audit has been run.

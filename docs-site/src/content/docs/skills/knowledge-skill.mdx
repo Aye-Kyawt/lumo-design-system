@@ -1,0 +1,24 @@
+---
+title: Knowledge skill
+description: The skills that build and check this design system.
+---
+This system is built by agents following skills committed in the repository. Each skill is the contract for one job, and they are readable as documentation in their own right.
+
+| Skill | What it is for |
+|---|---|
+| `build-component` | Turn one Figma node into one coded component, in four checked stages. |
+| `test-component` | Test a built component against its Figma node, every variant, size and state. |
+| `component-intent` | Write `{component}.intent.json` — what a component is for, transposed from Figma, never invented. |
+| `astro-page` | Build this whole site from the repo at one pinned commit. |
+| `release-review` | The gates and checks a component is reviewed against before its name enters a version. |
+| `registry` | The column-by-column contract for the component registry. |
+
+## The rule they all share
+
+**Report the gap rather than filling it in.** An empty field is visibly empty and gets decided by a human; a plausible invented sentence is indistinguishable from a sourced one and gets read as the system's position forever.
+
+That is why this site carries notices where a source is missing instead of reading as complete. A site that is honestly mostly notices is a correct output; one that reads complete because the gaps were filled is a failure.
+
+## Roles
+
+The engineer builds and fixes and never verifies its own work. QA tests and reports and never repairs. A human approves — no agent approves its own work.

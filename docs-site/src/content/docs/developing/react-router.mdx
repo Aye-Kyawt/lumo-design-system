@@ -1,0 +1,17 @@
+---
+title: React Router
+description: Using the Lumo Design System with React Router.
+---
+:::caution[Nothing in this library is router-aware]
+No component takes a `to`, `href` or `as` prop, and the package has no dependency on React Router or on any router. There is therefore no integration to document, and this page does not invent one.
+
+**Owner:** a human — decide whether router-aware components are wanted.
+:::
+
+## What that means in practice
+
+Components that look navigational are not. `Button` renders a `<button>` and takes `onClick`; it has no `href`, and its own description says not to use it for opening an external link. A `Card` becomes operable only when you give it an `onClick`.
+
+So navigation is yours to wire. Put the router's own link component where you need a link, and use these components for the things that are genuinely buttons and surfaces.
+
+If you need a card or a button that navigates, wrap it in your router's link rather than detaching the component or passing a stray `href` through — rest props are spread first on `Button` precisely so a caller cannot reach past what a variant promises.

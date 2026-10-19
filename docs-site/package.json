@@ -4,8 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "npm --prefix .. run build:tokens && astro dev",
-    "build": "npm --prefix .. run build:tokens && astro build",
-    "preview": "astro preview"
+    "build": "npm --prefix .. run build:tokens && astro build && node scripts/check-links.mjs",
+    "preview": "astro preview",
+    "generate": "node scripts/generate.mjs",
+    "check:links": "node scripts/check-links.mjs"
   },
   "devDependencies": {
     "@astrojs/starlight": "^0.42.6",

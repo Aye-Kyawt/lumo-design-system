@@ -1,0 +1,119 @@
+{
+  "component": "badge",
+  "figma_component": "Badge",
+  "figma_node": "17:1139",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use a badge to label a status or category the user reads, not clicks — a category tag, a status pill, a \"Most popular\" flag.",
+      "verbatim": "Use a badge to label a status or category the user reads, not clicks — a category tag, a status pill, a \"Most popular\" flag.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "Badge",
+        "node": "17:1139",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t use it for something the user can interact with; use Chip for that.",
+      "use_instead": "Chip",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "Badge",
+        "node": "17:1139",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "tone": {
+      "primary": {
+        "meaning": null,
+        "source": null
+      },
+      "success": {
+        "meaning": null,
+        "source": null
+      },
+      "warning": {
+        "meaning": null,
+        "source": null
+      },
+      "danger": {
+        "meaning": null,
+        "source": null
+      },
+      "neutral": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "in a card header Action slot, and in a table cell or list row as a status",
+      "source": "src/components/badge/badge.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--border-radius-chip",
+    "--border-width-default",
+    "--color-bg-negative-tonal-idle",
+    "--color-bg-positive-tonal-idle",
+    "--color-bg-primary-tonal-idle",
+    "--color-bg-surfacesecondary",
+    "--color-bg-warning-tonal-idle",
+    "--color-text-brand",
+    "--color-text-orange-twotone",
+    "--color-text-positive",
+    "--color-text-red-twotone",
+    "--color-text-secondary",
+    "--label-label1",
+    "--spacing-padding-sm",
+    "--spacing-padding-xs"
+  ],
+  "a11y": [
+    {
+      "fact": "renders a <span>, so it is not focusable and carries no interactive role — the set defines no interaction state because a badge is read, not clicked",
+      "source": "src/components/badge/badge.jsx:33"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.tone.primary",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.tone.success",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.tone.warning",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.tone.danger",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.tone.neutral",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "component": "progress",
+  "figma_component": "progress",
+  "figma_node": "69:1151",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use progress to show how far along a measurable thing is — a score against a target, an initiative’s completion, a multi-step flow.",
+      "verbatim": "Use progress to show how far along a measurable thing is — a score against a target, an initiative’s completion, a multi-step flow.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "progress",
+        "node": "69:1151",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t use it for an unknown wait; use Spinner instead.",
+      "use_instead": "Spinner",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "progress",
+        "node": "69:1151",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "status": {
+      "brand": {
+        "meaning": null,
+        "source": null
+      },
+      "positive": {
+        "meaning": null,
+        "source": null
+      },
+      "warning": {
+        "meaning": null,
+        "source": null
+      },
+      "negative": {
+        "meaning": null,
+        "source": null
+      }
+    },
+    "size": {
+      "sm": {
+        "meaning": null,
+        "source": null
+      },
+      "md": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "in a card body beneath a metric, and in a kanban card",
+      "source": "src/components/progress/progress.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--body-body3",
+    "--border-radius-full",
+    "--border-width-default",
+    "--color-bg-negative-idle",
+    "--color-bg-positive-idle",
+    "--color-bg-primary-idle",
+    "--color-bg-surfacesecondary",
+    "--color-bg-warning-idle",
+    "--color-text-primary",
+    "--color-text-secondary",
+    "--label-label1",
+    "--spacing-2",
+    "--spacing-4",
+    "--spacing-8",
+    "--spacing-gap-horizontal-sm",
+    "--spacing-gap-xs"
+  ],
+  "a11y": [
+    {
+      "fact": "role=\"progressbar\" sits on the track, not the wrapper: a progressbar’s contents are not exposed to assistive tech, so putting it on the wrapper would swallow the label and the value text",
+      "source": "src/components/progress/progress.jsx:87"
+    },
+    {
+      "fact": "carries aria-valuenow, aria-valuemin and aria-valuemax, with the percent clamped to 0-100",
+      "source": "src/components/progress/progress.jsx:95"
+    },
+    {
+      "fact": "named by reference via aria-labelledby when a label is shown, and by aria-label when it is not, so the bar is never unnamed",
+      "source": "src/components/progress/progress.jsx:99"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.brand",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.positive",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.warning",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.status.negative",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.size.sm",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.size.md",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "component": "switch",
+  "figma_component": "Toggle",
+  "figma_node": "17:1201",
+  "figma_docs_page": null,
+  "source_commit": "b1605b95782bb959979e5848efff7ca8c775706a",
+  "use_when": [
+    {
+      "statement": "Use a toggle for one setting that takes effect immediately — \"Write summary with AI\" in the report builder.",
+      "verbatim": "Use a toggle for one setting that takes effect immediately — \"Write summary with AI\" in the report builder.",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "Toggle",
+        "node": "17:1201",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "dont_use_when": [
+    {
+      "verbatim": "Don’t use it when the change needs a Save action; use Checkbox for that.",
+      "use_instead": "Checkbox",
+      "source": {
+        "kind": "figma:description",
+        "library": "Lumo.Web.Component.V1.0.Complete",
+        "component": "Toggle",
+        "node": "17:1201",
+        "read_on": "2026-10-19"
+      }
+    }
+  ],
+  "variant_intent": {
+    "on": {
+      "true": {
+        "meaning": null,
+        "source": null
+      },
+      "false": {
+        "meaning": null,
+        "source": null
+      }
+    }
+  },
+  "placement": [
+    {
+      "statement": "in a settings row, with the label naming the setting",
+      "source": "src/components/switch/switch.stories.jsx"
+    }
+  ],
+  "pairs_with": [],
+  "required_tokens": [
+    "--border-radius-avatar",
+    "--border-radius-chip",
+    "--border-width-default",
+    "--border-width-focused",
+    "--color-bg-base",
+    "--color-bg-primary-hovered",
+    "--color-bg-primary-idle",
+    "--color-bg-primary-pressed",
+    "--color-border-primary-default",
+    "--color-border-primary-hovered",
+    "--elevation-focused",
+    "--motion-duration-fast",
+    "--motion-duration-instant",
+    "--opacity-100",
+    "--opacity-disabled",
+    "--size-control-md",
+    "--size-icon-sm",
+    "--spacing-padding-xs"
+  ],
+  "a11y": [
+    {
+      "fact": "renders a real <button role=\"switch\"> with aria-checked, so Space and Enter operate it and a screen reader reads the state",
+      "source": "src/components/switch/switch.jsx:19"
+    },
+    {
+      "fact": "uses aria-disabled rather than the DOM disabled attribute, so a disabled switch stays focusable and can still be read",
+      "source": "src/components/switch/switch.jsx:78"
+    },
+    {
+      "fact": "the node carries no label layer, so the accessible name must come from the caller via aria-label or aria-labelledby",
+      "source": "src/components/switch/switch.jsx:22"
+    },
+    {
+      "fact": "the knob is aria-hidden; the parent button is the control, so the knob must not be focusable or announced",
+      "source": "src/components/switch/switchKnob.jsx:18"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "figma_docs_page",
+      "reason": "no documentation page could be located for this component. The Figma MCP lists only one top-level page (\"Thumbnail\") for file UbWxCGi4FaV4Ficg2iDnu0, so the usage region the component-intent skill names as source 1 was unreachable. use_when and dont_use_when below are transposed from the component-set DESCRIPTION in the Lumo.Web.Component.V1.0.Complete library instead, which is designer-authored but is a different surface.",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.on.true",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    },
+    {
+      "field": "variant_intent.on.false",
+      "reason": "the description does not say what this value is for; the Figma documentation page that would carry a per-variant usage region could not be located",
+      "owner": "human:designer"
+    }
+  ]
+}

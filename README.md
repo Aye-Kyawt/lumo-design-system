@@ -12,7 +12,7 @@ The package is **`@ds-house/lumo-design-system`**.
 npm install @ds-house/lumo-design-system
 ```
 
->Status: 0.1.0 is published. It exports Button only. 0.1.0 was released by the owner's override while the release review was Blocked; CHANGELOG.md records what that override skipped. package.json keeps "private": true between releases, and npm run release:publish -- <version> removes that guard only for the length of a publish.
+>Status: 0.1.0 is published. It exports 5 components 0.1.0 was released by the owner's override while the release review was Blocked; CHANGELOG.md records what that override skipped. package.json keeps "private": true between releases, and npm run release:publish -- <version> removes that guard only for the length of a publish.
 
 
 `react` and `react-dom` are peer dependencies — 19 or newer. The package ships ESM and CJS

@@ -40,6 +40,20 @@
         "4321"
       ],
       "port": 4321
+    },
+    {
+      "name": "hero-wt",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/private/tmp/claude-501/-Users-ayekyawtkyawtmyaing-lumo-design-system/897320ee-6d84-4669-af06-33945920dc69/scratchpad/hero-wt/docs-site",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "4322"
+      ],
+      "port": 4322
     }
   ]
 }

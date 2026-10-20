@@ -46,6 +46,11 @@ export default defineConfig({
           },
         },
       ],
+      // Starlight's Hero is overridden so the landing page can carry a release
+      // card with the version, the way large public design-system sites do.
+      components: {
+        Hero: './src/components/Hero.astro',
+      },
       sidebar: [
         { label: 'Start here', link: '/' },
         {

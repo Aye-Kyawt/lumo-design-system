@@ -12,11 +12,8 @@ The package is **`@ds-house/lumo-design-system`**.
 npm install @ds-house/lumo-design-system
 ```
 
-> **Not published yet.** `package.json` carries `"private": true` as a deliberate guard, there
-> are no git tags, and no version has been released — so the command above will not resolve
-> today. It is the install command for this package, recorded so that the release chain has
-> something to check and so nobody has to guess it later. `npm run release:publish` is the only
-> thing that lifts the guard, and it puts it straight back.
+>Status: 0.1.0 is published. It exports Button only. 0.1.0 was released by the owner's override while the release review was Blocked; CHANGELOG.md records what that override skipped. package.json keeps "private": true between releases, and npm run release:publish -- <version> removes that guard only for the length of a publish.
+
 
 `react` and `react-dom` are peer dependencies — 19 or newer. The package ships ESM and CJS
 builds with TypeScript declarations generated from the JSDoc on the components.
